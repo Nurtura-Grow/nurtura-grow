@@ -10,9 +10,9 @@
 
     <title> {{ $title ?? 'NurturaGrow' }} </title>
 
-        <!-- BEGIN: CSS Assets-->
-
-        <!-- END: CSS Assets-->
+    <!-- BEGIN: CSS Assets-->
+    <link rel="stylesheet" href="{{ asset('dist/css/app.css') }}" />
+    <!-- END: CSS Assets-->
 </head>
 <!-- END: Head -->
 

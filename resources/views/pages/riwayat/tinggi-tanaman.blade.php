@@ -1,6 +1,5 @@
-@extends('layout.side-menu')
+@extends('layout.main')
 
-
-@section('subcontent')
-
+@section('content')
+    <p>Landing Page</p>
 @endsection

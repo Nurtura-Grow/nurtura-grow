@@ -1,7 +1,9 @@
-@extends('../layout/base')
+@extends('layout.base')
 
 @section('body')
     <body class="app">
+        @include('layout.components.side-menu')
+
         @yield('content')
 
         <!-- BEGIN: JS Assets-->

@@ -10,6 +10,6 @@ class LandingPageController extends Controller
 {
     public function index() :View
     {
-        return view('pages.dashboard');
+        return view('landing-page');
     }
 }

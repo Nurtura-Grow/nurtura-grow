@@ -27,7 +27,7 @@ use App\Http\Controllers\Pages\PanduanController;
 // GUEST
 
 // Todo: Add middleware for not authenticate
-Route::get('/, ', [LandingPageController::class, 'index'])->name('landing-page');
+//Route::get('/, ', [LandingPageController::class, 'index'])->name('landing-page');
 Route::get('/panduan', [PanduanController::class, 'index'])->name('panduan');
 
 // Todo: Add middleware for authenticated

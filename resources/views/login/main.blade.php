@@ -1,4 +1,4 @@
-@extends('../layout/' . $layout)
+@extends('layout.main')
 
 @section('content')
     <div class="container sm:px-10">
