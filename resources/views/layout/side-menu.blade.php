@@ -16,7 +16,7 @@
                 <li>
                     <a href="javascript:;" class="side-menu side-menu--active">
                         <div class="side-menu__icon">
-                            <p>D</p>
+                            <i class="fa-regular fa-chart-line"></i>
                         </div>
                         <div class="side-menu__title">
                             Dashboard
