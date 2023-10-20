@@ -11,7 +11,7 @@
     <title> {{ $title ?? 'NurturaGrow' }} </title>
 
         <!-- BEGIN: CSS Assets-->
-        <link rel="stylesheet" href="{{ mix('dist/css/app.css') }}" />
+
         <!-- END: CSS Assets-->
 </head>
 <!-- END: Head -->
