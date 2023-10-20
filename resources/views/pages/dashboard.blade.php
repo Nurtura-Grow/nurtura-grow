@@ -64,9 +64,9 @@
                             </h2>
                         </div>
                         <div class="mt-5">
-                            <div class="grid grid-cols-12 gap-6">
+                            <div class="grid grid-cols-12 2xl:gap-0 md:gap-6">
                                 @for ($i = 1; $i <= 4; $i++)
-                                    <div class="col-span-12 2xl:col-span-12 md:col-span-6 intro-y">
+                                    <div class="col-span-12 2xl:col-span-12 md:col-span-6 intro-y mt-0">
                                         <div class="intro-x">
                                             <div class="box px-5 py-3 mb-3  zoom-in">
                                                 <div class=" ml-1 mr-auto">
