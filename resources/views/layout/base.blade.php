@@ -11,7 +11,7 @@
     <title> {{ $title ?? 'NurturaGrow' }} </title>
 
     <!-- BEGIN: CSS Assets-->
-    <link rel="stylesheet" href="{{ asset('dist/css/app.css') }}" />
+    @vite('resources/css/app.css')
     <!-- END: CSS Assets-->
 </head>
 <!-- END: Head -->
