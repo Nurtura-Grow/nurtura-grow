@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 *,
 ::before,
 ::after {
@@ -4249,100 +4248,102 @@ select{
  */
 /* Default colors */
 :root {
-    --color-primary: 30 64 175;
-    --color-secondary: 226 232 240;
-    --color-success: 132 204 22;
-    --color-info: 6 182 212;
-    --color-warning: 250 204 21;
-    --color-pending: 249 115 22;
-    --color-danger: 220 38 38;
-    --color-light: 241 245 249;
-    --color-dark: 30 41 59;
-    --color-slate-50: 248 250 252;
-    --color-slate-100: 241 245 249;
-    --color-slate-200: 226 232 240;
-    --color-slate-300: 203 213 225;
-    --color-slate-400: 148 163 184;
-    --color-slate-500: 100 116 139;
-    --color-slate-600: 71 85 105;
-    --color-slate-700: 51 65 85;
-    --color-slate-800: 30 41 59;
-    --color-slate-900: 15 23 42;
+    --color-primary: theme('colors.root.primary');
+    --color-secondary: theme('colors.root.secondary');
+    --color-success: theme('colors.root.success');
+    --color-info: theme('colors.root.info');
+    --color-warning: theme('colors.root.warning');
+    --color-pending: theme('colors.root.pending');
+    --color-danger: theme('colors.root.danger');
+    --color-light: theme('colors.root.light');
+    --color-dark: theme('colors.root.dark');
+    --color-slate-50: theme('colors.root.slate-50');
+    --color-slate-100: theme('colors.root.slate-100');
+    --color-slate-200: theme('colors.root.slate-200');
+    --color-slate-300: theme('colors.root.slate-300');
+    --color-slate-400: theme('colors.root.slate-400');
+    --color-slate-500: theme('colors.root.slate-500');
+    --color-slate-600: theme('colors.root.slate-600');
+    --color-slate-700: theme('colors.root.slate-700');
+    --color-slate-800: theme('colors.root.slate-800');
+    --color-slate-900: theme('colors.root.slate-900');
 }
 /* Default dark-mode colors */
 .dark {
-    --color-primary: 29 78 216;
-    --color-slate-500: 148 163 184;
-    --color-darkmode-50: 87 103 132;
-    --color-darkmode-100: 74 90 121;
-    --color-darkmode-200: 65 81 114;
-    --color-darkmode-300: 53 69 103;
-    --color-darkmode-400: 48 61 93;
-    --color-darkmode-500: 41 53 82;
-    --color-darkmode-600: 40 51 78;
-    --color-darkmode-700: 35 45 69;
-    --color-darkmode-800: 27 37 59;
-    --color-darkmode-900: 15 23 42;
+    --color-primary: theme('colors.dark.primary');
+    --color-slate-500: theme('colors.dark.slate-500');
+    --color-darkmode-50: theme('colors.dark.darkmode-50');
+    --color-darkmode-100: theme('colors.dark.darkmode-100');
+    --color-darkmode-200: theme('colors.dark.darkmode-200');
+    --color-darkmode-300: theme('colors.dark.darkmode-300');
+    --color-darkmode-400: theme('colors.dark.darkmode-400');
+    --color-darkmode-500: theme('colors.dark.darkmode-500');
+    --color-darkmode-600: theme('colors.dark.darkmode-600');
+    --color-darkmode-700: theme('colors.dark.darkmode-700');
+    --color-darkmode-800: theme('colors.dark.darkmode-800');
+    --color-darkmode-900: theme('colors.dark.darkmode-900');
 }
 /* Theme 1 colors */
 .theme-1 {
-    --color-primary: 6 78 59;
-    --color-secondary: 226 232 240;
-    --color-success: 5 150 105;
-    --color-info: 6 182 212;
-    --color-warning: 250 204 21;
-    --color-pending: 245 158 11;
-    --color-danger: 225 29 72;
-    --color-light: 241 245 249;
-    --color-dark: 30 41 59;
+    --color-primary: theme('colors.theme-1.primary');
+    --color-secondary: theme('colors.theme-1.secondary');
+    --color-success: theme('colors.theme-1.success');
+    --color-info: theme('colors.theme-1.info');
+    --color-warning: theme('colors.theme-1.warning');
+    --color-pending: theme('colors.theme-1.pending');
+    --color-danger: theme('colors.theme-1.danger');
+    --color-light: theme('colors.theme-1.light');
+    --color-dark: theme('colors.theme-1.dark');
 }
 .theme-1.dark {
-        --color-primary: 6 95 70;
+        --color-primary: theme('colors.theme-1.dark-primary');
     }
 /* Theme 2 colors */
 .theme-2 {
-    --color-primary: 30 58 138;
-    --color-secondary: 226 232 240;
-    --color-success: 13 148 136;
-    --color-info: 6 182 212;
-    --color-warning: 245 158 11;
-    --color-pending: 249 115 22;
-    --color-danger: 185 28 28;
-    --color-light: 241 245 249;
-    --color-dark: 30 41 59;
+    --color-primary: theme('colors.theme-2.primary');
+    --color-secondary: theme('colors.theme-2.secondary');
+    --color-success: theme('colors.theme-2.success');
+    --color-info: theme('colors.theme-2.info');
+    --color-warning: theme('colors.theme-2.warning');
+    --color-pending: theme('colors.theme-2.pending');
+    --color-danger: theme('colors.theme-2.danger');
+    --color-light: theme('colors.theme-2.light');
+    --color-dark: theme('colors.theme-2.dark');
 }
 .theme-2.dark {
-        --color-primary: 30 64 175;
+    --color-primary: theme('colors.theme-2.dark-primary');
     }
 /* Theme 3 colors */
 .theme-3 {
-    --color-primary: 22 78 99;
-    --color-secondary: 226 232 240;
-    --color-success: 13 148 136;
-    --color-info: 6 182 212;
-    --color-warning: 245 158 11;
-    --color-pending: 217 119 6;
-    --color-danger: 185 28 28;
-    --color-light: 241 245 249;
-    --color-dark: 30 41 59;
+    --color-primary: theme('colors.theme-3.primary');
+    --color-secondary: theme('colors.theme-3.secondary');
+    --color-success: theme('colors.theme-3.success');
+    --color-info: theme('colors.theme-3.info');
+    --color-warning: theme('colors.theme-3.warning');
+    --color-pending: theme('colors.theme-3.pending');
+    --color-danger: theme('colors.theme-3.danger');
+    --color-light: theme('colors.theme-3.light');
+    --color-dark: theme('colors.theme-3.dark');
 }
+
 .theme-3.dark {
-        --color-primary: 21 94 117;
+        --color-primary: theme('colors.theme-3.dark-primary');
     }
 /* Theme 4 colors */
 .theme-4 {
-    --color-primary: 49 46 129;
-    --color-secondary: 226 232 240;
-    --color-success: 5 150 105;
-    --color-info: 6 182 212;
-    --color-warning: 234 179 8;
-    --color-pending: 234 88 12;
-    --color-danger: 185 28 28;
-    --color-light: 241 245 249;
-    --color-dark: 30 41 59;
+    --color-primary: theme('colors.theme-4.primary');
+    --color-secondary: theme('colors.theme-4.secondary');
+    --color-success: theme('colors.theme-4.success');
+    --color-info: theme('colors.theme-4.info');
+    --color-warning: theme('colors.theme-4.warning');
+    --color-pending: theme('colors.theme-4.pending');
+    --color-danger: theme('colors.theme-4.danger');
+    --color-light: theme('colors.theme-4.light');
+    --color-dark: theme('colors.theme-4.dark');
 }
+
 .theme-4.dark {
-        --color-primary: 67 56 202;
+        --color-primary: theme('colors.theme-4.dark-primary');
     }
 /*
  |--------------------------------------------------------------------------
