@@ -15,71 +15,68 @@
             <ul>
                 <li>
                     <a href="javascript:;" class="side-menu side-menu--active">
-                        <div class="side-menu__icon">
-                            <i class="fa-solid fa-chart-line"></i>
-                        </div>
+                        <div class="side-menu__icon"> <i data-lucide="home"></i> </div>
                         <div class="side-menu__title">
                             Dashboard
+                            <div class="side-menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
                         </div>
                     </a>
-                </li>
-                {{-- @foreach ($side_menu as $menu)
-                    @if ($menu == 'devider')
-                        <li class="side-nav__devider my-6"></li>
-                    @else
+                    <ul class="side-menu__sub-open">
                         <li>
-                            <a href="{{ isset($menu['layout']) ? route('page', ['layout' => $menu['layout'], 'pageName' => $menu['page_name']]) : 'javascript:;' }}"
-                                class="{{ $first_page_name == $menu['page_name'] ? 'side-menu side-menu--active' : 'side-menu' }}">
-                                <div class="side-menu__icon">
-                                    <i data-feather="{{ $menu['icon'] }}"></i>
-                                </div>
-                                <div class="side-menu__title">
-                                    {{ $menu['title'] }}
-                                    @if (isset($menu['sub_menu']))
-                                        <i data-feather="chevron-down" class="side-menu__sub-icon"></i>
-                                    @endif
-                                </div>
+                            <a href="index.html" class="side-menu side-menu--active">
+                                <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
+                                <div class="side-menu__title"> Overview 1 </div>
                             </a>
-                            @if (isset($menu['sub_menu']))
-                                <ul class="{{ $first_page_name == $menu['page_name'] ? 'side-menu__sub-open' : '' }}">
-                                    @foreach ($menu['sub_menu'] as $subMenu)
-                                        <li>
-                                            <a href="{{ isset($subMenu['layout']) ? route('page', ['layout' => $subMenu['layout'], 'pageName' => $subMenu['page_name']]) : 'javascript:;' }}"
-                                                class="{{ $second_page_name == $subMenu['page_name'] ? 'side-menu side-menu--active' : 'side-menu' }}">
-                                                <div class="side-menu__icon">
-                                                    <i data-feather="activity"></i>
-                                                </div>
-                                                <div class="side-menu__title">
-                                                    {{ $subMenu['title'] }}
-                                                    @if (isset($subMenu['sub_menu']))
-                                                        <i data-feather="chevron-down" class="side-menu__sub-icon"></i>
-                                                    @endif
-                                                </div>
-                                            </a>
-                                            @if (isset($subMenu['sub_menu']))
-                                                <ul
-                                                    class="{{ $second_page_name == $subMenu['page_name'] ? 'side-menu__sub-open' : '' }}">
-                                                    @foreach ($subMenu['sub_menu'] as $lastSubMenu)
-                                                        <li>
-                                                            <a href="{{ isset($lastSubMenu['layout']) ? route('page', ['layout' => $lastSubMenu['layout'], 'pageName' => $lastSubMenu['page_name']]) : 'javascript:;' }}"
-                                                                class="{{ $third_page_name == $lastSubMenu['page_name'] ? 'side-menu side-menu--active' : 'side-menu' }}">
-                                                                <div class="side-menu__icon">
-                                                                    <i data-feather="zap"></i>
-                                                                </div>
-                                                                <div class="side-menu__title">{{ $lastSubMenu['title'] }}
-                                                                </div>
-                                                            </a>
-                                                        </li>
-                                                    @endforeach
-                                                </ul>
-                                            @endif
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            @endif
                         </li>
-                    @endif
-                @endforeach --}}
+                        <li>
+                            <a href="side-menu-light-dashboard-overview-2.html" class="side-menu">
+                                <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
+                                <div class="side-menu__title"> Overview 2 </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="side-menu-light-dashboard-overview-3.html" class="side-menu">
+                                <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
+                                <div class="side-menu__title"> Overview 3 </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="side-menu-light-dashboard-overview-4.html" class="side-menu">
+                                <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
+                                <div class="side-menu__title"> Overview 4 </div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript:;" class="side-menu">
+                        <div class="side-menu__icon"> <i data-lucide="box"></i> </div>
+                        <div class="side-menu__title">
+                            Menu Layout
+                            <div class="side-menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
+                        </div>
+                    </a>
+                    <ul class="">
+                        <li>
+                            <a href="index.html" class="side-menu">
+                                <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
+                                <div class="side-menu__title"> Side Menu </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="simple-menu-light-dashboard-overview-1.html" class="side-menu">
+                                <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
+                                <div class="side-menu__title"> Simple Menu </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="top-menu-light-dashboard-overview-1.html" class="side-menu">
+                                <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
+                                <div class="side-menu__title"> Top Menu </div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </nav>
         <!-- END: Side Menu -->
@@ -89,5 +86,4 @@
             @yield('subcontent')
         </div>
         <!-- END: Content -->
-
     @endsection
