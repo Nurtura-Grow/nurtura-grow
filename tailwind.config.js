@@ -9,15 +9,15 @@ export default {
         extend: {
             colors: {
                 "root": {
-                    "primary": "87 180 146",
-                    "secondary": "226 232 240",
+                    "primary": "87 180 146", // Green Tosca
+                    "secondary": "0 38 35", // Dark Green
                     "success": "132 204 22",
                     "info": "6 182 212",
                     "warning": "250 204 21",
                     "pending": "249 115 22",
                     "danger": "220 38 38",
                     "light": "241 245 249",
-                    "dark": "30 41 59",
+                    "dark": "0 38 35",
                     "slate-50": "248 250 252",
                     "slate-100": "241 245 249",
                     "slate-200": "226 232 240",

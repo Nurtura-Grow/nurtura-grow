@@ -1,5 +1,5 @@
 @extends('layout.side-menu')
 
 @section('subcontent')
-    <p>Landing Page</p>
+    <p>Rekomendasi Index</p>
 @endsection
