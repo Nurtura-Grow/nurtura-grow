@@ -11,7 +11,7 @@
     <title> {{ $title ?? 'NurturaGrow' }} </title>
 
     <!-- BEGIN: CSS Assets-->
-    @include('partials.styles')
+    @include('layout.partials.styles')
     <!-- END: CSS Assets-->
 </head>
 <!-- END: Head -->

@@ -1,7 +1,5 @@
-@extends('layout.main')
+@extends('layout.side-menu')
 
-@section('content')
-    <h1 class="text-3xl font-bold underline">
-        Dashboard
-    </h1>
+@section('subcontent')
+    <p>Landing Page</p>
 @endsection
