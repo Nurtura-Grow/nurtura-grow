@@ -6,8 +6,6 @@
 
         @yield('content')
 
-        <!-- BEGIN: JS Assets-->
-
-        <!-- END: JS Assets-->
+        @include('layout.partials.scripts')
     </body>
 @endsection

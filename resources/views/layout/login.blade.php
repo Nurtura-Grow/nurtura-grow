@@ -3,12 +3,11 @@
 @section('body')
 
     <body class="login">
+        @include('layout.components.side-menu')
+
         @yield('content')
 
-        <!-- BEGIN: JS Assets-->
-        @yield('script')
-        @vite(['resources/js/app.js'])
-        <!-- END: JS Assets-->
+        @include('layout.partials.scripts')
 
     </body>
 @endsection
