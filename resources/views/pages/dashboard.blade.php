@@ -29,15 +29,15 @@
                 {{-- Grafik Data Semua Sensor --}}
                 <div class="col-span-12 mt-2">
                     <div class="intro-y block sm:flex items-center h-10 mt-5">
-                        <h2 class="text-lg font-medium truncate mr-5">
+                        <h2 class="text-lg font-medium truncate mr-5 sm:mr-0">
                             Data Seluruh Sensor
                         </h2>
                         <a class="sm:ml-auto mt-3 sm:mt-0 relative btn btn-primary text-white" data-tw-toggle="modal"
                             data-tw-target="#datepicker-modal-preview">
-                            Filter berdasarkan tanggal
+                            Pilih tanggal
                         </a>
                     </div>
-                    <div class="grid grid-cols-12 gap-6 mt-5">
+                    <div class="grid grid-cols-12 mt-12 sm:mt-5 gap-6">
                         <div class="col-span-12 intro-y">
                             <div class="report-box">
                                 <div class="box p-5">
@@ -57,27 +57,41 @@
             <div class="2xl:border-l -mb-10 pb-10">
                 <div class="2xl:pl-6 grid grid-cols-12 gap-x-6 2xl:gap-x-0 gap-y-6">
                     <!-- BEGIN: Hari Setelah Tanam -->
-                    <div class="col-span-12 md:col-span-6 xl:col-span-4 2xl:col-span-12 mt-3 2xl:mt-8">
+                    <div class="col-span-12  2xl:col-span-12 mt-3 2xl:mt-8">
                         <div class="intro-x flex items-center h-10">
                             <h2 class="text-lg font-medium truncate mr-5">
                                 Hari Setelah Tanam
                             </h2>
                         </div>
                         <div class="mt-5">
-                            @for ($i = 1; $i <= 4; $i++)
-                                <div class="intro-x">
-                                    <div class="box px-5 py-3 mb-3 flex items-center zoom-in">
-                                        <div class="ml-4 mr-auto">
-                                            <div class="font-medium">Penanaman {{ $i }}</div>
-                                            <div class="text-slate-500 text-xs mt-0.5">3 June 2020</div>
+                            <div class="grid grid-cols-12 gap-6">
+                                @for ($i = 1; $i <= 4; $i++)
+                                    <div class="col-span-12 2xl:col-span-12 md:col-span-6 intro-y">
+                                        <div class="intro-x">
+                                            <div class="box px-5 py-3 mb-3  zoom-in">
+                                                <div class=" ml-1 mr-auto">
+                                                    <div class="font-bold text-rgb-secondary">Penanaman {{ $i }}
+                                                    </div>
+                                                    <div class="text-slate-500 text-xs mt-0.5">3 June 2020</div>
+                                                    <div class="progress mt-2 h-4">
+                                                        <div class="progress-bar w-1/2" role="progressbar" aria-valuenow="0"
+                                                            aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                    <div class="flex justify-between text-dark">
+                                                        <div class="text-xs  mt-1"><span
+                                                                class="text-rgb-primary">10</span>/30 hari</div>
+                                                        <div class="text-xs mt-1">50%</div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="text-success">+$36</div>
                                     </div>
-                                </div>
-                            @endfor
+                                @endfor
+                            </div>
 
                             <a href="#"
-                                class="intro-x w-full block text-center rounded-md py-3 border border-dotted border-slate-400 dark:border-darkmode-300 text-slate-500">Lihat
+                                class="intro-x w-full block mt-2 text-center rounded-md py-3 border border-dotted border-slate-400 dark:border-darkmode-300 bg-rgb-secondary text-white">Lihat
                                 Selengkapnya</a>
                         </div>
                     </div>

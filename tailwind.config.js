@@ -29,6 +29,27 @@ export default {
                     "slate-800": "30 41 59",
                     "slate-900": "15 23 42",
                 },
+                "rgb":{
+                    'primary': 'rgb(87, 180, 146)', // Green Tosca
+                    'secondary': 'rgb(0, 38, 35)', // Dark Green
+                    'success': 'rgb(132, 204, 22)',
+                    'info': 'rgb(6, 182, 212)',
+                    'warning': 'rgb(250, 204, 21)',
+                    'pending': 'rgb(249, 115, 22)',
+                    'danger': 'rgb(220, 38, 38)',
+                    'light': 'rgb(241, 245, 249)',
+                    'dark': 'rgb(0, 38, 35)',
+                    'slate-50': 'rgb(248, 250, 252)',
+                    'slate-100': 'rgb(241, 245, 249)',
+                    'slate-200': 'rgb(226, 232, 240)',
+                    'slate-300': 'rgb(203, 213, 225)',
+                    'slate-400': 'rgb(148, 163, 184)',
+                    'slate-500': 'rgb(100, 116, 139)',
+                    'slate-600': 'rgb(71, 85, 105)',
+                    'slate-700': 'rgb(51, 65, 85)',
+                    'slate-800': 'rgb(30, 41, 59)',
+                    'slate-900': 'rgb(15, 23, 42)',
+                },
                 "dark": {
                     "primary": "29 78 216",
                     "slate-500": "148 163 184",
