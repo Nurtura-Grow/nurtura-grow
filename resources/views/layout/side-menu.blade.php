@@ -26,7 +26,7 @@
                         </a>
                         {{-- Sub Menu --}}
                         @if (isset($menu['sub_menu']))
-                            <ul
+                            <ul>
                                 class="{{ $sideMenu['first_page_name'] == $menu['route_name'] ? 'side-menu__sub-open' : '' }}">
                                 @foreach ($menu['sub_menu'] as $subMenu)
                                     <li>
