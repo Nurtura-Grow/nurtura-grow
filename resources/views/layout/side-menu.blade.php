@@ -3,7 +3,7 @@
 @section('content')
     @include('layout.components.mobile-menu')
 
-    <div class="flex mt-[2rem] md:mt-0">
+    <div class="flex mt-[4.7rem] md:mt-0">
         <!-- BEGIN: Side Menu -->
         <nav class="side-nav">
             <a href="" class="intro-x flex items-center pl-5 pt-4">
