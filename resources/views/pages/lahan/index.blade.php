@@ -27,38 +27,14 @@
                         {{-- Below Large Screen --}}
                         <div class="block mx-6 lg:hidden">
                             <div class="multiple-items">
-                                @for ($i = 1; $i <= 10; $i++)
-                                    <div class="p-3 cursor-pointer hover:bg-slate-100  rounded-md flex items-center">
-                                        <div class="flex flex-row gap-3">
-                                            <div class="flex-initial">
-                                                <i class="fa-solid fa-location-dot"></i>
-                                            </div>
-                                            <div class="w-full">
-                                                <p class="font-bold"> Lahan {{ $i }}</p>
-                                                <p class="font-medium text-primary">Kecamatan, Kota</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endfor
+                                @include('pages.lahan.lokasi-lahan')
                             </div>
                         </div>
 
                         {{-- Large Screen and Above --}}
                         <div class="hidden lg:block overflow-y-auto scrollbar-hidden max-h-[calc(70vh-160px)]">
                             <div class="flex flex-col gap-2">
-                                @for ($i = 1; $i <= 10; $i++)
-                                    <div class="p-3 mr-3 cursor-pointer hover:bg-slate-100  rounded-md flex items-center">
-                                        <div class="flex flex-row gap-3">
-                                            <div class="flex-initial">
-                                                <i class="fa-solid fa-location-dot"></i>
-                                            </div>
-                                            <div class="w-full">
-                                                <p class="font-bold"> Lahan {{ $i }}</p>
-                                                <p class="font-medium text-primary">Kecamatan, Kota</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endfor
+                                @include('pages.lahan.lokasi-lahan')
                             </div>
                         </div>
                     </div>
