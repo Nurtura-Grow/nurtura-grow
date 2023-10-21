@@ -10,9 +10,12 @@ class LahanController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('pages.lahan.index');
+        $sideMenu = $this->getSideMenuList($request);
+        return view('pages.lahan.index', [
+            'sideMenu' => $sideMenu
+        ]);
     }
 
     /**

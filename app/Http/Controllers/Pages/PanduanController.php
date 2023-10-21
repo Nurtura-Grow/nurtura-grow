@@ -7,8 +7,11 @@ use Illuminate\Http\Request;
 
 class PanduanController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view('pages.panduan');
+        $sideMenu = $this->getSideMenuList($request);
+        return view('pages.panduan', [
+            'sideMenu' => $sideMenu
+        ]);
     }
 }

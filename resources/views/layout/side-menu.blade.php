@@ -3,8 +3,7 @@
 @section('content')
     @include('layout.components.mobile-menu')
 
-    {{-- Todo: Add Side Menu --}}
-    <div class="flex">
+    <div class="flex mt-[2rem] md:mt-0">
         <!-- BEGIN: Side Menu -->
         <nav class="side-nav">
             <a href="" class="intro-x flex items-center pl-5 pt-4">
@@ -13,76 +12,44 @@
             </a>
             <div class="side-nav__devider my-6"></div>
             <ul>
-                <li>
-                    <a href="javascript:;" class="side-menu side-menu--active">
-                        <div class="side-menu__icon"> <i data-lucide="home"></i> </div>
-                        <div class="side-menu__title">
-                            Dashboard
-                            <div class="side-menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
-                        </div>
-                    </a>
-                    <ul class="side-menu__sub-open">
-                        <li>
-                            <a href="index.html" class="side-menu side-menu--active">
-                                <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
-                                <div class="side-menu__title"> Overview 1 </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="side-menu-light-dashboard-overview-2.html" class="side-menu">
-                                <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
-                                <div class="side-menu__title"> Overview 2 </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="side-menu-light-dashboard-overview-3.html" class="side-menu">
-                                <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
-                                <div class="side-menu__title"> Overview 3 </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="side-menu-light-dashboard-overview-4.html" class="side-menu">
-                                <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
-                                <div class="side-menu__title"> Overview 4 </div>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="javascript:;" class="side-menu">
-                        <div class="side-menu__icon"> <i data-lucide="box"></i> </div>
-                        <div class="side-menu__title">
-                            Menu Layout
-                            <div class="side-menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
-                        </div>
-                    </a>
-                    <ul class="">
-                        <li>
-                            <a href="index.html" class="side-menu">
-                                <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
-                                <div class="side-menu__title"> Side Menu </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="simple-menu-light-dashboard-overview-1.html" class="side-menu">
-                                <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
-                                <div class="side-menu__title"> Simple Menu </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="top-menu-light-dashboard-overview-1.html" class="side-menu">
-                                <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
-                                <div class="side-menu__title"> Top Menu </div>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                {{-- Todo: Add Side Menu Logic --}}
+                @foreach ($sideMenu['side_menu'] as $menu)
+                    <li>
+                        {{-- If have sub_menu -> javascript:;, if not, go to the route_name --}}
+                        <a href="{{ isset($menu['sub_menu']) ? 'javascript:;' : route($menu['route_name']) }}"
+                            class="side-menu {{ $sideMenu['first_page_name'] == $menu['route_name'] ? 'side-menu--active' : '' }}">
+                            <div class="side-menu__icon"> <i class="{{ $menu['icon'] }}"></i> </div>
+                            <div class="side-menu__title"> {{ $menu['title'] }}
+                                @if (isset($menu['sub_menu']))
+                                    <div class="side-menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
+                                @endif
+                            </div>
+                        </a>
+                        {{-- Sub Menu --}}
+                        @if (isset($menu['sub_menu']))
+                            <ul
+                                class="{{ $sideMenu['first_page_name'] == $menu['route_name'] ? 'side-menu__sub-open' : '' }}">
+                                @foreach ($menu['sub_menu'] as $subMenu)
+                                    <li>
+                                        <a href="{{ route($subMenu['route_name']) }}"
+                                            class="side-menu {{ $sideMenu['second_page_name'] == $subMenu['route_name'] ? 'side-menu--active' : '' }}">
+                                            <div class="side-menu__icon"> <i class="{{ $subMenu['icon'] }}"></i>
+                                            </div>
+                                            <div class="side-menu__title"> {{ $subMenu['title'] }} </div>
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        @endif
+                    </li>
+                @endforeach
             </ul>
         </nav>
         <!-- END: Side Menu -->
         <!-- BEGIN: Content -->
         <div class="content">
             @include('layout.components.top-bar')
+
             @yield('subcontent')
         </div>
         <!-- END: Content -->

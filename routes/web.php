@@ -36,14 +36,45 @@ Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::group([
     'prefix' => 'auth',
     'as' => 'auth.'
-    ], function () {
-        Route::post('/login', [LoginController::class, 'login'])->name('logout');
-        Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
-    });
+], function () {
+    Route::post('/login', [LoginController::class, 'login'])->name('logout');
+    Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
+});
 
 // Todo: Add middleware for logged in
-Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-Route::get('/lahan', [LahanController::class, 'index'])->name('lahan');
-Route::get('/tanaman', [TanamanController::class, 'index'])->name('tanaman');
-Route::get('/rekomendasi', [RekomendasiController::class, 'index'])->name('rekomendasi');
-Route::get('/riwayat', [RiwayatController::class, 'index'])->name('riwayat');
+
+Route::group([], function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    Route::group([
+        'prefix' => 'lahan',
+        'as' => 'lahan.'
+        ], function () {
+        Route::get('/', [LahanController::class, 'index'])->name('index');
+    });
+
+    Route::group([
+        'prefix' => 'tanaman',
+        'as' => 'tanaman.'
+    ], function () {
+        Route::get('/daftar', [TanamanController::class, 'index'])->name('index');
+        Route::get('/tambah', [TanamanController::class, 'index'])->name('create');
+    });
+
+
+    Route::group([
+        'prefix' => 'rekomendasi',
+        'as' => 'rekomendasi.'
+    ], function () {
+        Route::get('/pengairan', [RekomendasiController::class, 'index'])->name('pengairan');
+        Route::get('/pemupukan', [RekomendasiController::class, 'index'])->name('pemupukan');
+    });
+
+
+    Route::group([
+        'prefix' => 'riwayat',
+        'as' => 'riwayat.'
+    ], function () {
+        Route::get('/tanaman/tinggi', [RiwayatController::class, 'index'])->name('tanaman.tinggi');
+        Route::get('/rekomendasi', [RiwayatController::class, 'index'])->name('rekomendasi');
+    });
+});

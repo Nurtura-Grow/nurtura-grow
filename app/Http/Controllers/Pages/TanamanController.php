@@ -10,9 +10,12 @@ class TanamanController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('pages.tanaman.index');
+        $sideMenu = $this->getSideMenuList($request);
+        return view('pages.tanaman.index', [
+            'sideMenu' => $sideMenu
+        ]);
     }
 
     /**

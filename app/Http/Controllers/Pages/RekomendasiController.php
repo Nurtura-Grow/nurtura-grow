@@ -10,9 +10,12 @@ class RekomendasiController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('pages.rekomendasi.index');
+        $sideMenu = $this->getSideMenuList($request);
+        return view('pages.rekomendasi.index', [
+            'sideMenu' => $sideMenu
+        ]);
     }
 
     /**

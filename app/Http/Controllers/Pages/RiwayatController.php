@@ -10,9 +10,12 @@ class RiwayatController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('pages.riwayat.index');
+        $sideMenu = $this->getSideMenuList($request);
+        return view('pages.riwayat.index', [
+            'sideMenu' => $sideMenu
+        ]);
     }
 
     /**
