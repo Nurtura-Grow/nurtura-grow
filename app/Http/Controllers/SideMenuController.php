@@ -11,38 +11,44 @@ class SideMenuController extends Controller
         $activeMenu = $this->currentActiveMenu($request);
         return [
             'side_menu' => $this->listPage(),
-            'active_first_menu' => $activeMenu['active_first_menu'],
-            'active_second_menu' => $activeMenu['active_second_menu'],
+            ...$activeMenu
         ];
     }
 
     public function currentActiveMenu(Request $request)
     {
-        $firstPageName = '';
-        $secondPageName = '';
+        $firstMenu = '';
+        $secondMenu = '';
+        $firstPage = '';
+        $secondPage = '';
 
         $routeName = $request->route()->getName();
         $sideBar = $this->listPage();
 
         foreach ($sideBar as $menu) {
-            if ($menu['route_name'] == $routeName && empty($firstPageName)) {
-                $firstPageName = $menu['route_name'];
+            if ($menu['route_name'] == $routeName && empty($firstMenu)) {
+                $firstMenu = $menu['route_name'];
+                $firstPage = $menu['title'];
             }
 
             // Have Sub_menu
             if (isset($menu['sub_menu'])) {
                 foreach ($menu['sub_menu'] as $subMenu) {
-                    if ($subMenu['route_name'] == $routeName && empty($secondPageName) && $subMenu['route_name'] != 'dashboard') {
-                        $firstPageName = $menu['route_name'];
-                        $secondPageName = $subMenu['route_name'];
+                    if ($subMenu['route_name'] == $routeName && empty($secondMenu) && $subMenu['route_name'] != 'dashboard') {
+                        $firstMenu = $menu['route_name'];
+                        $firstPage = $menu['title'];
+                        $secondMenu = $subMenu['route_name'];
+                        $secondPage = $subMenu['title'];
                     }
                 }
             }
         }
 
         return [
-            'active_first_menu' => $firstPageName,
-            'active_second_menu' => $secondPageName
+            'active_first_menu' => $firstMenu,
+            'active_second_menu' => $secondMenu,
+            'first_title' => $firstPage,
+            'second_title' => $secondPage,
         ];
     }
 
