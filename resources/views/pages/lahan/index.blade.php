@@ -6,7 +6,7 @@
             Daftar Lahan
         </h2>
         <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
-            <button class="btn btn-secondary text-white shadow-md">
+            <button class="btn btn-secondary text-white hover:text-rgb-secondary shadow-md">
                 <i class="fa-solid fa-circle-plus mr-2"></i>Tambah Lahan
             </button>
         </div>
@@ -15,18 +15,19 @@
     <div class="grid grid-cols-12 gap-5 mt-5 intro-y">
         <div class="col-span-12 lg:col-span-3">
             <div class="box p-5 intro-y">
-                <div class="flex flex-col items-center">
-                    {{-- Todo: ganti jadi input --}}
-                    <button type="button" class="btn btn-primary w-full mt-2">
-                        <i class="fa-solid fa-magnifying-glass w-4 h-4 mr-2"></i>
-                        Cari Lahan
-                    </button>
+                <div class="flex flex-col items-center lg:items-center">
+                    {{-- Search Items --}}
+                    <div class="relative ">
+                        <input type="text" class="form-control py-3 px-4 w-full box pr-10 border-slate-500"
+                            placeholder="Cari lahan...">
+                        <i class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0 text-slate-500" data-lucide="search"></i>
+                    </div>
 
                     <div
-                        class="border-t border-b w-full border-slate-200/60 dark:border-darkmode-400 mt-6 mb-5 py-3 lg:overflow-hidden">
+                        class="border-t border-b w-full border-slate-300 dark:border-darkmode-400 mt-6 mb-5 py-3 lg:overflow-hidden">
                         {{-- Below Large Screen --}}
-                        <div class="block mx-6 lg:hidden">
-                            <div class="multiple-items">
+                        <div class="block mx-6 pb-8 lg:hidden">
+                            <div class="responsive-mode">
                                 @include('pages.lahan.lokasi-lahan')
                             </div>
                         </div>

@@ -2,7 +2,7 @@
 
 @section('subcontent')
     {{-- Atas --}}
-    <div class="grid grid-cols-12 gap-6 2xl:border-b-2 mb-5 pb-10">
+    <div class="grid grid-cols-12 gap-6 2xl:border-b-2 mb-5 pb-10 border-slate-300">
         {{-- Kiri --}}
         <div class="col-span-12 2xl:col-span-9">
             <div class="grid grid-cols-12 gap-6 ">
@@ -54,7 +54,7 @@
 
         {{-- Kanan --}}
         <div class="col-span-12 2xl:col-span-3">
-            <div class="2xl:border-l -mb-10 pb-10">
+            <div class="2xl:border-l border-slate-300 -mb-10 pb-10">
                 <div class="2xl:pl-6 grid grid-cols-12 gap-x-6 2xl:gap-x-0 gap-y-6">
                     <!-- BEGIN: Hari Setelah Tanam -->
                     <div class="col-span-12  2xl:col-span-12 mt-3 2xl:mt-8">
