@@ -12,9 +12,8 @@
         </div>
     </div>
 
-    {{-- Todo: kalau di mobile ganti single/responsive display dari:http://127.0.0.1:5500/side-menu-light-slider.html --}}
     <div class="grid grid-cols-12 gap-5 mt-5 intro-y">
-        <div class="col-span-3">
+        <div class="col-span-12 lg:col-span-3">
             <div class="box p-5 intro-y">
                 <div class="flex flex-col items-center">
                     {{-- Todo: ganti jadi input --}}
@@ -23,40 +22,58 @@
                         Cari Lahan
                     </button>
 
-                    <div class="border-t border-b w-full border-slate-200/60 dark:border-darkmode-400 mt-6 mb-5 py-3 overflow-hidden">
-                        <div class="overflow-y-auto scrollbar-hidden max-h-[calc(70vh-160px)]">
-                            @for ($i = 1; $i <= 10; $i++)
-                                <div class="p-3 cursor-pointer hover:bg-slate-100  rounded-md flex items-center">
-                                    <div class="flex flex-row gap-3">
-                                        <div class="flex-initial">
-                                            <i class="fa-solid fa-location-dot"></i>
-                                        </div>
-                                        <div class="w-full">
-                                            <p class="font-bold"> Lahan {{ $i }}</p>
-                                            <p class="font-medium text-primary">Kecamatan, Kota</p>
+                    <div
+                        class="border-t border-b w-full border-slate-200/60 dark:border-darkmode-400 mt-6 mb-5 py-3 lg:overflow-hidden">
+                        {{-- Below Large Screen --}}
+                        <div class="block mx-6 lg:hidden">
+                            <div class="multiple-items">
+                                @for ($i = 1; $i <= 10; $i++)
+                                    <div class="p-3 cursor-pointer hover:bg-slate-100  rounded-md flex items-center">
+                                        <div class="flex flex-row gap-3">
+                                            <div class="flex-initial">
+                                                <i class="fa-solid fa-location-dot"></i>
+                                            </div>
+                                            <div class="w-full">
+                                                <p class="font-bold"> Lahan {{ $i }}</p>
+                                                <p class="font-medium text-primary">Kecamatan, Kota</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            @endfor
+                                @endfor
+                            </div>
+                        </div>
+
+                        {{-- Large Screen and Above --}}
+                        <div class="hidden lg:block overflow-y-auto scrollbar-hidden max-h-[calc(70vh-160px)]">
+                            <div class="flex flex-col gap-2">
+                                @for ($i = 1; $i <= 10; $i++)
+                                    <div class="p-3 mr-3 cursor-pointer hover:bg-slate-100  rounded-md flex items-center">
+                                        <div class="flex flex-row gap-3">
+                                            <div class="flex-initial">
+                                                <i class="fa-solid fa-location-dot"></i>
+                                            </div>
+                                            <div class="w-full">
+                                                <p class="font-bold"> Lahan {{ $i }}</p>
+                                                <p class="font-medium text-primary">Kecamatan, Kota</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endfor
+                            </div>
                         </div>
                     </div>
+                </div>
 
-                    <div>
-                        Tekan lahan untuk menunjukkan lokasi pada peta
-                    </div>
+                <div>
+                    Tekan lahan untuk menunjukkan lokasi pada peta
                 </div>
             </div>
         </div>
-
         {{-- Masukin maps di sini --}}
-        <div class="col-span-9">
-            <div class="box p-5 intro-y h-full">
+        <div class="col-span-12 lg:col-span-9">
+            <div class="box p-5 intro-y h-full min-h-[70vh]">
                 {{-- Todo: tambahin maps --}}
             </div>
         </div>
-    </div>
-
-
-    </div>
     </div>
 @endsection
