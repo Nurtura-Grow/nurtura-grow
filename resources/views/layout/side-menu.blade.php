@@ -12,7 +12,6 @@
             </a>
             <div class="side-nav__devider my-6"></div>
             <ul>
-                {{-- Todo: Add Side Menu Logic --}}
                 @foreach ($sideMenu['side_menu'] as $menu)
                     <li>
                         {{-- If have sub_menu -> javascript:;, if not, go to the route_name --}}
@@ -53,4 +52,5 @@
             @yield('subcontent')
         </div>
         <!-- END: Content -->
+    </div>
     @endsection
