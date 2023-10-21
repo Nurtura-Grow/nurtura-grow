@@ -11,8 +11,8 @@ class SideMenuController extends Controller
         $activeMenu = $this->currentActiveMenu($request);
         return [
             'side_menu' => $this->listPage(),
-            'first_page_name' => $activeMenu['first_page_name'],
-            'second_page_name' => $activeMenu['second_page_name'],
+            'active_first_menu' => $activeMenu['active_first_menu'],
+            'active_second_menu' => $activeMenu['active_second_menu'],
         ];
     }
 
@@ -41,8 +41,8 @@ class SideMenuController extends Controller
         }
 
         return [
-            'first_page_name' => $firstPageName,
-            'second_page_name' => $secondPageName
+            'active_first_menu' => $firstPageName,
+            'active_second_menu' => $secondPageName
         ];
     }
 

@@ -16,7 +16,7 @@
                     <li>
                         {{-- If have sub_menu -> javascript:;, if not, go to the route_name --}}
                         <a href="{{ isset($menu['sub_menu']) ? 'javascript:;' : route($menu['route_name']) }}"
-                            class="side-menu {{ $sideMenu['first_page_name'] == $menu['route_name'] ? 'side-menu--active' : '' }}">
+                            class="side-menu {{ $sideMenu['active_first_menu'] == $menu['route_name'] ? 'side-menu--active' : '' }}">
                             <div class="side-menu__icon"> <i class="{{ $menu['icon'] }}"></i> </div>
                             <div class="side-menu__title"> {{ $menu['title'] }}
                                 @if (isset($menu['sub_menu']))
@@ -26,12 +26,12 @@
                         </a>
                         {{-- Sub Menu --}}
                         @if (isset($menu['sub_menu']))
-                            <ul>
-                                class="{{ $sideMenu['first_page_name'] == $menu['route_name'] ? 'side-menu__sub-open' : '' }}">
+                            <ul
+                                class="{{ $sideMenu['active_first_menu'] == $menu['route_name'] ? 'side-menu__sub-open' : '' }}">
                                 @foreach ($menu['sub_menu'] as $subMenu)
                                     <li>
                                         <a href="{{ route($subMenu['route_name']) }}"
-                                            class="side-menu {{ $sideMenu['second_page_name'] == $subMenu['route_name'] ? 'side-menu--active' : '' }}">
+                                            class="side-menu {{ $sideMenu['active_second_menu'] == $subMenu['route_name'] ? 'side-menu--active' : '' }}">
                                             <div class="side-menu__icon"> <i class="{{ $subMenu['icon'] }}"></i>
                                             </div>
                                             <div class="side-menu__title"> {{ $subMenu['title'] }} </div>
