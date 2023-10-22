@@ -15,7 +15,7 @@
     <div class="grid grid-cols-12 gap-5 mt-5 intro-y">
         <div class="col-span-12 lg:col-span-3">
             <div class="box p-5 intro-y">
-                <div class="flex flex-col items-center lg:items-center">
+                <div class="flex flex-col items-start lg:items-center">
                     {{-- Search Items --}}
                     <div class="relative ">
                         <input type="text" class="form-control py-3 px-4 w-full box pr-10 border-slate-500"

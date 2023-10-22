@@ -5,7 +5,12 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
             <li class="breadcrumb-item active text-bold" aria-current="page">
-                {{ $sideMenu['first_title'] . ' ' . $sideMenu['second_title'] ?? '' }}</li>
+                @if ($sideMenu['first_title'] == 'Tanaman')
+                    {{ $sideMenu['second_title'] ?? '' }}
+            </li>
+        @else
+            {{ $sideMenu['first_title'] . ' ' . $sideMenu['second_title'] ?? '' }}</li>
+            @endif
         </ol>
     </nav>
     <!-- END: Breadcrumb -->
