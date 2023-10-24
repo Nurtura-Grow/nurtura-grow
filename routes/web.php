@@ -57,7 +57,8 @@ Route::group([], function () {
         'as' => 'tanaman.'
     ], function () {
         Route::get('/daftar', [TanamanController::class, 'index'])->name('index');
-        Route::get('/tambah', [TanamanController::class, 'index'])->name('create');
+        Route::get('/tambah', [TanamanController::class, 'create'])->name('create');
+        Route::post('/tambah', [TanamanController::class, 'store'])->name('store');
     });
 
 

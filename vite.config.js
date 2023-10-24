@@ -1,7 +1,6 @@
 import { defineConfig, normalizePath } from "vite";
 import laravel from "laravel-vite-plugin";
 import { resolve } from "path";
-import inject from "@rollup/plugin-inject";
 
 export default defineConfig({
     resolve: {
