@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Pages\DashboardController;
 use App\Http\Controllers\Pages\LahanController;
 use App\Http\Controllers\Pages\TanamanController;
@@ -32,12 +33,14 @@ Route::get('/panduan', [PanduanController::class, 'index'])->name('panduan');
 
 // Todo: Add middleware for authenticated
 Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::get('/register', [RegisterController::class, 'index'])->name('register');
 
 Route::group([
     'prefix' => 'auth',
     'as' => 'auth.'
 ], function () {
-    Route::post('/login', [LoginController::class, 'login'])->name('logout');
+    Route::post('/login', [LoginController::class, 'login'])->name('login');
+    Route::post('/register', [RegisterController::class, 'register'])->name('register');
     Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 });
 

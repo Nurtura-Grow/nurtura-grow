@@ -9,20 +9,18 @@ use Illuminate\View\View;
 
 class LoginController extends Controller
 {
-    public function loginView()
+    public function index()
     {
-        return view('login.main', [
-            'layout' => 'login'
-        ]);
+        return view('account.login');
     }
 
     public function login(LoginRequest $request)
     {
-        if (! Auth::attempt([
-            'email' => $request->email,
-            'password' => $request->password
-        ])) {
-            throw new \Exception('Wrong email or password.');
-        }
+        // if (!Auth::attempt([
+        //     'email' => $request->email,
+        //     'password' => $request->password
+        // ])) {
+        //     throw new \Exception('Wrong email or password.');
+        // }
     }
 }
