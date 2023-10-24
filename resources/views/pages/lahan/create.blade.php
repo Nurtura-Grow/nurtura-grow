@@ -9,7 +9,7 @@
     </div>
 
     <div class="grid grid-cols-12 gap-5 mt-5 intro-y">
-        <div class="col-span-12 lg:col-span-3">
+        <div class="col-span-12 xl:col-span-3">
             <div class="box p-5 intro-y h-full">
                 <div class="flex flex-col items-start">
                     {{-- Form --}}
@@ -28,7 +28,7 @@
                             <input name="latitude" type="text" class="form-control col-span-6" placeholder="Latitude">
                         </div>
 
-                        <p class="mt-5 font-semibold text-rgb-secondary">
+                        <p class="mt-5 text-rgb-secondary">
                             Pindahkan tanda pada peta untuk memasukkan data koordinat secara otomatis
                         </p>
 

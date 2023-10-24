@@ -24,7 +24,7 @@ class TanamanController extends Controller
     public function create(Request $request)
     {
         $sideMenu = $this->getSideMenuList($request);
-        return view('pages.tanaman.tambah-tanaman', [
+        return view('pages.tanaman.create', [
             'sideMenu' => $sideMenu
         ]);
     }

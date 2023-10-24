@@ -10,12 +10,6 @@
     <div class="grid grid-cols-12 gap-5 mt-5 intro-y">
         <div class="col-span-12">
             <div class="box p-5 intro-y">
-                <a href="{{ route('tanaman.index') }}">
-                    <div class="text-primary ms-0 md:ms-4 my-4">
-                        <i class="fa-solid fa-arrow-left mr-2"></i>Kembali
-                    </div>
-                </a>
-
                 {{-- Form --}}
                 <form action="{{ route('tanaman.store') }}" method="POST">
                     @csrf
@@ -31,7 +25,7 @@
 
                     <div class="form-inline mt-5">
                         <label for="horizontal-form-2" class="form-label sm:w-32">Nama Lahan</label>
-                        <select class="form-control mt-2" name="nama_lahan">
+                        <select class="form-control tom-select mt-2" data-placeholder="Pilih lahan" name="nama_lahan">
                             {{-- Todo: Change the option to match the database --}}
                             <option>Chris Evans</option>
                             <option>Liam Neeson</option>
@@ -41,7 +35,8 @@
 
                     <div class="form-inline mt-5">
                         <label for="horizontal-form-2" class="form-label sm:w-32">Jenis Tanaman</label>
-                        <select class="form-control mt-2" name="jenis_tanaman">
+                        <select class="form-control tom-select mt-2" data-placeholder="Pilih jenis tanaman"
+                            name="jenis_tanaman">
                             {{-- Todo: Change the option to match the database --}}
                             <option>Chris Evans</option>
                             <option>Liam Neeson</option>
@@ -56,12 +51,16 @@
                                 class="absolute top-0 left-0 rounded-l w-10 h-full flex items-center justify-center bg-slate-100 border text-slate-500">
                                 <i class="fa-solid fa-calendar w-4 h-4"></i>
                             </div>
-                            <input name="tanggal_tanaman" type="text" class="datepicker form-control pl-12" data-single-mode="true">
+                            <input name="tanggal_tanaman" type="text" class="datepicker form-control pl-12"
+                                data-single-mode="true">
                         </div>
                     </div>
 
                     <div class="sm:ml-32 sm:pl-5 mt-5">
-                        <button class="btn btn-primary" type="submit">Tambah</button>
+                        <button class="btn btn-primary" type="submit">Tambah Tanaman</button>
+                        <a href="{{ route('tanaman.index') }}">
+                            <button class="ml-2 btn w-20" type="button">Batal</button>
+                        </a>
                     </div>
                 </form>
             </div>

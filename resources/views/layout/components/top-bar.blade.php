@@ -5,7 +5,7 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
             <li class="breadcrumb-item active text-bold" aria-current="page">
-                @if ($sideMenu['first_title'] == 'Tanaman')
+                @if ($sideMenu['first_title'] == 'Tanaman' || $sideMenu['first_title'] == 'Lahan')
                     {{ $sideMenu['second_title'] ?? '' }}
             </li>
         @else
