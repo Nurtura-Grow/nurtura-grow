@@ -85,7 +85,7 @@
 
         {{-- Todo:Benerin isi tabelnya + bikin responsive kayak di contoh: http://127.0.0.1:5500/side-menu-light-tabulator.html --}}
         <div class="overflow-x-auto scrollbar-hidden">
-            <table id="table" class="stripe hover overflow-x-auto">
+            <table id="table" class="display stripe hover overflow-x-auto">
                 <thead>
                     <tr>
                         <th class="border-b-2 whitespace-nowrap">Name</th>
@@ -109,5 +109,6 @@
 @push('scripts')
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/css/dataTables.tailwindcss.min.css"></script>
     @vite('resources/js/pages/datatable.js')
 @endpush
