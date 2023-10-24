@@ -64,7 +64,19 @@ class SideMenuController extends Controller
             'lahan' => [
                 'icon' => 'fa-solid fa-map-pin',
                 'route_name' => 'lahan.index',
-                'title' => 'Lahan'
+                'title' => 'Lahan',
+                'sub_menu' => [
+                    'daftar-lahan' => [
+                        'icon' => 'fa-solid fa-list',
+                        'route_name' => 'lahan.index',
+                        'title' => 'Daftar Lahan'
+                    ],
+                    'tambah-lahan' => [
+                        'icon' => 'fa-solid fa-plus',
+                        'route_name' => 'lahan.create',
+                        'title' => 'Tambah Lahan'
+                    ],
+                ]
             ],
             'tanaman' => [
                 'icon' => 'fa-brands fa-pagelines',

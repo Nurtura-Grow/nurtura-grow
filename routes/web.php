@@ -48,8 +48,9 @@ Route::group([], function () {
     Route::group([
         'prefix' => 'lahan',
         'as' => 'lahan.'
-        ], function () {
+    ], function () {
         Route::get('/', [LahanController::class, 'index'])->name('index');
+        Route::get('/tambah', [LahanController::class, 'create'])->name('create');
     });
 
     Route::group([

@@ -21,9 +21,12 @@ class LahanController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $sideMenu = $this->getSideMenuList($request);
+        return view('pages.lahan.create', [
+            'sideMenu' => $sideMenu
+        ]);
     }
 
     /**
