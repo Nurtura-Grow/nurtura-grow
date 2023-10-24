@@ -78,7 +78,7 @@
 
         {{-- Todo:Benerin isi tabelnya + bikin responsive kayak di contoh: http://127.0.0.1:5500/side-menu-light-tabulator.html --}}
         <div class="overflow-x-auto scrollbar-hidden">
-            <table id="table">
+            <table id="table" class="stripe hover overflow-x-auto">
                 <thead>
                     <tr>
                         <th class="border-b-2 whitespace-nowrap">Name</th>
@@ -87,57 +87,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class="border-b">Item 1</td>
-                        <td class="border-b">Category 1</td>
-                        <td class="border-b">10</td>
-                    </tr>
-                    <tr>
-                        <td class="border-b">Item 2</td>
-                        <td class="border-b">Category 2</td>
-                        <td class="border-b">20</td>
-                    </tr>
-                    <tr>
-                        <td class="border-b">Item 3</td>
-                        <td class="border-b">Category 3</td>
-                        <td class="border-b">30</td>
-                    </tr>
-                    <tr>
-                        <td class="border-b">Item 4</td>
-                        <td class="border-b">Category 4</td>
-                        <td class="border-b">40</td>
-                    </tr>
-                    <tr>
-                        <td class="border-b">Item 5</td>
-                        <td class="border-b">Category 5</td>
-                        <td class="border-b">50</td>
-                    </tr>
-                    <tr>
-                        <td class="border-b">Item 6</td>
-                        <td class="border-b">Category 6</td>
-                        <td class="border-b">60</td>
-                    </tr>
-                    <tr>
-                        <td class="border-b">Item 7</td>
-                        <td class="border-b">Category 7</td>
-                        <td class="border-b">70</td>
-                    </tr>
-                    <tr>
-                        <td class="border-b">Item 8</td>
-                        <td class="border-b">Category 8</td>
-                        <td class="border-b">80</td>
-                    </tr>
-                    <tr>
-                        <td class="border-b">Item 9</td>
-                        <td class="border-b">Category 9</td>
-                        <td class="border-b">90</td>
-                    </tr>
+                    @for ($i = 1; $i < 10; $i++)
+                        <tr>
+                            <td class="border-b">Item {{ $i }}</td>
+                            <td class="border-b">Category {{ $i }}</td>
+                            <td class="border-b">{{ $i * 10 }}</td>
+                        </tr>
+                    @endfor
+                </tbody>
             </table>
         </div>
     </div>
 @endsection
 
 @push('scripts')
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
     @vite('resources/js/pages/datatable.js')
 @endpush

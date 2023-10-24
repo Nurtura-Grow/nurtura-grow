@@ -1,0 +1,36 @@
+.dataTables_wrapper {
+    font-family: "Roboto", sans-serif !important;
+}
+
+/* Show Length */
+.dataTables_wrapper .dataTables_length {
+    width: 200px;
+}
+
+.dataTables_wrapper .dataTables_length select {
+    background-position: right center;
+    width: 60px;
+}
+
+/* Filter */
+.dataTables_wrapper .dataTables_filter input {
+    width: 300px;
+    padding: 8px;
+    border: 1px solid rgb(87, 180, 146);
+    border-radius: 5px;
+}
+
+.dataTables_wrapper .dataTables_filter input:focus {
+    outline: none;
+}
+
+/* Pagination */
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    border-radius: 10% !important;
+    padding: 0.5em 0.9em !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    border: 1px solid rgb(87, 180, 146) !important;
+}
