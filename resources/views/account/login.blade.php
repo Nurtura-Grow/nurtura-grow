@@ -17,8 +17,8 @@
             <div class="block xl:grid grid-cols-2 gap-4">
                 <!-- BEGIN: Login Info -->
                 <div class="hidden xl:flex flex-col h-screen">
-                    <a href="" class="-intro-x flex items-center pt-10">
-                        <img alt="" class="w-6" src="{{ asset('images/logo.svg') }} ">
+                    <a href="{{ route('index') }}" class="-intro-x flex items-center pt-10">
+                        <img alt="" class="w-8" src="{{ asset('images/logo-nobg.svg') }} ">
                         <span class="text-white text-lg ml-3">NurturaGrow</span>
                     </a>
                     <div class="my-auto">
@@ -39,7 +39,7 @@
                         <h2 class="intro-x font-bold text-2xl xl:text-3xl text-center xl:text-left">
                             Masuk
                         </h2>
-                        <form method="POST" action="{{route('auth.login')}}" class="intro-x mt-8">
+                        <form method="POST" action="{{ route('auth.login') }}" class="intro-x mt-8">
                             @csrf
                             <input type="text" name="email" class="intro-x form-control w-full py-3  block"
                                 placeholder="Email">

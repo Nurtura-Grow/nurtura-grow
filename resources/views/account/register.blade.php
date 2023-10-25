@@ -14,10 +14,9 @@
 
     <body class="flex min-h-screen p-0 m-0 bg-no-repeat bg-fixed bg-left bg-cover">
         <div class="container sm:px-10">
-
             <div class="hidden xl:block absolute top-5 p-5">
-                <a href="" class="-intro-x flex">
-                    <img alt="" class="w-6" src="{{ asset('images/logo.svg') }} ">
+                <a href="{{ route('index') }}" class="-intro-x flex">
+                    <img alt="" class="w-8" src="{{ asset('images/logo-bg.svg') }} ">
                     <span class="text-rgb-secondary font-bold text-lg ml-3"> NurturaGrow </span>
                 </a>
             </div>

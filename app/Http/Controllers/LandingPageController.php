@@ -8,8 +8,11 @@ use Illuminate\View\View;
 
 class LandingPageController extends Controller
 {
-    public function index() :View
+    public function index(Request $request) :View
     {
-        return view('landing-page');
+        $sideMenu = $this->getSideMenuList($request);
+        return view('landing-page', [
+            'sideMenu' => $sideMenu
+        ]);
     }
 }
