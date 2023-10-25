@@ -6,9 +6,9 @@
     <div class="flex mt-[4.7rem] md:mt-0">
         <!-- BEGIN: Side Menu -->
         <nav class="side-nav">
-            <a href="" class="intro-x flex items-center pl-5 pt-4">
-                <img alt="Nurtura Grow" class="w-6" src="{{ asset('images/logo.svg') }}">
-                <span class="hidden xl:block text-white text-lg ml-3 font-medium">NurturaGrow</span>
+            <a href="{{ route('dashboard') }}" class="intro-x flex items-center pl-5 pt-4">
+                <img alt="Nurtura Grow" class="w-8" src="{{ asset('images/logo-nobg.svg') }}">
+                <span class="hidden xl:block text-white text-lg ml-3 font-medium">Nurtura<span class="text-rgb-secondary">Grow</span></span>
             </a>
             <div class="side-nav__devider my-6"></div>
             <ul>
@@ -53,4 +53,4 @@
         </div>
         <!-- END: Content -->
     </div>
-    @endsection
+@endsection
