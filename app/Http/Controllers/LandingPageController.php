@@ -11,7 +11,7 @@ class LandingPageController extends Controller
     public function index(Request $request) :View
     {
         $sideMenu = $this->getSideMenuList($request);
-        return view('landing-page', [
+        return view('guest.landing-page', [
             'sideMenu' => $sideMenu
         ]);
     }
