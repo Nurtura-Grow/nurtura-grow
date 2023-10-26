@@ -15,7 +15,7 @@
             <img class="hidden md:block absolute bottom-0 left-0 w-full"
                 src="{{ asset('images/landing-page/section1.svg') }}">
             <img class="block md:hidden absolute bottom-0 left-0 w-full"
-                src="{{ asset('images/landing-page/section1-mobile.svg') }}">
+                src="{{ asset('images/landing-page/section1-small.svg') }}">
 
         </section>
         {{-- Section 2 - Fitur --}}
