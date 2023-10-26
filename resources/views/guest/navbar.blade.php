@@ -3,7 +3,7 @@
     <div class="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="{{ route('index') }}" class="flex items-center">
             <img src="{{ asset('images/logo-bg.svg') }}" class="w-8 mr-3" alt="NurturaGrow Logo" />
-            <span class="self-center text-2xl font-semibold  text-rgb-secondary whitespace-nowrap">NurturaGrow</span>
+            <span class="self-center text-xl font-semibold  text-rgb-secondary whitespace-nowrap">NurturaGrow</span>
         </a>
         <div class="w-full lg:w-auto" id="navbar-default">
             <ul
@@ -39,32 +39,48 @@
 
 {{-- Navbar Mobile --}}
 <nav class="w-screen mobile-menu lg:hidden">
-    <div class="mobile-menu-bar w-screen">
+    <div class="mobile-menu-bar w-screen border-b-2 border-rgb-secondary bg-rgb-light-green">
         <a href="{{ route('dashboard') }}" class="flex mr-auto">
             <img alt="Nurtura Grow" class="w-8" src="{{ asset('images/logo-bg.svg') }}">
             <span class="text-rgb-secondary text-lg ml-3 font-medium">NurturaGrow</span>
         </a>
-        <a href="{{ route('login') }}"
-            class="btn bg-white btn-outline-secondary py-2 pl-3 pr-4 rounded-xl mr-3">Masuk</a>
+        <a href="{{ route('login') }}" class="hidden md:block btn bg-white btn-outline-secondary rounded-xl py-2 mr-3">
+            <span class="text-rgb-secondary">Masuk</span>
+        </a>
         <a href="{{ route('register') }}"
-            class="btn bg-rgb-secondary text-white border-2 border-rgb-secondary rounded-xl mr-3">Daftar</a>
+            class="btn bg-rgb-secondary text-white border-2 border-rgb-secondary rounded-xl py-2 mr-3">Daftar</a>
         <a href="javascript:;" class="mobile-menu-toggler mr-3"> <i class="fa-solid fa-bars"></i> </a>
     </div>
     <div class="scrollable">
-        <a href="javascript:;" class="mobile-menu-toggler"> <i data-lucide="x-circle"
-                class="w-8 h-8 text-secondary transform -rotate-90"></i> </a>
+        <a href="javascript:;" class="mobile-menu-toggler text-white"> <i data-lucide="x-circle"
+                class="w-8 h-8 text-secondary transform -rotate-90"></i></a>
         <ul class="scrollable__content py-2">
             <li>
-                <a href="#" class="menu" aria-current="page">Beranda</a>
+                <a href="#" class="menu" aria-current="page">
+                    <div class="menu__title">Beranda</div>
+                </a>
             </li>
             <li>
-                <a href="#fitur" class="menu">Fitur</a>
+                <a href="#fitur" class="menu">
+                    <div class="menu__title">Fitur</div>
+                </a>
             </li>
             <li>
-                <a href="#tentang-kami" class="menu">Tentang Kami</a>
+                <a href="#tentang-kami" class="menu">
+                    <div class="menu__title">Tentang Kami</div>
+                </a>
             </li>
             <li>
-                <a href="#aksi" class="menu">Panduan</a>
+                <a href="{{ route('panduan') }}" class="menu">
+                    <div class="menu__icon"><i class="fa-solid fa-book"></i></div>
+                    <div class="menu__title">Panduan</div>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('login') }}" class="menu">
+                    <div class="menu__icon"><i class="fa-solid fa-arrow-right-to-bracket"></i></div>
+                    <div class="menu__title">Masuk</div>
+                </a>
             </li>
         </ul>
     </div>

@@ -6,15 +6,15 @@
 
 @section('body')
 
-    <body class="p-0 m-0 relative">
+    <body class="p-0 m-0 relative bg-rgb-light-green">
         @include('guest.navbar')
 
         {{-- Section 1 --}}
-        <section class="min-h-[90vh] p-0 m-0 bg-rgb-light-green relative">
+        <section class="min-h-[95vh] lg:min-h-[90vh] p-0 m-0 bg-rgb-light-green relative">
             {{-- Background Ornament --}}
-            <img class="hidden lg:block absolute bottom-0 left-0 w-full"
+            <img class="hidden md:block absolute bottom-0 left-0 w-full"
                 src="{{ asset('images/landing-page/section1.svg') }}">
-            <img class="block lg:hidden absolute bottom-0 left-0 w-full"
+            <img class="block md:hidden absolute bottom-0 left-0 w-full"
                 src="{{ asset('images/landing-page/section1-mobile.svg') }}">
 
         </section>
