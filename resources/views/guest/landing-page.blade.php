@@ -20,10 +20,13 @@
                         NurturaGrow
                     </h1>
                     <p class="text-lg text-justify max-lg:p-4">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo quos suscipit odio. Quibusdam sunt rem
-                        aperiam optio possimus labore ullam cupiditate atque quo neque esse culpa deleniti vel aspernatur
-                        corrupti, voluptatibus incidunt sit molestias hic mollitia itaque! Maiores praesentium vel labore
-                        quasi reprehenderit ab, ad perferendis minima perspiciatis quo nobis numquam architecto repellendus
+                        Kami memahami kekuatan alam dan menggabungkannya dengan inovasi teknologi terkini di
+                        NurturaGrow. Kami percaya bahwa tanaman yang dirawat dengan cinta dan teknologi yang tepat akan
+                        memberikan hasil terbaik. Oleh karena itu, kami dengan bangga mempersembahkan produk inovatif
+                        kami yang menggabungkan kebijaksanaan alam dan kecerdasan buatan melalui solusi otomatisasi
+                        pupuk dan air untuk tanaman bawang merah Anda. Dengan NurturaGrow, Anda dapat memastikan bahwa
+                        tanaman Anda menerima perawatan dan nutrisi terbaik, sehingga setiap musim tanam menghasilkan
+                        hasil yang memuaskan.
                     </p>
                     <div class="mt-8 lg:mt-16 max-lg:flex max-lg:flex-col  max-lg:justify-center max-lg:items-center">
                         <a href="{{ route('register') }}"
@@ -39,7 +42,8 @@
                     </div>
                 </div>
                 {{-- Kanan --}}
-                <div class="intro-x grid col-span-12 lg:col-span-5 py-5 lg:py-10 place-content-center lg:place-content-end px-4">
+                <div
+                    class="intro-x grid col-span-12 lg:col-span-5 py-5 lg:py-10 place-content-center lg:place-content-end px-4">
                     <img class="w-auto h-auto" src="{{ asset('images/landing-page/section1.png') }}"
                         alt="Ilustrasi NurturaGrow">
                 </div>
@@ -131,7 +135,7 @@
                         Gunakan NurturaGrow Sekarang
                     </h1>
                     <p class="mt-4 lg:mt-8 text-md md:text-lg lg:text-2xl font-semibold text-black">
-                        Solusi Sederhana untuk Pertumbuhan Luar Biasa
+                        Solusi Sederhana untuk Pertanian Luar Biasa
                     </p>
                 </div>
                 <div class="mt-8 lg:mt-16">
