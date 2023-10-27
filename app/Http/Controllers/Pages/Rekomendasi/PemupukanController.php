@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Pages;
+namespace App\Http\Controllers\Pages\Rekomendasi;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class RiwayatController extends Controller
+class PemupukanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +13,7 @@ class RiwayatController extends Controller
     public function index(Request $request)
     {
         $sideMenu = $this->getSideMenuList($request);
-        return view('pages.riwayat.index', [
+        return view('pages.rekomendasi.pemupukan', [
             'sideMenu' => $sideMenu
         ]);
     }

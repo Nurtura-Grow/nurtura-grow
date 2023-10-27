@@ -131,14 +131,14 @@
                     <h2 class="text-lg font-medium truncate mr-5">
                         Riwayat Aksi
                     </h2>
-                    <a href="{{route('riwayat.rekomendasi')}}" class="sm:ml-auto mt-3 sm:mt-0 relative text-primary">
+                    <a href="{{ route('riwayat.rekomendasi') }}" class="sm:ml-auto mt-3 sm:mt-0 relative text-primary">
                         Lihat Selengkapnya
                     </a>
                 </div>
                 <div class="intro-y box p-5 mt-12 sm:mt-5">
                     <div class="mt-5 rounded-md">
                         <div class="overflow-x-auto scrollbar-hidden">
-                            <table id="table" class="stripe hover overflow-x-auto">
+                            <table id="table" class="hover table overflow-x-auto">
                                 <thead>
                                     <tr>
                                         <th class="border-b-2 whitespace-nowrap">Name</th>

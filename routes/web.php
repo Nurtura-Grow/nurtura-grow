@@ -9,8 +9,10 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Pages\DashboardController;
 use App\Http\Controllers\Pages\LahanController;
 use App\Http\Controllers\Pages\TanamanController;
-use App\Http\Controllers\Pages\RekomendasiController;
-use App\Http\Controllers\Pages\RiwayatController;
+use App\Http\Controllers\Pages\Rekomendasi\PemupukanController;
+use App\Http\Controllers\Pages\Rekomendasi\PengairanController;
+use App\Http\Controllers\Pages\Riwayat\RekomendasiController as RiwayatRekomendasiController;
+use App\Http\Controllers\Pages\Riwayat\TinggiTanamanController;
 
 use App\Http\Controllers\Pages\PanduanController;
 
@@ -70,8 +72,8 @@ Route::group([], function () {
         'prefix' => 'rekomendasi',
         'as' => 'rekomendasi.'
     ], function () {
-        Route::get('/pengairan', [RekomendasiController::class, 'index'])->name('pengairan');
-        Route::get('/pemupukan', [RekomendasiController::class, 'index'])->name('pemupukan');
+        Route::get('/pengairan', [PengairanController::class, 'index'])->name('pengairan');
+        Route::get('/pemupukan', [PemupukanController::class, 'index'])->name('pemupukan');
     });
 
 
@@ -79,7 +81,7 @@ Route::group([], function () {
         'prefix' => 'riwayat',
         'as' => 'riwayat.'
     ], function () {
-        Route::get('/tanaman/tinggi', [RiwayatController::class, 'index'])->name('tanaman.tinggi');
-        Route::get('/rekomendasi', [RiwayatController::class, 'index'])->name('rekomendasi');
+        Route::get('/tanaman/tinggi', [TinggiTanamanController::class, 'index'])->name('tanaman.tinggi');
+        Route::get('/rekomendasi', [RiwayatRekomendasiController::class, 'index'])->name('rekomendasi');
     });
 });
