@@ -2,6 +2,10 @@ import DataTable from "datatables.net-dt";
 
 document.addEventListener("DOMContentLoaded", () => {
     new DataTable("#table", {
+        // searching: false,
+        // lengthChange: false,
+        // info: false,
+        // pagination: false,
         responsive: true,
         lengthMenu: [
             [5, 10, 25, 50, 100, -1],

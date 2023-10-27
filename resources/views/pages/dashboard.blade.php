@@ -116,7 +116,7 @@
                         <input type="text" class="form-control sm:w-56 box pl-10" placeholder="Filter lokasi lahan">
                     </div>
                 </div>
-                <div class="intro-y box p-5 mt-12 sm:mt-5">
+                <div class="intro-y box p-5 mt-12 sm:mt-5 h-full">
                     <div class="report-maps mt-5 bg-slate-200 rounded-md">
                         {{-- Todo: tambahin maps --}}
                     </div>
@@ -131,25 +131,42 @@
                     <h2 class="text-lg font-medium truncate mr-5">
                         Riwayat Aksi
                     </h2>
-                    <a href="#" class="sm:ml-auto mt-3 sm:mt-0 relative text-primary">
+                    <a href="{{route('riwayat.rekomendasi')}}" class="sm:ml-auto mt-3 sm:mt-0 relative text-primary">
                         Lihat Selengkapnya
                     </a>
                 </div>
                 <div class="intro-y box p-5 mt-12 sm:mt-5">
-
-                    <div class="report-maps mt-5 rounded-md">
-                        <table>
-                            <thead>Halo</thead>
-                            <tr>
-                                <td>10</td>
-                            </tr>
-                        </table>
+                    <div class="mt-5 rounded-md">
+                        <div class="overflow-x-auto scrollbar-hidden">
+                            <table id="table" class="stripe hover overflow-x-auto">
+                                <thead>
+                                    <tr>
+                                        <th class="border-b-2 whitespace-nowrap">Name</th>
+                                        <th class="border-b-2 whitespace-nowrap">Category</th>
+                                        <th class="border-b-2 whitespace-nowrap">Remaining Stock</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @for ($i = 1; $i < 10; $i++)
+                                        <tr>
+                                            <td class="border-b">Item {{ $i }}</td>
+                                            <td class="border-b">Category {{ $i }}</td>
+                                            <td class="border-b">{{ $i * 10 }}</td>
+                                        </tr>
+                                    @endfor
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                    {{-- Todo: benerin table pake tabulator (?) --}}
-
                 </div>
             </div>
         </div>
     </div>
     @include('pages.components.modal-datepicker')
 @endsection
+
+@push('scripts')
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
+    @vite('resources/js/pages/datatable.js')
+@endpush
