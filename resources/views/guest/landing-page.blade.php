@@ -131,7 +131,7 @@
                         Gunakan NurturaGrow Sekarang
                     </h1>
                     <p class="mt-4 lg:mt-8 text-md md:text-lg lg:text-2xl font-semibold text-black">
-                        Solusi Sederhana untuk Pertanian Luar Biasa
+                        Solusi Sederhana untuk Pertumbuhan Luar Biasa
                     </p>
                 </div>
                 <div class="mt-8 lg:mt-16">
