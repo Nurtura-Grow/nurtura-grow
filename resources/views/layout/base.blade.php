@@ -7,6 +7,7 @@
     <link href="{{ asset('dist/images/logo.svg') }}" rel="shortcut icon">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('images/logo-nobg.svg') }}">
 
     <title> {{ $title ?? 'NurturaGrow' }} </title>
 

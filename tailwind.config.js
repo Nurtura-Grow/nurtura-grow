@@ -30,7 +30,7 @@ export default {
                     "slate-900": "15 23 42",
                 },
                 "rgb":{
-                    'light-green': 'rgb(219, 235, 211)', // Light Green
+                    'light-green': 'rgb(219, 235, 221)', // Light Green
                     'mid-green': 'rgb(157, 193, 131)', // Light Green
                     'primary': 'rgb(87, 180, 146)', // Green Tosca
                     'secondary': 'rgb(0, 38, 35)', // Dark Green

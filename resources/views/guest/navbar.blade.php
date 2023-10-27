@@ -1,11 +1,11 @@
 {{-- Navbar --}}
 <nav class="hidden lg:block sticky top-0 border-b-2 border-rgb-secondary bg-rgb-light-green z-[1000]">
     <div class="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <a href="{{ route('index') }}" class="flex items-center">
+        <a href="{{ route('index') }}" class="flex items-center -intro-x">
             <img src="{{ asset('images/logo-bg.svg') }}" class="w-8 mr-3" alt="NurturaGrow Logo" />
             <span class="self-center text-xl font-semibold  text-rgb-secondary whitespace-nowrap">NurturaGrow</span>
         </a>
-        <div class="w-full lg:w-auto" id="navbar-default">
+        <div class="intro-x w-full lg:w-auto" id="navbar-default">
             <ul
                 class="font-medium text-secondary flex p-4 lg:p-0 mt-4 border rounded-lg  lg:flex-row lg:space-x-8 lg:mt-0 lg:border-0 ">
                 <li>
@@ -38,18 +38,18 @@
 </nav>
 
 {{-- Navbar Mobile --}}
-<nav class="w-screen mobile-menu lg:hidden">
+<nav class="w-screen mobile-menu lg:hidden sticky top-0  z-[1000]">
     <div class="mobile-menu-bar w-screen border-b-2 border-rgb-secondary bg-rgb-light-green">
-        <a href="{{ route('dashboard') }}" class="flex mr-auto">
+        <a href="{{ route('dashboard') }}" class="-intro-x flex mr-auto">
             <img alt="Nurtura Grow" class="w-8" src="{{ asset('images/logo-bg.svg') }}">
             <span class="text-rgb-secondary text-lg ml-3 font-medium">NurturaGrow</span>
         </a>
-        <a href="{{ route('login') }}" class="hidden md:block btn bg-white btn-outline-secondary rounded-xl py-2 mr-3">
+        <a href="{{ route('login') }}" class="intro-x hidden md:block btn bg-white btn-outline-secondary rounded-xl py-2 mr-3">
             <span class="text-rgb-secondary">Masuk</span>
         </a>
         <a href="{{ route('register') }}"
-            class="btn bg-rgb-secondary text-white border-2 border-rgb-secondary rounded-xl py-2 mr-3">Daftar</a>
-        <a href="javascript:;" class="mobile-menu-toggler mr-3"> <i class="fa-solid fa-bars"></i> </a>
+            class="intro-x btn bg-rgb-secondary text-white border-2 border-rgb-secondary rounded-xl py-2 mr-3">Daftar</a>
+        <a href="javascript:;" class="intro-x mobile-menu-toggler mr-3"> <i class="fa-solid fa-bars"></i> </a>
     </div>
     <div class="scrollable">
         <a href="javascript:;" class="mobile-menu-toggler text-white"> <i data-lucide="x-circle"
