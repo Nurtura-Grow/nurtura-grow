@@ -12,10 +12,12 @@ document.addEventListener("DOMContentLoaded", () => {
             [5, 10, 25, 50, 100, "All"],
         ],
         language: {
+            sLengthMenu: "Tunjukkan _MENU_ data",
             paginate: {
                 previous: "<",
                 next: ">",
             },
+            info: "Menunjukkan data ke-_START_ hingga ke-_END_ dari _TOTAL_ data",
         },
     });
 
