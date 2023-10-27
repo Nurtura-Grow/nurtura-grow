@@ -12,7 +12,7 @@
         <section
             class="min-h-[95vh] lg:min-h-[90vh] p-0 m-0 bg-rgb-light-green relative flex flex-col justify-center items-center">
             <div
-                class="mt-20 md:mt-15 lg:mt-0 grow grid grid-cols-12 gap-0 lg:gap-6 max-w-screen-2xl w-full place-content-center">
+                class="mt-20 md:mt-15 lg:mt-0 grow grid grid-cols-12 gap-0 lg:gap-6 max-w-screen-xl w-full place-content-center">
                 {{-- Kiri --}}
                 <div class="-intro-x grid col-span-12 lg:col-span-7 place-content-center p-8 md:p-4 m-0">
                     <h1
@@ -121,7 +121,7 @@
         </section>
 
         {{-- Section 4: CTA --}}
-        <section class="min-h-[35vh] lg:min-h-[80vh] p-0 m-0 bg-rgb-light-green flex flex-col justify-center"
+        <section class="min-h-[50v] lg:min-h-[80vh] p-0 m-0 bg-rgb-light-green flex flex-col justify-center"
             id="aksi">
             {{-- Background ornament --}}
             <img class="top-0 left-0 w-full" src="{{ asset('images/background/section4.svg') }}" alt="">

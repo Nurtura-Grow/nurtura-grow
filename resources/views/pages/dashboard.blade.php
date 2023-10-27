@@ -146,7 +146,7 @@
                                         <th class="border-b-2 whitespace-nowrap">Remaining Stock</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                {{-- <tbody>
                                     @for ($i = 1; $i < 10; $i++)
                                         <tr>
                                             <td class="border-b">Item {{ $i }}</td>
@@ -154,7 +154,7 @@
                                             <td class="border-b">{{ $i * 10 }}</td>
                                         </tr>
                                     @endfor
-                                </tbody>
+                                </tbody> --}}
                             </table>
                         </div>
                     </div>

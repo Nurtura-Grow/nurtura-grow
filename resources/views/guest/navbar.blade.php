@@ -1,6 +1,6 @@
 {{-- Navbar --}}
 <nav class="hidden lg:block sticky top-0 border-b-2 border-rgb-secondary bg-rgb-light-green z-[1000]">
-    <div class="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto p-4">
+    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="{{ route('index') }}" class="flex items-center -intro-x">
             <img src="{{ asset('images/logo-bg.svg') }}" class="w-8 mr-3" alt="NurturaGrow Logo" />
             <span class="self-center text-xl font-semibold  text-rgb-secondary whitespace-nowrap">NurturaGrow</span>
@@ -38,13 +38,14 @@
 </nav>
 
 {{-- Navbar Mobile --}}
-<nav class="w-screen mobile-menu lg:hidden sticky top-0  z-[1000]">
-    <div class="mobile-menu-bar w-screen border-b-2 border-rgb-secondary bg-rgb-light-green">
+<div class=" mobile-menu lg:hidden">
+    <div class="mobile-menu-bar">
         <a href="{{ route('dashboard') }}" class="-intro-x flex mr-auto">
             <img alt="Nurtura Grow" class="w-8" src="{{ asset('images/logo-bg.svg') }}">
             <span class="text-rgb-secondary text-lg ml-3 font-medium">NurturaGrow</span>
         </a>
-        <a href="{{ route('login') }}" class="intro-x hidden md:block btn bg-white btn-outline-secondary rounded-xl py-2 mr-3">
+        <a href="{{ route('login') }}"
+            class="intro-x hidden md:block btn bg-white btn-outline-secondary rounded-xl py-2 mr-3">
             <span class="text-rgb-secondary">Masuk</span>
         </a>
         <a href="{{ route('register') }}"
@@ -84,4 +85,4 @@
             </li>
         </ul>
     </div>
-</nav>
+</div>

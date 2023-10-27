@@ -8,16 +8,22 @@ document.addEventListener("DOMContentLoaded", () => {
         // pagination: false,
         responsive: true,
         lengthMenu: [
-            [5, 10, 25, 50, 100, -1],
-            [5, 10, 25, 50, 100, "All"],
+            [5, 10, 25, 50, 100, -1], // Value
+            [5, 10, 25, 50, 100, "Semua"], // Label
         ],
         language: {
-            sLengthMenu: "Tunjukkan _MENU_ data",
+            sEmptyTable: "Tidak ada data", // Tabel Empty
+            sLengthMenu: "Tunjukkan _MENU_ data", // Info
+            sInfo: "Menunjukkan data ke-_START_ hingga ke-_END_ dari _TOTAL_ data", // Info bawah kiri (showing 0 to 5 of 10 entries)
+            sInfoEmpty: "Tidak ada data",
             paginate: {
                 previous: "<",
                 next: ">",
             },
-            info: "Menunjukkan data ke-_START_ hingga ke-_END_ dari _TOTAL_ data",
+            oAria: {
+                sSortAscending: ": activate to sort column ascending",
+                sSortDescending: ": activate to sort column descending",
+            },
         },
     });
 
