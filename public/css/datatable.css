@@ -4,7 +4,7 @@
 
 /* Show Length */
 .dataTables_wrapper .dataTables_length {
-    width: auto;
+    width: 200px;
     padding: 5px;
 }
 
@@ -58,6 +58,10 @@
 }
 
 @media only screen and (max-width: 800px) {
+    .dataTables_wrapper .dataTables_length {
+        width: auto;
+    }
+
     .dataTables_wrapper .dataTables_filter input {
         width: 200px;
     }
