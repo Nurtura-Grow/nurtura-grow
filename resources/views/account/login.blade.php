@@ -39,12 +39,33 @@
                         <h2 class="intro-x font-bold text-2xl xl:text-3xl text-center xl:text-left">
                             Masuk
                         </h2>
+
+                        {{-- Alert --}}
+                        @error('login')
+                            <div class="col-span-12 mt-3 intro-y">
+                                <div class="alert alert-dismissible show box bg-primary text-white flex items-center mb-8"
+                                    role="alert">
+                                    <span>{{ $message }}</span>
+                                    <button type="button" class="btn-close text-white" data-tw-dismiss="alert"
+                                        aria-label="Close"> <i data-lucide="x" class="w-4 h-4"></i> </button>
+                                </div>
+                            </div>
+                        @enderror
+                        {{-- End Alert --}}
+
                         <form method="POST" action="{{ route('auth.login') }}" class="intro-x mt-8">
                             @csrf
-                            <input type="text" name="email" class="intro-x form-control w-full py-3  block"
-                                placeholder="Email">
-                            <input type="password" name="password" class="intro-x form-control py-3 px-4 block mt-4"
-                                placeholder="Password">
+                            <input type="text" name="email" placeholder="Email" value="{{ old('email') }}"
+                                class="intro-x form-control w-full py-3 block @error('email') border-danger @enderror)">
+                            @error('email')
+                                <div class="text-danger mt-2">{{ $message }} </div>
+                            @enderror
+
+                            <input type="password" name="password" placeholder="Password"
+                                class="intro-x form-control py-3 px-4 block mt-4 @error('password') border-danger @enderror">
+                            @error('password')
+                                <div class="text-danger mt-2">{{ $message }} </div>
+                            @enderror
 
                             <div class="intro-x flex text-slate-600 dark:text-slate-500 text-xs sm:text-sm mt-4">
                                 <div class="flex items-center mr-auto">

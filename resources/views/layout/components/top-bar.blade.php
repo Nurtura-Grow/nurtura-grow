@@ -52,7 +52,7 @@
                 <li>
                     <form action="{{ route('auth.logout') }}" method="POST">
                         @csrf
-                        <button class="dropdown-item hover:bg-white/5">
+                        <button class="dropdown-item w-full hover:bg-white/5">
                             <i data-lucide="toggle-right" class="w-4 h-4 mr-2"></i> Logout
                         </button>
                     </form>

@@ -4,26 +4,31 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class LoginController extends Controller
 {
-    public function index()
+    public function index(): View
     {
         return view('account.login');
     }
 
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
-        // if (!Auth::attempt([
-        //     'email' => $request->email,
-        //     'password' => $request->password
-        // ])) {
-        //     throw new \Exception('Wrong email or password.');
-        // }
+        $validated = $request->validated();
 
-        return redirect()->route('dashboard');
+        $credentials = [
+            'email' => $validated['email'],
+            'password' => $validated['password'],
+        ];
+
+        if (Auth::attempt($credentials)) {
+            // Alert::error('Error', 'Email atau password salah!');
+            $request->session()->regenerate();
+            return redirect()->route('dashboard');
+        }
+
+        return redirect()->back()->withInput()->withErrors('login', 'Username atau password salah!');
     }
 }
