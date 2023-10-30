@@ -29,29 +29,30 @@ use App\Http\Controllers\Pages\PanduanController;
 
 // GUEST
 Route::group([
-    // 'middleware' => 'guest',
+    'middleware' => 'guest',
 ], function () {
-    Route::get('/index', [LandingPageController::class, 'index'])->name('index');
+    Route::get('/', [LandingPageController::class, 'index'])->name('index');
     Route::get('/panduan', [PanduanController::class, 'index'])->name('panduan');
 
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::get('/register', [RegisterController::class, 'index'])->name('register');
+
+    Route::group([
+        'prefix' => 'auth',
+        'as' => 'auth.'
+    ], function () {
+        Route::post('/login', [LoginController::class, 'login'])->name('login');
+        Route::post('/register', [RegisterController::class, 'register'])->name('register');
+        Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
+    });
 });
 
 
-Route::group([
-    'prefix' => 'auth',
-    'as' => 'auth.'
-], function () {
-    Route::post('/login', [LoginController::class, 'login'])->name('login');
-    Route::post('/register', [RegisterController::class, 'register'])->name('register');
-    Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
-});
 
 Route::group([
-    // 'middleware' => 'authenticated',
+    'middleware' => 'authenticated',
 ], function () {
-    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::group([
         'prefix' => 'lahan',
         'as' => 'lahan.'

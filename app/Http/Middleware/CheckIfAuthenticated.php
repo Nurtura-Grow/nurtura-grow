@@ -20,7 +20,7 @@ class CheckIfAuthenticated
         if (Auth::check() == false) {
             Session::flush();
 
-            return redirect()->route('index');
+            return redirect()->route('login');
         }
 
         return $next($request);
