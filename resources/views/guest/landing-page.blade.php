@@ -44,7 +44,7 @@
                 {{-- Kanan --}}
                 <div
                     class="intro-x grid col-span-12 lg:col-span-5 py-5 lg:py-10 place-content-center lg:place-content-end px-4">
-                    <img class="w-auto h-auto" src="{{ asset('images/landing-page/section1.png') }}"
+                    <img class="w-auto h-auto" src="{{ asset('images/illustration/landing-page/section1.png') }}"
                         alt="Ilustrasi NurturaGrow">
                 </div>
             </div>
@@ -64,7 +64,7 @@
                 {{-- Fitur 1 --}}
                 <div
                     class="flex flex-col lg:flex-row mt-2 lg:mt-10 lg:gap-16 items-center lg:items-start lg:p-8 max-w-screen-lg">
-                    <img class="w-auto h-auto" src="{{ asset('images/landing-page/tentang-kami.png') }}" alt="">
+                    <img class="w-auto h-auto" src="{{ asset('images/illustration/landing-page/tentang-kami.png') }}" alt="">
                     <div class="text-justify max-lg:p-4">
                         <h1 class="font-bold text-xl lg:text-2xl max-lg:text-center text-rgb-secondary">
                             Lorem Ipsum
@@ -82,7 +82,7 @@
                 {{-- Fitur 2 --}}
                 <div
                     class="flex flex-col lg:flex-row mt-2 lg:mt-10 lg:gap-16 items-center lg:items-start  lg:p-8 max-w-screen-lg">
-                    <img class="w-auto h-auto" src="{{ asset('images/landing-page/tentang-kami.png') }}" alt="">
+                    <img class="w-auto h-auto" src="{{ asset('images/illustration/landing-page/tentang-kami.png') }}" alt="">
                     <div class="text-justify max-lg:p-4">
                         <h1 class="font-bold text-xl lg:text-2xl max-lg:text-center text-rgb-secondary">
                             Lorem Ipsum
@@ -109,13 +109,13 @@
             <div
                 class="mt-2 lg:mt-10 flex flex-col items-center justify-center lg:flex-row gap-6 lg:gap-12 h-auto w-full max-w-screen-xl p-8">
                 <div class="h-auto w-auto">
-                    <img class="h-auto w-auto" src="{{ asset('images/landing-page/Reason 1.png') }}" alt="">
+                    <img class="h-auto w-auto" src="{{ asset('images/illustration/landing-page/Reason 1.png') }}" alt="">
                 </div>
                 <div>
-                    <img class="h-auto w-auto" src="{{ asset('images/landing-page/Reason 1.png') }}" alt="">
+                    <img class="h-auto w-auto" src="{{ asset('images/illustration/landing-page/Reason 1.png') }}" alt="">
                 </div>
                 <div>
-                    <img class="h-auto w-auto" src="{{ asset('images/landing-page/Reason 1.png') }}" alt="">
+                    <img class="h-auto w-auto" src="{{ asset('images/illustration/landing-page/Reason 1.png') }}" alt="">
                 </div>
             </div>
         </section>

@@ -19,7 +19,7 @@
     <div class="intro-x dropdown w-8 h-8">
         <div class="dropdown-toggle w-8 h-8 rounded-full overflow-hidden shadow-lg image-fit zoom-in" role="button"
             aria-expanded="false" data-tw-toggle="dropdown">
-            <img src="{{ asset('images/landing-page/section1.png') }}">
+            <img src="{{ asset('images/illustration/landing-page/section1.png') }}">
         </div>
         <div class="dropdown-menu w-56">
             <ul class="dropdown-content bg-primary text-white">
@@ -52,7 +52,7 @@
                 <li>
                     <form action="{{ route('auth.logout') }}" method="POST">
                         @csrf
-                        <button class="dropdown-item hover:bg-white/5">
+                        <button class="dropdown-item w-full hover:bg-white/5">
                             <i data-lucide="toggle-right" class="w-4 h-4 mr-2"></i> Logout
                         </button>
                     </form>

@@ -30,16 +30,39 @@
                         <h2 class="intro-x font-bold text-2xl xl:text-3xl text-center xl:text-left">
                             Daftar
                         </h2>
-                        <form method="POST" action="{{ route('auth.login') }}" class="intro-x mt-8">
+                        <form method="POST" action="{{ route('auth.register') }}" class="intro-x mt-8">
                             @csrf
-                            <input type="text" name="email" class="intro-x form-control w-full py-3  block"
-                                placeholder="Email">
-                            <input type="password" name="password" class="intro-x form-control py-3 px-4 block mt-4"
-                                placeholder="Password">
-                            <input type="text" name="text" class="intro-x form-control py-3 px-4 block mt-4"
-                                placeholder="text">
-                            <input type="text" name="text" class="intro-x form-control py-3 px-4 block mt-4"
-                                placeholder="text">
+
+                            <input type="text" name="nama" placeholder="Nama" value='{{ old('nama') }}'
+                                class="intro-x form-control py-3 px-4 block mt-4  @error('nama') border-danger @enderror">
+                            @error('nama')
+                                <div class="text-danger mt-2">{{ $message }} </div>
+                            @enderror
+
+                            <input type="text" name="email" placeholder="Email" value='{{ old('email') }}'
+                                class="intro-x form-control w-full py-3 block mt-4  @error('email') border-danger @enderror">
+                            @error('email')
+                                <div class="text-danger mt-2">{{ $message }} </div>
+                            @enderror
+
+                            <input type="text" name="username" placeholder="Username" value='{{ old('username') }}'
+                                class="intro-x form-control w-full py-3  block mt-4  @error('username') border-danger @enderror">
+                            @error('username')
+                                <div class="text-danger mt-2">{{ $message }} </div>
+                            @enderror
+
+                            <input type="password" name="password" placeholder="Password" value='{{ old('password') }}'
+                                class="intro-x form-control py-3 px-4 block mt-4  @error('password') border-danger @enderror">
+                            @error('password')
+                                <div class="text-danger mt-2">{{ $message }} </div>
+                            @enderror
+
+                            <input type="password" name="password_confirmation" placeholder="Konfirmasi Password"
+                                value='{{ old('password_confirmation') }}'
+                                class="intro-x form-control py-3 px-4 block mt-4  @error('password_confirmation') border-danger @enderror">
+                            @error('password_confirmation')
+                                <div class="text-danger mt-2">{{ $message }} </div>
+                            @enderror
 
                             <div class="intro-x mt-5 xl:mt-8 text-center xl:text-left">
                                 <button class="btn btn-primary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top"

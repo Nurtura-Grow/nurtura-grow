@@ -28,28 +28,31 @@ use App\Http\Controllers\Pages\PanduanController;
 */
 
 // GUEST
-
-// Todo: Add middleware for not authenticate
-Route::get('/landing', [LandingPageController::class, 'index'])->name('index');
-Route::get('/panduan', [PanduanController::class, 'index'])->name('panduan');
-
-// Todo: Add middleware for authenticated
-Route::get('/login', [LoginController::class, 'index'])->name('login');
-Route::get('/register', [RegisterController::class, 'index'])->name('register');
-
 Route::group([
-    'prefix' => 'auth',
-    'as' => 'auth.'
+    'middleware' => 'guest',
 ], function () {
-    Route::post('/login', [LoginController::class, 'login'])->name('login');
-    Route::post('/register', [RegisterController::class, 'register'])->name('register');
-    Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
+    Route::get('/', [LandingPageController::class, 'index'])->name('index');
+    Route::get('/panduan', [PanduanController::class, 'index'])->name('panduan');
+
+    Route::get('/login', [LoginController::class, 'index'])->name('login');
+    Route::get('/register', [RegisterController::class, 'index'])->name('register');
+
+    Route::group([
+        'prefix' => 'auth',
+        'as' => 'auth.'
+    ], function () {
+        Route::post('/login', [LoginController::class, 'login'])->name('login');
+        Route::post('/register', [RegisterController::class, 'register'])->name('register');
+        Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
+    });
 });
 
-// Todo: Add middleware for logged in
 
-Route::group([], function () {
-    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+Route::group([
+    'middleware' => 'authenticated',
+], function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::group([
         'prefix' => 'lahan',
         'as' => 'lahan.'
