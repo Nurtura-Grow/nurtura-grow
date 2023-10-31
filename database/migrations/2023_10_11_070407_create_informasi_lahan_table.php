@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id('id_lahan');
             $table->float('panjang');
             $table->float('lebar');
-            $table->string('lokasi');
+            $table->decimal('latitude', 8, 6);
+            $table->decimal('longitude', 9, 6);
         });
     }
 

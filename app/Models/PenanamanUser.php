@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class PenanamanUser extends Model
 {
@@ -13,4 +14,14 @@ class PenanamanUser extends Model
     protected $guarded = [
         'id_user_penanaman'
     ];
+
+    public function users(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'id_user', 'id_user');
+    }
+
+    public function penanaman(): BelongsTo
+    {
+        return $this->belongsTo(Penanaman::class, 'id_penanaman', 'id_penanaman');
+    }
 }
