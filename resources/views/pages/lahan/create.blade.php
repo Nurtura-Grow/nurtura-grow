@@ -20,7 +20,7 @@
                         <input name="nama_lahan" type="text" class="form-control" placeholder="Nama lahan">
 
                         <label for="deskripsi" class="form-label mt-4 sm:w-32">Deskripsi</label>
-                        <input name="deskripsi" type="text" class="form-control" placeholder="Deskripsi">
+                        <textarea name="deskripsi" type="text" class="form-control" placeholder="Deskripsi"></textarea>
 
                         <label for="koordinat" class="form-label mt-4 sm:w-32">Koordinat</label>
                         <div class="grid grid-cols-12 gap-2">
