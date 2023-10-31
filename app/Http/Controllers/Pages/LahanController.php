@@ -6,6 +6,7 @@ use App\Models\InformasiLahan;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\InformasiLahanRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LahanController extends Controller
 {
@@ -14,9 +15,12 @@ class LahanController extends Controller
      */
     public function index(Request $request)
     {
+        $data_lahan = InformasiLahan::get();
+
         $sideMenu = $this->getSideMenuList($request);
         return view('pages.lahan.index', [
-            'sideMenu' => $sideMenu
+            'sideMenu' => $sideMenu,
+            'seluruhLahan' => $data_lahan,
         ]);
     }
 
@@ -38,7 +42,16 @@ class LahanController extends Controller
     {
         $data = $request->all();
 
-        InformasiLahan::create($data);
+        // Replace , with . in longitude and latitude
+        $data['longitude'] = str_replace(',', '.', $data['longitude']);
+        $data['latitude'] = str_replace(',', '.', $data['latitude']);
+
+        InformasiLahan::create([
+            ...$data,
+            'created_by' => Auth::user()->id_user,
+        ]);
+
+        return redirect()->route('lahan.index');
     }
 
     /**

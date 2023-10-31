@@ -7,7 +7,7 @@
         </h2>
         <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
             <a href="{{ route('tanaman.create') }}">
-                <button class="btn btn-secondary text-white hover:text-rgb-secondary shadow-md">
+                <button class="btn bg-rgb-secondary text-white shadow-md">
                     <i class="fa-solid fa-circle-plus mr-2"></i>Tambah Tanaman
                 </button>
             </a>

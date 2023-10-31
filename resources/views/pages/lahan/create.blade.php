@@ -45,3 +45,7 @@
         @include('pages.lahan.maps')
     </div>
 @endsection
+
+@push('scripts')
+    @vite(["resources/js/pages/googleMaps.js"])
+@endpush
