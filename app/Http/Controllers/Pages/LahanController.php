@@ -16,7 +16,6 @@ class LahanController extends Controller
     public function index(Request $request)
     {
         $data_lahan = InformasiLahan::get();
-
         $sideMenu = $this->getSideMenuList($request);
         return view('pages.lahan.index', [
             'sideMenu' => $sideMenu,
@@ -29,9 +28,11 @@ class LahanController extends Controller
      */
     public function create(Request $request)
     {
+        $data_lahan = InformasiLahan::get();
         $sideMenu = $this->getSideMenuList($request);
         return view('pages.lahan.create', [
-            'sideMenu' => $sideMenu
+            'sideMenu' => $sideMenu,
+            'seluruhLahan' => $data_lahan,
         ]);
     }
 

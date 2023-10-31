@@ -26,7 +26,7 @@
                     </div>
                     <div
                         class="grow border-t border-b w-full border-slate-300 dark:border-darkmode-400 mt-6 mb-5 py-3 lg:overflow-hidden">
-                        @if ($seluruhLahan != null)
+                        @if (count($seluruhLahan) > 0)
                             {{-- Below Large Screen --}}
                             <div class="block lg:hidden mx-6 pb-8">
                                 <div class="responsive-mode">
@@ -47,9 +47,9 @@
                                     Tidak ada lahan
                                 </p>
                                 <p class="font-medium mb-2">Silahkan tambahkan lahan terlebih dahulu</p>
-                                <button class="btn bg-rgb-secondary text-white shadow-md">
+                                <a href="{{ route('lahan.create') }}" class="btn bg-rgb-secondary text-white shadow-md">
                                     <i class="fa-solid fa-circle-plus mr-2"></i>Tambah Lahan
-                                </button>
+                                </a>
                             </div>
                         @endif
                     </div>
@@ -66,6 +66,4 @@
     </div>
 @endsection
 
-@push('scripts')
-    @vite(['resources/js/pages/googleMaps.js'])
-@endpush
+@include('pages.lahan.scripts')

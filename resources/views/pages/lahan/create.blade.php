@@ -24,8 +24,8 @@
 
                         <label for="deskripsi" class="form-label mt-4 sm:w-32">Koordinat</label>
                         <div class="grid grid-cols-12 gap-2">
-                            <input name="longitude" type="text" class="form-control col-span-6" placeholder="Longitude">
                             <input name="latitude" type="text" class="form-control col-span-6" placeholder="Latitude">
+                            <input name="longitude" type="text" class="form-control col-span-6" placeholder="Longitude">
                         </div>
 
                         <p class="mt-5 text-rgb-secondary">
@@ -46,6 +46,4 @@
     </div>
 @endsection
 
-@push('scripts')
-    @vite(["resources/js/pages/googleMaps.js"])
-@endpush
+@include('pages.lahan.scripts')
