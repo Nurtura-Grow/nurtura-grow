@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Pages;
 
+use App\Models\InformasiLahan;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\InformasiLahanRequest;
 use Illuminate\Http\Request;
 
 class LahanController extends Controller
@@ -34,7 +36,9 @@ class LahanController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        $data = $request->all();
+
+        InformasiLahan::create($data);
     }
 
     /**
