@@ -55,6 +55,8 @@ loader.load().then(async () => {
     // const searchContainer = document.getElementById("search-container");
     // const inputSearch = document.getElementById("input-search");
 
+    // Todo: add button for get the current user's location (not saved to database)
+    // Todo: Change the first coordinate to the user's current location / to first lahan
     const map = new Map(document.getElementById("container-maps"), {
         center: { lat: -7.257587749467159, lng: 112.74779134028901 },
         zoom: 10,
@@ -70,6 +72,8 @@ loader.load().then(async () => {
             position: google.maps.ControlPosition.BOTTOM_LEFT,
         },
     });
+
+    // Todo: If center is changed (in create lahan pages, change the coordinate value)
 
     // map.controls[google.maps.ControlPosition.TOP_LEFT].push(inputSearch);
 
