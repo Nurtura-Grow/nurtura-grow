@@ -82,7 +82,7 @@
                 <!-- BEGIN: Register Info -->
                 <div class="hidden xl:flex flex-col h-screen justify-items-end pt-10">
                     <div class="my-auto text-end ">
-                        <img alt="" class="-intro-x ml-auto w-1/2 -mt-16" src="{{ asset('images/logo.svg') }}">
+                        <img alt="" class="-intro-x ml-auto w-1/2 -mt-16" src="{{ asset('images/logo-nobg.svg') }}">
                         <div class="-intro-x text-white font-medium text-4xl leading-tight mt-10">
                             NurturaGrow<br>
                         </div>

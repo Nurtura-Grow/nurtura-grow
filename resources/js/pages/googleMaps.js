@@ -52,11 +52,12 @@ loader.load().then(async () => {
     const { Map } = await google.maps.importLibrary("maps");
     const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
 
-    // const inputSearch = createInputSearch();
+    // const searchContainer = document.getElementById("search-container");
+    // const inputSearch = document.getElementById("input-search");
 
     const map = new Map(document.getElementById("container-maps"), {
         center: { lat: -7.257587749467159, lng: 112.74779134028901 },
-        zoom: 16,
+        zoom: 10,
         mapId: "9505b7cedf2238ff",
         zoomControl: true,
         scaleControl: true,
@@ -82,6 +83,21 @@ loader.load().then(async () => {
             map,
             position: position,
             title: lahan.nama_lahan,
+        });
+    });
+
+    const lokasi_lahan = document.querySelectorAll(".lokasi-lahan");
+    lokasi_lahan.forEach((lokasi) => {
+        lokasi.addEventListener("click", () => {
+            const koordinat = JSON.parse(lokasi.getAttribute("data-koordinat"));
+
+            const koordinatLotLng = {
+                lat: parseFloat(koordinat.lat),
+                lng: parseFloat(koordinat.lng),
+            };
+
+            map.panTo(koordinatLotLng);
+            map.setZoom(16);
         });
     });
 });
