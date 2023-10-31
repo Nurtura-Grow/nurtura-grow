@@ -42,8 +42,8 @@
                             </div>
                         @else
                             {{-- Lahan Kosong --}}
-                            <div class="flex flex-col items-center justify-center h-full">
-                                <p class="font-bold text-center p-2">
+                            <div class="flex flex-col items-center justify-center text-center h-full">
+                                <p class="font-bold  p-2">
                                     Tidak ada lahan
                                 </p>
                                 <p class="font-medium mb-2">Silahkan tambahkan lahan terlebih dahulu</p>
@@ -56,9 +56,7 @@
                     <div>
                         Tekan lahan untuk menunjukkan lokasi pada peta
                     </div>
-
                 </div>
-
             </div>
         </div>
         {{-- Masukin maps di sini --}}

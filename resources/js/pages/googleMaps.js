@@ -1,5 +1,4 @@
 import { Loader } from "@googlemaps/js-api-loader";
-import { post } from "jquery";
 
 const loader = new Loader({
     apiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
@@ -48,19 +47,61 @@ const loader = new Loader({
 //     return firstDivParent;
 // }
 
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+    infoWindow.setPosition(pos);
+    infoWindow.setContent(
+        browserHasGeolocation
+            ? "Error: The Geolocation service failed."
+            : "Error: Your browser doesn't support geolocation."
+    );
+    infoWindow.open(map);
+}
+
+function moveToCurrentPosition(map, infoWindow) {
+    // Try HTML5 geolocation.
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const pos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude,
+                };
+
+                infoWindow.setPosition(pos);
+                infoWindow.setContent("Current Location");
+                infoWindow.open(map);
+                map.setCenter(pos);
+                map.setZoom(16);
+            },
+            () => {
+                handleLocationError(true, infoWindow, map.getCenter());
+            }
+        );
+    } else {
+        // Browser doesn't support Geolocation
+        handleLocationError(false, infoWindow, map.getCenter());
+    }
+}
+
 //  Todo: create marker using marker clusterer
 // Todo: only create markers & info that are visible on the map
+
 loader.load().then(async () => {
     const { Map } = await google.maps.importLibrary("maps");
     const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
 
-    // const searchContainer = document.getElementById("search-container");
-    // const inputSearch = document.getElementById("input-search");
+    /** Change the first coordinate to the user's current location / to first lahan */
 
-    // Todo: add button for get the current user's location (not saved to database)
-    // Todo: Change the first coordinate to the user's current location / to first lahan
+    // Random coordinates, will be changed with "move to current position"
+    const defaultCoordinates = { lat: -6.1753924, lng: 106.8271528 };
     const map = new Map(document.getElementById("container-maps"), {
-        center: { lat: -7.257587749467159, lng: 112.74779134028901 },
+        center:
+            seluruhLahan.length > 0
+                ? {
+                      lat: parseFloat(seluruhLahan[0].latitude),
+                      lng: parseFloat(seluruhLahan[0].longitude),
+                  }
+                : defaultCoordinates,
         zoom: 10,
         mapId: "9505b7cedf2238ff",
         zoomControl: true,
@@ -71,13 +112,62 @@ loader.load().then(async () => {
         mapTypeControl: true,
         mapTypeControlOptions: {
             style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-            position: google.maps.ControlPosition.BOTTOM_LEFT,
+            position: google.maps.ControlPosition.LEFT_BOTTOM,
         },
     });
 
-    // Todo: If center is changed (in create lahan pages, change the coordinate value)
+    const infoWindow = new google.maps.InfoWindow();
+    /** Move to current position */
+    if (seluruhLahan.length == 0) {
+        moveToCurrentPosition(map, infoWindow);
+    }
+
+    /** Button current position, embed to the map */
+    const locationButton = document.createElement("button");
+
+    locationButton.innerHTML = `<i class="fa-solid fa-location-crosshairs"></i>`;
+    locationButton.classList.add("btn", "bg-white", "shadow", "mr-3");
+
+    // Embed the button to the map display
+    map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(locationButton);
+
+    locationButton.addEventListener("click", () => {
+        moveToCurrentPosition(map, infoWindow);
+    });
 
     // map.controls[google.maps.ControlPosition.TOP_LEFT].push(inputSearch);
+
+    /** Center Marker */
+    const centerMarker = new google.maps.Marker({
+        position: map.getCenter(),
+        map: map,
+        title: "Center Marker",
+        draggable: true, // Make the marker draggable
+    });
+
+    /** Event listener for marker dragend event */
+    google.maps.event.addListener(centerMarker, "dragend", function () {
+        centerMarker.setMap(null); // Remove the marker from the map
+    });
+
+    /** Get Center Coordinate when the map is moved */
+    google.maps.event.addListener(map, "center_changed", function () {
+        var center = this.getCenter();
+        var latitude = parseFloat(center.lat()).toFixed(6);
+        var longitude = parseFloat(center.lng()).toFixed(6);
+
+        const latitudeInput = document.getElementById("latitude-input");
+        const longitudeInput = document.getElementById("longitude-input");
+
+        if (latitudeInput == null || longitudeInput == null) return;
+
+        latitudeInput.value = latitude;
+        longitudeInput.value = longitude;
+
+        centerMarker.setPosition(center);
+    });
+
+    /** Create Info windows (pop up when the marker is clicked) */
     const infoWindows = seluruhLahan.map((lahan) => {
         // Todo: add content string when the marker is clicked (to edit and delete dont forget :D)
         const contentString = `<div><strong>${lahan.nama_lahan}</strong></div>`;
@@ -86,6 +176,7 @@ loader.load().then(async () => {
         });
     });
 
+    /** Create Marker for every lahan */
     seluruhLahan.forEach((lahan, index) => {
         const position = {
             lat: parseFloat(lahan.latitude),
@@ -103,17 +194,19 @@ loader.load().then(async () => {
         });
     });
 
+    /** Move map to the selected lahan */
     const lokasi_lahan = document.querySelectorAll(".lokasi-lahan");
     lokasi_lahan.forEach((lahan) => {
-        lahan.addEventListener("click", () => {
-            const koordinat = JSON.parse(lahan.getAttribute("data-koordinat"));
-
-            const koordinatLotLng = {
+        lahan.addEventListener("click", function () {
+            const koordinat = JSON.parse(this.getAttribute("data-koordinat"));
+            console.log(koordinat);
+            const koordinatLatLng = {
                 lat: parseFloat(koordinat.lat),
                 lng: parseFloat(koordinat.lng),
             };
+            console.log(koordinatLatLng);
 
-            map.panTo(koordinatLotLng);
+            map.setCenter(koordinatLatLng);
             map.setZoom(16);
         });
     });

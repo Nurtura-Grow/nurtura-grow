@@ -22,10 +22,10 @@
                         <label for="deskripsi" class="form-label mt-4 sm:w-32">Deskripsi</label>
                         <input name="deskripsi" type="text" class="form-control" placeholder="Deskripsi">
 
-                        <label for="deskripsi" class="form-label mt-4 sm:w-32">Koordinat</label>
+                        <label for="koordinat" class="form-label mt-4 sm:w-32">Koordinat</label>
                         <div class="grid grid-cols-12 gap-2">
-                            <input name="latitude" type="text" class="form-control col-span-6" placeholder="Latitude">
-                            <input name="longitude" type="text" class="form-control col-span-6" placeholder="Longitude">
+                            <input name="latitude" type="text" class="form-control col-span-6" id="latitude-input" placeholder="Latitude" readonly>
+                            <input name="longitude" type="text" class="form-control col-span-6" id="longitude-input" placeholder="Longitude" readonly>
                         </div>
 
                         <p class="mt-5 text-rgb-secondary">

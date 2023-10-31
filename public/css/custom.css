@@ -1,3 +1,5 @@
 .content{
-    min-height: 97vh;
+    min-height: 95vh;
+    margin-top: auto;
+    margin-bottom: auto;
 }

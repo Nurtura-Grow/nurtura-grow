@@ -41,14 +41,20 @@ class LahanController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
+        $nama_lahan = $request->input('nama_lahan');
+        $deskripsi = $request->input('deskripsi');
+        $latitude = $request->input('latitude');
+        $longitude = $request->input('longitude');
 
         // Replace , with . in longitude and latitude
-        $data['longitude'] = str_replace(',', '.', $data['longitude']);
-        $data['latitude'] = str_replace(',', '.', $data['latitude']);
+        $longitude = str_replace(',', '.', $longitude);
+        $latitude = str_replace(',', '.', $latitude);
 
         InformasiLahan::create([
-            ...$data,
+            'nama_lahan' => $nama_lahan,
+            'deskripsi' => $deskripsi,
+            'latitude' => $latitude,
+            'longitude' => $longitude,
             'created_by' => Auth::user()->id_user,
         ]);
 
