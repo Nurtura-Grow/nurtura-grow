@@ -15,6 +15,11 @@ class LogAksi extends Model
         'id_log_aksi'
     ];
 
+    public function penanaman(): BelongsTo
+    {
+        return $this->belongsTo(Penanaman::class, 'id_penanaman', 'id_penanaman');
+    }
+
     public function rekomendasi_pengairan(): BelongsTo
     {
         return $this->belongsTo(RekomendasiPengairan::class, 'id_rekomendasi_air', 'id_rekomendasi_air');
@@ -23,11 +28,6 @@ class LogAksi extends Model
     public function rekomendasi_pemupukan(): BelongsTo
     {
         return $this->belongsTo(RekomendasiPemupukan::class, 'id_rekomendasi_pemupukan', 'id_rekomendasi_pemupukan');
-    }
-
-    public function penanaman(): BelongsTo
-    {
-        return $this->belongsTo(Penanaman::class, 'id_penanaman', 'id_penanaman');
     }
 
     public function sop_pemupukan(): BelongsTo

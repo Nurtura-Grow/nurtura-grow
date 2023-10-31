@@ -17,9 +17,9 @@ class Penanaman extends Model
         'id_penanaman'
     ];
 
-    public function penanaman_user(): HasOne
+    public function data_sensor(): HasMany
     {
-        return $this->hasOne(PenanamanUser::class, 'id_penanaman', 'id_penanaman');
+        return $this->hasMany(DataSensor::class, 'id_penanaman', 'id_penanaman');
     }
 
     public function informasi_lahan(): BelongsTo
@@ -27,23 +27,23 @@ class Penanaman extends Model
         return $this->belongsTo(InformasiLahan::class, 'id_lahan', 'id_lahan');
     }
 
+    public function log_aksi(): HasMany
+    {
+        return $this->hasMany(LogAksi::class, 'id_penanaman', 'id_penanaman');
+    }
+
+    public function penanaman_user(): HasOne
+    {
+        return $this->hasOne(PenanamanUser::class, 'id_penanaman', 'id_penanaman');
+    }
+
     public function rekomendasi_pengairan(): HasMany
     {
         return $this->hasMany(RekomendasiPengairan::class, 'id_penanaman', 'id_penanaman');
     }
 
-    public function data_sensor(): HasMany
-    {
-        return $this->hasMany(DataSensor::class, 'id_penanaman', 'id_penanaman');
-    }
-
     public function tinggi_tanaman(): HasMany
     {
         return $this->hasMany(TinggiTanaman::class, 'id_penanaman', 'id_penanaman');
-    }
-
-    public function log_aksi(): HasMany
-    {
-        return $this->hasMany(LogAksi::class, 'id_penanaman', 'id_penanaman');
     }
 }
