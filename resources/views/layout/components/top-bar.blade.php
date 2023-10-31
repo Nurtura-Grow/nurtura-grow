@@ -24,8 +24,8 @@
         <div class="dropdown-menu w-56">
             <ul class="dropdown-content bg-primary text-white">
                 <li class="p-2">
-                    <div class="font-medium">Cherylene Trevina</div>
-                    <div class="text-xs text-rgb-secondary mt-0.5">Petani</div>
+                    <div class="font-medium">{{ Auth::user()->nama }}</div>
+                    <div class="text-xs text-rgb-secondary mt-0.5">{{ Auth::user()->username }}</div>
                 </li>
                 <li>
                     <hr class="dropdown-divider border-white/[0.08]">

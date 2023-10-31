@@ -59,6 +59,7 @@ Route::group([
     ], function () {
         Route::get('/', [LahanController::class, 'index'])->name('index');
         Route::get('/tambah', [LahanController::class, 'create'])->name('create');
+        Route::post('/tambah', [LahanController::class, 'store'])->name('store');
     });
 
     Route::group([

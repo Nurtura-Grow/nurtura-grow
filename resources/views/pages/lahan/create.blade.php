@@ -13,7 +13,7 @@
             <div class="box p-5 intro-y h-full">
                 <div class="flex flex-col items-start">
                     {{-- Form --}}
-                    <form action="" class="ms-0 md:ms-4" method="POST">
+                    <form action="{{ route('lahan.store') }}" class="ms-0 md:ms-4" method="POST">
                         @csrf
 
                         <label for="nama_lahan" class="form-label sm:w-32">Nama lahan</label>
