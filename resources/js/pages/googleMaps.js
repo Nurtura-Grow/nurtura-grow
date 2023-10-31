@@ -48,6 +48,8 @@ const loader = new Loader({
 //     return firstDivParent;
 // }
 
+//  Todo: create marker using marker clusterer
+// Todo: only create markers & info that are visible on the map
 loader.load().then(async () => {
     const { Map } = await google.maps.importLibrary("maps");
     const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
@@ -76,24 +78,35 @@ loader.load().then(async () => {
     // Todo: If center is changed (in create lahan pages, change the coordinate value)
 
     // map.controls[google.maps.ControlPosition.TOP_LEFT].push(inputSearch);
+    const infoWindows = seluruhLahan.map((lahan) => {
+        // Todo: add content string when the marker is clicked (to edit and delete dont forget :D)
+        const contentString = `<div><strong>${lahan.nama_lahan}</strong></div>`;
+        return new google.maps.InfoWindow({
+            content: contentString,
+        });
+    });
 
-    seluruhLahan.forEach((lahan) => {
+    seluruhLahan.forEach((lahan, index) => {
         const position = {
             lat: parseFloat(lahan.latitude),
             lng: parseFloat(lahan.longitude),
         };
 
-        new AdvancedMarkerElement({
+        var marker = new AdvancedMarkerElement({
             map,
             position: position,
             title: lahan.nama_lahan,
         });
+
+        marker.addListener("click", () => {
+            infoWindows[index].open(map, marker);
+        });
     });
 
     const lokasi_lahan = document.querySelectorAll(".lokasi-lahan");
-    lokasi_lahan.forEach((lokasi) => {
-        lokasi.addEventListener("click", () => {
-            const koordinat = JSON.parse(lokasi.getAttribute("data-koordinat"));
+    lokasi_lahan.forEach((lahan) => {
+        lahan.addEventListener("click", () => {
+            const koordinat = JSON.parse(lahan.getAttribute("data-koordinat"));
 
             const koordinatLotLng = {
                 lat: parseFloat(koordinat.lat),
