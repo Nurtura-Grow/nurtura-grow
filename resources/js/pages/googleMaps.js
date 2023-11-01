@@ -172,7 +172,8 @@ loader.load().then(async () => {
             <p class="mb-4 text-justify text-slate-600 font-semibold">${lahan.deskripsi}</p>
             <p class="mb-4 text-justify text-black">${lahan.alamat}</p>
 
-            <a href="lahan/${lahan.id_lahan}/edit" class="btn btn-primary px-2 w-full"><i class="fa-solid fa-pencil w-4 h-4 mr-2"></i>Ubah</a>
+            <a target="_blank" href="https://www.google.com/maps/place/${lahan.latitude},${lahan.longitude}" class="btn bg-info px-2 w-full"><i class="fa-solid fa-map w-4 h-4 mr-2"></i>Buka di google maps</a>
+            <a href="lahan/${lahan.id_lahan}/edit" class="btn btn-primary mt-2 px-2 w-full"><i class="fa-solid fa-pencil w-4 h-4 mr-2"></i>Ubah</a>
 
             <form action="lahan/${lahan.id_lahan}" method="POST" class="mt-2 w-full">
                 <input name="_method" type="hidden" value="DELETE">
