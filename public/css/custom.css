@@ -1,5 +1,13 @@
-.content{
+.content {
     min-height: 95vh;
     margin-top: auto;
     margin-bottom: auto;
+}
+
+#container-search {
+    line-height: 1.25rem;
+    font-size: 0.875rem;
+    left: 10px;
+    top: 10px;
+    height: 10px;
 }

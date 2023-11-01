@@ -3,49 +3,8 @@ import { Loader } from "@googlemaps/js-api-loader";
 const loader = new Loader({
     apiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
     version: "weekly",
+    libraries: ["places"],
 });
-
-// function createInputSearch() {
-//     const firstDivParent = document.createElement("div");
-//     firstDivParent.classList.add("absolute");
-//
-//     const secondDivParent = document.createElement("div");
-//     secondDivParent.classList.add(
-//         "w-[200px]",
-//         "sm:w-auto",
-//         "relative",
-//         "mr-auto",
-//         "mt-3",
-//         "sm:mt-0"
-//     );
-//
-//     const icon = document.createElement("i");
-//     icon.classList.add(
-//         "w-4",
-//         "h-4",
-//         "absolute",
-//         "my-auto",
-//         "inset-y-0",
-//         "ml-3",
-//         "left-0",
-//         "z-10",
-//         "text-slate-500"
-//     );
-//     icon.setAttribute("data-lucide", "search");
-//
-//     const input = document.createElement("input");
-//     input.classList.add("form-control", "w-full", "sm:w-64", "box", "py-10");
-//     input.setAttribute("type", "text");
-//     input.setAttribute("placeholder", "Cari lokasi");
-//
-//     secondDivParent.appendChild(icon);
-//     secondDivParent.appendChild(input);
-//     firstDivParent.appendChild(secondDivParent);
-//
-//     console.log(firstDivParent)
-//
-//     return firstDivParent;
-// }
 
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
     infoWindow.setPosition(pos);
@@ -83,28 +42,6 @@ function moveToCurrentPosition(map, infoWindow) {
     }
 }
 
-function geocodeLatLng(coordinate, geocoder) {
-    coordinate = JSON.parse(coordinate);
-
-    coordinate = {
-        lat: parseFloat(coordinate.lat),
-        lng: parseFloat(coordinate.lng),
-    };
-
-    return new Promise((resolve, reject) => {
-        geocoder
-            .geocode({ location: coordinate })
-            .then((response) => {
-                if (response.results[0]) {
-                    resolve(response.results[0]); // Resolve with the geocoding result
-                } else {
-                    reject("No results found");
-                }
-            })
-            .catch((e) => reject("Geocoder failed due to: " + e));
-    });
-}
-
 //  Todo: create marker using marker clusterer
 // Todo: only create markers & info that are visible on the map
 
@@ -138,12 +75,46 @@ loader.load().then(async () => {
         },
     });
 
-    const geocoder = new google.maps.Geocoder();
     const infoWindow = new google.maps.InfoWindow();
     /** Move to current position */
     if (seluruhLahan.length == 0) {
         moveToCurrentPosition(map, infoWindow);
     }
+
+    /** Search Input */
+    // map.controls[google.maps.ControlPosition.TOP_LEFT].push(
+    //     createInputSearch()
+    // );
+
+    /** Auto Complete */
+    const input = document.querySelector("#cari-lokasi");
+    console.log(input);
+    const options = {
+        fields: ["formatted_address", "geometry", "name"],
+        strictBounds: false,
+    };
+
+    const autocomplete = new google.maps.places.Autocomplete(input, options);
+    autocomplete.bindTo("bounds", map);
+
+    autocomplete.addListener("place_changed", () => {
+        const place = autocomplete.getPlace();
+
+        if (!place.geometry || !place.geometry.location) {
+            // User entered the name of a Place that was not suggested and
+            // pressed the Enter key, or the Place Details request failed.
+            window.alert("Tidak ada data tersedia untuk: '" + place.name + "'");
+            return;
+        }
+
+        // If the place has a geometry, then present it on a map.
+        if (place.geometry.viewport) {
+            map.fitBounds(place.geometry.viewport);
+        } else {
+            map.setCenter(place.geometry.location);
+            map.setZoom(17);
+        }
+    });
 
     /** Button current position, embed to the map */
     const locationButton = document.createElement("button");
