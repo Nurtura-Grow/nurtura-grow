@@ -163,8 +163,23 @@ loader.load().then(async () => {
 
     /** Create Info windows (pop up when the marker is clicked) */
     const infoWindows = seluruhLahan.map((lahan) => {
-        // Todo: add content string when the marker is clicked (to edit and delete dont forget :D)
-        const contentString = `<div><strong>${lahan.nama_lahan}</strong></div>`;
+        const token = document
+            .querySelector('meta[name="csrf-token"]')
+            .getAttribute("content");
+
+        const contentString = `<div class="w-auto xl:w-[250px]">
+            <strong class="text-lg font-bold">${lahan.nama_lahan}</strong>
+            <p class="mb-4 text-justify text-slate-600 font-semibold">${lahan.deskripsi}</p>
+            <p class="mb-4 text-justify text-black">${lahan.alamat}</p>
+
+            <a href="lahan/${lahan.id_lahan}/edit" class="btn btn-primary px-2 w-full"><i class="fa-solid fa-pencil w-4 h-4 mr-2"></i>Ubah</a>
+
+            <form action="lahan/${lahan.id_lahan}" method="POST" class="mt-2 w-full">
+                <input name="_method" type="hidden" value="DELETE">
+                <input type="hidden" name="_token" value="${token}" />
+                <button type="submit" class="btn btn-danger px-2 w-full"><i class="fa-solid fa-trash w-4 h-4 mr-2"></i>Hapus</button>
+            </form>
+        </div>`;
         return new google.maps.InfoWindow({
             content: contentString,
         });
@@ -182,6 +197,7 @@ loader.load().then(async () => {
             map,
             position: position,
             title: lahan.nama_lahan,
+            draggable: false,
         });
 
         marker.addListener("click", () => {

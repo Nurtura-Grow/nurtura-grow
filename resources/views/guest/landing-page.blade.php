@@ -121,7 +121,7 @@
         </section>
 
         {{-- Section 4: CTA --}}
-        <section class="min-h-[50v] lg:min-h-[80vh] p-0 m-0 bg-rgb-light-green flex flex-col justify-center"
+        <section class="min-h-[50vh] lg:min-h-[80vh] p-0 m-0 bg-rgb-light-green flex flex-col justify-center"
             id="aksi">
             {{-- Background ornament --}}
             <img class="top-0 left-0 w-full" src="{{ asset('images/background/section4.svg') }}" alt="">

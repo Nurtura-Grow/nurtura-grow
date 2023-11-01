@@ -64,7 +64,7 @@ class LahanController extends Controller
 
         // Kalau gagal mendapatkan data dari google maps api
         if ($response->failed()) {
-            return redirect()->back()->with('error', 'Gagal menambahkan lahan. Silahkan coba lagi.');
+            return redirect()->back()->withInput()->with('add_lahan', 'Gagal menambahkan lahan. Silahkan coba lagi.');
         }
 
         $response = $response->json()['results'][0];
@@ -99,9 +99,9 @@ class LahanController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Request $request, string $id)
     {
-        //
+        dd("edit", $id);
     }
 
     /**
