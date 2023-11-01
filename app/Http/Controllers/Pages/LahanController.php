@@ -16,6 +16,11 @@ class LahanController extends Controller
     public function index(Request $request)
     {
         $data_lahan = InformasiLahan::get();
+
+        foreach ($data_lahan as $lahan) {
+            $lahan->new_nama = strtolower(str_replace(" ", "-", $lahan->nama_lahan));
+        }
+
         $sideMenu = $this->getSideMenuList($request);
         return view('pages.lahan.index', [
             'sideMenu' => $sideMenu,

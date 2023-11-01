@@ -7,8 +7,7 @@
             </div>
             <div class="w-full">
                 <p class="font-bold"> {{ $lahan->nama_lahan }}</p>
-                {{-- Todo: get kecamatan & kota from longitude latitude (if possible) --}}
-                <p class="font-medium text-primary">Kecamatan, Kota</p>
+                <p class="font-medium text-primary {{ $lahan->new_nama }}"></p>
             </div>
         </div>
     </div>

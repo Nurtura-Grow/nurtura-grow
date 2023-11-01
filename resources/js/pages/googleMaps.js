@@ -83,6 +83,28 @@ function moveToCurrentPosition(map, infoWindow) {
     }
 }
 
+function geocodeLatLng(coordinate, geocoder) {
+    coordinate = JSON.parse(coordinate);
+
+    coordinate = {
+        lat: parseFloat(coordinate.lat),
+        lng: parseFloat(coordinate.lng),
+    };
+
+    return new Promise((resolve, reject) => {
+        geocoder
+            .geocode({ location: coordinate })
+            .then((response) => {
+                if (response.results[0]) {
+                    resolve(response.results[0]); // Resolve with the geocoding result
+                } else {
+                    reject("No results found");
+                }
+            })
+            .catch((e) => reject("Geocoder failed due to: " + e));
+    });
+}
+
 //  Todo: create marker using marker clusterer
 // Todo: only create markers & info that are visible on the map
 
@@ -116,6 +138,7 @@ loader.load().then(async () => {
         },
     });
 
+    const geocoder = new google.maps.Geocoder();
     const infoWindow = new google.maps.InfoWindow();
     /** Move to current position */
     if (seluruhLahan.length == 0) {
@@ -176,13 +199,40 @@ loader.load().then(async () => {
         });
     });
 
-    /** Create Marker for every lahan */
+    /** Logic for every lahan */
     seluruhLahan.forEach((lahan, index) => {
         const position = {
             lat: parseFloat(lahan.latitude),
             lng: parseFloat(lahan.longitude),
         };
 
+        // Get Nama Lahan
+        var namaLahan = lahan.new_nama;
+        var string = document.querySelectorAll(`.${namaLahan}`);
+
+        string.innerText = "Loading...";
+
+        // Get Kecamatan & Kota
+        if (string.length > 0) {
+            geocodeLatLng(JSON.stringify(position), geocoder)
+                .then((geocodeResult) => {
+                    var kecamatan =
+                        geocodeResult.address_components[3].short_name;
+                    var kota = geocodeResult.address_components[4].long_name;
+
+                    string.forEach((item) => {
+                        item.innerText = `${kecamatan}, ${kota}`;
+                    });
+                })
+                .catch((error) => {
+                    console.error("Geocoding error:", error);
+                    string.forEach((item) => {
+                        item.innerText = "Lokasi tidak ditemukan";
+                    });
+                });
+        }
+
+        // Place Marker
         var marker = new AdvancedMarkerElement({
             map,
             position: position,
@@ -199,12 +249,11 @@ loader.load().then(async () => {
     lokasi_lahan.forEach((lahan) => {
         lahan.addEventListener("click", function () {
             const koordinat = JSON.parse(this.getAttribute("data-koordinat"));
-            console.log(koordinat);
+
             const koordinatLatLng = {
                 lat: parseFloat(koordinat.lat),
                 lng: parseFloat(koordinat.lng),
             };
-            console.log(koordinatLatLng);
 
             map.setCenter(koordinatLatLng);
             map.setZoom(16);
