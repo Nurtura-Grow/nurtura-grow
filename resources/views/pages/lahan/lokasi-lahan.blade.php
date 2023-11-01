@@ -7,7 +7,8 @@
             </div>
             <div class="w-full">
                 <p class="font-bold"> {{ $lahan->nama_lahan }}</p>
-                <p class="font-medium text-primary {{ $lahan->new_nama }}"></p>
+                <p class="font-medium text-primary {{ $lahan->new_nama }}">{{ $lahan->kecamatan . ', ' . $lahan->kota }}
+                </p>
             </div>
         </div>
     </div>

@@ -206,32 +206,6 @@ loader.load().then(async () => {
             lng: parseFloat(lahan.longitude),
         };
 
-        // Get Nama Lahan
-        var namaLahan = lahan.new_nama;
-        var string = document.querySelectorAll(`.${namaLahan}`);
-
-        string.innerText = "Loading...";
-
-        // Get Kecamatan & Kota
-        if (string.length > 0) {
-            geocodeLatLng(JSON.stringify(position), geocoder)
-                .then((geocodeResult) => {
-                    var kecamatan =
-                        geocodeResult.address_components[3].short_name;
-                    var kota = geocodeResult.address_components[4].long_name;
-
-                    string.forEach((item) => {
-                        item.innerText = `${kecamatan}, ${kota}`;
-                    });
-                })
-                .catch((error) => {
-                    console.error("Geocoding error:", error);
-                    string.forEach((item) => {
-                        item.innerText = "Lokasi tidak ditemukan";
-                    });
-                });
-        }
-
         // Place Marker
         var marker = new AdvancedMarkerElement({
             map,

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\InformasiLahanRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 
 class LahanController extends Controller
 {
@@ -55,11 +56,32 @@ class LahanController extends Controller
         $longitude = str_replace(',', '.', $longitude);
         $latitude = str_replace(',', '.', $latitude);
 
+        // Get kecamatan and kota from google maps api
+        $response = Http::withQueryParameters([
+            'latlng' => $latitude . ',' . $longitude,
+            'key' => env('VITE_GOOGLE_MAPS_API_KEY'),
+        ])->get('https://maps.googleapis.com/maps/api/geocode/json');
+
+        // Kalau gagal mendapatkan data dari google maps api
+        if ($response->failed()) {
+            return redirect()->back()->with('error', 'Gagal menambahkan lahan. Silahkan coba lagi.');
+        }
+
+        $response = $response->json()['results'][0];
+
+        // Kecamatan, Kota, Alamat
+        $kecamatan = $response['address_components'][3]['long_name'];
+        $kota = $response['address_components'][4]['long_name'];
+        $alamat = $response['formatted_address'];
+
         InformasiLahan::create([
             'nama_lahan' => $nama_lahan,
             'deskripsi' => $deskripsi,
             'latitude' => $latitude,
             'longitude' => $longitude,
+            'kecamatan' => $kecamatan,
+            'kota' => $kota,
+            'alamat' => $alamat,
             'created_by' => Auth::user()->id_user,
         ]);
 

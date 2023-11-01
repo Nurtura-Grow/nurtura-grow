@@ -24,8 +24,8 @@
 
                         <label for="koordinat" class="form-label mt-4 sm:w-32">Koordinat</label>
                         <div class="grid grid-cols-12 gap-2">
-                            <input name="latitude" type="text" class="form-control col-span-6" id="latitude-input" placeholder="Latitude" readonly>
-                            <input name="longitude" type="text" class="form-control col-span-6" id="longitude-input" placeholder="Longitude" readonly>
+                            <input readonly name="latitude" type="text" class="form-control col-span-6" id="latitude-input" placeholder="Latitude">
+                            <input readonly name="longitude" type="text" class="form-control col-span-6" id="longitude-input" placeholder="Longitude">
                         </div>
 
                         <p class="mt-5 text-rgb-secondary">
