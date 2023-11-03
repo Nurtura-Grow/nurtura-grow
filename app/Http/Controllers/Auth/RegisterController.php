@@ -20,6 +20,7 @@ class RegisterController extends Controller
     {
         $validated = $request->validated();
         $validated['password'] = bcrypt($validated['password']);
+        $validated['created_by'] = 1;
 
         $user = User::create($validated);
 

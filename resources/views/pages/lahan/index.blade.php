@@ -21,7 +21,7 @@
                     {{-- Search Items --}}
                     <div class="relative ">
                         <input type="text" class="form-control py-3 px-4 w-full box pr-10 border-slate-500"
-                            placeholder="Cari lahan...">
+                            id="search-lahan" placeholder="Cari lahan...">
                         <i class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0 text-slate-500" data-lucide="search"></i>
                     </div>
                     <div

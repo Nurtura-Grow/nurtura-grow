@@ -18,6 +18,7 @@ class LahanController extends Controller
     {
         $data_lahan = InformasiLahan::get();
 
+        // Replace space with dash and make it lowercase
         foreach ($data_lahan as $lahan) {
             $lahan->new_nama = strtolower(str_replace(" ", "-", $lahan->nama_lahan));
         }
@@ -26,7 +27,31 @@ class LahanController extends Controller
         return view('pages.lahan.index', [
             'sideMenu' => $sideMenu,
             'seluruhLahan' => $data_lahan,
+            'search' => $request->input('search'),
         ]);
+    }
+
+    public function search_lahan(Request $request)
+    {
+        if ($request->ajax()) {
+            $search = $request->input('search');
+
+            // Perform the search in your database
+            $data_lahan = InformasiLahan::where('nama_lahan', 'like', '%' . $search . '%')
+                ->orWhere('kecamatan', 'like', '%' . $search . '%')
+                ->orWhere('kota', 'like', '%' . $search . '%')
+                ->orWhere('alamat', 'like', '%' . $search . '%')
+                ->get();
+
+            foreach ($data_lahan as $lahan) {
+                $lahan->new_nama = strtolower(str_replace(" ", "-", $lahan->nama_lahan));
+            }
+
+            // Return the search results as JSON
+            return response()->json([
+                'data_lahan' => $data_lahan,
+            ]);
+        }
     }
 
     /**
