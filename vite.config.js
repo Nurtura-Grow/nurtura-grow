@@ -18,6 +18,8 @@ export default defineConfig({
                 "resources/js/app.js",
 
                 "resources/js/pages/datatable.js",
+                "resources/js/pages/googleMaps.js",
+                "resources/js/pages/testing.js",
             ],
             refresh: true,
         }),

@@ -16,6 +16,12 @@ return new class extends Migration
             $table->integer('hari_setelah_tanam');
             $table->float('tinggi_tanaman');
             $table->float('jumlah');
+            $table->foreignId('created_by');
+            $table->foreignId('updated_by')->nullable();
+            $table->foreignId('deleted_by')->nullable();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable();
+            $table->timestamp('deleted_at')->nullable();
         });
     }
 

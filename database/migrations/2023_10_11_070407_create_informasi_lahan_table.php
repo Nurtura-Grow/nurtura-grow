@@ -13,9 +13,19 @@ return new class extends Migration
     {
         Schema::create('informasi_lahan', function (Blueprint $table) {
             $table->id('id_lahan');
-            $table->float('panjang');
-            $table->float('lebar');
-            $table->string('lokasi');
+            $table->string('nama_lahan', 50);
+            $table->text('deskripsi')->nullable();
+            $table->decimal('latitude', 9, 6);
+            $table->decimal('longitude', 9, 6);
+            $table->string('kecamatan', 100);
+            $table->string('kota', 100);
+            $table->text('alamat');
+            $table->foreignId('created_by');
+            $table->foreignId('updated_by')->nullable();
+            $table->foreignId('deleted_by')->nullable();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable();
+            $table->timestamp('deleted_at')->nullable();
         });
     }
 

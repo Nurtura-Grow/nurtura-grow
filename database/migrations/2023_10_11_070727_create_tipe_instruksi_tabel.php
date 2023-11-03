@@ -14,6 +14,12 @@ return new class extends Migration
         Schema::create('tipe_instruksi', function (Blueprint $table) {
             $table->id('id_tipe_instruksi');
             $table->string('nama_tipe', 30);
+            $table->foreignId('created_by');
+            $table->foreignId('updated_by')->nullable();
+            $table->foreignId('deleted_by')->nullable();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable();
+            $table->timestamp('deleted_at')->nullable();
         });
     }
 

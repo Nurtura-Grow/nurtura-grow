@@ -7,7 +7,7 @@
         </h2>
         <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
             <a href="{{ route('tanaman.create') }}">
-                <button class="btn btn-secondary text-white hover:text-rgb-secondary shadow-md">
+                <button class="btn bg-rgb-secondary text-white shadow-md">
                     <i class="fa-solid fa-circle-plus mr-2"></i>Tambah Tanaman
                 </button>
             </a>
@@ -38,7 +38,7 @@
 @endsection
 
 @push('scripts')
-    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    {{-- <script src="https://code.jquery.com/jquery-3.7.0.js"></script> --}}
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/css/dataTables.tailwindcss.min.css"></script>
     @vite('resources/js/pages/datatable.js')

@@ -13,7 +13,7 @@
 @section('body')
 
     <body class="flex min-h-screen p-0 m-0 bg-no-repeat bg-fixed bg-left bg-cover">
-        <div class="container sm:px-10">
+        <div class="container sm:px-10 h-screen">
             <div class="block xl:grid grid-cols-2 gap-4">
                 <!-- BEGIN: Login Info -->
                 <div class="hidden xl:flex flex-col h-screen">

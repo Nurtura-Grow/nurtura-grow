@@ -15,7 +15,13 @@ return new class extends Migration
             $table->id('id_penanaman');
             $table->foreignId('id_lahan');
             $table->boolean('status_hidup');
-            $table->timestamp('tanggal_tanam')->useCurrent();
+            $table->date('tanggal_tanam');
+            $table->foreignId('created_by');
+            $table->foreignId('updated_by')->nullable();
+            $table->foreignId('deleted_by')->nullable();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable();
+            $table->timestamp('deleted_at')->nullable();
         });
     }
 

@@ -17,6 +17,12 @@ return new class extends Migration
             $table->float('tinggi_tanaman');
             $table->integer('hari_setelah_tanam');
             $table->timestamp('tanggal_pengukuran')->useCurrent();
+            $table->foreignId('created_by');
+            $table->foreignId('updated_by')->nullable();
+            $table->foreignId('deleted_by')->nullable();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable();
+            $table->timestamp('deleted_at')->nullable();
         });
     }
 

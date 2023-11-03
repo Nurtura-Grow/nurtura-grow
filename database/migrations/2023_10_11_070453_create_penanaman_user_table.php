@@ -16,6 +16,13 @@ return new class extends Migration
             $table->foreignId('id_user');
             $table->foreignId('id_penanaman');
             $table->timestamp('timestamp');
+            
+            $table->foreignId('created_by');
+            $table->foreignId('updated_by')->nullable();
+            $table->foreignId('deleted_by')->nullable();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable();
+            $table->timestamp('deleted_at')->nullable();
             // $table->foreign('id_user')->references('id_user')->on('users');
         });
     }

@@ -13,19 +13,19 @@
             <div class="box p-5 intro-y h-full">
                 <div class="flex flex-col items-start">
                     {{-- Form --}}
-                    <form action="" class="ms-0 md:ms-4" method="POST">
+                    <form action="{{ route('lahan.store') }}" class="ms-0 md:ms-4" method="POST">
                         @csrf
 
                         <label for="nama_lahan" class="form-label sm:w-32">Nama lahan</label>
                         <input name="nama_lahan" type="text" class="form-control" placeholder="Nama lahan">
 
                         <label for="deskripsi" class="form-label mt-4 sm:w-32">Deskripsi</label>
-                        <input name="deskripsi" type="text" class="form-control" placeholder="Deskripsi">
+                        <textarea name="deskripsi" type="text" class="form-control" placeholder="Deskripsi"></textarea>
 
-                        <label for="deskripsi" class="form-label mt-4 sm:w-32">Koordinat</label>
+                        <label for="koordinat" class="form-label mt-4 sm:w-32">Koordinat</label>
                         <div class="grid grid-cols-12 gap-2">
-                            <input name="longitude" type="text" class="form-control col-span-6" placeholder="Longitude">
-                            <input name="latitude" type="text" class="form-control col-span-6" placeholder="Latitude">
+                            <input readonly name="latitude" type="text" class="form-control col-span-6" id="latitude-input" placeholder="Latitude">
+                            <input readonly name="longitude" type="text" class="form-control col-span-6" id="longitude-input" placeholder="Longitude">
                         </div>
 
                         <p class="mt-5 text-rgb-secondary">
@@ -45,3 +45,5 @@
         @include('pages.lahan.maps')
     </div>
 @endsection
+
+@include('pages.lahan.scripts')

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class SumberDataSensor extends Model
 {
@@ -14,4 +15,9 @@ class SumberDataSensor extends Model
     protected $guarded = [
         'id_sumber_data'
     ];
+
+    public function data_sensor(): HasMany
+    {
+        return $this->hasMany(DataSensor::class, 'id_sumber_data', 'id_sumber_data');
+    }
 }

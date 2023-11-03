@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\Pages;
 
+use App\Models\InformasiLahan;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\InformasiLahanRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 
 class LahanController extends Controller
 {
@@ -12,9 +16,16 @@ class LahanController extends Controller
      */
     public function index(Request $request)
     {
+        $data_lahan = InformasiLahan::get();
+
+        foreach ($data_lahan as $lahan) {
+            $lahan->new_nama = strtolower(str_replace(" ", "-", $lahan->nama_lahan));
+        }
+
         $sideMenu = $this->getSideMenuList($request);
         return view('pages.lahan.index', [
-            'sideMenu' => $sideMenu
+            'sideMenu' => $sideMenu,
+            'seluruhLahan' => $data_lahan,
         ]);
     }
 
@@ -23,9 +34,11 @@ class LahanController extends Controller
      */
     public function create(Request $request)
     {
+        $data_lahan = InformasiLahan::get();
         $sideMenu = $this->getSideMenuList($request);
         return view('pages.lahan.create', [
-            'sideMenu' => $sideMenu
+            'sideMenu' => $sideMenu,
+            'seluruhLahan' => $data_lahan,
         ]);
     }
 
@@ -34,7 +47,45 @@ class LahanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $nama_lahan = $request->input('nama_lahan');
+        $deskripsi = $request->input('deskripsi');
+        $latitude = $request->input('latitude');
+        $longitude = $request->input('longitude');
+
+        // Replace , with . in longitude and latitude
+        $longitude = str_replace(',', '.', $longitude);
+        $latitude = str_replace(',', '.', $latitude);
+
+        // Get kecamatan and kota from google maps api
+        $response = Http::withQueryParameters([
+            'latlng' => $latitude . ',' . $longitude,
+            'key' => env('VITE_GOOGLE_MAPS_API_KEY'),
+        ])->get('https://maps.googleapis.com/maps/api/geocode/json');
+
+        // Kalau gagal mendapatkan data dari google maps api
+        if ($response->failed()) {
+            return redirect()->back()->withInput()->with('add_lahan', 'Gagal menambahkan lahan. Silahkan coba lagi.');
+        }
+
+        $response = $response->json()['results'][0];
+
+        // Kecamatan, Kota, Alamat
+        $kecamatan = $response['address_components'][3]['long_name'];
+        $kota = $response['address_components'][4]['long_name'];
+        $alamat = $response['formatted_address'];
+
+        InformasiLahan::create([
+            'nama_lahan' => $nama_lahan,
+            'deskripsi' => $deskripsi,
+            'latitude' => $latitude,
+            'longitude' => $longitude,
+            'kecamatan' => $kecamatan,
+            'kota' => $kota,
+            'alamat' => $alamat,
+            'created_by' => Auth::user()->id_user,
+        ]);
+
+        return redirect()->route('lahan.index');
     }
 
     /**
@@ -48,9 +99,9 @@ class LahanController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Request $request, string $id)
     {
-        //
+        dd("edit", $id);
     }
 
     /**
