@@ -63,7 +63,7 @@ Route::group([
         Route::post('/tambah', [LahanController::class, 'store'])->name('store');
         Route::get('/{id}/edit', [LahanController::class, 'edit'])->name('edit');
         Route::patch('/{id}', [LahanController::class, 'update'])->name('update');
-        Route::delete('/{id}', [LahanController::class, 'delete'])->name('delete');
+        Route::delete('/{id}', [LahanController::class, 'destroy'])->name('destroy');
     });
 
     Route::group([

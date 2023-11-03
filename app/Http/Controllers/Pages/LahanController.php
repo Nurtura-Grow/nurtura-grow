@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Pages;
 use App\Models\InformasiLahan;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\InformasiLahanRequest;
+use Illuminate\Console\View\Components\Info;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 
@@ -16,7 +18,7 @@ class LahanController extends Controller
      */
     public function index(Request $request)
     {
-        $data_lahan = InformasiLahan::get();
+        $data_lahan = InformasiLahan::where('deleted_by', null)->where('deleted_at', null)->get();
 
         // Replace space with dash and make it lowercase
         foreach ($data_lahan as $lahan) {
@@ -41,6 +43,7 @@ class LahanController extends Controller
                 ->orWhere('kecamatan', 'like', '%' . $search . '%')
                 ->orWhere('kota', 'like', '%' . $search . '%')
                 ->orWhere('alamat', 'like', '%' . $search . '%')
+                ->where('deleted_by', null)->where('deleted_at', null)
                 ->get();
 
             foreach ($data_lahan as $lahan) {
@@ -59,7 +62,7 @@ class LahanController extends Controller
      */
     public function create(Request $request)
     {
-        $data_lahan = InformasiLahan::get();
+        $data_lahan = InformasiLahan::where('deleted_by', null)->where('deleted_at', null)->get();
         $sideMenu = $this->getSideMenuList($request);
         return view('pages.lahan.create', [
             'sideMenu' => $sideMenu,
@@ -67,21 +70,8 @@ class LahanController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    private function getKecamatanKota($latitude, $longitude)
     {
-        $nama_lahan = $request->input('nama_lahan');
-        $deskripsi = $request->input('deskripsi');
-        $latitude = $request->input('latitude');
-        $longitude = $request->input('longitude');
-
-        // Replace , with . in longitude and latitude
-        $longitude = str_replace(',', '.', $longitude);
-        $latitude = str_replace(',', '.', $latitude);
-
-        // Get kecamatan and kota from google maps api
         $response = Http::withQueryParameters([
             'latlng' => $latitude . ',' . $longitude,
             'key' => env('VITE_GOOGLE_MAPS_API_KEY'),
@@ -99,6 +89,33 @@ class LahanController extends Controller
         $kota = $response['address_components'][4]['long_name'];
         $alamat = $response['formatted_address'];
 
+        return [
+            'kecamatan' => $kecamatan,
+            'kota' => $kota,
+            'alamat' => $alamat,
+        ];
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        $nama_lahan = $request->input('nama_lahan');
+        $deskripsi = $request->input('deskripsi');
+        $latitude = $request->input('latitude');
+        $longitude = $request->input('longitude');
+
+        // Replace , with . in longitude and latitude
+        $longitude = str_replace(',', '.', $longitude);
+        $latitude = str_replace(',', '.', $latitude);
+
+        // Get kecamatan, kota, and alamat from google maps api
+        $kecamatan_kota_alamat = $this->getKecamatanKota($latitude, $longitude);
+        $kecamatan = $kecamatan_kota_alamat['kecamatan'];
+        $kota = $kecamatan_kota_alamat['kota'];
+        $alamat = $kecamatan_kota_alamat['alamat'];
+
         InformasiLahan::create([
             'nama_lahan' => $nama_lahan,
             'deskripsi' => $deskripsi,
@@ -114,19 +131,20 @@ class LahanController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit(Request $request, string $id)
     {
-        dd("edit", $id);
+        $infoLahan = InformasiLahan::find($id);
+        if ($infoLahan) {
+            return view('pages.lahan.edit', [
+                'sideMenu' => $this->getSideMenuList($request),
+                'seluruhLahan' => InformasiLahan::where('deleted_by', null)->where('deleted_at', null)->get(),
+                'lahan' => $infoLahan,
+            ]);
+        }
+
+        return abort(Response::HTTP_NOT_FOUND);
     }
 
     /**
@@ -134,7 +152,33 @@ class LahanController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $nama_lahan = $request->input('nama_lahan');
+        $deskripsi = $request->input('deskripsi');
+        $latitude = $request->input('latitude');
+        $longitude = $request->input('longitude');
+
+        // Replace , with . in longitude and latitude
+        $longitude = str_replace(',', '.', $longitude);
+        $latitude = str_replace(',', '.', $latitude);
+
+        $kecamatan_kota_alamat = $this->getKecamatanKota($latitude, $longitude);
+        $kecamatan = $kecamatan_kota_alamat['kecamatan'];
+        $kota = $kecamatan_kota_alamat['kota'];
+        $alamat = $kecamatan_kota_alamat['alamat'];
+
+        InformasiLahan::find($id)->update([
+            "nama_lahan" => $nama_lahan,
+            "deskripsi" => $deskripsi,
+            "latitude" => $latitude,
+            "longitude" => $longitude,
+            "kecamatan" => $kecamatan,
+            "kota" => $kota,
+            "alamat" => $alamat,
+            "updated_at" => now(),
+            "updated_by" => Auth::user()->id_user,
+        ]);
+
+        return redirect()->route('lahan.index');
     }
 
     /**
@@ -142,6 +186,11 @@ class LahanController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        InformasiLahan::find($id)->update([
+            "deleted_at" => now(),
+            "deleted_by" => Auth::user()->id_user,
+        ]);
+
+        return redirect()->route('lahan.index');
     }
 }

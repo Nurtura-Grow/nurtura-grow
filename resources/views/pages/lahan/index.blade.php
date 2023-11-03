@@ -61,6 +61,7 @@
         {{-- Masukin maps di sini --}}
         @include('pages.lahan.maps')
     </div>
+    @include('pages.lahan.modal')
 @endsection
 
 @include('pages.lahan.scripts')

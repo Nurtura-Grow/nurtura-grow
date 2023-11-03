@@ -10,9 +10,9 @@ class InformasiLahan extends Model
 {
     use HasFactory;
     protected $table = 'informasi_lahan';
-    protected $primaryKey = 'id_informasi_lahan';
+    protected $primaryKey = 'id_lahan';
     protected $guarded = [
-        'id_informasi_lahan'
+        'id_lahan'
     ];
 
     public function data_sensor(): HasMany

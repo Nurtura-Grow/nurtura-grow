@@ -82,10 +82,12 @@ function renderCarousel(data) {
     }
 }
 
-renderCarousel(seluruhLahan);
-$(window).on("resize", function() {
+if (lahan == null) {
     renderCarousel(seluruhLahan);
-});
+    $(window).on("resize", function () {
+        renderCarousel(seluruhLahan);
+    });
+}
 
 
 $("#search-lahan").on("keyup", debounce(function () {
