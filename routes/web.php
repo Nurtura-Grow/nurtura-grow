@@ -58,11 +58,12 @@ Route::group([
         'as' => 'lahan.'
     ], function () {
         Route::get('/', [LahanController::class, 'index'])->name('index');
+        Route::get('/search', [LahanController::class, 'search_lahan'])->name('search');
         Route::get('/tambah', [LahanController::class, 'create'])->name('create');
         Route::post('/tambah', [LahanController::class, 'store'])->name('store');
         Route::get('/{id}/edit', [LahanController::class, 'edit'])->name('edit');
         Route::patch('/{id}', [LahanController::class, 'update'])->name('update');
-        Route::delete('/{id}', [LahanController::class, 'delete'])->name('delete');
+        Route::delete('/{id}', [LahanController::class, 'destroy'])->name('destroy');
     });
 
     Route::group([
@@ -91,4 +92,6 @@ Route::group([
         Route::get('/tanaman/tinggi', [TinggiTanamanController::class, 'index'])->name('tanaman.tinggi');
         Route::get('/rekomendasi', [RiwayatRekomendasiController::class, 'index'])->name('rekomendasi');
     });
+
+    Route::get('/panduan', [PanduanController::class, 'index'])->name('panduan');
 });

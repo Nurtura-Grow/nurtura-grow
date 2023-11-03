@@ -42,25 +42,29 @@ function moveToCurrentPosition(map, infoWindow) {
     }
 }
 
-//  Todo: create marker using marker clusterer
-// Todo: only create markers & info that are visible on the map
-
 loader.load().then(async () => {
     const { Map } = await google.maps.importLibrary("maps");
     const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
 
     /** Change the first coordinate to the user's current location / to first lahan */
+    var koordinat;
+    if (lahan != null) {
+        koordinat = {
+            lat: parseFloat(lahan.latitude),
+            lng: parseFloat(lahan.longitude),
+        };
+    } else if (seluruhLahan.length > 0) {
+        koordinat = {
+            lat: parseFloat(seluruhLahan[0].latitude),
+            lng: parseFloat(seluruhLahan[0].longitude),
+        };
+    } else {
+        // Random coordinate, will be changed into user's current location/first lahan/lahan edited
+        koordinat = { lat: -6.1753924, lng: 106.8271528 };
+    }
 
-    // Random coordinates, will be changed with "move to current position"
-    const defaultCoordinates = { lat: -6.1753924, lng: 106.8271528 };
     const map = new Map(document.getElementById("container-maps"), {
-        center:
-            seluruhLahan.length > 0
-                ? {
-                      lat: parseFloat(seluruhLahan[0].latitude),
-                      lng: parseFloat(seluruhLahan[0].longitude),
-                  }
-                : defaultCoordinates,
+        center: koordinat,
         zoom: 10,
         mapId: "9505b7cedf2238ff",
         zoomControl: true,
@@ -88,7 +92,6 @@ loader.load().then(async () => {
 
     /** Auto Complete */
     const input = document.querySelector("#cari-lokasi");
-    console.log(input);
     const options = {
         fields: ["formatted_address", "geometry", "name"],
         strictBounds: false,
@@ -163,10 +166,6 @@ loader.load().then(async () => {
 
     /** Create Info windows (pop up when the marker is clicked) */
     const infoWindows = seluruhLahan.map((lahan) => {
-        const token = document
-            .querySelector('meta[name="csrf-token"]')
-            .getAttribute("content");
-
         const contentString = `<div class="w-auto xl:w-[250px]">
             <strong class="text-lg font-bold">${lahan.nama_lahan}</strong>
             <p class="mb-4 text-justify text-slate-600 font-semibold">${lahan.deskripsi}</p>
@@ -174,13 +173,10 @@ loader.load().then(async () => {
 
             <a target="_blank" href="https://www.google.com/maps/place/${lahan.latitude},${lahan.longitude}" class="btn bg-info px-2 w-full"><i class="fa-solid fa-map w-4 h-4 mr-2"></i>Buka di google maps</a>
             <a href="lahan/${lahan.id_lahan}/edit" class="btn btn-primary mt-2 px-2 w-full"><i class="fa-solid fa-pencil w-4 h-4 mr-2"></i>Ubah</a>
-
-            <form action="lahan/${lahan.id_lahan}" method="POST" class="mt-2 w-full">
-                <input name="_method" type="hidden" value="DELETE">
-                <input type="hidden" name="_token" value="${token}" />
-                <button type="submit" class="btn btn-danger px-2 w-full"><i class="fa-solid fa-trash w-4 h-4 mr-2"></i>Hapus</button>
-            </form>
+            <button type="button" class="btn btn-danger px-2 mt-2 w-full delete-lahan" onclick="deleteModal(${lahan.id_lahan})" data-tw-toggle="modal" data-tw-target="#delete-modal"><i class="fa-solid fa-trash w-4 h-4 mr-2"></i>Hapus</button>
         </div>`;
+
+
         return new google.maps.InfoWindow({
             content: contentString,
         });
@@ -207,7 +203,26 @@ loader.load().then(async () => {
     });
 
     /** Move map to the selected lahan */
-    const lokasi_lahan = document.querySelectorAll(".lokasi-lahan");
+    const container = document.getElementById("carousel-container");
+    if (container) {
+        container.addEventListener("click", function (event) {
+            const targetElement = event.target.closest(".lokasi-lahan");
+
+            if (targetElement) {
+                const koordinat = JSON.parse(targetElement.getAttribute("data-koordinat"));
+
+                const koordinatLatLng = {
+                    lat: parseFloat(koordinat.lat),
+                    lng: parseFloat(koordinat.lng),
+                };
+
+                map.setCenter(koordinatLatLng);
+                map.setZoom(16);
+            }
+        });
+    }
+
+    var lokasi_lahan = document.querySelectorAll(".lokasi-lahan");
     lokasi_lahan.forEach((lahan) => {
         lahan.addEventListener("click", function () {
             const koordinat = JSON.parse(this.getAttribute("data-koordinat"));

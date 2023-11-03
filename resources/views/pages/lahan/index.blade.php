@@ -21,22 +21,21 @@
                     {{-- Search Items --}}
                     <div class="relative ">
                         <input type="text" class="form-control py-3 px-4 w-full box pr-10 border-slate-500"
-                            placeholder="Cari lahan...">
+                            id="search-lahan" placeholder="Cari lahan...">
                         <i class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0 text-slate-500" data-lucide="search"></i>
                     </div>
                     <div
                         class="grow border-t border-b w-full border-slate-300 dark:border-darkmode-400 mt-6 mb-5 py-3 xl:overflow-hidden">
                         @if (count($seluruhLahan) > 0)
                             {{-- Below Large Screen --}}
-                            <div class="block xl:hidden mx-6 pb-8">
-                                <div class="responsive-mode">
-                                    @include('pages.lahan.lokasi-lahan')
+                            <div class="block xl:hidden mx-6 pb-8" id="carousel-container">
+                                <div class="my-carousel">
                                 </div>
                             </div>
 
                             {{-- Large Screen and Above --}}
                             <div class="hidden xl:block overflow-y-auto scrollbar-hidden max-h-[calc(70vh-160px)]">
-                                <div class="flex flex-col gap-2">
+                                <div class="flex flex-col gap-2" id="big-screen-lahan">
                                     @include('pages.lahan.lokasi-lahan')
                                 </div>
                             </div>
@@ -62,6 +61,7 @@
         {{-- Masukin maps di sini --}}
         @include('pages.lahan.maps')
     </div>
+    @include('pages.lahan.modal')
 @endsection
 
 @include('pages.lahan.scripts')
