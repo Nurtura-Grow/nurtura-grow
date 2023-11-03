@@ -28,9 +28,8 @@
                         class="grow border-t border-b w-full border-slate-300 dark:border-darkmode-400 mt-6 mb-5 py-3 xl:overflow-hidden">
                         @if (count($seluruhLahan) > 0)
                             {{-- Below Large Screen --}}
-                            <div class="block xl:hidden mx-6 pb-8">
-                                <div class="responsive-mode" id="small-screen-lahan">
-                                    @include('pages.lahan.lokasi-lahan')
+                            <div class="block xl:hidden mx-6 pb-8" id="carousel-container">
+                                <div class="my-carousel">
                                 </div>
                             </div>
 

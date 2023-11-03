@@ -42,9 +42,6 @@ function moveToCurrentPosition(map, infoWindow) {
     }
 }
 
-//  Todo: create marker using marker clusterer
-// Todo: only create markers & info that are visible on the map
-
 loader.load().then(async () => {
     const { Map } = await google.maps.importLibrary("maps");
     const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
@@ -57,9 +54,9 @@ loader.load().then(async () => {
         center:
             seluruhLahan.length > 0
                 ? {
-                      lat: parseFloat(seluruhLahan[0].latitude),
-                      lng: parseFloat(seluruhLahan[0].longitude),
-                  }
+                    lat: parseFloat(seluruhLahan[0].latitude),
+                    lng: parseFloat(seluruhLahan[0].longitude),
+                }
                 : defaultCoordinates,
         zoom: 10,
         mapId: "9505b7cedf2238ff",
@@ -88,7 +85,6 @@ loader.load().then(async () => {
 
     /** Auto Complete */
     const input = document.querySelector("#cari-lokasi");
-    console.log(input);
     const options = {
         fields: ["formatted_address", "geometry", "name"],
         strictBounds: false,
@@ -207,8 +203,24 @@ loader.load().then(async () => {
     });
 
     /** Move map to the selected lahan */
+    const container = document.getElementById("carousel-container");
+    container.addEventListener("click", function (event) {
+        const targetElement = event.target.closest(".lokasi-lahan");
+
+        if (targetElement) {
+            const koordinat = JSON.parse(targetElement.getAttribute("data-koordinat"));
+
+            const koordinatLatLng = {
+                lat: parseFloat(koordinat.lat),
+                lng: parseFloat(koordinat.lng),
+            };
+
+            map.setCenter(koordinatLatLng);
+            map.setZoom(16);
+        }
+    });
+
     var lokasi_lahan = document.querySelectorAll(".lokasi-lahan");
-    console.log(lokasi_lahan)
     lokasi_lahan.forEach((lahan) => {
         lahan.addEventListener("click", function () {
             const koordinat = JSON.parse(this.getAttribute("data-koordinat"));

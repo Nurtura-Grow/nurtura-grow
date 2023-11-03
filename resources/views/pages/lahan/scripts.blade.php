@@ -3,6 +3,5 @@
         var url = '{{ route('lahan.search') }}';
         var seluruhLahan = @json($seluruhLahan);
     </script>
-    {{-- @vite(['resources/js/pages/searchLahan.js', 'resources/js/pages/googleMaps.js']) --}}
-    @vite(['resources/js/pages/searchLahan.js'])
+    @vite(['resources/js/pages/searchLahan.js', 'resources/js/pages/googleMaps.js'])
 @endpush
