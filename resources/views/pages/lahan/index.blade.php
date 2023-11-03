@@ -29,14 +29,14 @@
                         @if (count($seluruhLahan) > 0)
                             {{-- Below Large Screen --}}
                             <div class="block xl:hidden mx-6 pb-8">
-                                <div class="responsive-mode">
+                                <div class="responsive-mode" id="small-screen-lahan">
                                     @include('pages.lahan.lokasi-lahan')
                                 </div>
                             </div>
 
                             {{-- Large Screen and Above --}}
                             <div class="hidden xl:block overflow-y-auto scrollbar-hidden max-h-[calc(70vh-160px)]">
-                                <div class="flex flex-col gap-2">
+                                <div class="flex flex-col gap-2" id="big-screen-lahan">
                                     @include('pages.lahan.lokasi-lahan')
                                 </div>
                             </div>

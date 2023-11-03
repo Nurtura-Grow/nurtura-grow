@@ -207,7 +207,8 @@ loader.load().then(async () => {
     });
 
     /** Move map to the selected lahan */
-    const lokasi_lahan = document.querySelectorAll(".lokasi-lahan");
+    var lokasi_lahan = document.querySelectorAll(".lokasi-lahan");
+    console.log(lokasi_lahan)
     lokasi_lahan.forEach((lahan) => {
         lahan.addEventListener("click", function () {
             const koordinat = JSON.parse(this.getAttribute("data-koordinat"));

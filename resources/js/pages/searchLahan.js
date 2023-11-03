@@ -1,32 +1,7 @@
 import $ from "jquery";
+import debounce from "lodash/debounce";
 
-// Change Container Lahan
-function createLahanElement(lahan) {
-    const div = `
-        <div class="p-3 cursor-pointer hover:bg-slate-100 rounded-md flex items-center lokasi-lahan"
-            data-koordinat= ${JSON.stringify({
-                lat: lahan.latitude,
-                lng: lahan.longitude,
-            })}>
-            <div class="flex flex-row gap-3">
-                <div class="flex-initial">
-                    <i class="fa-solid fa-location-dot"></i>
-                </div>
-                <div class="w-full">
-                    <p class="font-bold"> ${lahan.nama_lahan}</p>
-                    <p class="font-medium text-primary ${lahan.new_nama}">${
-        lahan.kecamatan + ", " + lahan.kota
-    }
-                    </p>
-                </div>
-            </div>
-        </div>
-    `;
-
-    return div;
-}
-
-$("#search-lahan").on("keyup", function () {
+$("#search-lahan").on("keyup", debounce(function () {
     var searchTerm = $(this).val();
 
     $.ajax({
@@ -37,12 +12,43 @@ $("#search-lahan").on("keyup", function () {
         },
         success: function (data) {
             seluruhLahan = data.data_lahan;
+            var elementsToHide = [];
+            var elementsNotToHide = [];
 
-            $(".containerLahan").empty();
-            seluruhLahan.forEach((lahan) => {
-                const div = createLahanElement(lahan);
-                $(".containerLahan").append(div);
+            // Loop through elements with class .lokasi-lahan in big screen and categorize elements to hide or show
+            $("#big-screen-lahan .lokasi-lahan").each(function () {
+                var koordinat = $(this).data("koordinat");
+                var lat = koordinat.lat;
+                var lng = koordinat.lng;
+                var shouldHide = true;
+
+                // Check if any lahan matches the lat and lng
+                for (var i = 0; i < seluruhLahan.length; i++) {
+                    var lahan = seluruhLahan[i];
+                    if (lat === lahan.latitude && lng === lahan.longitude) {
+                        shouldHide = false;
+                        break;
+                    }
+                }
+
+                // Categorize elements based on whether they should be hidden or not
+                if (shouldHide) {
+                    elementsToHide.push(this);
+                } else {
+                    elementsNotToHide.push(this);
+                }
+            });
+
+            // Hide elements in the elementsToHide array
+            elementsToHide.forEach(function (element) {
+                $(element).addClass("hidden");
+            });
+
+            // Show elements in the elementsNotToHide array
+            elementsNotToHide.forEach(function (element) {
+                $(element).removeClass("hidden");
             });
         },
     });
-});
+}, 300 // milliseconds debounce interval
+));
