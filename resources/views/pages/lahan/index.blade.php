@@ -53,7 +53,9 @@
                         @endif
                     </div>
                     <div>
-                        Tekan lahan untuk menunjukkan lokasi pada peta
+                        Tekan <span class="font-semibold">lahan</span> untuk menunjukkan lokasi pada peta. <br>
+                        Tekan <span class="font-semibold">marker (<i class="fa-solid fa-location-dot text-rgb-danger"></i>)
+                        </span> pada peta untuk membuka informasi lahan.
                     </div>
                 </div>
             </div>

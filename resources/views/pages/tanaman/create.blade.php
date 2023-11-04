@@ -20,16 +20,16 @@
 
                     <div class="form-inline mt-5">
                         <label for="horizontal-form-2" class="form-label sm:w-32">Keterangan</label>
-                        <input name="keterangan" type="text" class="form-control" placeholder="Keterangan Penanaman">
+                        <textarea name="keterangan" type="text" class="form-control" placeholder="Keterangan Penanaman"></textarea>
                     </div>
 
                     <div class="form-inline mt-5">
                         <label for="horizontal-form-2" class="form-label sm:w-32">Nama Lahan</label>
-                        <select class="form-control tom-select mt-2" data-placeholder="Pilih lahan" name="nama_lahan">
-                            {{-- Todo: Change the option to match the database --}}
-                            <option>Chris Evans</option>
-                            <option>Liam Neeson</option>
-                            <option>Daniel Craig</option>
+                        <select class="form-control tom-select mt-2" data-placeholder="Pilih lahan" name="id_lahan">
+                            @foreach ($seluruhLahan as $lahan)
+                                <option value="{{ $lahan->id_lahan }}">{{ $lahan->nama_lahan }} || {{ $lahan->kecamatan }},
+                                    {{ $lahan->kota }}</option>
+                            @endforeach
                         </select>
                     </div>
 
@@ -37,10 +37,7 @@
                         <label for="horizontal-form-2" class="form-label sm:w-32">Jenis Tanaman</label>
                         <select class="form-control tom-select mt-2" data-placeholder="Pilih jenis tanaman"
                             name="jenis_tanaman">
-                            {{-- Todo: Change the option to match the database --}}
-                            <option>Chris Evans</option>
-                            <option>Liam Neeson</option>
-                            <option>Daniel Craig</option>
+                            <option selected>Bawang Merah</option>
                         </select>
                     </div>
 
@@ -54,6 +51,19 @@
                             <input name="tanggal_tanaman" type="text" class="datepicker form-control pl-12"
                                 data-single-mode="true">
                         </div>
+                    </div>
+
+                    <div class="form-inline mt-5 sm:ml-32 sm:pl-5">
+                        <div class="form-check form-switch">
+                            <input name="aktif" class="form-check-input" type="checkbox" checked>
+                            <label class="form-check-label" for="aktif">
+                                Sedang ditanam
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-inline mt-1 sm:ml-32 sm:pl-5">
+                        <p class="text-primary">Tekan tombol untuk menandakan penanaman sudah selesai</p>
                     </div>
 
                     <div class="sm:ml-32 sm:pl-5 mt-5">

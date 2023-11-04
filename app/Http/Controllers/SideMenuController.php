@@ -86,12 +86,12 @@ class SideMenuController extends Controller
                     'daftar-tanaman' => [
                         'icon' => 'fa-solid fa-list',
                         'route_name' => 'tanaman.index',
-                        'title' => 'Daftar Tanaman'
+                        'title' => 'Daftar Penanaman'
                     ],
                     'tambah-tanaman' => [
                         'icon' => 'fa-solid fa-plus',
                         'route_name' => 'tanaman.create',
-                        'title' => 'Tambah Tanaman'
+                        'title' => 'Tambah Penanaman'
                     ],
                 ]
             ],

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -16,6 +17,31 @@ class Penanaman extends Model
     protected $guarded = [
         'id_penanaman'
     ];
+
+    protected static $jumlahHST = 60;
+
+    public static function calculateHST($penanamanId)
+    {
+        $penanaman = Penanaman::find($penanamanId);
+        $tanggalTanam = Carbon::parse($penanaman->tanggal_tanam);
+        $today = Carbon::now();
+
+        $dayDifference = $today->diffInDays($tanggalTanam);
+
+        return $dayDifference;
+    }
+
+    public static  function calculateHSTPercentage($penanamanId)
+    {
+        $dayDifference = self::calculateHST($penanamanId);
+        $percentage = ($dayDifference / self::$jumlahHST) * 100;
+
+        // Round to 2 decimal places
+        $percentage = round($percentage);
+
+        return $percentage;
+    }
+
 
     public function data_sensor(): HasMany
     {

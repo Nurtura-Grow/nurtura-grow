@@ -7,12 +7,12 @@
                     Apakah Anda sungguh ingin menghapus data ini? <br>Data ini tidak dapat dikembalikan.
                 </div>
             </div>
-            <div class="px-5 pb-8 text-center">
+            <div class="px-5 pb-8 flex justify-center">
                 <button type="button" data-tw-dismiss="modal" class="btn btn-outline-secondary w-24 mr-1">
                     Batalkan
                 </button>
 
-                <form method="POST" id="deleteLahan">
+                <form method="POST" id="deleteLahan" class="inline">
                     @method('DELETE')
                     @csrf
                     <button type="submit" class="btn btn-danger w-24">Delete</button>
