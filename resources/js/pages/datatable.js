@@ -1,11 +1,9 @@
+import $ from 'jquery';
 import DataTable from "datatables.net-dt";
+import 'datatables.net-responsive';
 
-document.addEventListener("DOMContentLoaded", () => {
-    new DataTable("#table", {
-        // searching: false,
-        // lengthChange: false,
-        // info: false,
-        // pagination: false,
+$(document).ready(function () {
+    const table = new DataTable("#table", {
         responsive: true,
         lengthMenu: [
             [5, 10, 25, 50, 100, -1], // Value
@@ -25,7 +23,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 sSortDescending: ": activate to sort column descending",
             },
         },
-    });
+    })
+
+    table.row.adjust().column.adjust().responsive.recalc();
 
     const searchInput = document.querySelector(".dataTables_filter input");
     searchInput.classList.add("form-control");

@@ -36,8 +36,8 @@ class Penanaman extends Model
         $dayDifference = self::calculateHST($penanamanId);
         $percentage = ($dayDifference / self::$jumlahHST) * 100;
 
-        // Round to 2 decimal places
-        $percentage = round($percentage);
+        // Round to integer
+        $percentage = intval(round($percentage));
 
         return $percentage;
     }
