@@ -15,6 +15,11 @@ class InformasiLahan extends Model
         'id_lahan'
     ];
 
+    public static function activeLahanData()
+    {
+        return self::where('deleted_by', null)->where('deleted_at', null)->orderBy('nama_lahan')->get();
+    }
+
     public function data_sensor(): HasMany
     {
         return $this->hasMany(DataSensor::class, 'id_lahan', 'id_lahan');

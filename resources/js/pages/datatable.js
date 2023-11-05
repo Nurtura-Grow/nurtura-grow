@@ -1,6 +1,7 @@
 import $ from 'jquery';
 import DataTable from "datatables.net-dt";
 import 'datatables.net-responsive';
+import 'datatables.net-rowgroup';
 
 $(document).ready(function () {
     const table = new DataTable("#table", {
@@ -9,6 +10,9 @@ $(document).ready(function () {
             [5, 10, 25, 50, 100, -1], // Value
             [5, 10, 25, 50, 100, "Semua"], // Label
         ],
+        rowGroup:{
+            dataSrc: 1
+        },
         language: {
             sEmptyTable: "Tidak ada data", // Tabel Empty
             sLengthMenu: "Tunjukkan _MENU_ data", // Info

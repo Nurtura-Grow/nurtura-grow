@@ -31,6 +31,8 @@ class TanamanController extends Controller
             $tanaman->default_hari = Penanaman::$jumlahHST;
         }
 
+        $penanaman = $penanaman->sortBy('nama_lahan');
+
         return view('pages.tanaman.index', [
             'sideMenu' => $sideMenu,
             'seluruhPenanaman' => $penanaman,
@@ -43,7 +45,7 @@ class TanamanController extends Controller
     public function create(Request $request)
     {
         $sideMenu = $this->getSideMenuList($request);
-        $lahan = InformasiLahan::where('deleted_by', null)->where('deleted_at', null)->get();
+        $lahan = InformasiLahan::activeLahanData();
 
         return view('pages.tanaman.create', [
             'sideMenu' => $sideMenu,
@@ -81,7 +83,7 @@ class TanamanController extends Controller
     public function edit(Request $request, string $id)
     {
         $sideMenu = $this->getSideMenuList($request);
-        $lahan = InformasiLahan::where('deleted_by', null)->where('deleted_at', null)->get();
+        $lahan = InformasiLahan::activeLahanData();
         $penanaman = Penanaman::where('id_penanaman', $id)->where('deleted_by', null)->where('deleted_at', null)->first();
 
         // Change format tanggal tanam

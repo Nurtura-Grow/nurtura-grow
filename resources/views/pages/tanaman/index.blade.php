@@ -14,7 +14,7 @@
     </div>
 
     <div class="intro-y box p-5 mt-5">
-        <table id="table" class="stripe hover" style="width:100%">
+        <table id="table" class="hover" style="width:100%">
             <thead>
                 <tr>
                     <th class="border-b-2 whitespace-nowrap">No</th>

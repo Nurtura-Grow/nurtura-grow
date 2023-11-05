@@ -18,7 +18,7 @@ class LahanController extends Controller
      */
     public function index(Request $request)
     {
-        $data_lahan = InformasiLahan::where('deleted_by', null)->where('deleted_at', null)->get();
+        $data_lahan = InformasiLahan::activeLahanData();
 
         // Replace space with dash and make it lowercase
         foreach ($data_lahan as $lahan) {
@@ -62,7 +62,7 @@ class LahanController extends Controller
      */
     public function create(Request $request)
     {
-        $data_lahan = InformasiLahan::where('deleted_by', null)->where('deleted_at', null)->get();
+        $data_lahan = InformasiLahan::activeLahanData();
         $sideMenu = $this->getSideMenuList($request);
         return view('pages.lahan.create', [
             'sideMenu' => $sideMenu,
@@ -139,7 +139,7 @@ class LahanController extends Controller
         if ($infoLahan) {
             return view('pages.lahan.edit', [
                 'sideMenu' => $this->getSideMenuList($request),
-                'seluruhLahan' => InformasiLahan::where('deleted_by', null)->where('deleted_at', null)->get(),
+                'seluruhLahan' => InformasiLahan::activeLahanData(),
                 'lahan' => $infoLahan,
             ]);
         }
