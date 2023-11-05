@@ -15,7 +15,7 @@
                 <form method="POST" id="deleteLahan" class="inline">
                     @method('DELETE')
                     @csrf
-                    <button type="submit" class="btn btn-danger w-24">Delete</button>
+                    <button type="submit" class="btn btn-danger w-24">Hapus</button>
                 </form>
             </div>
         </div>

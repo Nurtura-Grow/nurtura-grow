@@ -25,8 +25,6 @@ $(document).ready(function () {
         },
     })
 
-    table.row.adjust().column.adjust().responsive.recalc();
-
     const searchInput = document.querySelector(".dataTables_filter input");
     searchInput.classList.add("form-control");
 

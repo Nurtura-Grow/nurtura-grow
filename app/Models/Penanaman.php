@@ -18,7 +18,7 @@ class Penanaman extends Model
         'id_penanaman'
     ];
 
-    protected static $jumlahHST = 60;
+    public static $jumlahHST = 60;
 
     public static function calculateHST($penanamanId)
     {

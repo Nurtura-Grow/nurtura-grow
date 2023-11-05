@@ -60,6 +60,7 @@
 /* DataTable Child Row */
 table.dataTable>tbody>tr.child ul.dtr-details {
     width: 100%;
+    margin-bottom: 0.75em;
 }
 
 @media only screen and (max-width: 800px) {

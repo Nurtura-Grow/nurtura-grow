@@ -166,19 +166,25 @@ class LahanController extends Controller
         $kota = $kecamatan_kota_alamat['kota'];
         $alamat = $kecamatan_kota_alamat['alamat'];
 
-        InformasiLahan::find($id)->update([
-            "nama_lahan" => $nama_lahan,
-            "deskripsi" => $deskripsi,
-            "latitude" => $latitude,
-            "longitude" => $longitude,
-            "kecamatan" => $kecamatan,
-            "kota" => $kota,
-            "alamat" => $alamat,
-            "updated_at" => now(),
-            "updated_by" => Auth::user()->id_user,
-        ]);
+        $infoLahan = InformasiLahan::find($id);
 
-        return redirect()->route('lahan.index');
+        if($infoLahan){
+            $infoLahan->update([
+                "nama_lahan" => $nama_lahan,
+                "deskripsi" => $deskripsi,
+                "latitude" => $latitude,
+                "longitude" => $longitude,
+                "kecamatan" => $kecamatan,
+                "kota" => $kota,
+                "alamat" => $alamat,
+                "updated_at" => now(),
+                "updated_by" => Auth::user()->id_user,
+            ]);
+
+            return redirect()->route('lahan.index');
+        } else {
+            return abort(Response::HTTP_NOT_FOUND);
+        }
     }
 
     /**

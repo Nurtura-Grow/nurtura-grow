@@ -73,6 +73,9 @@ Route::group([
         Route::get('/daftar', [TanamanController::class, 'index'])->name('index');
         Route::get('/tambah', [TanamanController::class, 'create'])->name('create');
         Route::post('/tambah', [TanamanController::class, 'store'])->name('store');
+        Route::get('/{id}/edit', [TanamanController::class, 'edit'])->name('edit');
+        Route::patch('/{id}', [TanamanController::class, 'update'])->name('update');
+        Route::delete('/{id}', [TanamanController::class, 'destroy'])->name('destroy');
     });
 
 
