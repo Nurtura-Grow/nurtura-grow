@@ -131,7 +131,7 @@
                     <h2 class="text-lg font-medium truncate mr-5">
                         Riwayat Aksi
                     </h2>
-                    <a href="{{ route('riwayat.rekomendasi') }}" class="sm:ml-auto mt-3 sm:mt-0 relative text-primary">
+                    <a href="{{ route('riwayat.index') }}" class="sm:ml-auto mt-3 sm:mt-0 relative text-primary">
                         Lihat Selengkapnya
                     </a>
                 </div>
@@ -165,8 +165,4 @@
     @include('pages.components.modal-datepicker')
 @endsection
 
-@push('scripts')
-    {{-- <script src="https://code.jquery.com/jquery-3.7.0.js"></script> --}}
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
-    @vite('resources/js/pages/datatable.js')
-@endpush
+@include('pages.components.datatable-styles')

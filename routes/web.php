@@ -11,8 +11,7 @@ use App\Http\Controllers\Pages\LahanController;
 use App\Http\Controllers\Pages\TanamanController;
 use App\Http\Controllers\Pages\Rekomendasi\PemupukanController;
 use App\Http\Controllers\Pages\Rekomendasi\PengairanController;
-use App\Http\Controllers\Pages\Riwayat\RekomendasiController as RiwayatRekomendasiController;
-use App\Http\Controllers\Pages\Riwayat\TinggiTanamanController;
+use App\Http\Controllers\Pages\RiwayatController;
 
 use App\Http\Controllers\Pages\PanduanController;
 
@@ -92,8 +91,7 @@ Route::group([
         'prefix' => 'riwayat',
         'as' => 'riwayat.'
     ], function () {
-        Route::get('/tanaman/tinggi', [TinggiTanamanController::class, 'index'])->name('tanaman.tinggi');
-        Route::get('/rekomendasi', [RiwayatRekomendasiController::class, 'index'])->name('rekomendasi');
+        Route::get('/', [RiwayatController::class, 'index'])->name('index');
     });
 
     Route::get('/panduan', [PanduanController::class, 'index'])->name('panduan');

@@ -4,7 +4,7 @@ import 'datatables.net-responsive';
 import 'datatables.net-rowgroup';
 
 $(document).ready(function () {
-    const table = new DataTable("#table", {
+    const table = new DataTable("table", {
         responsive: true,
         lengthMenu: [
             [5, 10, 25, 50, 100, -1], // Value

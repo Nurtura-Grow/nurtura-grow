@@ -114,20 +114,8 @@ class SideMenuController extends Controller
             ],
             'riwayat' => [
                 'icon' => 'fa-solid fa-clock-rotate-left',
-                'route_name' => 'riwayat',
+                'route_name' => 'riwayat.index',
                 'title' => 'Riwayat',
-                'sub_menu' => [
-                    'tinggi-tanaman' => [
-                        'icon' => 'fa-solid fa-plant-wilt',
-                        'route_name' => 'riwayat.tanaman.tinggi',
-                        'title' => 'Tinggi Tanaman'
-                    ],
-                    'rekomendasi' => [
-                        'icon' => 'fa-solid fa-hand-holding-heart',
-                        'route_name' => 'riwayat.rekomendasi',
-                        'title' => 'Rekomendasi'
-                    ],
-                ]
             ],
             'panduan' => [
                 'icon' => 'fa-solid fa-book',
