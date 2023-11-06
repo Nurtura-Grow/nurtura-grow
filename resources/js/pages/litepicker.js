@@ -8,7 +8,7 @@ var customOptions = {
     numberOfColumns: 1,
     numberOfMonths: 1,
     showWeekNumbers: false,
-    format: "DD MMM, YYYY",
+    format: "DD MMM YYYY",
     plugins: ['mobilefriendly'],
     dropdowns: {
         minYear: 2000,
@@ -18,7 +18,7 @@ var customOptions = {
     }
 };
 
-const formattedDate = moment().format('DD MMM, YYYY')
+const formattedDate = moment().format('DD MMM YYYY')
 const dateMulaiTanam = document.getElementById("dateMulaiTanam");
 const dateSelesaiTanam = document.getElementById("dateSelesaiTanam");
 

@@ -27,6 +27,6 @@ class Controller extends BaseController
 
     public function formatDateUI($date)
     {
-        return Carbon::parse($date)->format('j M, Y');
+        return Carbon::parse($date)->format('j M Y');
     }
 }
