@@ -48,8 +48,7 @@
                                 class="absolute top-0 left-0 rounded-l w-10 h-full flex items-center justify-center bg-slate-100 border text-slate-500">
                                 <i class="fa-solid fa-calendar w-4 h-4"></i>
                             </div>
-                            <input name="tanggal_tanaman" type="text" class="datepicker form-control pl-12"
-                                data-single-mode="true">
+                            <input name="tanggal_tanaman" type="text" class="form-control pl-12" id="dateMulaiTanam">
                         </div>
                     </div>
 
@@ -60,8 +59,7 @@
                                 class="absolute top-0 left-0 rounded-l w-10 h-full flex items-center justify-center bg-slate-100 border text-slate-500">
                                 <i class="fa-solid fa-calendar w-4 h-4"></i>
                             </div>
-                            <input name="tanggal_selesai" type="text" class="datepicker form-control pl-12"
-                                data-single-mode="true">
+                            <input name="tanggal_selesai" type="text" class="form-control pl-12" id="dateSelesaiTanam">
                         </div>
                     </div>
 

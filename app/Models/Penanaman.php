@@ -24,9 +24,14 @@ class Penanaman extends Model
     {
         $penanaman = Penanaman::find($penanamanId);
         $tanggalTanam = Carbon::parse($penanaman->tanggal_tanam);
-        $today = Carbon::now();
 
-        $dayDifference = $today->diffInDays($tanggalTanam);
+        $hariTujuan = Carbon::now();
+
+        if ($penanaman->tanggal_panen != null) {
+            $hariTujuan = Carbon::parse($penanaman->tanggal_panen);
+        }
+
+        $dayDifference = $hariTujuan->diffInDays($tanggalTanam);
 
         return $dayDifference;
     }

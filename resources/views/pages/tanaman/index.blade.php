@@ -21,6 +21,7 @@
                     <th class="border-b-2 whitespace-nowrap">Lahan</th>
                     <th class="border-b-2 whitespace-nowrap">Nama Penanaman</th>
                     <th class="border-b-2 whitespace-nowrap">Tanggal Tanam</th>
+                    <th class="border-b-2 whitespace-nowrap">Tanggal Panen</th>
                     <th class="border-b-2 whitespace-nowrap">Hari Setelah Tanam</th>
                     <th class="border-b-2 whitespace-nowrap">Status</th>
                     <th class="border-b-2 whitespace-nowrap">Aksi</th>
@@ -33,6 +34,7 @@
                         <td class="border-b">{{ $penanaman->nama_lahan }}</td>
                         <td class="border-b">{{ $penanaman->nama_penanaman }}</td>
                         <td class="border-b">{{ $penanaman->tanggal_tanam }}</td>
+                        <td class="border-b">{{ $penanaman->tanggal_panen ?? '-' }}</td>
                         <td class="border-b">
                             <div class="progress h-5">
                                 <div class="progress-bar" role="progressbar" style="width: {{ $penanaman->persentase }}%;"

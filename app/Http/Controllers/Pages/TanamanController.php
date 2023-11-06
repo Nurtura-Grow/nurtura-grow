@@ -17,7 +17,6 @@ class TanamanController extends Controller
     public function index(Request $request)
     {
         $sideMenu = $this->getSideMenuList($request);
-        // $penanaman = Penanaman::where('deleted_by', null)->where('deleted_at', null)->get();
         $penanaman = Penanaman::with('informasi_lahan')
             ->where('deleted_by', null)
             ->where('deleted_at', null)
@@ -26,6 +25,11 @@ class TanamanController extends Controller
         foreach ($penanaman as $tanaman) {
             $tanaman->nama_lahan = $tanaman->informasi_lahan->nama_lahan;
             $tanaman->tanggal_tanam = $this->formatDateUI($tanaman->tanggal_tanam);
+
+            if ($tanaman->status_hidup == false) {
+                $tanaman->tanggal_panen = $this->formatDateUI($tanaman->tanggal_panen);
+            }
+
             $tanaman->hst = Penanaman::calculateHST($tanaman->id_penanaman);
             $tanaman->persentase = Penanaman::calculateHSTPercentage($tanaman->id_penanaman);
             $tanaman->default_hari = Penanaman::$jumlahHST;
@@ -64,7 +68,7 @@ class TanamanController extends Controller
         $tanggal_tanam = $this->formatDateDatabase($request['tanggal_tanaman']);
         $aktif = $request['aktif']  == "on" ? true : false;
 
-        if ($aktif == true) {
+        if ($aktif == false) {
             $tanggal_panen = $this->formatDateDatabase($request['tanggal_selesai']);
         }
 
@@ -74,7 +78,7 @@ class TanamanController extends Controller
             "keterangan" => $keterangan,
             "status_hidup" => $aktif,
             "tanggal_tanam" => $tanggal_tanam,
-            "tanggal_panen" => $tanggal_panen,
+            "tanggal_panen" => $tanggal_panen ?? null,
             "created_by" => Auth::user()->id_user,
             "created_at" => now(),
         ]);
@@ -132,7 +136,7 @@ class TanamanController extends Controller
             "keterangan" => $keterangan,
             "status_hidup" => $aktif,
             "tanggal_tanam" => $tanggal_tanam,
-            "tanggal_panen" => $tanggal_panen,
+            "tanggal_panen" => $tanggal_panen ?? null,
             "updated_by" => Auth::user()->id_user,
             "updated_at" => now(),
         ]);
