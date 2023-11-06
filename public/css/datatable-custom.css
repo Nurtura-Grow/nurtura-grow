@@ -63,6 +63,12 @@ table.dataTable>tbody>tr.child ul.dtr-details {
     margin-bottom: 0.75em;
 }
 
+/* Row Group */
+table.dataTable tr.dtrg-group th {
+    background-color: rgba(87, 180, 146, 0.1);
+    text-align: left;
+}
+
 @media only screen and (max-width: 800px) {
     .dataTables_wrapper .dataTables_length {
         width: auto;

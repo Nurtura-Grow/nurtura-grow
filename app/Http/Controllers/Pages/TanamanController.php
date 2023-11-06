@@ -62,14 +62,19 @@ class TanamanController extends Controller
         $keterangan = $request['keterangan'];
         $id_lahan = $request['id_lahan'];
         $tanggal_tanam = $this->formatDateDatabase($request['tanggal_tanaman']);
-        $aktif = $request['aktif'];
+        $aktif = $request['aktif']  == "on" ? true : false;
+
+        if ($aktif == true) {
+            $tanggal_panen = $this->formatDateDatabase($request['tanggal_selesai']);
+        }
 
         Penanaman::create([
             "id_lahan" => $id_lahan,
             "nama_penanaman" => $nama_penanaman,
             "keterangan" => $keterangan,
-            "status_hidup" => $aktif == "on" ? true : false,
+            "status_hidup" => $aktif,
             "tanggal_tanam" => $tanggal_tanam,
+            "tanggal_panen" => $tanggal_panen,
             "created_by" => Auth::user()->id_user,
             "created_at" => now(),
         ]);
@@ -88,6 +93,7 @@ class TanamanController extends Controller
 
         // Change format tanggal tanam
         $penanaman->tanggal_tanam = $this->formatDateUI($penanaman->tanggal_tanam);
+        $penanaman->tanggal_panen = $this->formatDateUI($penanaman->tanggal_panen);
 
         if (!$penanaman) {
             return abort(Response::HTTP_NOT_FOUND);
@@ -109,19 +115,24 @@ class TanamanController extends Controller
         $keterangan = $request['keterangan'];
         $id_lahan = $request['id_lahan'];
         $tanggal_tanam = $this->formatDateDatabase($request['tanggal_tanaman']);
-        $aktif = $request['aktif'];
+        $aktif = $request['aktif'] == "on" ? true : false;
 
         $penanaman = Penanaman::where('id_penanaman', $id)->where('deleted_by', null)->where('deleted_at', null)->first();
         if (!$penanaman) {
             return abort(Response::HTTP_NOT_FOUND);
         }
 
+        if ($aktif == false) {
+            $tanggal_panen = $this->formatDateDatabase($request['tanggal_selesai']);
+        }
+
         $penanaman->update([
             "id_lahan" => $id_lahan,
             "nama_penanaman" => $nama_penanaman,
             "keterangan" => $keterangan,
-            "status_hidup" => $aktif == "on" ? true : false,
+            "status_hidup" => $aktif,
             "tanggal_tanam" => $tanggal_tanam,
+            "tanggal_panen" => $tanggal_panen,
             "updated_by" => Auth::user()->id_user,
             "updated_at" => now(),
         ]);
