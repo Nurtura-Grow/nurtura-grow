@@ -79,4 +79,5 @@
         // Initial call to set the classes based on the initial scroll position
         handleScroll();
     </script>
+    @vite('resources/js/pages/dataLahan.js')
 @endpush

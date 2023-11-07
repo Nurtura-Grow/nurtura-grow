@@ -6,20 +6,7 @@
     </div>
     <div class="p-5">
         <form>
-            <label for="id_lahan" class="form-label">Nama Lahan</label>
-            <select class="form-control tom-select mt-2" data-placeholder="Pilih lahan" name="id_lahan">
-                @foreach ($seluruhLahan as $lahan)
-                    <option value="{{ $lahan->id_lahan }}">{{ $lahan->nama_lahan }} || {{ $lahan->kecamatan }},
-                        {{ $lahan->kota }}</option>
-                @endforeach
-            </select>
-
-            <label for="nama_penanaman" class="form-label mt-5">Nama Penanaman</label>
-            <select class="form-control tom-select mt-2" data-placeholder="Pilih Penanaman" name="id_penanaman">
-                @foreach ($seluruhPenanaman as $penanaman)
-                    <option value="{{ $penanaman->id_penanaman }}">{{ $penanaman->nama_penanaman }}</option>
-                @endforeach
-            </select>
+            @include('pages.data-manual.nama-lahan')
 
             <label for="tanggal_pengairan" class="form-label mt-5">Tanggal Pencatatan</label>
             <div class="relative w-56">

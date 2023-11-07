@@ -14,12 +14,14 @@ class PengendalianManualController extends Controller
     {
         $sideMenu = $this->getSideMenuList($request);
         $lahan = InformasiLahan::activeLahanData();
-        $penanaman = Penanaman::activePenanamanData();
+
+        foreach ($lahan as $informasiLahan) {
+            $informasiLahan->load('penanaman');
+        }
 
         return view('pages.data-manual.index', [
             'sideMenu' => $sideMenu,
             'seluruhLahan' => $lahan,
-            'seluruhPenanaman' => $penanaman
         ]);
     }
 }

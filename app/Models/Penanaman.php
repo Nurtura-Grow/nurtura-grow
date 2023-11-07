@@ -25,6 +25,11 @@ class Penanaman extends Model
         return self::where('deleted_by', null)->where('deleted_at', null)->get();
     }
 
+    public static function getDataPenanaman($idLahan)
+    {
+        return self::activePenanamanData()->where('id_lahan', $idLahan);
+    }
+
     public static function calculateHST($penanamanId)
     {
         $penanaman = Penanaman::find($penanamanId);
