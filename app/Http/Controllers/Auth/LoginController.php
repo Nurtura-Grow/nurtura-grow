@@ -24,11 +24,11 @@ class LoginController extends Controller
         ];
 
         if (Auth::attempt($credentials)) {
-            // Alert::error('Error', 'Email atau password salah!');
             $request->session()->regenerate();
             return redirect()->route('dashboard');
         }
 
+        // Alert::error('Error', 'Email atau password salah!');
         return redirect()->back()->withInput()->withErrors('login', 'Username atau password salah!');
     }
 }

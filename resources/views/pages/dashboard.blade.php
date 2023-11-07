@@ -70,13 +70,17 @@
                                         <div class="intro-x">
                                             <div class="box px-5 py-3 mb-3  zoom-in">
                                                 <div class=" ml-1 mr-auto">
+                                                    {{-- Judul Penanaman --}}
                                                     <div class="font-bold text-rgb-secondary">Penanaman {{ $i }}
                                                     </div>
+                                                    {{-- Tanggal --}}
                                                     <div class="text-slate-500 text-xs mt-0.5">3 June 2020</div>
+                                                    {{-- Progress Bar --}}
                                                     <div class="progress mt-2 h-4">
                                                         <div class="progress-bar w-1/2" role="progressbar" aria-valuenow="0"
                                                             aria-valuemin="0" aria-valuemax="100"></div>
                                                     </div>
+                                                    {{-- Keterangan Progress --}}
                                                     <div class="flex justify-between text-dark">
                                                         <div class="text-xs  mt-1"><span
                                                                 class="text-rgb-primary">10</span>/30 hari</div>
@@ -90,7 +94,7 @@
                                 @endfor
                             </div>
 
-                            <a href="#"
+                            <a href="{{ route('tanaman.index') }}"
                                 class="intro-x w-full block mt-2 text-center rounded-md py-3 border border-dotted border-slate-400 dark:border-darkmode-300 bg-rgb-secondary text-white">Lihat
                                 Selengkapnya</a>
                         </div>
@@ -105,28 +109,31 @@
     {{-- Bawah --}}
     <div class="grid grid-cols-12 gap-6">
         {{-- Daftar Lahan --}}
-        <div class="col-span-12 2xl:col-span-6">
-            <div class="col-span-12">
+        <div class="col-span-12 2xl:col-span-6 flex flex-col">
+            <div class="col-span-12 flex flex-col h-full">
+                {{-- Atas --}}
                 <div class="intro-y block sm:flex items-center h-10">
                     <h2 class="text-lg font-medium truncate mr-5">
-                        Daftar Lahan
+                        <a href="{{ route('lahan.index') }}"> Daftar Lahan <span class="text-primary font-normal">(Lihat
+                                Selengkapnya)</span></a>
                     </h2>
                     <div class="sm:ml-auto mt-3 sm:mt-0 relative text-slate-500">
                         <i class="fa-solid fa-location-dot w-4 h-4 z-10 absolute my-auto inset-y-0 ml-3 left-0"></i>
-                        <input type="text" class="form-control sm:w-56 box pl-10" placeholder="Filter lokasi lahan">
+                        <input type="text" class="form-control sm:w-56 box pl-10" placeholder="Cari Lokasi"
+                            id="cari-lokasi">
                     </div>
                 </div>
-                <div class="intro-y box p-5 mt-12 sm:mt-5 h-full">
-                    <div class="report-maps mt-5 bg-slate-200 rounded-md">
-                        {{-- Todo: tambahin maps --}}
-                    </div>
+                {{-- Maps --}}
+                <div class="intro-y box p-5 mt-12 sm:mt-5 grow">
+                    <div class="max-2xl:min-h-[500px] h-full" id="container-maps"></div>
+
                 </div>
             </div>
         </div>
 
         {{-- Riwayat Aksi --}}
-        <div class="col-span-12 2xl:col-span-6">
-            <div class="col-span-12">
+        <div class="col-span-12 2xl:col-span-6 flex flex-col">
+            <div class="col-span-12 flex flex-col h-full">
                 <div class="intro-y block sm:flex items-center h-10">
                     <h2 class="text-lg font-medium truncate mr-5">
                         Riwayat Aksi
@@ -135,27 +142,10 @@
                         Lihat Selengkapnya
                     </a>
                 </div>
-                <div class="intro-y box p-5 mt-12 sm:mt-5">
+                <div class="intro-y box p-5 mt-12 sm:mt-5 grow">
                     <div class="mt-5 rounded-md">
                         <div class="overflow-x-auto scrollbar-hidden">
-                            <table id="table" class="hover table overflow-x-auto">
-                                <thead>
-                                    <tr>
-                                        <th class="border-b-2 whitespace-nowrap">Name</th>
-                                        <th class="border-b-2 whitespace-nowrap">Category</th>
-                                        <th class="border-b-2 whitespace-nowrap">Remaining Stock</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @for ($i = 1; $i < 30; $i++)
-                                        <tr>
-                                            <td class="border-b">Item {{ $i }}</td>
-                                            <td class="border-b">Category {{ $i }}</td>
-                                            <td class="border-b">{{ $i * 10 }}</td>
-                                        </tr>
-                                    @endfor
-                                </tbody>
-                            </table>
+                            @include('pages.riwayat.pengairan')
                         </div>
                     </div>
                 </div>
@@ -166,3 +156,4 @@
 @endsection
 
 @include('pages.components.datatable-styles')
+@include('pages.lahan.scripts')
