@@ -12,16 +12,15 @@
         <div class="intro-y col-span-12 xl:col-span-3">
             <div class="box mt-5 pb-5 sticky top-10 xl:h-[90vh]">
                 <div class="px-4 pt-5">
-                    <a class="flex rounded-lg items-center px-4 py-2 bg-primary text-white font-medium "
-                        href="#tinggiTanaman">
+                    <a class="flex rounded-lg items-center px-4 py-2 bg-primary text-white font-medium" href="#tinggiTanaman">
                         <i class="fa-solid fa-ruler-vertical w-4 h-4 mr-2"></i>
                         <div class="flex-1 truncate">Tinggi Tanaman</div>
                     </a>
-                    <a class="flex rounded-lg items-center px-4 py-2 mt-1 " href="#pengairan">
+                    <a class="flex rounded-lg items-center px-4 py-2 mt-1" href="#pengairan">
                         <i class="w-4 h-4 mr-2 fa-solid fa-faucet-drip"></i>
                         <div class="flex-1 truncate">Pengairan</div>
                     </a>
-                    <a class="flex rounded-lg items-center px-4 py-2 mt-1  " href="#pemupukan">
+                    <a class="flex rounded-lg items-center px-4 py-2 mt-1 " href="#pemupukan">
                         <i class="fa-brands fa-pagelines w-4 h-4 mr-2"></i>
                         <div class="flex-1 truncate">Pemupukan</div>
                     </a>

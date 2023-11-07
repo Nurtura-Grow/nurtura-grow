@@ -21,7 +21,6 @@ export default defineConfig({
                 "resources/js/pages/googleMaps.js",
                 "resources/js/pages/searchLahan.js",
                 "resources/js/pages/litepicker.js",
-                "resources/js/pages/dataLahan.js",
                 // "resources/js/pages/testing.js",
             ],
             refresh: true,
