@@ -1,8 +1,8 @@
 @extends('layout.main')
 
 @section('content')
-    <div class="content">
-        <div class="grid grid-cols-12 justify-center items-center h-screen">
+    <div class="content h-[90vh]">
+        <div class="grid grid-cols-12 justify-center items-center h-full">
             <div class="col-span-6 mx-auto">
                 <img src="{{ asset('images/error/404.png') }}" alt="404">
             </div>

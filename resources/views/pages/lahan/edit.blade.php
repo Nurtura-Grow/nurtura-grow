@@ -31,7 +31,7 @@
                                 value="{{ $lahan->longitude }}" id="longitude-input" placeholder="Longitude">
                         </div>
 
-                        <p class="mt-5 text-rgb-secondary">
+                        <p class="mt-5 form-help">
                             Pindahkan tanda pada peta untuk memasukkan data koordinat secara otomatis
                         </p>
 

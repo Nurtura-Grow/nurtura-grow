@@ -10,10 +10,11 @@ $(document).ready(function () {
             [5, 10, 25, 50, 100, -1], // Value
             [5, 10, 25, 50, 100, "Semua"], // Label
         ],
-        rowGroup:{
+        rowGroup: {
             dataSrc: 1
         },
         language: {
+            sSearch: "Cari data:",
             sEmptyTable: "Tidak ada data", // Tabel Empty
             sLengthMenu: "Tunjukkan _MENU_ data", // Info
             sInfo: "Menunjukkan data ke-_START_ hingga ke-_END_ dari _TOTAL_ data", // Info bawah kiri (showing 0 to 5 of 10 entries)

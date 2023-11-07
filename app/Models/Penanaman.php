@@ -20,6 +20,11 @@ class Penanaman extends Model
 
     public static $jumlahHST = 60;
 
+    public static function activePenanamanData()
+    {
+        return self::where('deleted_by', null)->where('deleted_at', null)->get();
+    }
+
     public static function calculateHST($penanamanId)
     {
         $penanaman = Penanaman::find($penanamanId);

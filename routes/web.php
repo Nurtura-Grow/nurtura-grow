@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Pages\DashboardController;
 use App\Http\Controllers\Pages\LahanController;
 use App\Http\Controllers\Pages\TanamanController;
+use App\Http\Controllers\Pages\PengendalianManualController;
 use App\Http\Controllers\Pages\Rekomendasi\PemupukanController;
 use App\Http\Controllers\Pages\Rekomendasi\PengairanController;
 use App\Http\Controllers\Pages\RiwayatController;
@@ -75,6 +76,13 @@ Route::group([
         Route::get('/{id}/edit', [TanamanController::class, 'edit'])->name('edit');
         Route::patch('/{id}', [TanamanController::class, 'update'])->name('update');
         Route::delete('/{id}', [TanamanController::class, 'destroy'])->name('destroy');
+    });
+
+    Route::group([
+        'prefix' => 'manual',
+        'as' => 'manual.'
+    ], function () {
+        Route::get('/', [PengendalianManualController::class, 'index'])->name('index');
     });
 
 

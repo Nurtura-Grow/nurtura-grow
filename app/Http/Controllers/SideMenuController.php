@@ -112,6 +112,11 @@ class SideMenuController extends Controller
                     ]
                 ]
             ],
+            'manual' => [
+                'icon' => 'fa-solid fa-gears',
+                'route_name' => 'manual.index',
+                'title' => 'Input Data Manual',
+            ],
             'riwayat' => [
                 'icon' => 'fa-solid fa-clock-rotate-left',
                 'route_name' => 'riwayat.index',
