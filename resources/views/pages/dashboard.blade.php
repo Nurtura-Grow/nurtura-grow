@@ -41,7 +41,7 @@
                         <div class="col-span-12 intro-y">
                             <div class="report-box">
                                 <div class="box p-5">
-                                    {{-- Grafik 1 --}}
+                                    {{-- Grafik 5 --}}
                                     <p>Grafik {{ $i }}</p>
                                 </div>
                             </div>
@@ -97,7 +97,7 @@
                                                         </div>
                                                     </div>
                                                 @else
-                                                    <p class="text-rgb-secondary text-center">Tidak Ada Data
+                                                    <p class="text-rgb-secondary text-center font-semibold">Tidak Ada Data
                                                     </p>
                                                 @endif
                                             </div>
