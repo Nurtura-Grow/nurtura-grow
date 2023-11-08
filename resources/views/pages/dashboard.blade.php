@@ -17,7 +17,7 @@
                         @for ($i = 1; $i <= 4; $i++)
                             <div class="col-span-12 sm:col-span-6 xl:col-span-3 intro-y">
                                 <div class="report-box zoom-in">
-                                    <div class="box p-5">
+                                    <div class="box p-5 h-[150px]">
                                         {{-- Grafik 1 --}}
                                         <p>Grafik {{ $i }}</p>
                                     </div>
@@ -28,7 +28,7 @@
                 </div>
                 {{-- Grafik Data Semua Sensor --}}
                 <div class="col-span-12 mt-2">
-                    <div class="intro-y block sm:flex items-center h-10 mt-5">
+                    <div class="intro-y block sm:flex items-center h-10 mt-3">
                         <h2 class="text-lg font-medium truncate mr-5 sm:mr-0">
                             Data Seluruh Sensor
                         </h2>
@@ -40,7 +40,7 @@
                     <div class="grid grid-cols-12 mt-12 sm:mt-5 gap-6">
                         <div class="col-span-12 intro-y">
                             <div class="report-box">
-                                <div class="box p-5">
+                                <div class="box p-5 h-[260px]">
                                     {{-- Grafik 5 --}}
                                     <p>Grafik {{ $i }}</p>
                                 </div>
