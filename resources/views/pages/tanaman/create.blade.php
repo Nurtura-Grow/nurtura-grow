@@ -25,9 +25,11 @@
 
                     <div class="form-inline mt-5">
                         <label for="id_lahan" class="form-label sm:w-48">Nama Lahan</label>
-                        <select class="form-control tom-select mt-2" data-placeholder="Pilih lahan" name="id_lahan">
+                        <select class="form-control tom-select mt-2" data-placeholder="Pilih lahan" name="id_lahan"
+                            {{ $seluruhLahan == null ? 'disabled' : '' }}>
                             @foreach ($seluruhLahan as $lahan)
-                                <option value="{{ $lahan->id_lahan }}">{{ $lahan->nama_lahan }} || {{ $lahan->kecamatan }},
+                                <option value="{{ $lahan->id_lahan }}">{{ $lahan->nama_lahan }} ||
+                                    {{ $lahan->kecamatan }},
                                     {{ $lahan->kota }}</option>
                             @endforeach
                         </select>

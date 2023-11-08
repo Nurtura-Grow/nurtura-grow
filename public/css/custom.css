@@ -1,1 +1,19 @@
-*{scroll-behavior:smooth}.content{min-height:95vh}#container-search{line-height:1.25rem;font-size:.875rem;left:10px;top:10px;height:10px}
+* {
+    scroll-behavior: smooth;
+}
+.content {
+    min-height: 95vh;
+}
+#container-search {
+    line-height: 1.25rem;
+    font-size: 0.875rem;
+    left: 10px;
+    top: 10px;
+    height: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .content {
+        min-height: 85vh;
+    }
+}
