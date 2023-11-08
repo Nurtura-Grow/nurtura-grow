@@ -36,4 +36,20 @@ $(document).ready(function () {
     const lengthSelect = document.querySelector(".dataTables_length select");
     lengthSelect.classList.add("form-select");
     lengthSelect.setAttribute("placeholder", "Cari data");
+
+    // Hide the initial hidden column
+    table.columns('.hidden-column').visible(false);
+
+    $('#btn-keterangan').on('click', function () {
+        var column = table.column('.hidden-column');
+        var columnVisible = !column.visible();
+
+        if(columnVisible){
+            $(this).html('<i class="fa-regular fa-eye-slash mr-2"></i>Sembunyikan Keterangan Penanaman');
+        } else {
+            $(this).html('<i class="fa-regular fa-eye mr-2"></i> Tampilkan Keterangan Penanaman');
+        }
+
+        column.visible(!column.visible());
+    });
 });

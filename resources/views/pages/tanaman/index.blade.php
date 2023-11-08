@@ -14,12 +14,20 @@
     </div>
 
     <div class="intro-y box p-5 mt-5">
+        {{-- Button show keterangan --}}
+        <div class="flex justify-center lg:justify-start mb-5">
+            <button class="btn btn-primary shadow-md" id="btn-keterangan">
+                <i class="fa-regular fa-eye mr-2"></i>Tampilkan Keterangan Penanaman
+            </button>
+        </div>
+
         <table id="table" class="hover" style="width:100%">
             <thead>
                 <tr>
                     <th class="border-b-2 whitespace-nowrap">No</th>
                     <th class="border-b-2 whitespace-nowrap">Lahan</th>
                     <th class="border-b-2 whitespace-nowrap">Nama Penanaman</th>
+                    <th class="border-b-2 whitespace-nowrap hidden-column">Keterangan Penanaman</th>
                     <th class="border-b-2 whitespace-nowrap">Tanggal Tanam</th>
                     <th class="border-b-2 whitespace-nowrap">Tanggal Panen</th>
                     <th class="border-b-2 whitespace-nowrap">Hari Setelah Tanam</th>
@@ -33,6 +41,7 @@
                         <td class="border-b">{{ $loop->index + 1 }}</td>
                         <td class="border-b">{{ $penanaman->nama_lahan }}</td>
                         <td class="border-b">{{ $penanaman->nama_penanaman }}</td>
+                        <td class="border-b">{{ $penanaman->keterangan }}</td>
                         <td class="border-b">{{ $penanaman->tanggal_tanam }}</td>
                         <td class="border-b">{{ $penanaman->tanggal_panen ?? '-' }}</td>
                         <td class="border-b">
