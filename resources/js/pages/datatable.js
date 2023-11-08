@@ -45,11 +45,11 @@ $(document).ready(function () {
         var columnVisible = !column.visible();
 
         if(columnVisible){
-            $(this).html('<i class="fa-regular fa-eye-slash mr-2"></i>Sembunyikan Keterangan Penanaman');
+            $(this).html('<i class="fa-regular fa-eye-slash mr-2"></i>Sembunyikan Keterangan');
         } else {
-            $(this).html('<i class="fa-regular fa-eye mr-2"></i> Tampilkan Keterangan Penanaman');
+            $(this).html('<i class="fa-regular fa-eye mr-2"></i> Tampilkan Keterangan');
         }
 
-        column.visible(!column.visible());
+        column.visible(columnVisible);
     });
 });

@@ -17,7 +17,7 @@
         {{-- Button show keterangan --}}
         <div class="flex justify-center lg:justify-start mb-5">
             <button class="btn btn-primary shadow-md" id="btn-keterangan">
-                <i class="fa-regular fa-eye mr-2"></i>Tampilkan Keterangan Penanaman
+                <i class="fa-regular fa-eye mr-2"></i>Tampilkan Keterangan
             </button>
         </div>
 
