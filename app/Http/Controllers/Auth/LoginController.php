@@ -26,9 +26,9 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             return redirect()->route('dashboard');
+        } else {
+            // Alert::error('Error', 'Email atau password salah!');
+            return redirect()->back()->withInput()->withErrors('login', 'Username atau password salah!');
         }
-
-        // Alert::error('Error', 'Email atau password salah!');
-        return redirect()->back()->withInput()->withErrors('login', 'Username atau password salah!');
     }
 }

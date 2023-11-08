@@ -43,7 +43,6 @@ Route::group([
     ], function () {
         Route::post('/login', [LoginController::class, 'login'])->name('login');
         Route::post('/register', [RegisterController::class, 'register'])->name('register');
-        Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
     });
 });
 
@@ -51,7 +50,14 @@ Route::group([
 
 Route::group([
     'middleware' => 'authenticated',
-], function () {
+    ], function () {
+
+    Route::group([
+        'prefix' => 'auth',
+        'as' => 'auth.'
+    ], function () {
+        Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
+    });
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::group([
         'prefix' => 'lahan',
