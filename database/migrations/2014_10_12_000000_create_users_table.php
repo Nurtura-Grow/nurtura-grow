@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('username', 50)->unique();
             $table->string('email', 100)->unique();
             $table->string('password', 255);
+            $table->string('remember_token', 100)->nullable();
 
 
             $table->foreignId('created_by');

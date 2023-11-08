@@ -23,7 +23,9 @@ class LoginController extends Controller
             'password' => $validated['password'],
         ];
 
-        if (Auth::attempt($credentials)) {
+        $rememberMe = $request->input('remember_me') == 'on' ? true : false;
+
+        if (Auth::attempt($credentials, $rememberMe)) {
             $request->session()->regenerate();
             return redirect()->route('dashboard');
         } else {
