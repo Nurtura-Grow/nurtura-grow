@@ -29,8 +29,8 @@
                         <label for="id_lahan" class="form-label sm:w-48">Nama Lahan</label>
                         <select class="form-control tom-select mt-2" data-placeholder="Pilih lahan" name="id_lahan">
                             @foreach ($seluruhLahan as $lahan)
-                                <option value="{{ $lahan->id_lahan }}">{{ $lahan->nama_lahan }} || {{ $lahan->kecamatan }},
-                                    {{ $lahan->kota }}</option>
+                                <option value="{{ $lahan->id_lahan }}" {{ $penanaman->id_lahan == $lahan->id_lahan ? 'selected' : ''}}>
+                                    {{ $lahan->nama_lahan }} || {{ $lahan->kecamatan }}, {{ $lahan->kota }}</option>
                             @endforeach
                         </select>
                     </div>

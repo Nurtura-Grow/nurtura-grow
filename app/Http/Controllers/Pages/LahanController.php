@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Pages;
 use App\Models\InformasiLahan;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\InformasiLahanRequest;
+use App\Models\Penanaman;
 use Illuminate\Console\View\Components\Info;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -193,6 +194,11 @@ class LahanController extends Controller
     public function destroy(string $id)
     {
         InformasiLahan::find($id)->update([
+            "deleted_at" => now(),
+            "deleted_by" => Auth::user()->id_user,
+        ]);
+
+        Penanaman::where('id_lahan', $id)->update([
             "deleted_at" => now(),
             "deleted_by" => Auth::user()->id_user,
         ]);
