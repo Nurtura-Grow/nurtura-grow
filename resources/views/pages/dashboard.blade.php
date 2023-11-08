@@ -65,29 +65,41 @@
                         </div>
                         <div class="mt-5">
                             <div class="grid grid-cols-12 2xl:gap-0 md:gap-6">
-                                @for ($i = 1; $i <= 4; $i++)
+                                {{-- Pengulangan Kotak sebanyak 4 kali --}}
+                                @for ($i = 0; $i < 4; $i++)
                                     <div class="col-span-12 2xl:col-span-12 md:col-span-6 intro-y mt-0">
                                         <div class="intro-x">
-                                            <div class="box px-5 py-3 mb-3  zoom-in">
-                                                <div class=" ml-1 mr-auto">
-                                                    {{-- Judul Penanaman --}}
-                                                    <div class="font-bold text-rgb-secondary">Penanaman {{ $i }}
+                                            <div class="box px-5 py-3 mb-3 zoom-in min-h-[100px]">
+                                                @if (isset($penanaman[$i]))
+                                                    <div class=" ml-1 mr-auto">
+                                                        {{-- Judul Penanaman --}}
+                                                        <div class="font-bold text-rgb-secondary">
+                                                            {{ $penanaman[$i]->nama_penanaman }}
+                                                        </div>
+                                                        {{-- Tanggal Tanam --}}
+                                                        <div class="text-slate-500 text-xs mt-0.5">
+                                                            {{ $penanaman[$i]->tanggal_tanam }}
+                                                        </div>
+                                                        {{-- Progress Bar --}}
+                                                        <div class="progress mt-2 h-4">
+                                                            <div class="progress-bar"
+                                                                style="width: {{ $penanaman[$i]->persentase }}%;"
+                                                                role="progressbar" aria-valuenow="0" aria-valuemin="0"
+                                                                aria-valuemax="100"></div>
+                                                        </div>
+                                                        {{-- Keterangan Progress --}}
+                                                        <div class="flex justify-between text-dark">
+                                                            <div class="text-xs  mt-1"><span
+                                                                    class="text-rgb-primary">{{ $penanaman[$i]->hst }}</span>/{{ $penanaman[$i]->default_hari }}
+                                                                hari</div>
+                                                            <div class="text-xs mt-1">{{ $penanaman[$i]->persentase }}%
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    {{-- Tanggal --}}
-                                                    <div class="text-slate-500 text-xs mt-0.5">3 June 2020</div>
-                                                    {{-- Progress Bar --}}
-                                                    <div class="progress mt-2 h-4">
-                                                        <div class="progress-bar w-1/2" role="progressbar" aria-valuenow="0"
-                                                            aria-valuemin="0" aria-valuemax="100"></div>
-                                                    </div>
-                                                    {{-- Keterangan Progress --}}
-                                                    <div class="flex justify-between text-dark">
-                                                        <div class="text-xs  mt-1"><span
-                                                                class="text-rgb-primary">10</span>/30 hari</div>
-                                                        <div class="text-xs mt-1">50%</div>
-                                                    </div>
-
-                                                </div>
+                                                @else
+                                                    <p class="text-rgb-secondary text-center">Tidak Ada Data
+                                                    </p>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>

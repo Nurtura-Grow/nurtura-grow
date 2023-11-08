@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('id_penanaman');
             $table->foreignId('id_lahan');
             $table->string('nama_penanaman');
-            $table->string('keterangan');
+            $table->string('keterangan')->nullable();
             $table->boolean('status_hidup');
             $table->date('tanggal_tanam');
             $table->date('tanggal_panen')->nullable();
