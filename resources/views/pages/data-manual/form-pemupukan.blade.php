@@ -24,12 +24,26 @@
                     data-single-mode=true>
             </div>
 
-            <label for="Waktu" class="form-label mt-5">Waktu</label>
-            <div class="grid grid-cols-12 gap-2">
-                <input type="text" class="form-control col-span-4" placeholder="Waktu Mulai"
-                    aria-label="default input inline 1" name="waktu_mulai">
-                <input type="text" class="form-control col-span-4" placeholder="Waktu Selesai"
-                    aria-label="default input inline 2" name="waktu_selesai">
+            <label for="waktu" class="form-label mt-5">Waktu</label>
+            <div class="flex flex-col lg:flex-row gap-2">
+                {{-- Waktu Mulai --}}
+                <div class="relative w-56">
+                    <div
+                        class="absolute top-0 left-0 rounded-l w-10 h-full flex items-center justify-center bg-slate-100 border text-slate-500">
+                        <i class="fa-regular fa-clock w-4 h-4"></i>
+                    </div>
+                    <input type="text" class="form-control waktu-mulai pl-12" placeholder="Waktu Mulai"
+                        aria-label="waktu" name="waktu_mulai">
+                </div>
+                {{-- Waktu Selesai --}}
+                <div class="relative w-56">
+                    <div
+                        class="absolute top-0 left-0 rounded-l w-10 h-full flex items-center justify-center bg-slate-100 border text-slate-500">
+                        <i class="fa-regular fa-clock w-4 h-4"></i>
+                    </div>
+                    <input type="text" class="form-control waktu-selesai pl-12" placeholder="Waktu Selesai"
+                        aria-label="waktu" name="waktu_selesai">
+                </div>
             </div>
 
             <button type="submit" class="btn btn-primary mt-5 px-10">Masukkan</button>

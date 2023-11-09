@@ -7,6 +7,7 @@ export default defineConfig({
         alias: {
             "@": normalizePath(resolve(__dirname, "resource")),
             "$": "jQuery",
+            "~flatpickr": resolve(__dirname, "node_modules/flatpickr"),
         },
     },
 
@@ -21,6 +22,7 @@ export default defineConfig({
                 "resources/js/pages/googleMaps.js",
                 "resources/js/pages/searchLahan.js",
                 "resources/js/pages/litepicker.js",
+                "resources/js/pages/flatpickr.js",
                 // "resources/js/pages/testing.js",
             ],
             refresh: true,
