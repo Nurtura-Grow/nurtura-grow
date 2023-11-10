@@ -1,9 +1,10 @@
 <div class="mobile-menu md:hidden">
     <div class="mobile-menu-bar">
         <a href="{{ route('dashboard') }}" class="flex mr-auto">
-            <img alt="Nurtura Grow" class="w-8" src="{{ asset('images/logo-bg.svg') }}">
+            <img alt="Nurtura Grow" class="max-w-[190px]" src="{{ asset('images/logo.svg') }}">
+            {{-- <img alt="Nurtura Grow" class="w-8" src="{{ asset('images/logo-bg.svg') }}">
             <span class="text-white text-lg ml-3 font-medium">Nurtura<span
-                    class="text-rgb-secondary">Grow</span></span>
+                    class="text-rgb-secondary">Grow</span></span> --}}
         </a>
         <a href="javascript:;" class="mobile-menu-toggler"> <i data-lucide="bar-chart-2"
                 class="w-8 h-8 text-white transform -rotate-90"></i> </a>

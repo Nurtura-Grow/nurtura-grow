@@ -7,8 +7,10 @@
         <!-- BEGIN: Side Menu -->
         <nav class="side-nav">
             <a href="{{ route('dashboard') }}" class="intro-x flex items-center pl-5 pt-4">
-                <img alt="Nurtura Grow" class="w-8" src="{{ asset('images/logo-nobg.svg') }}">
-                <span class="hidden xl:block text-white text-lg ml-3 font-medium">Nurtura<span class="text-rgb-secondary">Grow</span></span>
+                <img alt="Nurtura Grow" class="hidden xl:block max-w-[190px]" src="{{ asset('images/logo.svg') }}">
+                <img alt="Nurtura Grow" class="block xl:hidden w-8" src="{{ asset('images/logo-only.svg') }}">
+                {{-- <img alt="Nurtura Grow" class="w-8" src="{{ asset('images/logo-nobg.svg') }}"> --}}
+                {{-- <span class="hidden xl:block text-white text-lg ml-3 font-medium">Nurtura<span class="text-rgb-secondary">Grow</span></span> --}}
             </a>
             <div class="side-nav__devider my-6"></div>
             <ul>
