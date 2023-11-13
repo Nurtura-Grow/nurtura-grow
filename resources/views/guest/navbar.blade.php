@@ -2,7 +2,7 @@
 <nav class="hidden lg:block sticky top-0 border-b-2 border-rgb-secondary bg-rgb-light-green z-[1000]">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="{{ route('index') }}" class="flex items-center -intro-x">
-            <img src="{{ asset('images/logo-bg.svg') }}" class="w-8 mr-3" alt="NurturaGrow Logo" />
+            <img src="{{ asset('images/logo.svg') }}" class="w-10 h-10 mr-3" alt="NurturaGrow Logo" />
             <span class="self-center text-xl font-semibold  text-rgb-secondary whitespace-nowrap">NurturaGrow</span>
         </a>
         <div class="intro-x w-full lg:w-auto" id="navbar-default">

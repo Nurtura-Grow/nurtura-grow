@@ -18,8 +18,8 @@
     <!-- BEGIN: Account Menu -->
     <div class="intro-x dropdown">
         <div class="flex flex-row items-center" role="button" aria-expanded="false" data-tw-toggle="dropdown">
-            <p class="hidden sm:block mx-4 text-rgb-secondary font-semibold">{{ Auth::user()->nama }}</p>
-            <div class="w-8 h-8 rounded-full overflow-hidden shadow-lg image-fit zoom-in">
+            <p class="hidden sm:block mx-4 text-rgb-secondary font-semibold"><i class="fa-regular fa-user mr-2"></i>{{ Auth::user()->nama }}</p>
+            <div class="w-10 h-10 rounded-full overflow-hidden shadow-lg image-fit zoom-in">
                 <img src="{{ asset('images/illustration/landing-page/section1.png') }}">
             </div>
             <p class="block sm:hidden mx-4 text-rgb-secondary font-semibold">{{ Auth::user()->nama }}</p>
