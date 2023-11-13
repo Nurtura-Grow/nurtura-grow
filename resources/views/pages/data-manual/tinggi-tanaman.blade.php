@@ -8,7 +8,8 @@
     </div>
 
     <div class="intro-y box p-5 mt-5 md:min-h-[40vh] lg:min-h-[70vh]">
-        <form>
+        <form method='POST' action="{{ route('manual.tinggi.store') }}">
+            @csrf
             @include('pages.data-manual.nama-lahan')
 
             <div class="form-inline mt-5">
@@ -25,9 +26,12 @@
 
             <div class="form-inline mt-5">
                 <label for="tinggi_tanaman" class="form-label sm:w-32">Tinggi Tanaman</label>
-                <div class="input-group w-56">
-                    <input name="tinggi_tanaman" type="text" class="form-control" placeholder="10">
-                    <div class="input-group-text">cm</div>
+                <div class="grid grid-cols-12 gap-2 w-56">
+                    <input name="tinggi_tanaman" type="text" class="form-control col-span-6" placeholder="10">
+                    <select class="form-select col-span-6" name="satuan">
+                        <option>cm</option>
+                        <option>mm</option>
+                    </select>
                 </div>
             </div>
 

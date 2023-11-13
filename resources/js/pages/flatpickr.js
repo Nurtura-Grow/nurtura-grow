@@ -8,6 +8,7 @@ $(document).ready(function () {
         enableSeconds: true,
         dateFormat: "H:i:S K",
         minuteIncrement: 1,
+        allowInput: true
     }
     flatpickr(".waktu-mulai", options);
     flatpickr(".waktu-selesai", options);

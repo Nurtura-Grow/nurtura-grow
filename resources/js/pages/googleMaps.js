@@ -202,7 +202,7 @@ loader.load().then(async () => {
         });
     });
 
-    /** Move map to the selected lahan */
+    /** Move map to the selected lahan (Small Screen) */
     const container = document.getElementById("carousel-container");
     if (container) {
         container.addEventListener("click", function (event) {
@@ -222,6 +222,7 @@ loader.load().then(async () => {
         });
     }
 
+    /** Move map to the selected lahan (Big Screen) */
     var lokasi_lahan = document.querySelectorAll(".lokasi-lahan");
     lokasi_lahan.forEach((lahan) => {
         lahan.addEventListener("click", function () {

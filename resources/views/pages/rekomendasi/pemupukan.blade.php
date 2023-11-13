@@ -9,7 +9,7 @@
 
 <div class="intro-y box p-5 mt-5">
     <div class="overflow-x-auto scrollbar-hidden">
-
+        abcdef
     </div>
 </div>
 @endsection

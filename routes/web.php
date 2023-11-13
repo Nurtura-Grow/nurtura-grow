@@ -11,7 +11,7 @@ use App\Http\Controllers\Pages\LahanController;
 use App\Http\Controllers\Pages\TanamanController;
 use App\Http\Controllers\Pages\PengendalianManual\PemupukanController as PemupukanManualController;
 use App\Http\Controllers\Pages\PengendalianManual\PengairanController as PengairanManualController;
-use App\Http\Controllers\Pages\PengendalianManual\TinggiTanamanController;
+use App\Http\Controllers\Pages\PengendalianManual\TinggiTanamanController as TinggiTanamanManualController;
 use App\Http\Controllers\Pages\Rekomendasi\PemupukanController;
 use App\Http\Controllers\Pages\Rekomendasi\PengairanController;
 use App\Http\Controllers\Pages\RiwayatController;
@@ -48,54 +48,37 @@ Route::group([
     });
 });
 
-
-
 Route::group([
     'middleware' => 'authenticated',
-    ], function () {
-
+], function () {
+    // Route Logout
     Route::group([
         'prefix' => 'auth',
         'as' => 'auth.'
     ], function () {
         Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
     });
+
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::group([
-        'prefix' => 'lahan',
-        'as' => 'lahan.'
-    ], function () {
-        Route::get('/', [LahanController::class, 'index'])->name('index');
-        Route::get('/search', [LahanController::class, 'search_lahan'])->name('search');
-        Route::get('/tambah', [LahanController::class, 'create'])->name('create');
-        Route::post('/tambah', [LahanController::class, 'store'])->name('store');
-        Route::get('/{id}/edit', [LahanController::class, 'edit'])->name('edit');
-        Route::patch('/{id}', [LahanController::class, 'update'])->name('update');
-        Route::delete('/{id}', [LahanController::class, 'destroy'])->name('destroy');
-    });
 
-    Route::group([
-        'prefix' => 'tanaman',
-        'as' => 'tanaman.'
-    ], function () {
-        Route::get('/daftar', [TanamanController::class, 'index'])->name('index');
-        Route::get('/tambah', [TanamanController::class, 'create'])->name('create');
-        Route::post('/tambah', [TanamanController::class, 'store'])->name('store');
-        Route::get('/{id}/edit', [TanamanController::class, 'edit'])->name('edit');
-        Route::patch('/{id}', [TanamanController::class, 'update'])->name('update');
-        Route::delete('/{id}', [TanamanController::class, 'destroy'])->name('destroy');
-    });
+    // Route Lahan
+    Route::resource('lahan', LahanController::class)->except(['show']);
+    Route::get('/lahan/search', [LahanController::class, 'search_lahan'])->name('lahan.search');
 
+    // Route Tanaman
+    Route::resource('tanaman', TanamanController::class)->except(['show']);
+
+    // Route Manual
     Route::group([
         'prefix' => 'manual',
         'as' => 'manual.'
     ], function () {
-        Route::get('/tinggi/tanaman', [TinggiTanamanController::class, 'index'])->name('tinggi.tanaman');
-        Route::get('/pengairan', [PengairanManualController::class, 'index'])->name('pengairan');
-        Route::get('/pemupukan', [PemupukanManualController::class, 'index'])->name('pemupukan');
+        Route::resource('/tinggi', TinggiTanamanManualController::class)->except(['index', 'show']);
+        Route::resource('/pengairan', PengairanManualController::class)->except(['index', 'show']);
+        Route::resource('/pemupukan', PemupukanManualController::class)->except(['index', 'show']);
     });
 
-
+    // Route Rekomendasi
     Route::group([
         'prefix' => 'rekomendasi',
         'as' => 'rekomendasi.'
@@ -104,7 +87,7 @@ Route::group([
         Route::get('/pemupukan', [PemupukanController::class, 'index'])->name('pemupukan');
     });
 
-
+    // Route Riwayat
     Route::group([
         'prefix' => 'riwayat',
         'as' => 'riwayat.'
@@ -112,5 +95,6 @@ Route::group([
         Route::get('/', [RiwayatController::class, 'index'])->name('index');
     });
 
+    // Route Panduan
     Route::get('/panduan', [PanduanController::class, 'index'])->name('panduan');
 });

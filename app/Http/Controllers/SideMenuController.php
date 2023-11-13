@@ -119,17 +119,17 @@ class SideMenuController extends Controller
                 'sub_menu' => [
                     'tinggi' => [
                         'icon' => 'fa-solid fa-ruler-vertical',
-                        'route_name' => 'manual.tinggi.tanaman',
+                        'route_name' => 'manual.tinggi.create',
                         'title' => 'Tinggi Tanaman'
                     ],
                     'pengairan' => [
                         'icon' => 'fa-solid fa-faucet-drip',
-                        'route_name' => 'manual.pengairan',
+                        'route_name' => 'manual.pengairan.create',
                         'title' => 'Pengairan'
                     ],
                     'pemupukan' => [
                         'icon' => 'fa-brands fa-pagelines',
-                        'route_name' => 'manual.pemupukan',
+                        'route_name' => 'manual.pemupukan.create',
                         'title' => 'Pemupukan'
                     ]
                 ]

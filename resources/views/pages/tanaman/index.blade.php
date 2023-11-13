@@ -60,7 +60,7 @@
                             </td>
                         @endif
                         <td class="border-b">
-                            <a href="{{ route('tanaman.edit', ['id' => $penanaman->id_penanaman]) }}"
+                            <a href="{{ route('tanaman.edit', ['tanaman' => $penanaman->id_penanaman]) }}"
                                 class="mr-4 whitespace-nowrap">
                                 <i class="w-4 h-4 mr-1 fa-solid fa-pencil"></i>Ubah
                             </a>
@@ -111,7 +111,7 @@
                 // Get data-tanaman attribute
                 const dataTanaman = JSON.parse(element.getAttribute('data-tanaman')).id_penanaman;
 
-                const route = "{{ route('tanaman.destroy', ['id' => ':id']) }}";
+                const route = "{{ route('tanaman.destroy', ['tanaman' => ':id']) }}";
                 const url = route.replace(':id', dataTanaman);
 
                 // Change Form

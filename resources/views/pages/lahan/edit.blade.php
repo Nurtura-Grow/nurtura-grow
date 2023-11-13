@@ -12,7 +12,7 @@
             <div class="box p-5 intro-y h-full">
                 <div class="flex flex-col items-start">
                     {{-- Form --}}
-                    <form action="{{ route('lahan.update', ['id' => $lahan->id_lahan]) }}" class="ms-0 md:ms-4" method="POST">
+                    <form action="{{ route('lahan.update', ['lahan' => $lahan->id_lahan]) }}" class="ms-0 md:ms-4" method="POST">
                         @csrf
                         @method('PATCH')
 

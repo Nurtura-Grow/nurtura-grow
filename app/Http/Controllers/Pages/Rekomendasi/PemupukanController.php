@@ -13,7 +13,7 @@ class PemupukanController extends Controller
     public function index(Request $request)
     {
         $sideMenu = $this->getSideMenuList($request);
-        return view('pages.data-manual.pemupukan', [
+        return view('pages.rekomendasi.pemupukan', [
             'sideMenu' => $sideMenu
         ]);
     }

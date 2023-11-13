@@ -11,7 +11,7 @@
         <div class="col-span-12">
             <div class="box p-5 intro-y">
                 {{-- Form --}}
-                <form action="{{ route('tanaman.update', ['id' => $penanaman->id_penanaman]) }}" method="POST">
+                <form action="{{ route('tanaman.update', ['tanaman' => $penanaman->id_penanaman]) }}" method="POST">
                     @method('PATCH')
                     @csrf
                     <div class="form-inline">

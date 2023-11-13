@@ -8,19 +8,22 @@
     </div>
 
     <div class="intro-y box p-5 mt-5 md:min-h-[40vh] lg:min-h-[70vh]">
-        <form>
+        <form method="POST" action="{{ route('manual.pengairan.store') }}">
+            @csrf
             @include('pages.data-manual.nama-lahan')
 
             <div class="form-inline mt-5">
                 <label for="volume_pengairan" class="form-label sm:w-32">Volume Pengairan</label>
-                <div class="input-group w-56">
-                    <input name="volume_pemupukan" type="text" class="form-control" placeholder="10">
-                    <div class="input-group-text">ml</div>
+                <div class="grid grid-cols-12 gap-2 w-56">
+                    <input name="volume_pengairan" type="text" class="form-control col-span-6" placeholder="10">
+                    <select class="form-select col-span-6" name="satuan">
+                        <option>cm</option>
+                        <option>mm</option>
+                    </select>
                 </div>
             </div>
 
             <div class="form-inline mt-5">
-
                 <label for="tanggal_pengairan" class="form-label sm:w-32">Tanggal Pengairan</label>
                 <div class="relative w-56">
                     <div
