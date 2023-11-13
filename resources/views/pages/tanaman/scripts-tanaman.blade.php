@@ -2,6 +2,7 @@
     <script>
         // Todo: Tambah tulisan "Penanaman akan selesai" di bawah tanggal selesai tanam, lalu tulis
         // "Penanaman akan selesai tanggal .... apakah anda ingin mengganti?"
+        // Tambahin durasi penanamannya juga D:
         var aktif = {{ isset($penanaman) && $penanaman->status_hidup == 1 ? 'true' : 'false' }};
         document.querySelector('#inputPenanaman').addEventListener("change", function() {
             const keteranganPenanaman = document.querySelector('#keteranganPenanaman');

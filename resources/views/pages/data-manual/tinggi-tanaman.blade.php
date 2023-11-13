@@ -13,13 +13,13 @@
             @include('pages.data-manual.nama-lahan')
 
             <div class="form-inline mt-5">
-                <label for="tanggal_pengairan" class="form-label sm:w-32">Tanggal Pencatatan</label>
+                <label for="tanggal_pencatatan" class="form-label sm:w-32">Tanggal Pencatatan</label>
                 <div class="relative w-56">
                     <div
                         class="absolute top-0 left-0 rounded-l w-10 h-full flex items-center justify-center bg-slate-100 border text-slate-500">
                         <i class="fa-solid fa-calendar w-4 h-4"></i>
                     </div>
-                    <input name="tanggal_pengairan" type="text" class="form-control datepicker pl-12"
+                    <input name="tanggal_pencatatan" type="text" class="form-control datepicker pl-12"
                         data-single-mode=true>
                 </div>
             </div>

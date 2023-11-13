@@ -33,7 +33,10 @@ class TinggiTanamanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $id_penanaman = $request->input('id_penanaman');
+        $tanggal_pencatatan =$this->formatDateDatabase($request->input('tanggal_pencatatan'));
+        $tinggi_tanaman = $request->input('tinggi_tanaman');
+        $satuan = $request->input('satuan');
     }
 
     /**
