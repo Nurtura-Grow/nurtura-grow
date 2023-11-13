@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('sop_pemupukan', function (Blueprint $table) {
             $table->id('id_sop_pemupukan');
             $table->integer('hari_setelah_tanam');
-            $table->float('tinggi_tanaman');
-            $table->float('jumlah');
+            $table->float('tinggi_tanaman_minimal');
+            $table->float('tinggi_tanaman_maksimal');
+            $table->float('jumlah_pupuk');
+            $table->float('jumlah_air');
             $table->foreignId('created_by');
             $table->foreignId('updated_by')->nullable();
             $table->foreignId('deleted_by')->nullable();

@@ -2,6 +2,10 @@
     scroll-behavior: smooth;
 }
 
+.top-bar{
+    height: 79px;
+}
+
 #container-search {
     line-height: 1.25rem;
     font-size: 0.875rem;

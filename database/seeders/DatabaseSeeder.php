@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\SopPemupukan;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,6 +19,7 @@ class DatabaseSeeder extends Seeder
             LahanSeeder::class,
             TipeInstruksiSeeder::class,
             SumberDataSeeder::class,
+            SopPemupukanSeeder::class,
         ]);
         // \App\Models\User::factory(10)->create();
 
