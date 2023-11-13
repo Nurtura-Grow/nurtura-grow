@@ -7,13 +7,13 @@
         </h2>
     </div>
 
-    <div class="intro-y box p-5 mt-5">
+    <div class="intro-y box p-5 mt-5 md:min-h-[40vh] lg:min-h-[70vh]">
         <div class="overflow-x-auto scrollbar-hidden">
             <form>
                 @include('pages.data-manual.nama-lahan')
 
                 <div class="form-inline mt-5">
-                    <label for="volume_pemupukan" class="form-label sm:w-48">Volume Pemupukan</label>
+                    <label for="volume_pemupukan" class="form-label sm:w-32">Volume Pemupukan</label>
                     <div class="input-group w-56">
                         <input name="volume_pemupukan" type="text" class="form-control" placeholder="10">
                         <div class="input-group-text">ml</div>
@@ -22,7 +22,7 @@
 
                 <div class="form-inline mt-5">
 
-                    <label for="tanggal_pemupukan" class="form-label sm:w-48">Tanggal Pemupukan</label>
+                    <label for="tanggal_pemupukan" class="form-label sm:w-32">Tanggal Pemupukan</label>
                     <div class="relative w-56">
                         <div
                             class="absolute top-0 left-0 rounded-l w-10 h-full flex items-center justify-center bg-slate-100 border text-slate-500">
@@ -34,7 +34,7 @@
                 </div>
 
                 <div class="form-inline mt-5">
-                    <label for="waktu" class="form-label sm:w-48">Waktu</label>
+                    <label for="waktu" class="form-label sm:w-32">Waktu</label>
                     <div class="flex flex-col lg:flex-row gap-2">
                         {{-- Waktu Mulai --}}
                         <div class="relative w-56">
@@ -57,7 +57,7 @@
                     </div>
                 </div>
 
-                <div class="sm:ml-48 sm:pl-5">
+                <div class="sm:ml-32 sm:pl-5">
                     <button type="submit" class="btn btn-primary mt-5 px-10">Masukkan</button>
                 </div>
             </form>

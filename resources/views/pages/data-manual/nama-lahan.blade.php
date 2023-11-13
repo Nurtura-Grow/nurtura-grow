@@ -1,5 +1,5 @@
-<div class="form-inline mt-5">
-    <label for="nama_penanaman" class="form-label sm:w-48">Nama Penanaman</label>
+<div class="form-inline">
+    <label for="nama_penanaman" class="form-label sm:w-32">Nama Penanaman</label>
     <select class="form-control tom-select mt-1" data-placeholder="Pilih Penanaman" name="id_penanaman">
         @foreach ($seluruhLahan as $lahan)
             <optgroup label="{{ $lahan->nama_lahan . ' || ' . $lahan->kecamatan . ', ' . $lahan->kota }}">

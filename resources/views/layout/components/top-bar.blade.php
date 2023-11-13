@@ -16,10 +16,13 @@
     <!-- END: Breadcrumb -->
 
     <!-- BEGIN: Account Menu -->
-    <div class="intro-x dropdown w-8 h-8">
-        <div class="dropdown-toggle w-8 h-8 rounded-full overflow-hidden shadow-lg image-fit zoom-in" role="button"
-            aria-expanded="false" data-tw-toggle="dropdown">
-            <img src="{{ asset('images/illustration/landing-page/section1.png') }}">
+    <div class="intro-x dropdown">
+        <div class="flex flex-row items-center" role="button" aria-expanded="false" data-tw-toggle="dropdown">
+            <p class="hidden sm:block mx-4 text-rgb-secondary font-semibold">{{ Auth::user()->nama }}</p>
+            <div class="w-8 h-8 rounded-full overflow-hidden shadow-lg image-fit zoom-in">
+                <img src="{{ asset('images/illustration/landing-page/section1.png') }}">
+            </div>
+            <p class="block sm:hidden mx-4 text-rgb-secondary font-semibold">{{ Auth::user()->nama }}</p>
         </div>
         <div class="dropdown-menu w-56">
             <ul class="dropdown-content bg-primary text-white">
@@ -59,6 +62,7 @@
                 </li>
             </ul>
         </div>
+
     </div>
     <!-- END: Account Menu -->
 </div>
