@@ -114,8 +114,25 @@ class SideMenuController extends Controller
             ],
             'manual' => [
                 'icon' => 'fa-solid fa-gears',
-                'route_name' => 'manual.index',
+                'route_name' => 'manual',
                 'title' => 'Input Data Manual',
+                'sub_menu' => [
+                    'tinggi' => [
+                        'icon' => 'fa-solid fa-ruler-vertical',
+                        'route_name' => 'manual.tinggi.tanaman',
+                        'title' => 'Tinggi Tanaman'
+                    ],
+                    'pengairan' => [
+                        'icon' => 'fa-solid fa-faucet-drip',
+                        'route_name' => 'manual.pengairan',
+                        'title' => 'Pengairan'
+                    ],
+                    'pemupukan' => [
+                        'icon' => 'fa-brands fa-pagelines',
+                        'route_name' => 'manual.pemupukan',
+                        'title' => 'Pemupukan'
+                    ]
+                ]
             ],
             'riwayat' => [
                 'icon' => 'fa-solid fa-clock-rotate-left',

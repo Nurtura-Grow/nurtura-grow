@@ -9,7 +9,9 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Pages\DashboardController;
 use App\Http\Controllers\Pages\LahanController;
 use App\Http\Controllers\Pages\TanamanController;
-use App\Http\Controllers\Pages\PengendalianManualController;
+use App\Http\Controllers\Pages\PengendalianManual\PemupukanController as PemupukanManualController;
+use App\Http\Controllers\Pages\PengendalianManual\PengairanController as PengairanManualController;
+use App\Http\Controllers\Pages\PengendalianManual\TinggiTanamanController;
 use App\Http\Controllers\Pages\Rekomendasi\PemupukanController;
 use App\Http\Controllers\Pages\Rekomendasi\PengairanController;
 use App\Http\Controllers\Pages\RiwayatController;
@@ -88,7 +90,9 @@ Route::group([
         'prefix' => 'manual',
         'as' => 'manual.'
     ], function () {
-        Route::get('/', [PengendalianManualController::class, 'index'])->name('index');
+        Route::get('/tinggi/tanaman', [TinggiTanamanController::class, 'index'])->name('tinggi.tanaman');
+        Route::get('/pengairan', [PengairanManualController::class, 'index'])->name('pengairan');
+        Route::get('/pemupukan', [PemupukanManualController::class, 'index'])->name('pemupukan');
     });
 
 

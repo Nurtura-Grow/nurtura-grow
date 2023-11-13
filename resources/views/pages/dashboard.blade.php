@@ -2,6 +2,7 @@
 
 @section('subcontent')
     {{-- Atas --}}
+    {{-- Todo: tambahin quick access + hasil rekomendasi dari ml --}}
     <div class="grid grid-cols-12 gap-6 2xl:border-b-2 mb-5 pb-10 border-slate-300">
         {{-- Kiri --}}
         <div class="col-span-12 2xl:col-span-9">

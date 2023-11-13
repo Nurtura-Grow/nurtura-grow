@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Pages\Rekomendasi;
+namespace App\Http\Controllers\Pages\PengendalianManual;
 
 use App\Http\Controllers\Controller;
+use App\Models\InformasiLahan;
 use Illuminate\Http\Request;
 
-class PemupukanController extends Controller
+class PengairanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,8 +14,17 @@ class PemupukanController extends Controller
     public function index(Request $request)
     {
         $sideMenu = $this->getSideMenuList($request);
-        return view('pages.data-manual.pemupukan', [
-            'sideMenu' => $sideMenu
+        $lahan = InformasiLahan::activeLahanData();
+
+        foreach ($lahan as $informasiLahan) {
+            $informasiLahan->load(['penanaman' => function ($query) {
+                $query->whereNull('deleted_at')->whereNull('deleted_by');
+            }]);
+        }
+
+        return view('pages.data-manual.pengairan', [
+            'sideMenu' => $sideMenu,
+            'seluruhLahan' => $lahan,
         ]);
     }
 

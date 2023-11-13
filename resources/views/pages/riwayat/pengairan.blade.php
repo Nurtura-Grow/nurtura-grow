@@ -3,6 +3,7 @@
         <tr>
             <th class="border-b-2 whitespace-nowrap">No</th>
             <th class="border-b-2 whitespace-nowrap">Nama Penanaman</th>
+            <th class="border-b-2 whitespace-nowrap">Sumber Data</th>
             <th class="border-b-2 whitespace-nowrap">Nama Lahan</th>
             <th class="border-b-2 whitespace-nowrap">HST</th>
             <th class="border-b-2 whitespace-nowrap">Volume Pengairan</th>
@@ -17,6 +18,7 @@
             <tr>
                 <td class="border-b">{{ $i }}</td>
                 <td class="border-b">Nama Penanaman 1</td>
+                <td class="border-b">Manual/Otomatis</td>
                 <td class="border-b">Nama Lahan {{ $i }}</td>
                 <td class="border-b">HST {{ $i }}</td>
                 <td class="border-b">Volume Pengairan {{ $i }}</td>
