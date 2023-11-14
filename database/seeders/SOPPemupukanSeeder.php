@@ -27,10 +27,10 @@ class SopPemupukanSeeder extends Seeder
         for ($i = 0; $i <= 60; $i = $i + 3) {
             SopPemupukan::create([
                 "hari_setelah_tanam" => $i,
-                "tinggi_tanaman_minimal" => $tinggi_minimal,
-                "tinggi_tanaman_maksimal" => $tinggi_maksimal,
-                "jumlah_pupuk" => $jumlah_pupuk,
-                "jumlah_air" => $jumlah_air,
+                "tinggi_tanaman_minimal_mm" => $tinggi_minimal,
+                "tinggi_tanaman_maksimal_mm" => $tinggi_maksimal,
+                "jumlah_pupuk_ml" => $jumlah_pupuk,
+                "jumlah_air_ml" => $jumlah_air,
                 "created_by" => $id_user,
             ]);
 

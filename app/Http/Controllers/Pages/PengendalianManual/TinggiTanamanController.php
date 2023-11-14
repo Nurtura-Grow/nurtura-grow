@@ -37,6 +37,8 @@ class TinggiTanamanController extends Controller
         $tanggal_pencatatan =$this->formatDateDatabase($request->input('tanggal_pencatatan'));
         $tinggi_tanaman = $request->input('tinggi_tanaman');
         $satuan = $request->input('satuan');
+
+        if($satuan) 
     }
 
     /**

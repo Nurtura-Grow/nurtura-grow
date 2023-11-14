@@ -54,9 +54,11 @@
                                     class="font-semibold">{{ $penanaman->default_hari }}</span> hari</p>
                         </td>
                         @if ($penanaman->status_hidup == 1)
-                            <td class="border-b text-success"><i class="fa-regular fa-square-check mr-2"></i>Aktif</td>
+                            <td class="border-b"><span class="text-success"><i class="fa-regular fa-square-check mr-2"></i>
+                                    Aktif</span></td>
                         @elseif ($penanaman->status_hidup == 0)
-                            <td class="border-b text-danger"><i class="fa-solid fa-square-xmark mr-2"></i>Tidak Aktif
+                            <td class="border-b"><span class="text-danger">
+                                <i class="fa-solid fa-square-xmark mr-2"></i>Tidak Aktif</span>
                             </td>
                         @endif
                         <td class="border-b">
@@ -65,9 +67,9 @@
                                 <i class="w-4 h-4 mr-1 fa-solid fa-pencil"></i>Ubah
                             </a>
                             <span class="text-danger deletePenanaman hover:cursor-pointer whitespace-nowrap"
-                                data-tanaman='{{ json_encode(['id_penanaman' => $penanaman->id_penanaman]) }}'
-                                data-tw-toggle="modal" data-tw-target="#deleteTanaman"><i
-                                    class="w-4 h-4 mr-1 fa-solid fa-trash"></i>Hapus</span>
+                                onclick="deleteTanaman(this)" data-tw-toggle="modal" data-tw-target="#deleteTanaman"
+                                data-tanaman='{{ json_encode(['id_penanaman' => $penanaman->id_penanaman]) }}'>
+                                <i class="w-4 h-4 mr-1 fa-solid fa-trash"></i>Hapus</span>
                         </td>
                     </tr>
                 @endforeach
@@ -102,21 +104,24 @@
     </div>
 @endsection
 
-@include('pages.components.datatable-styles')
 @push('scripts')
     <script>
-        var deletePenanaman = document.querySelectorAll('.deletePenanaman');
-        deletePenanaman.forEach(element => {
-            element.addEventListener("click", function(event) {
-                // Get data-tanaman attribute
-                const dataTanaman = JSON.parse(element.getAttribute('data-tanaman')).id_penanaman;
+        function deleteTanaman(element) {
+            console.log('clicked')
+            // Get data-tanaman attribute
+            const dataTanaman = JSON.parse(element.getAttribute('data-tanaman')).id_penanaman;
 
-                const route = "{{ route('tanaman.destroy', ['tanaman' => ':id']) }}";
-                const url = route.replace(':id', dataTanaman);
+            console.log(dataTanaman)
+            const route = "{{ route('tanaman.destroy', ['tanaman' => ':id']) }}";
+            const url = route.replace(':id', dataTanaman);
+            console.log(url)
 
-                // Change Form
-                $('#formDeleteTanaman').attr('action', url);
-            })
-        });
+            // Change Form
+
+            const formDeleteTanaman = document.querySelector('#formDeleteTanaman')
+            formDeleteTanaman.setAttribute('action', url)
+            // $('#formDeleteTanaman').attr('action', url);
+        };
     </script>
 @endpush
+@include('pages.components.datatable-styles')

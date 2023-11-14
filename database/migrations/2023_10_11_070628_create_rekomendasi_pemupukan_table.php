@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('rekomendasi_pemupukan', function (Blueprint $table) {
             $table->id('id_rekomendasi_pemupukan');
             $table->foreignId('id_tinggi_tanaman');
-            $table->float('jumlah_rekomendasi');
+            $table->float('jumlah_rekomendasi_ml');
+            $table->float('durasi_detik');
             $table->timestamp('tanggal_rekomendasi')->useCurrent();
             // $table->foreignId('created_by');
             // $table->foreignId('updated_by')->nullable();

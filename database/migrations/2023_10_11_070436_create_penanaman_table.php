@@ -19,6 +19,7 @@ return new class extends Migration
             $table->boolean('status_hidup');
             $table->date('tanggal_tanam');
             $table->date('tanggal_panen')->nullable();
+            $table->boolean('alat_terpasang')->default(false);
             $table->foreignId('created_by');
             $table->foreignId('updated_by')->nullable();
             $table->foreignId('deleted_by')->nullable();
