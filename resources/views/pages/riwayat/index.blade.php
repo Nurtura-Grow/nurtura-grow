@@ -82,7 +82,6 @@
 
         // Handle resize
         window.addEventListener('resize', function() {
-            console.log("resize")
             document.querySelectorAll('.tab-pane').forEach(tab => {
                 tab.style.width = '100%';
             });
