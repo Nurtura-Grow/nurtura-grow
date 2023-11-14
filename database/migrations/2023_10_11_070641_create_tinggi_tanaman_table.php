@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('id_penanaman');
             $table->float('tinggi_tanaman_mm');
             $table->integer('hari_setelah_tanam');
-            $table->timestamp('tanggal_pengukuran')->useCurrent();
+            $table->date('tanggal_pengukuran')->useCurrent();
             $table->foreignId('created_by');
             $table->foreignId('updated_by')->nullable();
             $table->foreignId('deleted_by')->nullable();

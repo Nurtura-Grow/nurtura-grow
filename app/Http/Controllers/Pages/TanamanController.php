@@ -22,6 +22,7 @@ class TanamanController extends Controller
             ->where('deleted_at', null)
             ->get();
 
+        // Change Format & Add New Variables
         foreach ($penanaman as $tanaman) {
             $tanaman->nama_lahan = $tanaman->informasi_lahan->nama_lahan;
             $tanaman->tanggal_tanam = $this->formatDateUI($tanaman->tanggal_tanam);
@@ -62,14 +63,14 @@ class TanamanController extends Controller
      */
     public function store(Request $request)
     {
-        $nama_penanaman = $request['nama_penanaman'];
-        $keterangan = $request['keterangan'];
-        $id_lahan = $request['id_lahan'];
-        $tanggal_tanam = $this->formatDateDatabase($request['tanggal_tanaman']);
-        $aktif = $request['aktif']  == "on" ? true : false;
+        $nama_penanaman = $request->input('nama_penanaman');
+        $keterangan = $request->input('keterangan');
+        $id_lahan = $request->input('id_lahan');
+        $tanggal_tanam = $this->formatDateDatabase($request->input('tanggal_tanaman'));
+        $aktif = $request->input('aktif')  == "on" ? true : false;
 
         if ($aktif == false) {
-            $tanggal_panen = $this->formatDateDatabase($request['tanggal_selesai']);
+            $tanggal_panen = $this->formatDateDatabase($request->input('tanggal_selesai'));
         }
 
         Penanaman::create([
@@ -115,11 +116,11 @@ class TanamanController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $nama_penanaman = $request['nama_penanaman'];
-        $keterangan = $request['keterangan'];
-        $id_lahan = $request['id_lahan'];
-        $tanggal_tanam = $this->formatDateDatabase($request['tanggal_tanaman']);
-        $aktif = $request['aktif'] == "on" ? true : false;
+        $nama_penanaman = $request->input('nama_penanaman');
+        $keterangan = $request->input('keterangan');
+        $id_lahan = $request->input('id_lahan');
+        $tanggal_tanam = $this->formatDateDatabase($request->input('tanggal_tanaman'));
+        $aktif = $request->input('aktif') == "on" ? true : false;
 
         $penanaman = Penanaman::where('id_penanaman', $id)->where('deleted_by', null)->where('deleted_at', null)->first();
         if (!$penanaman) {
@@ -127,7 +128,7 @@ class TanamanController extends Controller
         }
 
         if ($aktif == false) {
-            $tanggal_panen = $this->formatDateDatabase($request['tanggal_selesai']);
+            $tanggal_panen = $this->formatDateDatabase($request->input('tanggal_selesai'));
         }
 
         $penanaman->update([

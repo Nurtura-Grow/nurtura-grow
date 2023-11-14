@@ -1,9 +1,8 @@
-<table id="table" class="hover intro-y" style="width:100%">
+<table id="table" class="hover intro-y overflow-hidden" style="width:100%">
     <thead>
         <tr>
             <th class="border-b-2 whitespace-nowrap">No</th>
             <th class="border-b-2 whitespace-nowrap">Nama Penanaman</th>
-            <th class="border-b-2 whitespace-nowrap">Sumber Data</th>
             <th class="border-b-2 whitespace-nowrap">Nama Lahan</th>
             <th class="border-b-2 whitespace-nowrap">HST</th>
             <th class="border-b-2 whitespace-nowrap">Tinggi Tanaman</th>
@@ -17,7 +16,6 @@
             <tr>
                 <td class="border-b">{{ $i }}</td>
                 <td class="border-b">Penanaman 1</td>
-                <td class="border-b">Manual/Otomatis</td>
                 <td class="border-b">Lahan {{ $i }} </td>
                 <td class="border-b">HST {{ $i }}</td>
                 <td class="border-b">Tinggi Tanaman {{ $i }}</td>

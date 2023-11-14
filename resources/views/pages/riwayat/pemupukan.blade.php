@@ -1,4 +1,4 @@
-<table id="table" class="hover intro-y" style="width:100%">
+<table id="table" class="hover intro-y overflow-hidden" style="width:100%">
     <thead>
         <tr>
             <th class="border-b-2 whitespace-nowrap">No</th>
