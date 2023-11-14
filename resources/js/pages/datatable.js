@@ -44,7 +44,7 @@ $(document).ready(function () {
         var column = table.column('.hidden-column');
         var columnVisible = !column.visible();
 
-        if(columnVisible){
+        if (columnVisible) {
             $(this).html('<i class="fa-regular fa-eye-slash mr-2"></i>Sembunyikan Keterangan');
         } else {
             $(this).html('<i class="fa-regular fa-eye mr-2"></i> Tampilkan Keterangan');
