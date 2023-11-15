@@ -26,9 +26,10 @@
                         role="tab" aria-controls="pemupukan" aria-selected="false"> Pemupukan </button>
                 </li>
 
-                <li id="riwayat-pengairan" class="nav-item flex-1" role="presentation"> <button class="nav-link w-full py-2"
-                        data-tw-toggle="pill" data-tw-target="#pengairan" type="button" role="tab"
-                        aria-controls="pengairan" aria-selected="false"> Pengairan </button> </li>
+                <li id="riwayat-pengairan" class="nav-item flex-1" role="presentation">
+                    <button class="nav-link w-full py-2" data-tw-toggle="pill" data-tw-target="#pengairan" type="button"
+                        role="tab" aria-controls="pengairan" aria-selected="false"> Pengairan </button>
+                </li>
             </ul>
 
             <div class="tab-content mt-5 w-full">
