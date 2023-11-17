@@ -153,9 +153,24 @@ class TinggiTanamanController extends Controller
             return redirect()->back()->withInput()->withErrors('tanggal_catat', 'Tanggal pencatatan tidak valid');
         }
 
+        $tinggi_tanaman = $request->input('tinggi_tanaman');
+        $satuan = $request->input('satuan');
+        // Convert to mm
+        switch ($satuan) {
+            case "cm":
+                $tinggi_tanaman *= 10;
+                break;
+
+            case "mm":
+                break;
+
+            default:
+                return abort(Response::HTTP_NOT_FOUND);
+        }
+
         $tinggiTanaman->update([
-            "id_penanaman" => $request->input('id_penanaman'),
-            "tinggi_tanaman_mm" => $request->input('tinggi_tanaman'),
+            "id_penanaman" => $id_penanaman,
+            "tinggi_tanaman_mm" => $tinggi_tanaman,
             "hari_setelah_tanam" => $hst,
             "tanggal_pengukuran" => $tanggal_pencatatan,
             "updated_by" => Auth::user()->id_user,
