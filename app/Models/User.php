@@ -19,4 +19,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(Penanaman::class, 'id_user', 'id_user');
     }
+
+    // Relationship Created By, Updated By, Deleted By dkk
+
 }

@@ -14,8 +14,12 @@ return new class extends Migration
         Schema::create('penanaman', function (Blueprint $table) {
             $table->id('id_penanaman');
             $table->foreignId('id_lahan');
+            $table->string('nama_penanaman');
+            $table->string('keterangan')->nullable();
             $table->boolean('status_hidup');
             $table->date('tanggal_tanam');
+            $table->date('tanggal_panen')->nullable();
+            $table->boolean('alat_terpasang')->default(false);
             $table->foreignId('created_by');
             $table->foreignId('updated_by')->nullable();
             $table->foreignId('deleted_by')->nullable();

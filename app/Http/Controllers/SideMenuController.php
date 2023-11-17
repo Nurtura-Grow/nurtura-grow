@@ -86,12 +86,12 @@ class SideMenuController extends Controller
                     'daftar-tanaman' => [
                         'icon' => 'fa-solid fa-list',
                         'route_name' => 'tanaman.index',
-                        'title' => 'Daftar Tanaman'
+                        'title' => 'Daftar Penanaman'
                     ],
                     'tambah-tanaman' => [
                         'icon' => 'fa-solid fa-plus',
                         'route_name' => 'tanaman.create',
-                        'title' => 'Tambah Tanaman'
+                        'title' => 'Tambah Penanaman'
                     ],
                 ]
             ],
@@ -112,22 +112,32 @@ class SideMenuController extends Controller
                     ]
                 ]
             ],
-            'riwayat' => [
-                'icon' => 'fa-solid fa-clock-rotate-left',
-                'route_name' => 'riwayat',
-                'title' => 'Riwayat',
+            'manual' => [
+                'icon' => 'fa-solid fa-gears',
+                'route_name' => 'manual',
+                'title' => 'Input Data Manual',
                 'sub_menu' => [
-                    'tinggi-tanaman' => [
-                        'icon' => 'fa-solid fa-plant-wilt',
-                        'route_name' => 'riwayat.tanaman.tinggi',
+                    'tinggi' => [
+                        'icon' => 'fa-solid fa-ruler-vertical',
+                        'route_name' => 'manual.tinggi.create',
                         'title' => 'Tinggi Tanaman'
                     ],
-                    'rekomendasi' => [
-                        'icon' => 'fa-solid fa-hand-holding-heart',
-                        'route_name' => 'riwayat.rekomendasi',
-                        'title' => 'Rekomendasi'
+                    'pengairan' => [
+                        'icon' => 'fa-solid fa-faucet-drip',
+                        'route_name' => 'manual.pengairan.create',
+                        'title' => 'Pengairan'
                     ],
+                    'pemupukan' => [
+                        'icon' => 'fa-brands fa-pagelines',
+                        'route_name' => 'manual.pemupukan.create',
+                        'title' => 'Pemupukan'
+                    ]
                 ]
+            ],
+            'riwayat' => [
+                'icon' => 'fa-solid fa-clock-rotate-left',
+                'route_name' => 'riwayat.index',
+                'title' => 'Riwayat',
             ],
             'panduan' => [
                 'icon' => 'fa-solid fa-book',

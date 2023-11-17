@@ -1,7 +1,9 @@
-.content {
-    min-height: 95vh;
-    margin-top: auto;
-    margin-bottom: auto;
+* {
+    scroll-behavior: smooth;
+}
+
+.top-bar{
+    height: 79px;
 }
 
 #container-search {
@@ -10,4 +12,16 @@
     left: 10px;
     top: 10px;
     height: 10px;
+}
+
+@media screen and (min-width: 768px) {
+    .content {
+        min-height: 95vh;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .content {
+        min-height: 85vh;
+    }
 }

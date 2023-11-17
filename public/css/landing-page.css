@@ -1,16 +1,1 @@
-* {
-    scroll-behavior: smooth;
-}
-
-.mobile-menu .menu {
-    color: rgb(0, 38, 35) !important;
-}
-
-.mobile-menu {
-    margin: 0;
-    background-color: transparent;
-}
-
-.mobile-menu .scrollable{
-    background-color: rgb(219, 235, 211);
-}
+*{scroll-behavior:smooth}.mobile-menu .menu{color:#002623!important}.mobile-menu{margin:0;background-color:transparent}.mobile-menu .scrollable{background-color:#dbebd3}

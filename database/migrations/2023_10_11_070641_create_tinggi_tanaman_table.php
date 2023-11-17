@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('tinggi_tanaman', function (Blueprint $table) {
             $table->id('id_tinggi_tanaman');
             $table->foreignId('id_penanaman');
-            $table->float('tinggi_tanaman');
+            $table->float('tinggi_tanaman_mm');
             $table->integer('hari_setelah_tanam');
-            $table->timestamp('tanggal_pengukuran')->useCurrent();
+            $table->date('tanggal_pengukuran')->useCurrent();
             $table->foreignId('created_by');
             $table->foreignId('updated_by')->nullable();
             $table->foreignId('deleted_by')->nullable();

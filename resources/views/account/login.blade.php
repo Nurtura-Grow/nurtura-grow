@@ -11,14 +11,13 @@
 @endpush
 
 @section('body')
-
     <body class="flex min-h-screen p-0 m-0 bg-no-repeat bg-fixed bg-left bg-cover">
         <div class="container sm:px-10 h-screen">
             <div class="block xl:grid grid-cols-2 gap-4">
                 <!-- BEGIN: Login Info -->
                 <div class="hidden xl:flex flex-col h-screen">
                     <a href="{{ route('index') }}" class="-intro-x flex items-center pt-10">
-                        <img alt="" class="w-8" src="{{ asset('images/logo-nobg.svg') }} ">
+                        <img alt="" class="w-10" src="{{ asset('images/logo.svg') }} ">
                         <span class="text-white text-lg ml-3">NurturaGrow</span>
                     </a>
                     <div class="my-auto">
@@ -70,7 +69,7 @@
 
                             <div class="intro-x flex text-slate-600 dark:text-slate-500 text-xs sm:text-sm mt-4">
                                 <div class="flex items-center mr-auto">
-                                    <input id="remember-me" type="checkbox" class="form-check-input border mr-2">
+                                    <input name="remember_me" id="remember-me" type="checkbox" class="form-check-input border mr-2">
                                     <label class="cursor-pointer select-none" for="remember-me">Ingat saya</label>
                                 </div>
                                 <a href="">Lupa Password?</a>

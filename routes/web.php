@@ -9,10 +9,12 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Pages\DashboardController;
 use App\Http\Controllers\Pages\LahanController;
 use App\Http\Controllers\Pages\TanamanController;
+use App\Http\Controllers\Pages\PengendalianManual\PemupukanController as PemupukanManualController;
+use App\Http\Controllers\Pages\PengendalianManual\PengairanController as PengairanManualController;
+use App\Http\Controllers\Pages\PengendalianManual\TinggiTanamanController as TinggiTanamanManualController;
 use App\Http\Controllers\Pages\Rekomendasi\PemupukanController;
 use App\Http\Controllers\Pages\Rekomendasi\PengairanController;
-use App\Http\Controllers\Pages\Riwayat\RekomendasiController as RiwayatRekomendasiController;
-use App\Http\Controllers\Pages\Riwayat\TinggiTanamanController;
+use App\Http\Controllers\Pages\RiwayatController;
 
 use App\Http\Controllers\Pages\PanduanController;
 
@@ -43,39 +45,41 @@ Route::group([
     ], function () {
         Route::post('/login', [LoginController::class, 'login'])->name('login');
         Route::post('/register', [RegisterController::class, 'register'])->name('register');
-        Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
     });
 });
-
-
 
 Route::group([
     'middleware' => 'authenticated',
 ], function () {
+    // Route Logout
+    Route::group([
+        'prefix' => 'auth',
+        'as' => 'auth.'
+    ], function () {
+        Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
+    });
+
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    // Route Lahan
+    Route::resource('lahan', LahanController::class)->except(['show']);
+    Route::get('/lahan/search', [LahanController::class, 'search_lahan'])->name('lahan.search');
+
+    // Route Tanaman
+    Route::resource('tanaman', TanamanController::class)->except(['show']);
+
+    // Route Manual
     Route::group([
-        'prefix' => 'lahan',
-        'as' => 'lahan.'
+        'prefix' => 'manual',
+        'as' => 'manual.'
     ], function () {
-        Route::get('/', [LahanController::class, 'index'])->name('index');
-        Route::get('/search', [LahanController::class, 'search_lahan'])->name('search');
-        Route::get('/tambah', [LahanController::class, 'create'])->name('create');
-        Route::post('/tambah', [LahanController::class, 'store'])->name('store');
-        Route::get('/{id}/edit', [LahanController::class, 'edit'])->name('edit');
-        Route::patch('/{id}', [LahanController::class, 'update'])->name('update');
-        Route::delete('/{id}', [LahanController::class, 'destroy'])->name('destroy');
+        Route::resource('/tinggi', TinggiTanamanManualController::class)->except(['index', 'show']);
+        Route::get('/tinggi/penanaman/{id}', [TinggiTanamanManualController::class, 'search_tanggal'])->name('tinggi.search_tanggal');
+        Route::resource('/pengairan', PengairanManualController::class)->except(['index', 'show']);
+        Route::resource('/pemupukan', PemupukanManualController::class)->except(['index', 'show']);
     });
 
-    Route::group([
-        'prefix' => 'tanaman',
-        'as' => 'tanaman.'
-    ], function () {
-        Route::get('/daftar', [TanamanController::class, 'index'])->name('index');
-        Route::get('/tambah', [TanamanController::class, 'create'])->name('create');
-        Route::post('/tambah', [TanamanController::class, 'store'])->name('store');
-    });
-
-
+    // Route Rekomendasi
     Route::group([
         'prefix' => 'rekomendasi',
         'as' => 'rekomendasi.'
@@ -84,14 +88,14 @@ Route::group([
         Route::get('/pemupukan', [PemupukanController::class, 'index'])->name('pemupukan');
     });
 
-
+    // Route Riwayat
     Route::group([
         'prefix' => 'riwayat',
         'as' => 'riwayat.'
     ], function () {
-        Route::get('/tanaman/tinggi', [TinggiTanamanController::class, 'index'])->name('tanaman.tinggi');
-        Route::get('/rekomendasi', [RiwayatRekomendasiController::class, 'index'])->name('rekomendasi');
+        Route::get('/', [RiwayatController::class, 'index'])->name('index');
     });
 
+    // Route Panduan
     Route::get('/panduan', [PanduanController::class, 'index'])->name('panduan');
 });

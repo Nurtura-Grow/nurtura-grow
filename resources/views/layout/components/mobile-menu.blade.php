@@ -1,7 +1,8 @@
 <div class="mobile-menu md:hidden">
     <div class="mobile-menu-bar">
-        <a href="{{ route('dashboard') }}" class="flex mr-auto">
-            <img alt="Nurtura Grow" class="w-8" src="{{ asset('images/logo-bg.svg') }}">
+        <a href="{{ route('dashboard') }}" class="flex items-center mr-auto">
+            <img alt="Nurtura Grow" class="w-10 h-10" src="{{ asset('images/logo.svg') }}">
+            {{-- <img alt="Nurtura Grow" class="w-8" src="{{ asset('images/logo-bg.svg') }}"> --}}
             <span class="text-white text-lg ml-3 font-medium">Nurtura<span
                     class="text-rgb-secondary">Grow</span></span>
         </a>

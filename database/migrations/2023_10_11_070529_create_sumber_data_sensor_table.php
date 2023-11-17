@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('sumber_data_sensor', function (Blueprint $table) {
             $table->id('id_sumber_data');
             $table->string('nama_sumber_data', 50);
-            $table->timestamp('timestamp')->useCurrent();
             $table->foreignId('created_by');
             $table->foreignId('updated_by')->nullable();
             $table->foreignId('deleted_by')->nullable();

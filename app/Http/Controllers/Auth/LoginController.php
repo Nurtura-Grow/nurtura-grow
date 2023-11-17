@@ -23,12 +23,14 @@ class LoginController extends Controller
             'password' => $validated['password'],
         ];
 
-        if (Auth::attempt($credentials)) {
-            // Alert::error('Error', 'Email atau password salah!');
+        $rememberMe = $request->input('remember_me') == 'on' ? true : false;
+
+        if (Auth::attempt($credentials, $rememberMe)) {
             $request->session()->regenerate();
             return redirect()->route('dashboard');
+        } else {
+            // Alert::error('Error', 'Email atau password salah!');
+            return redirect()->back()->withInput()->withErrors('login', 'Username atau password salah!');
         }
-
-        return redirect()->back()->withInput()->withErrors('login', 'Username atau password salah!');
     }
 }

@@ -1,43 +1,37 @@
 <?php
 
-namespace App\Http\Controllers\Pages\Riwayat;
+namespace App\Http\Controllers\Pages\PengendalianManual;
 
 use App\Http\Controllers\Controller;
+use App\Models\InformasiLahan;
 use Illuminate\Http\Request;
 
-class RekomendasiController extends Controller
+class PengairanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index(Request $request)
-    {
-        $sideMenu = $this->getSideMenuList($request);
-        return view('pages.riwayat.rekomendasi', [
-            'sideMenu' => $sideMenu
-        ]);
-    }
-
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $sideMenu = $this->getSideMenuList($request);
+        $lahan = InformasiLahan::activeLahanData();
+
+        foreach ($lahan as $informasiLahan) {
+            $informasiLahan->load(['penanaman' => function ($query) {
+                $query->whereNull('deleted_at')->whereNull('deleted_by');
+            }]);
+        }
+
+        return view('pages.data-manual.pengairan', [
+            'sideMenu' => $sideMenu,
+            'seluruhLahan' => $lahan,
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
     {
         //
     }

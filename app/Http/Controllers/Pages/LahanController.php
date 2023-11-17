@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Pages;
 use App\Models\InformasiLahan;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\InformasiLahanRequest;
+use App\Models\Penanaman;
 use Illuminate\Console\View\Components\Info;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -18,13 +19,7 @@ class LahanController extends Controller
      */
     public function index(Request $request)
     {
-        $data_lahan = InformasiLahan::where('deleted_by', null)->where('deleted_at', null)->get();
-
-        // Replace space with dash and make it lowercase
-        foreach ($data_lahan as $lahan) {
-            $lahan->new_nama = strtolower(str_replace(" ", "-", $lahan->nama_lahan));
-        }
-
+        $data_lahan = InformasiLahan::activeLahanDataWithNewNama();
         $sideMenu = $this->getSideMenuList($request);
         return view('pages.lahan.index', [
             'sideMenu' => $sideMenu,
@@ -39,11 +34,14 @@ class LahanController extends Controller
             $search = $request->input('search');
 
             // Perform the search in your database
-            $data_lahan = InformasiLahan::where('nama_lahan', 'like', '%' . $search . '%')
-                ->orWhere('kecamatan', 'like', '%' . $search . '%')
-                ->orWhere('kota', 'like', '%' . $search . '%')
-                ->orWhere('alamat', 'like', '%' . $search . '%')
-                ->where('deleted_by', null)->where('deleted_at', null)
+            $data_lahan = InformasiLahan::where(function ($query) use ($search) {
+                $query->where('nama_lahan', 'like', '%' . $search . '%')
+                    ->orWhere('kecamatan', 'like', '%' . $search . '%')
+                    ->orWhere('kota', 'like', '%' . $search . '%')
+                    ->orWhere('alamat', 'like', '%' . $search . '%');
+            })
+                ->whereNull('deleted_by')
+                ->whereNull('deleted_at')
                 ->get();
 
             foreach ($data_lahan as $lahan) {
@@ -62,7 +60,7 @@ class LahanController extends Controller
      */
     public function create(Request $request)
     {
-        $data_lahan = InformasiLahan::where('deleted_by', null)->where('deleted_at', null)->get();
+        $data_lahan = InformasiLahan::activeLahanData();
         $sideMenu = $this->getSideMenuList($request);
         return view('pages.lahan.create', [
             'sideMenu' => $sideMenu,
@@ -139,7 +137,7 @@ class LahanController extends Controller
         if ($infoLahan) {
             return view('pages.lahan.edit', [
                 'sideMenu' => $this->getSideMenuList($request),
-                'seluruhLahan' => InformasiLahan::where('deleted_by', null)->where('deleted_at', null)->get(),
+                'seluruhLahan' => InformasiLahan::activeLahanData(),
                 'lahan' => $infoLahan,
             ]);
         }
@@ -166,19 +164,25 @@ class LahanController extends Controller
         $kota = $kecamatan_kota_alamat['kota'];
         $alamat = $kecamatan_kota_alamat['alamat'];
 
-        InformasiLahan::find($id)->update([
-            "nama_lahan" => $nama_lahan,
-            "deskripsi" => $deskripsi,
-            "latitude" => $latitude,
-            "longitude" => $longitude,
-            "kecamatan" => $kecamatan,
-            "kota" => $kota,
-            "alamat" => $alamat,
-            "updated_at" => now(),
-            "updated_by" => Auth::user()->id_user,
-        ]);
+        $infoLahan = InformasiLahan::find($id);
 
-        return redirect()->route('lahan.index');
+        if ($infoLahan) {
+            $infoLahan->update([
+                "nama_lahan" => $nama_lahan,
+                "deskripsi" => $deskripsi,
+                "latitude" => $latitude,
+                "longitude" => $longitude,
+                "kecamatan" => $kecamatan,
+                "kota" => $kota,
+                "alamat" => $alamat,
+                "updated_at" => now(),
+                "updated_by" => Auth::user()->id_user,
+            ]);
+
+            return redirect()->route('lahan.index');
+        } else {
+            return abort(Response::HTTP_NOT_FOUND);
+        }
     }
 
     /**
@@ -187,6 +191,11 @@ class LahanController extends Controller
     public function destroy(string $id)
     {
         InformasiLahan::find($id)->update([
+            "deleted_at" => now(),
+            "deleted_by" => Auth::user()->id_user,
+        ]);
+
+        Penanaman::where('id_lahan', $id)->update([
             "deleted_at" => now(),
             "deleted_by" => Auth::user()->id_user,
         ]);
