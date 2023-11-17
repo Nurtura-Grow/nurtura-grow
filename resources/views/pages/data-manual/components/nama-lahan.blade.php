@@ -5,7 +5,8 @@
             <optgroup label="{{ $lahan->nama_lahan . ' || ' . $lahan->kecamatan . ', ' . $lahan->kota }}">
                 @foreach ($lahan->penanaman as $penanaman)
                     <option value="{{ $penanaman->id_penanaman }}"
-                        {{ isset($tanaman) && $tanaman->id_penanaman == $penanaman->id_penanaman ? 'selected' : '' }}>
+                        {{ isset($tanaman) && $tanaman->id_penanaman == $penanaman->id_penanaman ? 'selected' : '' }}
+                        {{ $penanaman->status_hidup == 0 ? 'disabled' : '' }}>
                         {{ $penanaman->nama_penanaman }}</option>
                 @endforeach
             </optgroup>

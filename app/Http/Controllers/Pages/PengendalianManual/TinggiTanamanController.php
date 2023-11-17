@@ -14,7 +14,7 @@ class TinggiTanamanController extends Controller
 {
     public function search_tanggal(Request $request, $id)
     {
-        if($request->ajax()) {
+        if ($request->ajax()) {
             $tanggal_tanam = Penanaman::find($id)->tanggal_tanam;
 
             return response()->json([
@@ -54,6 +54,14 @@ class TinggiTanamanController extends Controller
     public function store(Request $request)
     {
         $id_penanaman = $request->input('id_penanaman');
+        // Fetch the 'penanaman' record
+        $penanaman = Penanaman::find($id_penanaman);
+
+        // Check if 'status_hidup' is equal to 0
+        if ($penanaman && $penanaman->status_hidup == 0) {
+            return abort(Response::HTTP_NOT_FOUND);
+        }
+
         $tanggal_pencatatan = $this->formatDateDatabase($request->input('tanggal_pencatatan'));
         $tinggi_tanaman = $request->input('tinggi_tanaman');
         $satuan = $request->input('satuan');
@@ -72,8 +80,8 @@ class TinggiTanamanController extends Controller
         }
 
         $hst = TinggiTanaman::getHST($id_penanaman, $tanggal_pencatatan);
-        if ($hst === null) {
-            return abort(Response::HTTP_NOT_FOUND);
+        if ($hst < 0) {
+            return redirect()->back()->withInput()->withErrors('tanggal_catat', 'Tanggal pencatatan tidak valid');
         }
 
         TinggiTanaman::create([
@@ -130,6 +138,14 @@ class TinggiTanamanController extends Controller
         }
 
         $id_penanaman = $request->input('id_penanaman');
+        // Fetch the 'penanaman' record
+        $penanaman = Penanaman::find($id_penanaman);
+
+        // Check if 'status_hidup' is equal to 0
+        if ($penanaman && $penanaman->status_hidup == 0) {
+            return abort(Response::HTTP_NOT_FOUND);
+        }
+
         $tanggal_pencatatan = $this->formatDateDatabase($request->input('tanggal_pencatatan'));
 
         $hst = TinggiTanaman::getHST($id_penanaman, $tanggal_pencatatan);
