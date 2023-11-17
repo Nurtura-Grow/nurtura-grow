@@ -19,13 +19,7 @@ class LahanController extends Controller
      */
     public function index(Request $request)
     {
-        $data_lahan = InformasiLahan::activeLahanData();
-
-        // Replace space with dash and make it lowercase
-        foreach ($data_lahan as $lahan) {
-            $lahan->new_nama = strtolower(str_replace(" ", "-", $lahan->nama_lahan));
-        }
-
+        $data_lahan = InformasiLahan::activeLahanDataWithNewNama();
         $sideMenu = $this->getSideMenuList($request);
         return view('pages.lahan.index', [
             'sideMenu' => $sideMenu,
@@ -40,11 +34,14 @@ class LahanController extends Controller
             $search = $request->input('search');
 
             // Perform the search in your database
-            $data_lahan = InformasiLahan::where('nama_lahan', 'like', '%' . $search . '%')
-                ->orWhere('kecamatan', 'like', '%' . $search . '%')
-                ->orWhere('kota', 'like', '%' . $search . '%')
-                ->orWhere('alamat', 'like', '%' . $search . '%')
-                ->where('deleted_by', null)->where('deleted_at', null)
+            $data_lahan = InformasiLahan::where(function ($query) use ($search) {
+                $query->where('nama_lahan', 'like', '%' . $search . '%')
+                    ->orWhere('kecamatan', 'like', '%' . $search . '%')
+                    ->orWhere('kota', 'like', '%' . $search . '%')
+                    ->orWhere('alamat', 'like', '%' . $search . '%');
+            })
+                ->whereNull('deleted_by')
+                ->whereNull('deleted_at')
                 ->get();
 
             foreach ($data_lahan as $lahan) {
@@ -169,7 +166,7 @@ class LahanController extends Controller
 
         $infoLahan = InformasiLahan::find($id);
 
-        if($infoLahan){
+        if ($infoLahan) {
             $infoLahan->update([
                 "nama_lahan" => $nama_lahan,
                 "deskripsi" => $deskripsi,

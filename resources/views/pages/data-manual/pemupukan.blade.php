@@ -11,7 +11,7 @@
         <div class="overflow-x-auto scrollbar-hidden">
             <form method="POST" action="{{ route('manual.pemupukan.store') }}">
                 @csrf
-                @include('pages.data-manual.nama-lahan')
+                @include('pages.data-manual.components.nama-lahan')
 
                 <div class="form-inline mt-5">
                     <label for="volume_pemupukan" class="form-label sm:w-32">Volume Pemupukan</label>
@@ -68,4 +68,4 @@
     </div>
 @endsection
 
-@include('pages.data-manual.scripts')
+@include('pages.data-manual.components.scripts')

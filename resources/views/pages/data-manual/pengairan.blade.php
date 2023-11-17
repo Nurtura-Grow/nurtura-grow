@@ -10,7 +10,7 @@
     <div class="intro-y box p-5 mt-5 md:min-h-[40vh] lg:min-h-[70vh]">
         <form method="POST" action="{{ route('manual.pengairan.store') }}">
             @csrf
-            @include('pages.data-manual.nama-lahan')
+            @include('pages.data-manual.components.nama-lahan')
 
             <div class="form-inline mt-5">
                 <label for="volume_pengairan" class="form-label sm:w-32">Volume Pengairan</label>
@@ -66,4 +66,4 @@
     </div>
 @endsection
 
-@include('pages.data-manual.scripts')
+@include('pages.data-manual.components.scripts')

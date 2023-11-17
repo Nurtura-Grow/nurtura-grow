@@ -74,6 +74,7 @@ Route::group([
         'as' => 'manual.'
     ], function () {
         Route::resource('/tinggi', TinggiTanamanManualController::class)->except(['index', 'show']);
+        Route::get('/tinggi/penanaman/{id}', [TinggiTanamanManualController::class, 'search_tanggal'])->name('tinggi.search_tanggal');
         Route::resource('/pengairan', PengairanManualController::class)->except(['index', 'show']);
         Route::resource('/pemupukan', PemupukanManualController::class)->except(['index', 'show']);
     });

@@ -6,31 +6,34 @@
             <th class="border-b-2 whitespace-nowrap">Nama Lahan</th>
             <th class="border-b-2 whitespace-nowrap">HST</th>
             <th class="border-b-2 whitespace-nowrap">Tinggi Tanaman</th>
-            <th class="border-b-2 whitespace-nowrap">Ditambahkan Oleh</th>
-            <th class="border-b-2 whitespace-nowrap">Ditambahkan Pada</th>
+            <th class="border-b-2 whitespace-nowrap">Tanggal Tanam</th>
+            <th class="border-b-2 whitespace-nowrap">Tanggal Pengukuran</th>
+            <th class="border-b-2 whitespace-nowrap">Diukur Oleh</th>
             <th class="border-b-2 whitespace-nowrap">Aksi</th>
         </tr>
     </thead>
     <tbody>
-        @for ($i = 0; $i < 10; $i++)
+        @foreach ($tinggiTanaman as $tanaman)
             <tr>
-                <td class="border-b">{{ $i }}</td>
-                <td class="border-b">Penanaman 1</td>
-                <td class="border-b">Lahan {{ $i }} </td>
-                <td class="border-b">HST {{ $i }}</td>
-                <td class="border-b">Tinggi Tanaman {{ $i }}</td>
-                <td class="border-b">Ditambahkan Oleh {{ $i }}</td>
-                <td class="border-b">Ditambahkan Pada {{ $i }}</td>
+                <td class="border-b">{{ $loop->index + 1 }}</td>
+                <td class="border-b">{{ $tanaman->nama_penanaman }}</td>
+                <td class="border-b">{{ $tanaman->nama_lahan }} </td>
+                <td class="border-b">{{ $tanaman->hari_setelah_tanam }}</td>
+                <td class="border-b">{{ $tanaman->tinggi_tanaman_mm }} mm</td>
+                <td class="border-b">{{ $tanaman->tanggal_tanam }}</td>
+                <td class="border-b">{{ $tanaman->ditambahkan_pada }}</td>
+                <td class="border-b">{{ $tanaman->created_by }}</td>
                 <td class="border-b">
-                    <a href="#" class="mr-4 whitespace-nowrap">
+                    <a href="{{ route('manual.tinggi.edit', ['tinggi' => $tanaman->id_tinggi_tanaman]) }}"
+                        class="mr-4 whitespace-nowrap">
                         <i class="w-4 h-4 mr-1 fa-solid fa-pencil"></i>Ubah
                     </a>
-                    <span class="text-danger deletePenanaman hover:cursor-pointer whitespace-nowrap" data-tanaman=''
-                        data-tw-toggle="modal" data-tw-target="#deleteRiwayatTinggi"><i
-                            class="w-4 h-4 mr-1 fa-solid fa-trash"></i>Hapus</span>
+                    <span class="text-danger deleteRiwayatTinggi hover:cursor-pointer whitespace-nowrap"
+                        data-tanaman='{{ $tanaman->id_tinggi_tanaman }}' data-tw-toggle="modal" onclick="changeAttribute(this)"
+                        data-tw-target="#deleteRiwayatTinggi"><i class="w-4 h-4 mr-1 fa-solid fa-trash"></i>Hapus</span>
                 </td>
             </tr>
-        @endfor
+        @endforeach
     </tbody>
 </table>
 
@@ -60,3 +63,16 @@
         </div>
     </div>
 </div>
+
+@push('scripts')
+    <script>
+        function changeAttribute(element) {
+            console.log("click");
+            const formRiwayatTinggi = document.getElementById('formRiwayatTinggi');
+            console.log(formRiwayatTinggi);
+            console.log(element.getAttribute('data-tanaman'));
+            formRiwayatTinggi.setAttribute('action', '/manual/tinggi/' + element.getAttribute(
+                'data-tanaman'));
+        };
+    </script>
+@endpush

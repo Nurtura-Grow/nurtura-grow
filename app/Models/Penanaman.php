@@ -73,11 +73,6 @@ class Penanaman extends Model
         return $this->hasMany(LogAksi::class, 'id_penanaman', 'id_penanaman');
     }
 
-    public function penanaman_user(): HasOne
-    {
-        return $this->hasOne(PenanamanUser::class, 'id_penanaman', 'id_penanaman');
-    }
-
     public function rekomendasi_pengairan(): HasMany
     {
         return $this->hasMany(RekomendasiPengairan::class, 'id_penanaman', 'id_penanaman');
@@ -86,5 +81,21 @@ class Penanaman extends Model
     public function tinggi_tanaman(): HasMany
     {
         return $this->hasMany(TinggiTanaman::class, 'id_penanaman', 'id_penanaman');
+    }
+
+    // Created By, Updated By, Deleted By
+    public function userCreatedBy(): BelongsTo
+    {
+        return $this->belongsTo('App\Models\User', 'created_by', 'id_user');
+    }
+
+    public function userUpdatedBy(): BelongsTo
+    {
+        return $this->belongsTo('App\Models\User', 'updated_by', 'id_user');
+    }
+
+    public function userDeletedBy(): BelongsTo
+    {
+        return $this->belongsTo('App\Models\User', 'deleted_by', 'id_user');
     }
 }

@@ -2,14 +2,29 @@
 
 namespace App\Http\Controllers\Pages\PengendalianManual;
 
-use App\Models\InformasiLahan;
 use App\Http\Controllers\Controller;
+use App\Models\Penanaman;
 use App\Models\TinggiTanaman;
+use App\Models\InformasiLahan;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
 class TinggiTanamanController extends Controller
 {
+    public function search_tanggal(Request $request, $id)
+    {
+        if($request->ajax()) {
+            $tanggal_tanam = Penanaman::find($id)->tanggal_tanam;
+
+            return response()->json([
+                'tanggal_tanam' => $tanggal_tanam,
+            ], 200);
+        } else {
+            return abort(Response::HTTP_NOT_FOUND);
+        }
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -24,9 +39,12 @@ class TinggiTanamanController extends Controller
             }]);
         }
 
+        $tanggalSekarang = $this->formatDateUI(now());
+
         return view('pages.data-manual.tinggi-tanaman', [
             'sideMenu' => $sideMenu,
             'seluruhLahan' => $lahan,
+            'tanggalSekarang' => $tanggalSekarang,
         ]);
     }
 
@@ -50,18 +68,12 @@ class TinggiTanamanController extends Controller
                 break;
 
             default:
-                return response()->json([
-                    "status" => "400",
-                    "message" => "Satuan tidak dikenali",
-                ], 400);
+                return abort(Response::HTTP_NOT_FOUND);
         }
 
         $hst = TinggiTanaman::getHST($id_penanaman, $tanggal_pencatatan);
         if ($hst === null) {
-            return response()->json([
-                "status" => "400",
-                "message" => "Penanaman tidak ditemukan",
-            ], 400);
+            return abort(Response::HTTP_NOT_FOUND);
         }
 
         TinggiTanaman::create([
@@ -78,9 +90,33 @@ class TinggiTanamanController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Request $request, string $id)
     {
-        //
+        $sideMenu = $this->getSideMenuList($request);
+
+        $tinggi_tanaman = TinggiTanaman::find($id);
+
+        if (!$tinggi_tanaman) {
+            return abort(Response::HTTP_NOT_FOUND);
+        }
+
+        $penanaman = $tinggi_tanaman->penanaman()->first();
+        $tinggi_tanaman->id_penanaman = $penanaman->id_penanaman;
+        $tinggi_tanaman->nama_penanaman = $penanaman->nama_penanaman;
+        $tinggi_tanaman->tanggal_pengukuran = $this->formatDateUI($tinggi_tanaman->tanggal_pengukuran);
+
+        $lahan = InformasiLahan::activeLahanData();
+        foreach ($lahan as $informasiLahan) {
+            $informasiLahan->load(['penanaman' => function ($query) {
+                $query->whereNull('deleted_at')->whereNull('deleted_by');
+            }]);
+        }
+
+        return view('pages.data-manual.edit.tinggi-tanaman', [
+            'sideMenu' => $sideMenu,
+            'tanaman' => $tinggi_tanaman,
+            'seluruhLahan' => $lahan,
+        ]);
     }
 
     /**
@@ -88,7 +124,29 @@ class TinggiTanamanController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $tinggiTanaman = TinggiTanaman::find($id);
+        if (!$tinggiTanaman) {
+            return abort(Response::HTTP_NOT_FOUND);
+        }
+
+        $id_penanaman = $request->input('id_penanaman');
+        $tanggal_pencatatan = $this->formatDateDatabase($request->input('tanggal_pencatatan'));
+
+        $hst = TinggiTanaman::getHST($id_penanaman, $tanggal_pencatatan);
+        if ($hst < 0) {
+            return redirect()->back()->withInput()->withErrors('tanggal_catat', 'Tanggal pencatatan tidak valid');
+        }
+
+        $tinggiTanaman->update([
+            "id_penanaman" => $request->input('id_penanaman'),
+            "tinggi_tanaman_mm" => $request->input('tinggi_tanaman'),
+            "hari_setelah_tanam" => $hst,
+            "tanggal_pengukuran" => $tanggal_pencatatan,
+            "updated_by" => Auth::user()->id_user,
+            "updated_at" => now(),
+        ]);
+
+        return redirect()->route('riwayat.index');
     }
 
     /**
@@ -96,6 +154,16 @@ class TinggiTanamanController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $tinggiTanaman = TinggiTanaman::find($id);
+        if (!$tinggiTanaman) {
+            return abort(Response::HTTP_NOT_FOUND);
+        }
+
+        $tinggiTanaman->update([
+            "deleted_by" => Auth::user()->id_user,
+            "deleted_at" => now(),
+        ]);
+
+        return redirect()->route('riwayat.index');
     }
 }

@@ -21,6 +21,7 @@ export default defineConfig({
                 "resources/js/pages/datatable.js",
                 "resources/js/pages/googleMaps.js",
                 "resources/js/pages/searchLahan.js",
+                "resources/js/pages/getPenanamanTanggalTanam.js",
                 "resources/js/pages/litepicker.js",
                 "resources/js/pages/flatpickr.js",
                 // "resources/js/pages/testing.js",

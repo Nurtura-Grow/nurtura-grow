@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class TinggiTanaman extends Model
 {
@@ -23,15 +24,45 @@ class TinggiTanaman extends Model
 
         if (!$penanaman) {
             // Handle case where penanaman is not found
-            return null;
+            return -1;
         }
 
         $tanggal_tanam = Carbon::parse($penanaman->tanggal_tanam);
-        $tanggal_pencatatan = Carbon::parse($penanaman->tanggal_pencatatan);
+        $tanggal_pencatatan = Carbon::parse($tanggal_pencatatan);
 
-        // Calculate HST in days
-        $hst = $tanggal_pencatatan->diffInDays($tanggal_tanam);
-        return $hst;
+        if ($tanggal_pencatatan < $tanggal_tanam) {
+            return -2;
+        } else {
+            $hst = $tanggal_pencatatan->diffInDays($tanggal_tanam);
+            return $hst;
+        }
+    }
+
+    public static function activeTinggiDataWithDetails()
+    {
+        return self::with(['penanaman.informasi_lahan', 'userCreatedBy'])
+            ->whereNull('deleted_by')
+            ->whereNull('deleted_at')
+            ->get()
+            ->map(function ($tinggi) {
+                $penanaman = $tinggi->penanaman->first();
+                $tinggi->nama_penanaman = $penanaman->nama_penanaman;
+                $tinggi->nama_lahan = $penanaman->informasi_lahan->first()->nama_lahan;
+                $tinggi->created_by = $tinggi->userCreatedBy->first()->nama;
+                $tinggi->tanggal_tanam = app('App\Http\Controllers\Controller')->formatDateUI($penanaman->tanggal_tanam);
+                $tinggi->ditambahkan_pada = app('App\Http\Controllers\Controller')->formatDateUI($tinggi->tanggal_pengukuran);
+                return $tinggi;
+            })
+            ->sortBy([
+                ['nama_penanaman', 'asc'],
+                ['hari_setelah_tanam', 'asc'],
+            ]);
+    }
+
+
+    public static function activeTinggiData()
+    {
+        return self::where('deleted_by', null)->where('deleted_at', null)->get();
     }
 
     public function penanaman(): BelongsTo
@@ -42,5 +73,21 @@ class TinggiTanaman extends Model
     public function rekomendasi_pemupukan(): HasMany
     {
         return $this->hasMany(RekomendasiPemupukan::class, 'id_rekomendasi_pemupukan', 'id_rekomendasi_pemupukan');
+    }
+
+    // Created By, Updated By, Deleted By
+    public function userCreatedBy(): BelongsTo
+    {
+        return $this->belongsTo('App\Models\User', 'created_by', 'id_user');
+    }
+
+    public function userUpdatedBy(): BelongsTo
+    {
+        return $this->belongsTo('App\Models\User', 'updated_by', 'id_user');
+    }
+
+    public function userDeletedBy(): BelongsTo
+    {
+        return $this->belongsTo('App\Models\User', 'deleted_by', 'id_user');
     }
 }
