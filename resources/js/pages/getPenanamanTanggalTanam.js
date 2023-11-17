@@ -77,5 +77,6 @@ function changeDatePickerTinggiValue(tanggal_tanam) {
     datePickerTinggi.setOptions({
         minDate: tanggal_tanam,
         setDate: tanggal_tanam,
+        maxDate: moment().format("DD MMM YYYY"),
     });
 }
