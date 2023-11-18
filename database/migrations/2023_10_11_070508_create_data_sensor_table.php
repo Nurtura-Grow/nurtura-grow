@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('data_sensor', function (Blueprint $table) {
             $table->id('id_sensor');
             $table->foreignId('id_penanaman');
-            $table->foreignId('id_sumber_data');
             $table->float('suhu');
             $table->float('kelembapan_udara');
             $table->float('kelembapan_tanah');

@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\InformasiLahan;
+use App\Models\Penanaman;
 use App\Models\User;
 
 class LahanSeeder extends Seeder
@@ -24,6 +24,17 @@ class LahanSeeder extends Seeder
             'kota' => 'East Java',
             'alamat' => '7MQH+JH Kare, Madiun Regency, East Java, Indonesia',
             'created_by' => $id_user
+        ]);
+
+        Penanaman::firstOrCreate([
+            'id_lahan' => InformasiLahan::first()->id_lahan,
+            'nama_penanaman' => 'Penanaman Bawang Merah 1',
+            'keterangan' => 'Ini tanaman Bawang Merah',
+            'tanggal_tanam' => now(),
+            'tanggal_panen' => null,
+            'status_hidup' => true,
+            'created_by' => $id_user,
+            'alat_terpasang' => true,
         ]);
     }
 }
