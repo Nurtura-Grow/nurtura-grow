@@ -44,3 +44,6 @@
 @endsection
 
 @include('pages.data-manual.components.scripts')
+@push('scripts')
+    @vite(['resources/js/pages/flatpickr.js', 'resources/js/pages/getPenanamanTanggalTanam.js'])
+@endpush

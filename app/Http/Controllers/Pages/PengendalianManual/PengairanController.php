@@ -22,9 +22,12 @@ class PengairanController extends Controller
             }]);
         }
 
+        $tanggalSekarang = $this->formatDateUI(now());
+
         return view('pages.data-manual.pengairan', [
             'sideMenu' => $sideMenu,
             'seluruhLahan' => $lahan,
+            'tanggalSekarang' => $tanggalSekarang
         ]);
     }
 

@@ -16,6 +16,8 @@ class PemupukanController extends Controller
         $sideMenu = $this->getSideMenuList($request);
         $lahan = InformasiLahan::activeLahanData();
 
+        $tanggalSekarang = $this->formatDateUI(now());
+
         foreach ($lahan as $informasiLahan) {
             $informasiLahan->load(['penanaman' => function ($query) {
                 $query->whereNull('deleted_at')->whereNull('deleted_by');
@@ -24,6 +26,7 @@ class PemupukanController extends Controller
         return view('pages.data-manual.pemupukan', [
             'sideMenu' => $sideMenu,
             'seluruhLahan' => $lahan,
+            'tanggalSekarang' => $tanggalSekarang,
         ]);
     }
 
