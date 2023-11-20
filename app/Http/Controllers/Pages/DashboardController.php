@@ -33,29 +33,30 @@ class DashboardController extends Controller
             'seluruhLahan' => $seluruhLahan,
             'penanaman' => $penanaman,
             'grafik' => [
+                'Suhu Udara' => [
+                    "name" => 'Suhu Udara',
+                    "data" => 20,
+                    "slug" => "suhu-udara",
+                    "color" => "rgb(0, 38, 35)"
+
+                ],
                 'Kelembapan Udara' => [
                     "name" => "Kelembapan Udara",
                     "data" => 30,
                     "slug" => "kelembapan-udara",
-                    "color" => "rgb-dark"
+                    "color" => "rgb(87, 180, 146)",
                 ],
                 'Kelembapan Tanah' => [
                     "name" => 'Kelembapan Tanah',
-                    "data" => 40,
+                    "data" => 50,
                     "slug" => "kelembapan-tanah",
-                    "color" => "primary",
+                    "color" => "rgb(239, 123, 69)",
                 ],
                 'pH Tanah' => [
                     "name" => 'pH Tanah',
                     "data" => 80,
                     "slug" => "ph-tanah",
-                    "color" => "rgb-orange",
-                ],
-                'Suhu Udara' => [
-                    "name" => 'Suhu Udara',
-                    "data" => 20,
-                    "slug" => "suhu-udara",
-                    "color" => "rgb-yellow",
+                    "color" => "rgb(246, 174, 45)",
                 ],
             ]
         ]);
