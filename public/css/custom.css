@@ -25,6 +25,11 @@
     background-color: transparent;
     vertical-align: middle;
     box-sizing: content-box;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    border-radius: 50%;
+    overflow: hidden;
 }
 .radial-progress::-moz-progress-bar {
     appearance: none;
