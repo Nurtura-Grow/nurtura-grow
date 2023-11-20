@@ -45,5 +45,5 @@
 
 @include('pages.data-manual.components.scripts')
 @push('scripts')
-    @vite(['resources/js/pages/flatpickr.js', 'resources/js/pages/getPenanamanTanggalTanam.js'])
+    @vite(['resources/js/pages/data-manual/waktuMulaiSelesai', 'resources/js/pages/data-manual/getPenanamanTanggalTanam.js'])
 @endpush

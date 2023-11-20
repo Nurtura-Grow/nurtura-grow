@@ -82,13 +82,14 @@ function renderCarousel(data) {
     }
 }
 
-if (lahan == null) {
-    renderCarousel(seluruhLahan);
-    $(window).on("resize", function () {
+if(routeName == "lahan.index"){
+    if (lahan == null) {
         renderCarousel(seluruhLahan);
-    });
+        $(window).on("resize", function () {
+            renderCarousel(seluruhLahan);
+        });
+    }
 }
-
 
 $("#search-lahan").on("keyup", debounce(function () {
     var searchTerm = $(this).val();
