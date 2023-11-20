@@ -41,6 +41,8 @@ export default {
                     'danger': 'rgb(220, 38, 38)',
                     'light': 'rgb(241, 245, 249)',
                     'dark': 'rgb(0, 38, 35)',
+                    'orange' : 'rgb(239, 123, 69)',
+                    'yellow' : 'rgb(246, 174, 45)',
                     'slate-50': 'rgb(248, 250, 252)',
                     'slate-100': 'rgb(241, 245, 249)',
                     'slate-200': 'rgb(226, 232, 240)',
@@ -103,6 +105,7 @@ export default {
                     "dark-primary": "21 94 117",
                 },
                 "theme-4": {
+
                     "primary": "49 46 129",
                     "secondary": "226 232 240",
                     "success": "5 150 105",

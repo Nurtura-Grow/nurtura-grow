@@ -1,5 +1,37 @@
 @extends('layout.side-menu')
 
+@push('styles')
+    <style>
+        .radial-progress {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        circle.bg-gray-200 {
+            stroke: currentColor;
+            fill: transparent;
+        }
+
+        circle.bg-green-500 {
+            stroke: currentColor;
+            fill: transparent;
+            stroke-dasharray: 400, 400;
+        }
+
+        text {
+            text-anchor: middle;
+        }
+    </style>
+@endpush
+
 @section('subcontent')
     {{-- Atas --}}
     <div class="grid grid-cols-12 gap-6 2xl:border-b-2 mb-5 pb-10 border-slate-300">
@@ -17,16 +49,23 @@
                     </div>
                     {{-- Container Grafik (grow = h-full) --}}
                     <div class="intro-y grow flex flex-wrap -mx-4 mt-4">
-                        @for ($i = 1; $i <= 4; $i++)
+                        @foreach ($grafik as $graf)
                             <div class="w-full sm:w-1/2 xl:w-1/4 px-4 mb-6">
                                 <div class="report-box h-full zoom-in">
-                                    <div class="box  p-5 h-full">
-                                        {{-- Isi Grafik 1 --}}
-                                        <canvas  id="grafik-{{ $i }}"></canvas>
+                                    <div class="box p-5 h-full text-center">
+                                        {{-- Judul Grafik --}}
+                                        <p class="mb-2 font-semibold">{{ $graf['name'] }}</p>
+                                        {{-- Isi Grafik --}}
+                                        <div class="radial-progress text-{{ $graf['color'] }}"
+                                            style="--value:{{ $graf['data'] }}; --thickness:1rem;" role="progressbar">
+                                            <span class='text-rgb-dark font-semibold'>
+                                                {{ $graf['data'] }}%
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        @endfor
+                        @endforeach
                     </div>
                 </div>
 
@@ -48,7 +87,7 @@
                             <div class="report-box h-full zoom-in">
                                 <div class="box p-5 h-full">
                                     {{-- Isi Grafik Keseluruhan --}}
-                                    <p>Grafik {{ $i }}</p>
+                                    <p>Grafik 5</p>
                                 </div>
                             </div>
                         </div>

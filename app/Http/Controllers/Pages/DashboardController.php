@@ -32,6 +32,32 @@ class DashboardController extends Controller
             'sideMenu' => $sideMenu,
             'seluruhLahan' => $seluruhLahan,
             'penanaman' => $penanaman,
+            'grafik' => [
+                'Kelembapan Udara' => [
+                    "name" => "Kelembapan Udara",
+                    "data" => 30,
+                    "slug" => "kelembapan-udara",
+                    "color" => "rgb-dark"
+                ],
+                'Kelembapan Tanah' => [
+                    "name" => 'Kelembapan Tanah',
+                    "data" => 40,
+                    "slug" => "kelembapan-tanah",
+                    "color" => "primary",
+                ],
+                'pH Tanah' => [
+                    "name" => 'pH Tanah',
+                    "data" => 80,
+                    "slug" => "ph-tanah",
+                    "color" => "rgb-orange",
+                ],
+                'Suhu Udara' => [
+                    "name" => 'Suhu Udara',
+                    "data" => 20,
+                    "slug" => "suhu-udara",
+                    "color" => "rgb-yellow",
+                ],
+            ]
         ]);
     }
 }
