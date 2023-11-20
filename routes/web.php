@@ -61,6 +61,12 @@ Route::group([
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+    // Data Dashboard JSON
+    Route::get('/dashboard/temperature', [DashboardController::class, 'temperature'])->name('dashboard.temperature');
+    Route::get('/dashboard/humidity', [DashboardController::class, 'humidity'])->name('dashboard.humidity');
+    Route::get('/dashboard/soilmoisture', [DashboardController::class, 'soilmoisture'])->name('dashboard.soilmoisture');
+    Route::get('/dashboard/ph', [DashboardController::class, 'ph'])->name('dashboard.ph');
+
     // Route Lahan
     Route::resource('lahan', LahanController::class)->except(['show']);
     Route::get('/lahan/search', [LahanController::class, 'search_lahan'])->name('lahan.search');

@@ -16,6 +16,7 @@ class DashboardController extends Controller
         $seluruhLahan = InformasiLahan::activeLahanData();
 
         $penanaman = Penanaman::activePenanamanData();
+        $jumlahLahan = 6;
 
         foreach ($penanaman as $tanaman) {
             $tanaman->nama_lahan = $tanaman->informasi_lahan->nama_lahan;
@@ -26,12 +27,13 @@ class DashboardController extends Controller
             $tanaman->default_hari = Penanaman::$jumlahHST;
         }
 
-        $penanaman = collect($penanaman)->sortByDesc('hst')->take(4)->values();
+        $penanaman = collect($penanaman)->sortByDesc('hst')->take($jumlahLahan)->values();
 
         return view('pages.dashboard', [
             'sideMenu' => $sideMenu,
             'seluruhLahan' => $seluruhLahan,
             'penanaman' => $penanaman,
+            'jumlahLahan' => $jumlahLahan,
             'grafik' => [
                 'Suhu Udara' => [
                     "name" => 'Suhu Udara',

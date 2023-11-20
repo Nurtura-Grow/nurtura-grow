@@ -92,7 +92,7 @@
                         {{-- Cotainer kotak-kotak --}}
                         <div class="mt-3 grid grid-cols-12 2xl:gap-0 md:gap-6">
                             {{-- Pengulangan Kotak sebanyak 4 kali --}}
-                            @for ($i = 0; $i < 6; $i++)
+                            @for ($i = 0; $i < $jumlahLahan; $i++)
                                 <div class="col-span-12 2xl:col-span-12 md:col-span-6 intro-y mt-0">
                                     <div
                                         class="intro-x box {{ isset($penanaman[$i]) ? 'px-5 py-3' : 'flex flex-col justify-center items-center' }} mb-3 zoom-in min-h-[100px]">
