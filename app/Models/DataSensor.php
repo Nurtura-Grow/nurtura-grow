@@ -23,25 +23,4 @@ class DataSensor extends Model
     {
         return $this->belongsTo(Penanaman::class, 'id_penanaman', 'id_penanaman');
     }
-
-    public function sumber_data_sensor(): BelongsTo
-    {
-        return $this->belongsTo(SumberDataSensor::class, 'id_sumber_data', 'id_sumber_data');
-    }
-
-    // Created By, Updated By, Deleted By
-    public function userCreatedBy(): BelongsTo
-    {
-        return $this->belongsTo('App\Models\User', 'created_by', 'id_user');
-    }
-
-    public function userUpdatedBy(): BelongsTo
-    {
-        return $this->belongsTo('App\Models\User', 'updated_by', 'id_user');
-    }
-
-    public function userDeletedBy(): BelongsTo
-    {
-        return $this->belongsTo('App\Models\User', 'deleted_by', 'id_user');
-    }
 }
