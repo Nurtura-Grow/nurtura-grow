@@ -22,7 +22,7 @@
                                 <div class="report-box h-full zoom-in">
                                     <div class="box  p-5 h-full">
                                         {{-- Isi Grafik 1 --}}
-                                        <p>Grafik {{ $i }}</p>
+                                        <canvas  id="grafik-{{ $i }}"></canvas>
                                     </div>
                                 </div>
                             </div>
@@ -179,5 +179,8 @@
     @include('pages.components.modal-datepicker')
 @endsection
 
+@push('scripts')
+    @vite(['resources/js/pages/dashboard/chart.js'])
+@endpush
 @include('pages.components.datatable-styles')
 @include('pages.lahan.scripts')
