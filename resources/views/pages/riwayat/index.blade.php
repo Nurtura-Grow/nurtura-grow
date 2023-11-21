@@ -21,6 +21,11 @@
                     </button>
                 </li>
 
+                <li id="riwayat-sensor" class="nav-item flex-1" role="presentation">
+                    <button class="nav-link w-full py-2" data-tw-toggle="pill" data-tw-target="#data-sensor" type="button"
+                        role="tab" aria-controls="data-sensor" aria-selected="false"> Data Sensor </button>
+                </li>
+
                 <li id="riwayat-pemupukan" class="nav-item flex-1" role="presentation">
                     <button class="nav-link w-full py-2" data-tw-toggle="pill" data-tw-target="#pemupukan" type="button"
                         role="tab" aria-controls="pemupukan" aria-selected="false"> Pemupukan </button>
@@ -37,6 +42,11 @@
                     aria-labelledby="riwayat-tinggi">
                     @include('pages.riwayat.tinggi-tanaman')
                 </div>
+                <div id="data-sensor" class="tab-pane leading-relaxed w-full" role="tabpanel"
+                    aria-labelledby="riwayat-sensor">
+                    @include('pages.riwayat.data-sensor')
+                </div>
+
                 <div id="pemupukan" class="tab-pane leading-relaxed w-full" role="tabpanel"
                     aria-labelledby="riwayat-pemupukan">
                     @include('pages.riwayat.pemupukan')
