@@ -31,6 +31,7 @@ $('.chooseDate').on('click', function () {
     }
 })
 
+// If "lainnya" is chosen, set hidden class on .dateLainnya
 function datelainnya() {
     // If dateLainnya have hidden
     if ($('.dateLainnya').hasClass('hidden')) {
@@ -43,13 +44,13 @@ function datelainnya() {
 }
 
 /** Chart JS */
-
+// Pilih Jenis Grafik
 $('#pilihGrafik').on('change', function () {
     label = $(this).val();
     getDataAndUpdateChart(label);
 });
 
-// Get the chosen date
+// Tanggal yang dipilih
 $('#pilihTanggal').on('click', function () {
     tanggalDari = $('#tanggal_dari').val();
     tanggalHingga = $('#tanggal_hingga').val();
@@ -60,10 +61,17 @@ $('#pilihTanggal').on('click', function () {
 // Declare chart instance outside the functions
 let chartInstance;
 
-// Function to add data to the chart
+// Function to update data to the chart
 function addData(label, newData) {
     chartInstance.data.datasets[0].label = label;
     chartInstance.data.datasets[0].data = newData;
+
+    if(label == "pH Tanah"){
+        chartInstance.options.scales.y.max = 14;
+    } else {
+        chartInstance.options.scales.y.max = 100;
+    }
+
     chartInstance.update();
 }
 
@@ -139,7 +147,8 @@ function updateGraphs(dataGraphic, label = 'Suhu Udara') {
         const options = {
             scales: {
                 y: {
-                    beginAtZero: true
+                    min: 0,
+                    max: 100,
                 }
             }
         };
