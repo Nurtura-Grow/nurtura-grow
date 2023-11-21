@@ -64,7 +64,8 @@ class DashboardController extends Controller
                     "slug" => "ph-tanah",
                     "color" => "rgb(246, 174, 45)",
                 ],
-            ]
+            ],
+            'timestamp' => Carbon::parse($dataSensor->timestamp_pengukuran)->format('d M Y || H:i:s'),
         ]);
     }
 

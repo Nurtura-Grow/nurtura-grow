@@ -14,6 +14,10 @@
                         <h2 class="text-lg font-medium truncate mr-5">
                             Data Sensor Terkini
                         </h2>
+
+                        <p class="sm:ml-auto relative font-bold">
+                            {{ $timestamp }}
+                        </p>
                     </div>
                     {{-- Container Grafik (grow = h-full) --}}
                     <div class="intro-y grow flex flex-wrap -mx-4 mt-4">
@@ -47,7 +51,8 @@
                         </h2>
                         <div class="flex flex-row mt-3 sm:mt-0">
                             <div class="w-40 sm:w-56 lg:w-64">
-                                <select data-placeholder="Pilih grafik yang ditunjukkan" id="pilihGrafik" class="tom-select w-full">
+                                <select data-placeholder="Pilih grafik yang ditunjukkan" id="pilihGrafik"
+                                    class="tom-select w-full">
                                     @foreach ($grafik as $graf)
                                         <option>{{ $graf['name'] }}</option>
                                     @endforeach
