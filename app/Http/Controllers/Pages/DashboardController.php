@@ -29,7 +29,7 @@ class DashboardController extends Controller
             $tanaman->default_hari = Penanaman::$jumlahHST;
         }
 
-        $dataSensor = DataSensor::latest()->first();
+        $dataSensor = DataSensor:: orderBy('timestamp_pengukuran', 'desc')->first();
 
         $penanaman = collect($penanaman)->sortByDesc('hst')->take($jumlahLahan)->values();
 
