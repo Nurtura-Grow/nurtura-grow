@@ -43,6 +43,7 @@ class DashboardController extends Controller
                     "name" => 'Suhu Udara',
                     "data" => $dataSensor->suhu,
                     "slug" => "suhu-udara",
+                    "persentase" => $dataSensor->suhu,
                     "color" => "rgb(0, 38, 35)"
 
                 ],
@@ -50,18 +51,21 @@ class DashboardController extends Controller
                     "name" => "Kelembapan Udara",
                     "data" => $dataSensor->kelembapan_udara,
                     "slug" => "kelembapan-udara",
+                    "persentase" => $dataSensor->kelembapan_udara,
                     "color" => "rgb(87, 180, 146)",
                 ],
                 'Kelembapan Tanah' => [
                     "name" => 'Kelembapan Tanah',
                     "data" => $dataSensor->kelembapan_tanah,
                     "slug" => "kelembapan-tanah",
+                    "persentase" => $dataSensor->kelembapan_tanah,
                     "color" => "rgb(239, 123, 69)",
                 ],
                 'pH Tanah' => [
                     "name" => 'pH Tanah',
                     "data" => $dataSensor->ph_tanah,
                     "slug" => "ph-tanah",
+                    "persentase" => $dataSensor->ph_tanah / 14 * 100,
                     "color" => "rgb(246, 174, 45)",
                 ],
             ],

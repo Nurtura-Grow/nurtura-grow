@@ -29,7 +29,7 @@
                                         <p class="mb-2 font-semibold">{{ $graf['name'] }}</p>
                                         {{-- Isi Grafik --}}
                                         <div class="radial-progress"
-                                            style="color:{{ $graf['color'] }}; --value:{{ $graf['data'] }}; --thickness:1rem;"
+                                            style="color:{{ $graf['color'] }}; --value:{{ $graf['persentase'] }}; --thickness:1rem;"
                                             role="progressbar">
                                             <span class='text-rgb-dark font-semibold text-xl whitespace-nowrap'>
                                                 {{ $graf['data'] }}{{ Str::contains($graf['slug'], 'kelembapan') ? '%' : (Str::contains($graf['slug'], 'suhu') ? '°C' : '') }}
