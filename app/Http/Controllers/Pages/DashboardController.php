@@ -102,7 +102,7 @@ class DashboardController extends Controller
                     break;
             }
 
-            $data = DataSensor::whereBetween('timestamp_pengukuran', [$tanggalDari, $tanggalHingga])->get();
+            $data = DataSensor::whereBetween('timestamp_pengukuran', [$tanggalDari, $tanggalHingga])->orderBy('timestamp_pengukuran')->get();
 
             $suhuArray = $data->pluck('suhu')->toArray();
             $kelembapanUdaraArray = $data->pluck('kelembapan_udara')->toArray();
@@ -110,16 +110,18 @@ class DashboardController extends Controller
             $phTanahArray = $data->pluck('ph_tanah')->toArray();
             $timestampPengukuranArray = $data->pluck('timestamp_pengukuran')->toArray();
 
+            $formattedTimestamps = array_map(function ($timestamp) {
+                return Carbon::parse($timestamp)->format('d M Y H:i:s');
+            }, $timestampPengukuranArray);
+
             return response()->json([
                 'data' => [
                     "suhu" => $suhuArray,
                     "kelembapan_udara" => $kelembapanUdaraArray,
                     "kelembapan_tanah" => $kelembapanTanahArray,
                     "ph_tanah" => $phTanahArray,
-                    "timestamp_pengukuran" => $timestampPengukuranArray,
+                    "timestamp_pengukuran" => $formattedTimestamps,
                 ],
-                'tanggalDari' => $tanggalDari,
-                'tanggalHingga' => $tanggalHingga,
             ], 200);
         }
     }

@@ -88,7 +88,7 @@ function getDataAndUpdateChart(labelParam = label, tanggalDariParam = tanggalDar
             tanggalHingga: tanggalHinggaParam
         },
         success: function (response) {
-            console.log('response', response.data.suhu);
+            console.log('response', response.averages);
             var x, y;
             switch (labelParam) {
                 case 'Suhu Udara':
@@ -106,10 +106,6 @@ function getDataAndUpdateChart(labelParam = label, tanggalDariParam = tanggalDar
             }
 
             var x = response.data.timestamp_pengukuran;
-
-            console.log('x', x);
-            console.log(y);
-
             const convertedData = x.map((timestamp, index) => ({
                 x: timestamp,
                 y: y[index],
