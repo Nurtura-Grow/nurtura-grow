@@ -47,7 +47,7 @@
                         </h2>
                         <div class="flex flex-row mt-3 sm:mt-0">
                             <div class="w-40 sm:w-56 lg:w-64">
-                                <select data-placeholder="Pilih grafik yang ditunjukkan" class="tom-select w-full">
+                                <select data-placeholder="Pilih grafik yang ditunjukkan" id="pilihGrafik" class="tom-select w-full">
                                     @foreach ($grafik as $graf)
                                         <option>{{ $graf['name'] }}</option>
                                     @endforeach
@@ -198,7 +198,11 @@
 @endsection
 
 @push('scripts')
-    @vite(['resources/js/pages/dashboard/chart.js', 'resources/js/pages/dashboard/button.js'])
+    <script>
+        var urlDashboard = "{{ route('dashboard.data') }}";
+    </script>
+
+    @vite(['resources/js/pages/dashboard/chart.js'])
 @endpush
 @include('pages.components.datatable-styles')
 @include('pages.lahan.scripts')

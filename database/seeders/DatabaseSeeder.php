@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\SopPemupukan;
+use App\Models\DataSensor;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -21,6 +21,9 @@ class DatabaseSeeder extends Seeder
             SumberDataSeeder::class,
             SopPemupukanSeeder::class,
         ]);
+
+        DataSensor::factory()->count(100)->create();
+        
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Pages;
 
 use App\Http\Controllers\Controller;
+use App\Models\DataSensor;
 use App\Models\InformasiLahan;
 use App\Models\Penanaman;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -27,6 +29,8 @@ class DashboardController extends Controller
             $tanaman->default_hari = Penanaman::$jumlahHST;
         }
 
+        $dataSensor = DataSensor::latest()->first();
+
         $penanaman = collect($penanaman)->sortByDesc('hst')->take($jumlahLahan)->values();
 
         return view('pages.dashboard', [
@@ -37,30 +41,85 @@ class DashboardController extends Controller
             'grafik' => [
                 'Suhu Udara' => [
                     "name" => 'Suhu Udara',
-                    "data" => 20,
+                    "data" => $dataSensor->suhu,
                     "slug" => "suhu-udara",
                     "color" => "rgb(0, 38, 35)"
 
                 ],
                 'Kelembapan Udara' => [
                     "name" => "Kelembapan Udara",
-                    "data" => 30,
+                    "data" => $dataSensor->kelembapan_udara,
                     "slug" => "kelembapan-udara",
                     "color" => "rgb(87, 180, 146)",
                 ],
                 'Kelembapan Tanah' => [
                     "name" => 'Kelembapan Tanah',
-                    "data" => 50,
+                    "data" => $dataSensor->kelembapan_tanah,
                     "slug" => "kelembapan-tanah",
                     "color" => "rgb(239, 123, 69)",
                 ],
                 'pH Tanah' => [
                     "name" => 'pH Tanah',
-                    "data" => 80,
+                    "data" => $dataSensor->ph_tanah,
                     "slug" => "ph-tanah",
                     "color" => "rgb(246, 174, 45)",
                 ],
             ]
         ]);
+    }
+
+    public function data(Request $request)
+    {
+        // Receive json data
+        if ($request->ajax()) {
+            $dateChosen = $request->input('dateChosen');
+            $tanggalDari = $request->input('tanggalDari');
+            $tanggalHingga = $request->input('tanggalHingga');
+
+            switch ($dateChosen) {
+                case 'today':
+                    $tanggalDari = Carbon::today()->startOfDay()->toDateTimeString();
+                    $tanggalHingga = Carbon::today()->endOfDay()->toDateTimeString();
+                    break;
+                case 'yesterday':
+                    $tanggalDari = Carbon::yesterday()->startOfDay()->toDateTimeString();
+                    $tanggalHingga = Carbon::yesterday()->endOfDay()->toDateTimeString();
+                    break;
+                    // Last 7 Days
+                case 'last_week':
+                    $tanggalDari = Carbon::today()->subDays(6)->startOfDay()->toDateTimeString();
+                    $tanggalHingga = Carbon::today()->endOfDay()->toDateTimeString();
+                    break;
+                    // Last 30 Dayes
+                case 'last_month':
+                    $tanggalDari = Carbon::today()->subDays(29)->startOfDay()->toDateTimeString();
+                    $tanggalHingga = Carbon::today()->endOfDay()->toDateTimeString();
+                    break;
+                default:
+                    $tanggalDari = Carbon::parse($tanggalDari)->startOfDay()->toDateTimeString();
+                    $tanggalHingga = Carbon::parse($tanggalHingga)->endOfDay()->toDateTimeString();
+                    break;
+            }
+
+            $data = DataSensor::whereBetween('timestamp_pengukuran', [$tanggalDari, $tanggalHingga])->get();
+
+            $suhuArray = $data->pluck('suhu')->toArray();
+            $kelembapanUdaraArray = $data->pluck('kelembapan_udara')->toArray();
+            $kelembapanTanahArray = $data->pluck('kelembapan_tanah')->toArray();
+            $phTanahArray = $data->pluck('ph_tanah')->toArray();
+            $timestampPengukuranArray = $data->pluck('timestamp_pengukuran')->toArray();
+
+            return response()->json([
+                'data' => [
+                    "suhu" => $suhuArray,
+                    "kelembapan_udara" => $kelembapanUdaraArray,
+                    "kelembapan_tanah" => $kelembapanTanahArray,
+                    "ph_tanah" => $phTanahArray,
+                    "timestamp_pengukuran" => $timestampPengukuranArray,
+                ],
+                'tanggalDari' => $tanggalDari,
+                'tanggalHingga' => $tanggalHingga,
+            ], 200);
+        }
     }
 }
