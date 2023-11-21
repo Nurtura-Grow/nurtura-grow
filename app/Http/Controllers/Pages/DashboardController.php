@@ -103,8 +103,9 @@ class DashboardController extends Controller
             }
 
             $data = DataSensor::whereBetween('timestamp_pengukuran', [$tanggalDari, $tanggalHingga])->orderBy('timestamp_pengukuran')->get();
+            $bedaTanggal = Carbon::parse($tanggalDari)->diffInDays($tanggalHingga);
 
-            if ($dateChosen == 'last_week' || $dateChosen == 'last_month') {
+            if ($dateChosen == 'last_week' || $dateChosen == 'last_month' || ($dateChosen == 'lainnya' && $bedaTanggal > 1)) {
                 // Group the data by date
                 $groupedData = $data->groupBy(function ($item) {
                     return Carbon::parse($item->timestamp_pengukuran)->format('Y-m-d');

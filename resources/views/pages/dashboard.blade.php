@@ -207,7 +207,7 @@
         var urlDashboard = "{{ route('dashboard.data') }}";
     </script>
 
-    @vite(['resources/js/pages/dashboard/chart.js'])
+    @vite(['resources/js/pages/dashboard/chart.js', 'resources/js/pages/dashboard/litepickr.js'])
 @endpush
 @include('pages.components.datatable-styles')
 @include('pages.lahan.scripts')

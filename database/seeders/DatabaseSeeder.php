@@ -22,8 +22,8 @@ class DatabaseSeeder extends Seeder
             SopPemupukanSeeder::class,
         ]);
 
-        DataSensor::factory()->count(100)->create();
-        
+        DataSensor::factory()->count(300)->create();
+
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([

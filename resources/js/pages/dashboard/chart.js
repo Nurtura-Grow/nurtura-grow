@@ -66,7 +66,7 @@ function addData(label, newData) {
     chartInstance.data.datasets[0].label = (dateChosen == "last_week" || dateChosen == "last_month" ? "Rata-rata " : "") + label;
     chartInstance.data.datasets[0].data = newData;
 
-    if(label == "pH Tanah"){
+    if (label == "pH Tanah") {
         chartInstance.options.scales.y.max = 14;
     } else {
         chartInstance.options.scales.y.max = 100;
@@ -140,11 +140,24 @@ function updateGraphs(dataGraphic, label = 'Suhu Udara') {
 
         const options = {
             scales: {
+                x: {
+                    ticks: {
+                        autoSkip: true,
+                        minRotation: 0,
+                        maxRotation: 0,
+                    }
+                },
                 y: {
                     min: 0,
                     max: 100,
                 }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                }
             }
+
         };
 
         const config = {

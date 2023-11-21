@@ -23,7 +23,7 @@ export default defineConfig({
                 "resources/js/pages/datatable.js",
 
                 // Dashboard
-                "resources/js/pages/dashboard/button.js",
+                "resources/js/pages/dashboard/litepickr.js",
                 "resources/js/pages/dashboard/chart.js",
 
                 // Data Manual

@@ -42,12 +42,12 @@
                 {{-- Pilih Tanggal lainnya --}}
                 <div class="col-span-12 dateLainnya hidden sm:col-span-6">
                     <label for="tanggal_dari" class="form-label font-bold">Dari</label>
-                    <input type="text" id="tanggal_dari" class="datepicker form-control"
+                    <input type="text" id="tanggal_dari" class="datepickerDashboard form-control"
                         data-single-mode="true">
                 </div>
                 <div class="col-span-12 dateLainnya hidden sm:col-span-6">
                     <label for="tanggal_hingga" class="form-label font-bold">Hingga</label>
-                    <input type="text" id="tanggal_hingga" class="datepicker form-control"
+                    <input type="text" id="tanggal_hingga" class="datepickerDashboard form-control"
                         data-single-mode="true">
                 </div>
             </div>
