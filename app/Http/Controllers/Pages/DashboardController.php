@@ -104,15 +104,41 @@ class DashboardController extends Controller
 
             $data = DataSensor::whereBetween('timestamp_pengukuran', [$tanggalDari, $tanggalHingga])->orderBy('timestamp_pengukuran')->get();
 
-            $suhuArray = $data->pluck('suhu')->toArray();
-            $kelembapanUdaraArray = $data->pluck('kelembapan_udara')->toArray();
-            $kelembapanTanahArray = $data->pluck('kelembapan_tanah')->toArray();
-            $phTanahArray = $data->pluck('ph_tanah')->toArray();
-            $timestampPengukuranArray = $data->pluck('timestamp_pengukuran')->toArray();
+            if ($dateChosen == 'last_week' || $dateChosen == 'last_month') {
+                // Group the data by date
+                $groupedData = $data->groupBy(function ($item) {
+                    return Carbon::parse($item->timestamp_pengukuran)->format('Y-m-d');
+                });
 
-            $formattedTimestamps = array_map(function ($timestamp) {
-                return Carbon::parse($timestamp)->format('d M Y H:i:s');
-            }, $timestampPengukuranArray);
+                $suhuArray = [];
+                $kelembapanUdaraArray = [];
+                $kelembapanTanahArray = [];
+                $phTanahArray = [];
+                $timestampPengukuranArray = [];
+
+                // Rata-rata
+                foreach ($groupedData as $date => $group) {
+                    $suhuArray[] = $group->avg('suhu');
+                    $kelembapanUdaraArray[] = $group->avg('kelembapan_udara');
+                    $kelembapanTanahArray[] = $group->avg('kelembapan_tanah');
+                    $phTanahArray[] = $group->avg('ph_tanah');
+                    $timestampPengukuranArray[] = $date;
+                }
+
+                $formattedTimestamps = array_map(function ($timestamp) {
+                    return Carbon::parse($timestamp)->format('d M Y');
+                }, $timestampPengukuranArray);
+            } else {
+                $suhuArray = $data->pluck('suhu')->toArray();
+                $kelembapanUdaraArray = $data->pluck('kelembapan_udara')->toArray();
+                $kelembapanTanahArray = $data->pluck('kelembapan_tanah')->toArray();
+                $phTanahArray = $data->pluck('ph_tanah')->toArray();
+                $timestampPengukuranArray = $data->pluck('timestamp_pengukuran')->toArray();
+
+                $formattedTimestamps = array_map(function ($timestamp) {
+                    return Carbon::parse($timestamp)->format('d M Y H:i:s');
+                }, $timestampPengukuranArray);
+            }
 
             return response()->json([
                 'data' => [

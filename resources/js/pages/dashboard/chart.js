@@ -63,7 +63,7 @@ let chartInstance;
 
 // Function to update data to the chart
 function addData(label, newData) {
-    chartInstance.data.datasets[0].label = label;
+    chartInstance.data.datasets[0].label = (dateChosen == "last_week" || dateChosen == "last_month" ? "Rata-rata " : "") + label;
     chartInstance.data.datasets[0].data = newData;
 
     if(label == "pH Tanah"){
@@ -88,8 +88,8 @@ function getDataAndUpdateChart(labelParam = label, tanggalDariParam = tanggalDar
             tanggalHingga: tanggalHinggaParam
         },
         success: function (response) {
-            console.log('response', response.averages);
             var x, y;
+            var x = response.data.timestamp_pengukuran;
             switch (labelParam) {
                 case 'Suhu Udara':
                     y = response.data.suhu
@@ -104,8 +104,6 @@ function getDataAndUpdateChart(labelParam = label, tanggalDariParam = tanggalDar
                     y = response.data.ph_tanah
                     break;
             }
-
-            var x = response.data.timestamp_pengukuran;
             const convertedData = x.map((timestamp, index) => ({
                 x: timestamp,
                 y: y[index],
