@@ -19,7 +19,7 @@
                 }
             });
         });
-
     </script>
 
+    @vite(['resources/js/pages/data-manual/waktuMulaiSelesai', 'resources/js/pages/data-manual/getPenanamanTanggalTanam.js'])
 @endpush
