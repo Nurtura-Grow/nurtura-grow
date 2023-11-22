@@ -29,7 +29,7 @@ class DashboardController extends Controller
             $tanaman->default_hari = Penanaman::$jumlahHST;
         }
 
-        $dataSensor = DataSensor:: orderBy('timestamp_pengukuran', 'desc')->first();
+        $dataSensor = DataSensor::orderBy('timestamp_pengukuran', 'desc')->first();
 
         $penanaman = collect($penanaman)->sortByDesc('hst')->take($jumlahLahan)->values();
 
@@ -152,6 +152,8 @@ class DashboardController extends Controller
                     "kelembapan_tanah" => $kelembapanTanahArray,
                     "ph_tanah" => $phTanahArray,
                     "timestamp_pengukuran" => $formattedTimestamps,
+                    "tanggalDari" => Carbon::parse($tanggalDari)->format('d M Y H:i:s'),
+                    "tanggalHingga" => Carbon::parse($tanggalHingga)->format('d M Y H:i:s'),
                 ],
             ], 200);
         }

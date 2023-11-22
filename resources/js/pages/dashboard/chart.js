@@ -1,6 +1,9 @@
-import { Chart } from "chart.js/auto";
 import $ from 'jquery';
+import { Chart } from "chart.js/auto";
+import crosshair from 'chartjs-plugin-crosshair';
 import moment from "moment";
+
+Chart.register(crosshair);
 
 // Default Variable
 const today = moment().format('DD MMM, YYYY');
@@ -155,6 +158,24 @@ function updateGraphs(dataGraphic, label = 'Suhu Udara') {
             plugins: {
                 legend: {
                     display: false
+                },
+                crosshair: {
+                    line: {
+                        color: '#C3C6CD',  // crosshair line color
+                        width: 1,        // crosshair line width
+                        dashPattern: [5, 5] // crosshair line dash pattern
+                    },
+                    sync: {
+                        enabled: true,            // enable trace line syncing with other charts
+                        group: 1,                 // chart group
+                        suppressTooltips: false   // suppress tooltips when showing a synced tracer
+                    },
+                    zoom: {
+                        enabled: false, // enable zooming
+                    },
+                    snap: {
+                        enabled: true, // enable snapping to data points
+                    }
                 }
             }
 
@@ -164,6 +185,7 @@ function updateGraphs(dataGraphic, label = 'Suhu Udara') {
             type: 'line',
             data: data,
             options: options,
+            plugins: [crosshair],
         };
 
         // Create a new Chart.js instance and store it in the chartInstance variable

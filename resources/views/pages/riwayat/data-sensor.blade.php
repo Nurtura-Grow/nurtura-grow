@@ -1,68 +1,91 @@
-<table id="table" class="hover intro-y overflow-hidden" style="width:100%">
-    <thead>
-        <tr>
-            <th class="border-b-2 whitespace-nowrap">No</th>
-            <th class="border-b-2 whitespace-nowrap">Nama Penanaman</th>
-            <th class="border-b-2 whitespace-nowrap">Nama Lahan</th>
-            <th class="border-b-2 whitespace-nowrap">Suhu Udara</th>
-            <th class="border-b-2 whitespace-nowrap">Kelembapan Udara</th>
-            <th class="border-b-2 whitespace-nowrap">Kelembapan Tanah</th>
-            <th class="border-b-2 whitespace-nowrap">pH Tanah</th>
-            <th class="border-b-2 whitespace-nowrap">Diukur pada</th>
-        </tr>
-    </thead>
-    <tbody>
-        @for ($i = 0; $i < 10; $i++)
-            <tr>
-                <td class="border-b">{{ $i + 1 }}</td>
-                <td class="border-b">Blablabla</td>
-                <td class="border-b">Blablabla</td>
-                <td class="border-b">Blablabla</td>
-                <td class="border-b">Blablabla</td>
-                <td class="border-b">Blablabla</td>
-                <td class="border-b">Blablabla</td>
-                <td class="border-b">Blablabla</td>
-            </tr>
-        @endfor
-    </tbody>
-</table>
+<div class="mb-2" style="width: 100%">
+    <div class="block sm:flex border-b-4 items-center h-10">
+        <h1 class="font-bold text-lg">
+            Grafik Data Sensor
+        </h1>
+        <a class="relative ml-auto btn btn-primary h-8 text-white" data-tw-toggle="modal"
+            data-tw-target="#datepicker-modal-preview">
+            Pilih tanggal
+        </a>
+    </div>
 
-{{-- Modal untuk Delete --}}
-<div id="deleteRiwayatTinggi" class="modal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-body p-0">
-                <div class="p-5 text-center"> <i data-lucide="x-circle" class="w-16 h-16 text-danger mx-auto mt-3"></i>
-                    <div class="text-3xl mt-5">Apakah Anda yakin?</div>
-                    <div class="text-slate-500 mt-2">
-                        Apakah Anda sungguh ingin menghapus data ini? <br>Data ini tidak dapat dikembalikan.
-                    </div>
-                </div>
-                <div class="px-5 pb-8 flex justify-center">
-                    <button type="button" data-tw-dismiss="modal" class="btn btn-outline-secondary w-24 mr-1">
-                        Batalkan
-                    </button>
+    <div class="grid grid-cols-12 gap-x-6 gap-y-2">
+        {{-- Tanggal yang dipilih --}}
+        <div class="col-span-12 flex justify-center items-center ml-3 pt-5">
+            <span class="font-bold">Data pada tanggal:</span>
+            <span class="ml-1" id="tanggalTerpilih"></span>
+        </div>
 
-                    <form method="POST" id="formRiwayatTinggi">
-                        @method('DELETE')
-                        @csrf
-                        <button type="submit" class="btn btn-danger w-24">Hapus</button>
-                    </form>
-                </div>
-            </div>
+        {{-- Data Grafik --}}
+        <div class="col-span-12 xl:col-span-6 p-5">
+            <h1 class="font-bold text-md">
+                Data Sensor Suhu Udara
+            </h1>
+            <canvas id="suhu"></canvas>
+        </div>
+        <div class="col-span-12 xl:col-span-6 p-5">
+            <h1 class="font-bold text-md">
+                Data Sensor Kelembapan Udara
+            </h1>
+            <canvas id="kelembapan_udara"></canvas>
+        </div>
+        <div class="col-span-12 xl:col-span-6 p-5">
+            <h1 class="font-bold text-md">
+                Data Sensor Kelembapan Tanah
+            </h1>
+            <canvas id="kelembapan_tanah"></canvas>
+        </div>
+        <div class="col-span-12 xl:col-span-6 p-5">
+            <h1 class="font-bold text-md">
+                Data Sensor pH Tanah
+            </h1>
+            <canvas id="ph_tanah"></canvas>
         </div>
     </div>
 </div>
 
+{{-- Tabel --}}
+<div class="">
+    <h1 class="mb-3 text-lg font-bold border-b-4">Tabel Riwayat Data Sensor</h1>
+    <table id="table" class="hover intro-y overflow-x-hidden" style="width:100%">
+        <thead>
+            <tr>
+                <th class="border-b-2 whitespace-nowrap">No</th>
+                <th class="border-b-2 whitespace-nowrap">Nama Penanaman</th>
+                <th class="border-b-2 whitespace-nowrap">Nama Lahan</th>
+                <th class="border-b-2 whitespace-nowrap">Suhu Udara</th>
+                <th class="border-b-2 whitespace-nowrap">Kelembapan Udara</th>
+                <th class="border-b-2 whitespace-nowrap">Kelembapan Tanah</th>
+                <th class="border-b-2 whitespace-nowrap">pH Tanah</th>
+                <th class="border-b-2 whitespace-nowrap">Diukur pada</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($data_sensor as $data)
+                <tr>
+                    <td class="border-b">{{ $loop->index + 1 }}</td>
+                    <td class="border-b">{{ $data->nama_penanaman }}</td>
+                    <td class="border-b">{{ $data->nama_lahan }}</td>
+                    <td class="border-b">{{ $data->suhu }}</td>
+                    <td class="border-b">{{ $data->kelembapan_udara }}</td>
+                    <td class="border-b">{{ $data->kelembapan_tanah }}</td>
+                    <td class="border-b">{{ $data->ph_tanah }}</td>
+                    <td class="border-b" data-sort="{{ $data->attribute_timestamp }}">{{ $data->timestamp_pengukuran }}
+                    </td>
+                </tr>
+            @endforeach
+
+        </tbody>
+    </table>
+
+</div>
+
+@include('pages.components.modal-datepicker')
+
 @push('scripts')
     <script>
-        function changeAttribute(element) {
-            console.log("click");
-            const formRiwayatTinggi = document.getElementById('formRiwayatTinggi');
-            console.log(formRiwayatTinggi);
-            console.log(element.getAttribute('data-tanaman'));
-            formRiwayatTinggi.setAttribute('action', '/manual/tinggi/' + element.getAttribute(
-                'data-tanaman'));
-        };
+        var urlDashboard = "{{ route('dashboard.data') }}";
     </script>
+
+    @vite(['resources/js/pages/riwayat/data-sensor.js', 'resources/js/pages/riwayat/litepickr.js'])
 @endpush

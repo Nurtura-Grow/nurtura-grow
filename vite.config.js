@@ -6,7 +6,7 @@ export default defineConfig({
     resolve: {
         alias: {
             "@": normalizePath(resolve(__dirname, "resource")),
-            "$": "jQuery",
+            $: "jQuery",
             "~flatpickr": resolve(__dirname, "node_modules/flatpickr"),
         },
     },
@@ -37,6 +37,11 @@ export default defineConfig({
                 // Penanaman
                 "resources/js/pages/penanaman/litepicker.js",
                 // "resources/js/pages/testing.js",
+
+                // Riwayat
+                "resources/js/pages/riwayat/index.js",
+                "resources/js/pages/riwayat/data-sensor.js",
+                "resources/js/pages/riwayat/litepicker.js",
             ],
             refresh: true,
         }),
