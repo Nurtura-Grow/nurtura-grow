@@ -69,7 +69,7 @@
                     <div class="intro-y grow -mx-4 mt-12 sm:mt-5">
                         <div class="px-4 mb-4 h-full">
                             <div class="report-box h-full zoom-in">
-                                <div class="box p-5 h-full flex items-center justify-center">
+                                <div class="box p-5 h-full flex items-center justify-center" id="container-grafik">
                                     {{-- Isi Grafik Keseluruhan --}}
                                     <canvas class="w-fit h-fit" id="grafik-keseluruhan"></canvas>
                                 </div>

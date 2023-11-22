@@ -9,7 +9,7 @@
         </button>
     </div>
 
-    <div class="grid grid-cols-12 gap-x-6 gap-y-2">
+    <div class="grid grid-cols-12 gap-x-6 gap-y-1">
         {{-- Tanggal yang dipilih --}}
         <div class="col-span-12 flex flex-col sm:flex-row justify-center items-center ml-3 pt-5">
             <span class="font-bold">Data pada tanggal:</span>
@@ -17,29 +17,29 @@
         </div>
 
         {{-- Data Grafik --}}
-        <div class="col-span-12 xl:col-span-6 p-5">
+        <div class="col-span-12 lg:col-span-6 p-5" id="container_suhu">
             <h1 class="font-bold text-md">
                 Data Sensor Suhu Udara
             </h1>
-            <canvas id="suhu"></canvas>
+            <canvas class="grafik-data" id="suhu"></canvas>
         </div>
-        <div class="col-span-12 xl:col-span-6 p-5">
+        <div class="col-span-12 lg:col-span-6 p-5" id="container_kelembapan_udara">
             <h1 class="font-bold text-md">
                 Data Sensor Kelembapan Udara
             </h1>
-            <canvas id="kelembapan_udara"></canvas>
+            <canvas class="grafik-data" id="kelembapan_udara"></canvas>
         </div>
-        <div class="col-span-12 xl:col-span-6 p-5">
+        <div class="col-span-12 lg:col-span-6 p-5" id="container_kelembapan_tanah">
             <h1 class="font-bold text-md">
                 Data Sensor Kelembapan Tanah
             </h1>
-            <canvas id="kelembapan_tanah"></canvas>
+            <canvas class="grafik-data" id="kelembapan_tanah"></canvas>
         </div>
-        <div class="col-span-12 xl:col-span-6 p-5">
+        <div class="col-span-12 lg:col-span-6 p-5" id="container_ph_tanah">
             <h1 class="font-bold text-md">
                 Data Sensor pH Tanah
             </h1>
-            <canvas id="ph_tanah"></canvas>
+            <canvas class="grafik-data" id="ph_tanah"></canvas>
         </div>
     </div>
 </div>

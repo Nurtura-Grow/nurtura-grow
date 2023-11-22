@@ -2,8 +2,7 @@ import $ from 'jquery';
 import { Chart } from "chart.js/auto";
 import crosshair from 'chartjs-plugin-crosshair';
 import moment from "moment";
-import Litepicker from 'litepicker';
-import 'litepicker/dist/plugins/mobilefriendly';
+import { isEmpty } from 'lodash';
 
 // Register plugin crosshair
 Chart.register(crosshair);
@@ -88,19 +87,38 @@ function getDataAndUpdateChart(chartId) {
 
         success: function (response) {
             $('#tanggalTerpilih').text(response.data.tanggalDari + ' - ' + response.data.tanggalHingga);
+            if (isEmpty(response.data.timestamp_pengukuran)) {
+                $('.grafik-data').remove(); // this is my <canvas> element
+                $('#container_suhu').append('<canvas class="grafik-data w-full h-full" id="suhu"></canvas>')
+                $('#container_kelembapan_udara').append('<canvas class="grafik-data w-full h-full" id="kelembapan_udara"></canvas>')
+                $('#container_kelembapan_tanah').append('<canvas class="grafik-data w-full h-full" id="kelembapan_tanah"></canvas>')
+                $('#container_ph_tanah').append('<canvas class="grafik-data w-full h-full" id="ph_tanah"></canvas>')
 
-            const x = response.data.timestamp_pengukuran;
-            const y = response.data[chartId]; // Assuming the data keys match the chart IDs
-            const convertedData = x.map((timestamp, index) => ({
-                x: timestamp,
-                y: y[index],
-            }));
+                const canvases = document.querySelectorAll('.grafik-data');
 
-            // Call the function to update the chart with new data
-            if (chartInstances[chartId]) {
-                addData(chartInstances[chartId], convertedData);
+                canvases.forEach((canvas) => {
+                    const ctx = canvas.getContext('2d');
+
+                    ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear previous content
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.font = '16px Roboto';
+                    ctx.fillText("Tidak ada data", canvas.width / 2, canvas.height / 2);
+                });
             } else {
-                createChart(chartId, convertedData);
+                const x = response.data.timestamp_pengukuran;
+                const y = response.data[chartId]; // Assuming the data keys match the chart IDs
+                const convertedData = x.map((timestamp, index) => ({
+                    x: timestamp,
+                    y: y[index],
+                }));
+
+                // Call the function to update the chart with new data
+                if (chartInstances[chartId]) {
+                    addData(chartInstances[chartId], convertedData);
+                } else {
+                    createChart(chartId, convertedData);
+                }
             }
         },
         error: function (err) {

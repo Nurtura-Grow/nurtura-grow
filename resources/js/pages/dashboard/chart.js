@@ -2,6 +2,7 @@ import $ from 'jquery';
 import { Chart } from "chart.js/auto";
 import crosshair from 'chartjs-plugin-crosshair';
 import moment from "moment";
+import { isEmpty } from 'lodash';
 
 Chart.register(crosshair);
 
@@ -91,29 +92,43 @@ function getDataAndUpdateChart(labelParam = label, tanggalDariParam = tanggalDar
             tanggalHingga: tanggalHinggaParam
         },
         success: function (response) {
-            var x, y;
-            var x = response.data.timestamp_pengukuran;
-            switch (labelParam) {
-                case 'Suhu Udara':
-                    y = response.data.suhu
-                    break;
-                case 'Kelembapan Udara':
-                    y = response.data.kelembapan_udara
-                    break;
-                case 'Kelembapan Tanah':
-                    y = response.data.kelembapan_tanah
-                    break;
-                case 'pH Tanah':
-                    y = response.data.ph_tanah
-                    break;
-            }
-            const convertedData = x.map((timestamp, index) => ({
-                x: timestamp,
-                y: y[index],
-            }));
+            if (isEmpty(response.data.timestamp_pengukuran)) {
+                $('#grafik-keseluruhan').remove(); // this is my <canvas> element
+                $('#container-grafik').append('<canvas class="w-fit h-fit" id="grafik-keseluruhan"><canvas>');
 
-            // Call the function to update the chart with new data
-            updateGraphs(convertedData, labelParam);
+                const canvas = document.querySelector('#grafik-keseluruhan');
+                const ctx = canvas.getContext('2d');
+
+                ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear previous content
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.font = '24px Roboto';
+                ctx.fillText("Tidak ada data", canvas.width / 2, canvas.height / 2);
+            } else {
+                var x, y;
+                var x = response.data.timestamp_pengukuran;
+                switch (labelParam) {
+                    case 'Suhu Udara':
+                        y = response.data.suhu
+                        break;
+                    case 'Kelembapan Udara':
+                        y = response.data.kelembapan_udara
+                        break;
+                    case 'Kelembapan Tanah':
+                        y = response.data.kelembapan_tanah
+                        break;
+                    case 'pH Tanah':
+                        y = response.data.ph_tanah
+                        break;
+                }
+                const convertedData = x.map((timestamp, index) => ({
+                    x: timestamp,
+                    y: y[index],
+                }));
+
+                // Call the function to update the chart with new data
+                updateGraphs(convertedData, labelParam);
+            }
         },
         error: function (err) {
             console.log(err);
