@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -38,6 +39,8 @@ Route::group([
 
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::get('/register', [RegisterController::class, 'index'])->name('register');
+    Route::get('/forgot/password', [ForgotPasswordController::class, 'index'])->name('password');
+    Route::get('/verifikasi', [ForgotPasswordController::class, 'index_verifikasi'])->name('verifikasi');
 
     Route::group([
         'prefix' => 'auth',
@@ -45,6 +48,8 @@ Route::group([
     ], function () {
         Route::post('/login', [LoginController::class, 'login'])->name('login');
         Route::post('/register', [RegisterController::class, 'register'])->name('register');
+        Route::post('/forgot/password', [ForgotPasswordController::class, 'password'])->name('password');
+        Route::post('/verifikasi', [ForgotPasswordController::class, 'verifikasi'])->name('verifikasi');
     });
 });
 

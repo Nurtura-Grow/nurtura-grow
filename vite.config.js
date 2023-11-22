@@ -22,6 +22,9 @@ export default defineConfig({
                 // Pages
                 "resources/js/pages/datatable.js",
 
+                // Auth
+                "resources/js/auth/verifikasi-otp.js",
+
                 // Dashboard
                 "resources/js/pages/dashboard/litepickr.js",
                 "resources/js/pages/dashboard/chart.js",

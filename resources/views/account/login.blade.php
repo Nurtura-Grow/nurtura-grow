@@ -11,8 +11,8 @@
 @endpush
 
 @section('body')
-    <body class="flex min-h-screen p-0 m-0 bg-no-repeat bg-fixed bg-left bg-cover">
-        <div class="container sm:px-10 h-screen">
+    <body class="flex min-h-screen overflow-hidden p-0 m-0 bg-no-repeat bg-fixed bg-left bg-cover">
+        <div class="container px-6 sm:px-24 h-screen">
             <div class="block xl:grid grid-cols-2 gap-4">
                 <!-- BEGIN: Login Info -->
                 <div class="hidden xl:flex flex-col h-screen">
@@ -72,7 +72,7 @@
                                     <input name="remember_me" id="remember-me" type="checkbox" class="form-check-input border mr-2">
                                     <label class="cursor-pointer select-none" for="remember-me">Ingat saya</label>
                                 </div>
-                                <a href="">Lupa Password?</a>
+                                <a href="{{ route('password')}}">Lupa Password?</a>
                             </div>
 
                             <div class="intro-x mt-5 xl:mt-8 text-center xl:text-left">

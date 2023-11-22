@@ -12,8 +12,8 @@
 
 @section('body')
 
-    <body class="flex min-h-screen p-0 m-0 bg-no-repeat bg-fixed bg-left bg-cover">
-        <div class="container sm:px-10">
+    <body class="flex min-h-screen overflow-hidden p-0 m-0 bg-no-repeat bg-fixed bg-left bg-cover">
+        <div class="container px-6 sm:px-24">
             <div class="hidden xl:block absolute top-5 p-5">
                 <a href="{{ route('index') }}" class="-intro-x flex items-center">
                     <img alt="" class="w-10" src="{{ asset('images/logo.svg') }} ">

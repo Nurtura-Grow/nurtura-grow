@@ -10,7 +10,7 @@
     <div class="intro-y box p-5 mt-5 md:min-h-[40vh] lg:min-h-[70vh]">
         <form method="POST" action="{{ route('manual.pengairan.store') }}">
             @csrf
-            @include('pages.data-manual.components.nama-lahan')
+            @include('pages.data-manual.components.nama-lahan-pengairan-pemupukan')
 
             {{-- Tanggal Pengairan --}}
             <div class="form-inline mt-5">
