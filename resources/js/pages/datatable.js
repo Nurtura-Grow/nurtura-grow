@@ -30,12 +30,8 @@ $(document).ready(function () {
         },
     })
 
-    const searchInput = document.querySelector(".dataTables_filter input");
-    searchInput.classList.add("form-control");
-
-    const lengthSelect = document.querySelector(".dataTables_length select");
-    lengthSelect.classList.add("form-select");
-    lengthSelect.setAttribute("placeholder", "Cari data");
+    $('.dataTables_filter input').addClass('form-control');
+    $('.dataTables_length select').addClass('form-select').attr("placeholder", "Cari data");
 
     // Hide the initial hidden column
     table.columns('.hidden-column').visible(false);

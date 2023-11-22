@@ -61,6 +61,14 @@ Route::group([
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+    // Data Dashboard JSON
+    Route::group([
+        'prefix' => 'dashboard',
+        'as' => "dashboard."
+    ], function () {
+        Route::get('/data', [DashboardController::class, 'data'])->name('data');
+    });
+
     // Route Lahan
     Route::resource('lahan', LahanController::class)->except(['show']);
     Route::get('/lahan/search', [LahanController::class, 'search_lahan'])->name('lahan.search');

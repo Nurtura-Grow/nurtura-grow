@@ -21,5 +21,5 @@
         })
     </script>
 
-    @vite(["resources/js/pages/litepicker.js",])
+    @vite(["resources/js/pages/penanaman/litepicker.js",])
 @endpush

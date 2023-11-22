@@ -14,19 +14,31 @@
                         <h2 class="text-lg font-medium truncate mr-5">
                             Data Sensor Terkini
                         </h2>
+
+                        <p class="sm:ml-auto relative font-bold">
+                            {{ $timestamp }}
+                        </p>
                     </div>
                     {{-- Container Grafik (grow = h-full) --}}
                     <div class="intro-y grow flex flex-wrap -mx-4 mt-4">
-                        @for ($i = 1; $i <= 4; $i++)
+                        @foreach ($grafik as $graf)
                             <div class="w-full sm:w-1/2 xl:w-1/4 px-4 mb-6">
                                 <div class="report-box h-full zoom-in">
-                                    <div class="box  p-5 h-full">
-                                        {{-- Isi Grafik 1 --}}
-                                        <p>Grafik {{ $i }}</p>
+                                    <div class="box p-5 h-full text-center">
+                                        {{-- Judul Grafik --}}
+                                        <p class="mb-2 font-semibold">{{ $graf['name'] }}</p>
+                                        {{-- Isi Grafik --}}
+                                        <div class="radial-progress"
+                                            style="color:{{ $graf['color'] }}; --value:{{ $graf['persentase'] }}; --thickness:1rem;"
+                                            role="progressbar">
+                                            <span class='text-rgb-dark font-semibold text-xl whitespace-nowrap'>
+                                                {{ $graf['data'] }}{{ Str::contains($graf['slug'], 'kelembapan') ? '%' : (Str::contains($graf['slug'], 'suhu') ? '°C' : '') }}
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        @endfor
+                        @endforeach
                     </div>
                 </div>
 
@@ -34,21 +46,32 @@
                 <div class="basis-[40%] xl:basis-[60%] 2xl:basis-3/5 mt-2 flex flex-col">
                     {{-- Judul --}}
                     <div class="intro-y block sm:flex items-center h-10 mt-3">
-                        <h2 class="text-lg font-medium truncate mr-5 sm:mr-0">
+                        <h2 class="text-lg font-medium truncate mr-auto">
                             Data Seluruh Sensor
                         </h2>
-                        <a class="sm:ml-auto mt-3 sm:mt-0 relative btn btn-primary text-white" data-tw-toggle="modal"
-                            data-tw-target="#datepicker-modal-preview">
-                            Pilih tanggal
-                        </a>
+                        <div class="flex flex-row mt-3 sm:mt-0">
+                            <div class="w-40 sm:w-56 lg:w-64">
+                                <select data-placeholder="Pilih grafik yang ditunjukkan" id="pilihGrafik"
+                                    class="tom-select w-full">
+                                    @foreach ($grafik as $graf)
+                                        <option>{{ $graf['name'] }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <a class="ml-1 sm:ml-5 relative btn btn-primary text-white" data-tw-toggle="modal"
+                                data-tw-target="#datepicker-modal-preview">
+                                Pilih tanggal
+                            </a>
+                        </div>
                     </div>
                     {{-- Contaier Grafik --}}
                     <div class="intro-y grow -mx-4 mt-12 sm:mt-5">
-                        <div class="w-full px-4 mb-4 h-full">
+                        <div class="px-4 mb-4 h-full">
                             <div class="report-box h-full zoom-in">
-                                <div class="box p-5 h-full">
+                                <div class="box p-5 h-full flex items-center justify-center">
                                     {{-- Isi Grafik Keseluruhan --}}
-                                    <p>Grafik {{ $i }}</p>
+                                    <canvas class="w-fit h-fit" id="grafik-keseluruhan"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -60,7 +83,7 @@
 
         {{-- Kanan --}}
         <div class="col-span-12 2xl:col-span-3">
-            <div class="2xl:border-l border-slate-300 -mb-10 pb-10">
+            <div class="2xl:border-l h-full border-slate-300 -mb-10 pb-10">
                 <div class="2xl:pl-6 grid grid-cols-12 gap-x-6 2xl:gap-x-0 gap-y-6">
                     <!-- BEGIN: Hari Setelah Tanam -->
                     <div class="col-span-12  2xl:col-span-12 mt-3 2xl:mt-8">
@@ -74,7 +97,7 @@
                         {{-- Cotainer kotak-kotak --}}
                         <div class="mt-3 grid grid-cols-12 2xl:gap-0 md:gap-6">
                             {{-- Pengulangan Kotak sebanyak 4 kali --}}
-                            @for ($i = 0; $i < 4; $i++)
+                            @for ($i = 0; $i < $jumlahLahan; $i++)
                                 <div class="col-span-12 2xl:col-span-12 md:col-span-6 intro-y mt-0">
                                     <div
                                         class="intro-x box {{ isset($penanaman[$i]) ? 'px-5 py-3' : 'flex flex-col justify-center items-center' }} mb-3 zoom-in min-h-[100px]">
@@ -179,5 +202,12 @@
     @include('pages.components.modal-datepicker')
 @endsection
 
+@push('scripts')
+    <script>
+        var urlDashboard = "{{ route('dashboard.data') }}";
+    </script>
+
+    @vite(['resources/js/pages/dashboard/chart.js', 'resources/js/pages/dashboard/litepickr.js'])
+@endpush
 @include('pages.components.datatable-styles')
 @include('pages.lahan.scripts')

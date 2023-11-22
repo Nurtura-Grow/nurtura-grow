@@ -44,3 +44,6 @@
 @endsection
 
 @include('pages.data-manual.components.scripts')
+@push('scripts')
+    @vite(['resources/js/pages/data-manual/waktuMulaiSelesai', 'resources/js/pages/data-manual/getPenanamanTanggalTanam.js'])
+@endpush

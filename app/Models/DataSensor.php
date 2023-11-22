@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -15,6 +16,25 @@ class DataSensor extends Model
     protected $guarded = [
         'id_sensor'
     ];
+
+
+    public static function dataSensorWithDetails()
+    {
+        return self::with(['penanaman.informasi_lahan'])
+            ->get()
+            ->sortBy('timestamp_pengukuran')
+            ->map(function ($data_sensor) {
+                $penanaman = $data_sensor->penanaman->first();
+                $lahan = $penanaman->informasi_lahan->first();
+
+                $data_sensor->nama_lahan = $lahan->nama_lahan;
+                $data_sensor->nama_penanaman = $penanaman->nama_penanaman;
+                $data_sensor->attribute_timestamp = Carbon::parse($data_sensor->timestamp_pengukuran)->toIso8601String();
+                $data_sensor->timestamp_pengukuran = Carbon::parse($data_sensor->timestamp_pengukuran)->format('d M Y H:i:s');
+                return $data_sensor;
+            });
+    }
+
     public function informasi_lahan(): BelongsTo
     {
         return $this->belongsTo(InformasiLahan::class, 'id_lahan', 'id_lahan');
@@ -22,26 +42,5 @@ class DataSensor extends Model
     public function penanaman(): BelongsTo
     {
         return $this->belongsTo(Penanaman::class, 'id_penanaman', 'id_penanaman');
-    }
-
-    public function sumber_data_sensor(): BelongsTo
-    {
-        return $this->belongsTo(SumberDataSensor::class, 'id_sumber_data', 'id_sumber_data');
-    }
-
-    // Created By, Updated By, Deleted By
-    public function userCreatedBy(): BelongsTo
-    {
-        return $this->belongsTo('App\Models\User', 'created_by', 'id_user');
-    }
-
-    public function userUpdatedBy(): BelongsTo
-    {
-        return $this->belongsTo('App\Models\User', 'updated_by', 'id_user');
-    }
-
-    public function userDeletedBy(): BelongsTo
-    {
-        return $this->belongsTo('App\Models\User', 'deleted_by', 'id_user');
     }
 }
