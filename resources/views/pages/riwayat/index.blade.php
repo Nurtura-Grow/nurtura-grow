@@ -13,8 +13,8 @@
     </div>
 
     <div class="intro-y box p-5 mt-10 sm:mt-5">
-        <div class="overflow-x-auto scrollbar-hidden">
-            <ul class="nav nav-link-tabs" role="tablist" id="navigationBar">
+        <div class="">
+            <ul class="nav nav-link-tabs overflow-x-auto scrollbar-hidden" role="tablist" id="navigationBar">
                 <li id="riwayat-tinggi" class="nav-item flex-1" role="presentation">
                     <button class="nav-link w-full py-2 active" data-tw-toggle="pill" data-tw-target="#tinggi"
                         type="button" role="tab" aria-controls="tinggi" aria-selected="true"> Tinggi Tanaman
@@ -38,20 +38,20 @@
             </ul>
 
             <div class="tab-content mt-5 w-full">
-                <div id="tinggi" class="tab-pane leading-relaxed active w-full p-2" role="tabpanel"
+                <div id="tinggi" class="tab-pane leading-relaxed active w-full sm:p-2" role="tabpanel"
                     aria-labelledby="riwayat-tinggi">
                     @include('pages.riwayat.tinggi-tanaman')
                 </div>
-                <div id="data-sensor" class="tab-pane leading-relaxed w-full p-2" role="tabpanel"
+                <div id="data-sensor" class="tab-pane leading-relaxed w-full sm:p-2" role="tabpanel"
                     aria-labelledby="riwayat-sensor">
                     @include('pages.riwayat.data-sensor')
                 </div>
 
-                <div id="pemupukan" class="tab-pane leading-relaxed w-full p-2" role="tabpanel"
+                <div id="pemupukan" class="tab-pane leading-relaxed w-full sm:p-2" role="tabpanel"
                     aria-labelledby="riwayat-pemupukan">
                     @include('pages.riwayat.pemupukan')
                 </div>
-                <div id="pengairan" class="tab-pane leading-relaxed w-full p-2" role="tabpanel"
+                <div id="pengairan" class="tab-pane leading-relaxed w-full sm:p-2" role="tabpanel"
                     aria-labelledby="riwayat-pengairan">
                     @include('pages.riwayat.pengairan')
                 </div>

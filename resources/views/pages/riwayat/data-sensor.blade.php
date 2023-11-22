@@ -1,17 +1,17 @@
 <div class="mb-2" style="width: 100%">
-    <div class="block sm:flex border-b-4 items-center h-10">
+    <div class="flex flex-col sm:flex-row sm:border-b-4 items-center h-10 sticky top-16 md:top-0 bg-white z-[9999]">
         <h1 class="font-bold text-lg">
             Grafik Data Sensor
         </h1>
-        <a class="relative ml-auto btn btn-primary h-8 text-white" data-tw-toggle="modal"
+        <button class="sm:ml-auto btn btn-primary h-8 text-white" data-tw-toggle="modal"
             data-tw-target="#datepicker-modal-preview">
             Pilih tanggal
-        </a>
+        </button>
     </div>
 
     <div class="grid grid-cols-12 gap-x-6 gap-y-2">
         {{-- Tanggal yang dipilih --}}
-        <div class="col-span-12 flex justify-center items-center ml-3 pt-5">
+        <div class="col-span-12 flex flex-col sm:flex-row justify-center items-center ml-3 pt-5">
             <span class="font-bold">Data pada tanggal:</span>
             <span class="ml-1" id="tanggalTerpilih"></span>
         </div>
@@ -46,7 +46,7 @@
 
 {{-- Tabel --}}
 <div class="">
-    <h1 class="mb-3 text-lg font-bold border-b-4">Tabel Riwayat Data Sensor</h1>
+    <h1 class="mb-3 text-lg font-bold border-b-4 sticky top-16 md:top-0 bg-white z-[9999]">Tabel Riwayat Data Sensor</h1>
     <table id="table" class="hover intro-y overflow-x-hidden" style="width:100%">
         <thead>
             <tr>
