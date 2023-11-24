@@ -105,7 +105,7 @@
 
         <div class="w-full sm:w-auto flex mt-4 sm:mt-0" id="button-tampilkan-sop">
             <button class="btn bg-rgb-secondary text-white shadow-md">
-                <i class="fa-solid fa-eye mr-2"></i>Tampilkan SOP Pengairan
+                <i class="fa-solid fa-eye mr-2"></i>Tampilkan SOP dan Rekomendasi Pengairan
             </button>
         </div>
     </div>

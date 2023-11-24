@@ -12,7 +12,7 @@ $('#batalkan').on('click', function () {
     $('#rekomendasi-sistem').addClass('hidden');
 })
 
-// Tampilkan SOP
+// Tampilkan SOP dan Rekomendasi
 $('#button-tampilkan-sop').on('click', function () {
     $('#judul-section-sop').removeClass('hidden');
     $('#section-rekomendasi').removeClass('hidden');
