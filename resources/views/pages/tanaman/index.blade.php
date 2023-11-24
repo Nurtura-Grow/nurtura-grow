@@ -77,7 +77,7 @@
     </div>
 
     {{-- Modal untuk Delete --}}
-    <div id="deleteTanaman" class="modal" tabindex="-1" aria-hidden="true">
+    <div id="deleteTanaman" class="modal" tabindex="-1" aria-hidden="true" data-tw-backdrop="static">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body p-0">

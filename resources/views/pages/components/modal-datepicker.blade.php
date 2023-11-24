@@ -1,5 +1,5 @@
 <!-- BEGIN: Modal Content -->
-<div id="datepicker-modal-preview" class="modal" tabindex="-1" aria-hidden="true">
+<div id="datepicker-modal-preview" class="modal" tabindex="-1" aria-hidden="true" data-tw-backdrop="static">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <!-- BEGIN: Modal Header -->
