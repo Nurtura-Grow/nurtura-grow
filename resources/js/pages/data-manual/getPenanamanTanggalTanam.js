@@ -17,9 +17,27 @@ if (satuan) {
     })
 }
 
-const dateTinggi = document.querySelector(".dateTinggi");
+/** Litepicker */
+// Create Litepicker Element
+var customOptions = {
+    autoApply: false,
+    singleMode: true,
+    numberOfColumns: 1,
+    numberOfMonths: 1,
+    showWeekNumbers: false,
+    format: "DD MMM YYYY",
+    plugins: ['mobilefriendly'], // Plugins -> mobilefriendly: can swipe on mobile
+    dropdowns: {
+        minYear: 2000,
+        maxYear: null,
+        months: true,
+        years: true
+    }
+};
 
+const dateTinggi = document.querySelector(".dateTinggi");
 if (dateTinggi) {
+
     const datePickerTinggi = new Litepicker({
         element: dateTinggi,
         ...customOptions,
@@ -65,21 +83,4 @@ if (dateTinggi) {
         makeAjaxRequest(id_penanaman);
     });
 
-    /** Litepicker */
-    // Create Litepicker Element
-    var customOptions = {
-        autoApply: false,
-        singleMode: true,
-        numberOfColumns: 1,
-        numberOfMonths: 1,
-        showWeekNumbers: false,
-        format: "DD MMM YYYY",
-        plugins: ['mobilefriendly'], // Plugins -> mobilefriendly: can swipe on mobile
-        dropdowns: {
-            minYear: 2000,
-            maxYear: null,
-            months: true,
-            years: true
-        }
-    };
 }

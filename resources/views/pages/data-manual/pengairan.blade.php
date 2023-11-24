@@ -139,8 +139,8 @@
 
                             <div class="grid grid-cols-12 gap-2 w-auto sm:w-56 ml-4 mt-2">
                                 <input name="volume_pengairan" type="text" class="form-control col-span-6"
-                                    placeholder="10">
-                                <select class="form-select col-span-6" name="satuan">
+                                    placeholder="10" id="volume">
+                                <select class="form-select col-span-6" name="satuan" id="satuan">
                                     <option>L</option>
                                     <option selected>mL</option>
                                 </select>
