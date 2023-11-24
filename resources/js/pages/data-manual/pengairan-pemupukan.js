@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-// Menyesuaikan satuan tinggi tanaman
+// Menyesuaikan satuan volume
 const satuan = document.getElementById('satuan');
 if (satuan) {
     satuan.addEventListener('change', function () {

@@ -32,7 +32,7 @@ export default defineConfig({
                 // Data Manual
                 "resources/js/pages/data-manual/waktuMulaiSelesai",
                 "resources/js/pages/data-manual/getPenanamanTanggalTanam.js",
-                "resources/js/pages/data-manual/pengairan.js",
+                "resources/js/pages/data-manual/pengairan-pemupukan.js",
 
                 // Lahan
                 "resources/js/pages/lahan/googleMaps.js",

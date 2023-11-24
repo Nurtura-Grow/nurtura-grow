@@ -202,5 +202,5 @@
 @include('pages.data-manual.components.scripts')
 
 @push('scripts')
-    @vite(['resources/js/pages/data-manual/pengairan.js'])
+    @vite(['resources/js/pages/data-manual/pengairan-pemupukan.js'])
 @endpush
