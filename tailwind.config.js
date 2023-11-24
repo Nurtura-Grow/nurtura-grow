@@ -11,11 +11,11 @@ export default {
                 "root": {
                     "primary": "87 180 146", // Green Tosca
                     "secondary": "0 38 35", // Dark Green
-                    "success": "132 204 22",
+                    "success": "87 180 146",
                     "info": "6 182 212",
-                    "warning": "250 204 21",
+                    "warning": "246 174 45",
                     "pending": "249 115 22",
-                    "danger": "220 38 38",
+                    "danger": "202 0 0",
                     "light": "241 245 249",
                     "dark": "0 38 35",
                     "slate-50": "248 250 252",
@@ -34,11 +34,11 @@ export default {
                     'mid-green': 'rgb(157, 193, 131)', // Light Green
                     'primary': 'rgb(87, 180, 146)', // Green Tosca
                     'secondary': 'rgb(0, 38, 35)', // Dark Green
-                    'success': 'rgb(132, 204, 22)',
+                    'success': 'rgb(87, 180, 146)',
                     'info': 'rgb(6, 182, 212)',
-                    'warning': 'rgb(250, 204, 21)',
+                    'warning': 'rgb(246, 174, 45)',
                     'pending': 'rgb(249, 115, 22)',
-                    'danger': 'rgb(220, 38, 38)',
+                    'danger': 'rgb(202, 0, 0)',
                     'light': 'rgb(241, 245, 249)',
                     'dark': 'rgb(0, 38, 35)',
                     'orange' : 'rgb(239, 123, 69)',
