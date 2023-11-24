@@ -95,23 +95,23 @@ class SideMenuController extends Controller
                     ],
                 ]
             ],
-            'rekomendasi' => [
-                'icon' => 'fa-solid fa-hands-holding-circle',
-                'route_name' => 'rekomendasi',
-                'title' => 'Rekomendasi',
-                'sub_menu' => [
-                    'pengairan' => [
-                        'icon' => 'fa-solid fa-droplet',
-                        'route_name' => 'rekomendasi.pengairan',
-                        'title' => 'Pengairan'
-                    ],
-                    'pemupukan' => [
-                        'icon' => 'fa-solid fa-seedling',
-                        'route_name' => 'rekomendasi.pemupukan',
-                        'title' => 'Pemupukan'
-                    ]
-                ]
-            ],
+            // 'rekomendasi' => [
+            //     'icon' => 'fa-solid fa-hands-holding-circle',
+            //     'route_name' => 'rekomendasi',
+            //     'title' => 'Rekomendasi',
+            //     'sub_menu' => [
+            //         'pengairan' => [
+            //             'icon' => 'fa-solid fa-droplet',
+            //             'route_name' => 'rekomendasi.pengairan',
+            //             'title' => 'Pengairan'
+            //         ],
+            //         'pemupukan' => [
+            //             'icon' => 'fa-solid fa-seedling',
+            //             'route_name' => 'rekomendasi.pemupukan',
+            //             'title' => 'Pemupukan'
+            //         ]
+            //     ]
+            // ],
             'manual' => [
                 'icon' => 'fa-solid fa-gears',
                 'route_name' => 'manual',

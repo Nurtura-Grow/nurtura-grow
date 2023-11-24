@@ -92,15 +92,6 @@ Route::group([
         Route::resource('/pemupukan', PemupukanManualController::class)->except(['index', 'show']);
     });
 
-    // Route Rekomendasi
-    Route::group([
-        'prefix' => 'rekomendasi',
-        'as' => 'rekomendasi.'
-    ], function () {
-        Route::get('/pengairan', [PengairanController::class, 'index'])->name('pengairan');
-        Route::get('/pemupukan', [PemupukanController::class, 'index'])->name('pemupukan');
-    });
-
     // Route Riwayat
     Route::group([
         'prefix' => 'riwayat',
