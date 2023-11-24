@@ -17,66 +17,69 @@ if (satuan) {
     })
 }
 
-/** AJAX */
-function makeAjaxRequest(id_penanaman) {
-    // Replace :id with the value of id_penanaman
-    const formattedUrl = url.replace(':id', id_penanaman);
-
-    // Make the AJAX request using jQuery
-    $.ajax({
-        url: formattedUrl,
-        method: 'GET',
-        success: function (data) {
-            // Handle the response data
-            const tanggal_tanam = data.tanggal_tanam;
-            changeDatePickerTinggiValue(tanggal_tanam);
-        },
-        error: function (xhr, status, error) {
-            // Handle errors
-            console.error('AJAX error:', error);
-        }
-    });
-}
-
-// Initial AJAX request with default value
-makeAjaxRequest($('#id_penanaman').val());
-
-// Change event handler
-$('#id_penanaman').on('change', function () {
-    const id_penanaman = $(this).val();
-    // Make the AJAX request using the function
-    makeAjaxRequest(id_penanaman);
-});
-
-/** Litepicker */
-// Create Litepicker Element
-var customOptions = {
-    autoApply: false,
-    singleMode: true,
-    numberOfColumns: 1,
-    numberOfMonths: 1,
-    showWeekNumbers: false,
-    format: "DD MMM YYYY",
-    plugins: ['mobilefriendly'], // Plugins -> mobilefriendly: can swipe on mobile
-    dropdowns: {
-        minYear: 2000,
-        maxYear: null,
-        months: true,
-        years: true
-    }
-};
-
 const dateTinggi = document.querySelector(".dateTinggi");
-const datePickerTinggi = new Litepicker({
-    element: dateTinggi,
-    ...customOptions,
-})
 
-// Change Value of Datepicker
-function changeDatePickerTinggiValue(tanggal_tanam) {
-    datePickerTinggi.setOptions({
-        minDate: tanggal_tanam,
-        setDate: tanggal_tanam,
-        maxDate: moment().format("DD MMM YYYY"),
+if (dateTinggi) {
+    const datePickerTinggi = new Litepicker({
+        element: dateTinggi,
+        ...customOptions,
+    })
+
+    // Change Value of Datepicker
+    function changeDatePickerTinggiValue(tanggal_tanam) {
+        datePickerTinggi.setOptions({
+            minDate: tanggal_tanam,
+            setDate: tanggal_tanam,
+            maxDate: moment().format("DD MMM YYYY"),
+        });
+    }
+
+    /** AJAX */
+    function makeAjaxRequest(id_penanaman) {
+        // Replace :id with the value of id_penanaman
+        const formattedUrl = url.replace(':id', id_penanaman);
+
+        // Make the AJAX request using jQuery
+        $.ajax({
+            url: formattedUrl,
+            method: 'GET',
+            success: function (data) {
+                // Handle the response data
+                const tanggal_tanam = data.tanggal_tanam;
+                changeDatePickerTinggiValue(tanggal_tanam);
+            },
+            error: function (xhr, status, error) {
+                // Handle errors
+                console.error('AJAX error:', error);
+            }
+        });
+    }
+
+    // Initial AJAX request with default value
+    makeAjaxRequest($('#id_penanaman').val());
+
+    // Change event handler
+    $('#id_penanaman').on('change', function () {
+        const id_penanaman = $(this).val();
+        // Make the AJAX request using the function
+        makeAjaxRequest(id_penanaman);
     });
+
+    /** Litepicker */
+    // Create Litepicker Element
+    var customOptions = {
+        autoApply: false,
+        singleMode: true,
+        numberOfColumns: 1,
+        numberOfMonths: 1,
+        showWeekNumbers: false,
+        format: "DD MMM YYYY",
+        plugins: ['mobilefriendly'], // Plugins -> mobilefriendly: can swipe on mobile
+        dropdowns: {
+            minYear: 2000,
+            maxYear: null,
+            months: true,
+            years: true
+        }
+    };
 }
