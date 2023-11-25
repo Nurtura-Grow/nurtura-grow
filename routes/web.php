@@ -40,7 +40,8 @@ Route::group([
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::get('/register', [RegisterController::class, 'index'])->name('register');
     Route::get('/forgot/password', [ForgotPasswordController::class, 'index'])->name('password');
-    Route::get('/verifikasi', [ForgotPasswordController::class, 'index_verifikasi'])->name('verifikasi');
+    Route::get('/verifikasi/{email}', [ForgotPasswordController::class, 'index_verifikasi'])->name('verifikasi');
+    Route::get('/reset/password/{email}', [ForgotPasswordController::class, 'index_reset_password'])->name('reset_password');
 
     Route::group([
         'prefix' => 'auth',
@@ -48,8 +49,9 @@ Route::group([
     ], function () {
         Route::post('/login', [LoginController::class, 'login'])->name('login');
         Route::post('/register', [RegisterController::class, 'register'])->name('register');
-        Route::post('/forgot/password', [ForgotPasswordController::class, 'password'])->name('password');
-        Route::post('/verifikasi', [ForgotPasswordController::class, 'verifikasi'])->name('verifikasi');
+        Route::post('/forgot/password', [ForgotPasswordController::class, 'forgot_password'])->name('forgot_password');
+        Route::post('/verifikasi/pin/{email}', [ForgotPasswordController::class, 'verifikasi'])->name('verifikasi');
+        Route::post('/reset/password/{email}', [ForgotPasswordController::class, 'reset_password'])->name('reset_password');
     });
 });
 

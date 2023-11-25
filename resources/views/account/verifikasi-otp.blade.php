@@ -32,26 +32,28 @@
                             Verifikasi Kode OTP
                         </h2>
                         <p class="intro-x mt-3">
-                            Masukkan kode OTP yang dikirimkan ke email Anda.
+                            Masukkan kode OTP yang dikirimkan ke email {{ $email }}.
+                            Jika tidak ada, periksa folder SPAM Anda.
                         </p>
 
-                        <form method="POST" action="{{ route('auth.verifikasi') }}" class="intro-x mt-8 w-full">
+                        <form method="POST" action="{{ route('auth.verifikasi', ['email' => $email_encrypted ]) }}" class="intro-x mt-8 w-full">
                             @csrf
                             <div class="flex flex-row gap-3 h-16" id="otp-container">
+                                <input type="hidden" name="otp_combined" id="otp_combined" value="">
                                 <input class="form-control border-2 text-xl font-bold border-gray-300 h-full text-center"
-                                    type="text" maxlength="1" />
+                                    type="text"  name="otp[]" maxlength="1" />
                                 <input class="form-control border-2 text-xl font-bold border-gray-300 h-full text-center"
-                                    type="text" maxlength="1" />
+                                    type="text" name="otp[]"  maxlength="1" />
                                 <input class="form-control border-2 text-xl font-bold border-gray-300 h-full text-center"
-                                    type="text" maxlength="1" />
+                                    type="text" name="otp[]"  maxlength="1" />
                                 <input class="form-control border-2 text-xl font-bold border-gray-300 h-full text-center"
-                                    type="text" maxlength="1" />
+                                    type="text" name="otp[]"  maxlength="1" />
                             </div>
 
                             <div class="intro-x mt-5 lg:mt-8 text-center lg:text-left">
-                                <a class="w-full btn bg-rgb-secondary text-white shadow-md" id="buttonTambah">
+                                <button class="w-full btn bg-rgb-secondary text-white shadow-md">
                                     Verifikasi OTP
-                                </a>
+                                </button>
                             </div>
                         </form>
 

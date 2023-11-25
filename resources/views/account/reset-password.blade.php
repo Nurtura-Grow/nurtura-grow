@@ -1,9 +1,10 @@
 @extends('layout.base')
 
 @section('body')
+
     <body class="flex h-screen p-0 m-0 bg-no-repeat bg-rgb-light-green overflow-hidden">
-        <div class="h-screen container sm:px-8 lg:px-12 xl:px-24">
-            <div class="h-screen block lg:grid lg:grid-cols-2 gap-4">
+        <div class="container sm:px-8 lg:px-12 xl:px-24 h-screen">
+            <div class="block lg:grid grid-cols-2 gap-4">
                 <!-- BEGIN: Login Info -->
                 <div class="hidden lg:flex flex-col h-screen">
                     <a href="{{ route('index') }}" class="-intro-x flex items-center pt-10">
@@ -18,24 +19,24 @@
                 </div>
                 <!-- END: Login Info -->
                 <!-- BEGIN: Login Form -->
-                <div class="h-screen flex items-center justify-center py-5 px-5 lg:py-0 lg:my-0 overflow-hidden">
+                <div class="h-screen lg:h-auto flex py-5 px-5 lg:py-0 lg:my-0">
                     <div
                         class="intro-x my-auto flex flex-col mx-auto xl:ml-20 bg-white p-16 rounded-lg shadow-md lg:shadow-none w-full">
                         <h2 class="intro-x font-bold text-2xl lg:text-3xl text-center lg:text-left">
-                            Lupa Password?
+                            Password baru
                         </h2>
                         <p class="intro-x mt-3">
-                            Jangan khawatir! Masukkan alamat email yang ditautkan dengan akun Anda.
+                            Masukkan password baru Anda
                         </p>
 
-                        <form method="POST" action="{{ route('auth.forgot_password') }}" class="intro-x mt-8 w-full">
+                        <form method="POST" action="{{ route('auth.reset_password', ['email' => $email_encrypted]) }}"
+                            class="intro-x mt-8 w-full">
                             @csrf
-                            <input type="text" name="email" placeholder="Masukkan email Anda"
-                                value="{{ old('email') }}"
-                                class="intro-x form-control w-full py-3 block @error('email') border-danger @enderror">
-                            @error('email')
-                                <div class="text-danger mt-2">{{ $message }}</div>
-                            @enderror
+                            <input type="password" name="password" placeholder="Masukkan password Anda"
+                                class="intro-x form-control w-full py-3 block">
+
+                            <input type="password" name="password_confirmation" placeholder="Ulangi password Anda"
+                                class="intro-x form-control w-full mt-5 py-3 block">
 
                             <div class="intro-x mt-5 lg:mt-8 text-center lg:text-left">
                                 <button type="submit" class="w-full btn text-white shadow-md"
