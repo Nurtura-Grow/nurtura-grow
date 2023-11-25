@@ -1,6 +1,19 @@
 // Get all input elements
 const inputs = document.querySelectorAll('#otp-container input');
 
+const form = document.querySelector('form');
+form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    let otpValue = '';
+    form.querySelectorAll('input[type="text"]').forEach(function (input) {
+        otpValue += input.value;
+    });
+
+    // Set the combined value to the hidden field
+    document.getElementById('otp_combined').value = otpValue;
+    form.submit();
+});
+
 // Add event listener to each input
 inputs.forEach((input, index) => {
     input.addEventListener('keyup', (e) => {

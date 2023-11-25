@@ -41,7 +41,7 @@
 <div class=" mobile-menu lg:hidden">
     <div class="mobile-menu-bar">
         <a href="{{ route('dashboard') }}" class="-intro-x flex mr-auto">
-            <img alt="Nurtura Grow" class="w-8" src="{{ asset('images/logo-bg.svg') }}">
+            <img alt="Nurtura Grow" class="w-8" src="{{ asset('images/logo.svg') }}">
             <span class="text-rgb-secondary text-lg ml-3 font-medium">NurturaGrow</span>
         </a>
         <a href="{{ route('login') }}"
