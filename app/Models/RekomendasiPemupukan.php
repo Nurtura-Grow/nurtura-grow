@@ -25,4 +25,9 @@ class RekomendasiPemupukan extends Model
     {
         return $this->belongsTo(TinggiTanaman::class, 'id_tinggi_tanaman', 'id_tinggi_tanaman');
     }
+
+    public function message(): BelongsTo
+    {
+        return $this->belongsTo(Message::class, 'pesan', 'id');
+    }
 }

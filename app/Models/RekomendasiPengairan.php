@@ -26,4 +26,14 @@ class RekomendasiPengairan extends Model
     {
         return $this->belongsTo(Penanaman::class, 'id_penanaman', 'id_penanaman');
     }
+
+    public function kondisi_message(): BelongsTo
+    {
+        return $this->belongsTo(Message::class, 'kondisi', 'id');
+    }
+
+    public function saran_message(): BelongsTo
+    {
+        return $this->belongsTo(Message::class, 'saran', 'id');
+    }
 }

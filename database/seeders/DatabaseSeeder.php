@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
             SopPemupukanSeeder::class,
         ]);
 
-        DataSensor::factory()->count(300)->create();
+        DataSensor::factory()->count(500)->create();
 
         // \App\Models\User::factory(10)->create();
 

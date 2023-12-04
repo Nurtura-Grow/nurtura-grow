@@ -3,7 +3,7 @@
 @section('subcontent')
     <div class="intro-y flex flex-col sm:flex-row items-center mt-8 hidden" id="judul-section-sop">
         <h2 class="text-lg font-medium mr-auto">
-            SOP Pengairan
+            SOP Pemupukan
         </h2>
 
         <div class="w-full sm:w-auto flex mt-4 sm:mt-0" id="sembunyikan-section-rekomendasi">
@@ -58,30 +58,45 @@
                         </div>
                     </div>
 
-                    {{-- Rekomendasi Pemupukan Selanjutnya --}}
+                    {{-- Rekomendasi Pemupukan Terakhir --}}
                     <div class="intro-y">
-                        <p class="font-bold">Rekomendasi Pemupukan Selanjutnya</p>
+                        <p class="font-bold">Rekomendasi Pemupukan Terakhir</p>
                         <span class="">31 Desember 2023</span>
 
                         <div class="flex mt-2">
                             <span class="basis-1/6">Pukul:</span>
-                            <span>12:00:00 - 12:15:00</span>
+                            <span>12:00:00</span>
                         </div>
                         <div class="flex">
-                            <span class="basis-1/6">Volume:</span>
-                            <span>100 mL</span>
+                            <span class="basis-1/6">Rekomendasi:</span>
+                            <span>Blablabalblablabal</span>
+                        </div>
+                        {{-- Tambah tinggi tanaman --}}
+
+                    </div>
+
+                    {{-- Pemupukan sesuai SOP --}}
+                    <div class="intro-y">
+                        <p class="font-bold">Pemupukan Selanjutnya berdasarkan SOP</p>
+                        <span class="">31 Desember 2023</span>
+
+                        <div class="flex mt-2">
+                            <span class="basis-1/6">Pukul:</span>
+                            <span>12:00:00</span>
+                        </div>
+                        <div class="flex">
+                            <span class="basis-1/6">Jumlah:</span>
+                            <span>520 mL</span>
                         </div>
                     </div>
 
                     {{-- Aksi Pemupukan --}}
                     <div class="intro-y" id="jalankan-aksi-sekarang">
                         <p class="mb-2 font-bold">Apakah Anda ingin memberi pupuk sekarang?</p>
-                        <div class="flex flex-row gap-2">
-                            <a href="#input-manual" class="basis-1/2 w-full btn btn-primary px-5">Ya, abaikan rekomendasi
-                                sistem</a>
-                            <a href="#judul-section-sop" class="basis-1/2 w-full btn px-5" id="jalankan-rekomendasi">Tidak, ikuti
-                                rekomendasi
-                                sistem</a>
+                        <div class="flex flex-col xl:flex-row gap-2">
+                            <a href="#input-manual" class="basis-1/2 w-full btn btn-primary px-5">Ya, abaikan SOP pemupukan</a>
+                            <a href="#judul-section-sop" class="basis-1/2 w-full btn px-5" id="jalankan-rekomendasi">Tidak,
+                                ikuti SOP pemupukan</a>
                         </div>
                     </div>
 
@@ -162,8 +177,8 @@
                                         class="absolute top-0 left-0 rounded-l w-10 h-full flex items-center justify-center bg-slate-100 border text-slate-500">
                                         <i class="fa-regular fa-clock w-4 h-4"></i>
                                     </div>
-                                    <input type="text" class="form-control waktu-mulai pl-12" placeholder="Waktu Mulai"
-                                        aria-label="waktu" name="waktu_mulai">
+                                    <input type="text" class="form-control waktu-mulai pl-12"
+                                        placeholder="Waktu Mulai" aria-label="waktu" name="waktu_mulai">
                                 </div>
                                 {{-- Waktu Selesai --}}
                                 <div class="relative w-auto sm:w-56">

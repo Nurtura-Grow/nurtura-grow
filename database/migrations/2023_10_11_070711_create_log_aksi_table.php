@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id('id_log_aksi');
             $table->foreignId('id_tipe_instruksi');
             $table->foreignId('id_penanaman');
+            // kalau ikutin rekomendasi machine learning
             $table->foreignId('id_rekomendasi_pemupukan')->nullable();
             $table->foreignId('id_rekomendasi_air')->nullable();
             $table->float('durasi');

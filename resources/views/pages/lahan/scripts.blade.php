@@ -10,5 +10,5 @@
             $("#deleteLahan").attr("action", `/lahan/${idLahan}`);
         }
     </script>
-    {{-- @vite(['resources/js/pages/lahan/searchLahan.js', 'resources/js/pages/lahan/googleMaps.js']) --}}
+    @vite(['resources/js/pages/lahan/searchLahan.js', 'resources/js/pages/lahan/googleMaps.js'])
 @endpush

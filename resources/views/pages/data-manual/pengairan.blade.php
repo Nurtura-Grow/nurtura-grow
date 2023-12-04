@@ -76,7 +76,7 @@
                     {{-- Aksi Penyiraman --}}
                     <div class="intro-y" id="jalankan-aksi-sekarang">
                         <p class="mb-2 font-bold">Apakah Anda ingin menyiram sekarang?</p>
-                        <div class="flex flex-row gap-2">
+                        <div class="flex flex-col xl:flex-row gap-2">
                             <a href="#input-manual" class="basis-1/2 w-full btn btn-primary px-5">Ya, abaikan rekomendasi
                                 sistem</a>
                             <a href="#judul-section-sop" class="basis-1/2 w-full btn px-5" id="jalankan-rekomendasi">Tidak, ikuti
