@@ -22,9 +22,31 @@
         {{-- Bawah --}}
         <div class="grow basis-1/2 flex flex-col lg:flex-row gap-5 mb-8">
             <div class="basis-1/2">
-                <h3 class="intro-y font-medium text-lg mb-3">Grafik Terkini</h3>
-                <div class="intro-y h-full box p-5">
-                    {{-- Grafik Pengairan --}}
+                <h3 class="intro-y font-medium text-lg mb-3">Grafik Perbandingan</h3>
+                <div class="intro-y h-full box p-5 flex flex-col items-center justify-center">
+
+                    <div class="flex flex-col sm:flex-row gap-5">
+                        <div class="w-40 sm:w-56 lg:w-64">
+                            <select data-placeholder="Pilih grafik yang ditunjukkan" id="pilihGrafik"
+                                class="tom-select w-full">
+                                @foreach ($grafik as $graf)
+                                    <option>{{ $graf['name'] }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        {{-- Grafik Pengairan --}}
+                        <a class="relative btn btn-primary text-white" data-tw-toggle="modal"
+                            data-tw-target="#datepicker-modal-preview">
+                            Pilih tanggal
+                        </a>
+                    </div>
+
+                    <div class="grow w-full h-full flex justify-center items-center" id="container-grafik">
+                        <canvas class="w-fit h-fit" id="grafik-pengairan"></canvas>
+                    </div>
+
+                    <p>Keterangan: data minimal dan maksimal yang ditampilkan adalah kondisi ideal untuk penyiraman</p>
                 </div>
             </div>
 
@@ -79,9 +101,8 @@
                         <div class="flex flex-col xl:flex-row gap-2">
                             <a href="#input-manual" class="basis-1/2 w-full btn btn-primary px-5">Ya, abaikan rekomendasi
                                 sistem</a>
-                            <a href="#judul-section-sop" class="basis-1/2 w-full btn px-5" id="jalankan-rekomendasi">Tidak, ikuti
-                                rekomendasi
-                                sistem</a>
+                            <a href="#judul-section-sop" class="basis-1/2 w-full btn px-5" id="jalankan-rekomendasi">Tidak,
+                                ikuti rekomendasi sistem</a>
                         </div>
                     </div>
 
@@ -161,8 +182,8 @@
                                         class="absolute top-0 left-0 rounded-l w-10 h-full flex items-center justify-center bg-slate-100 border text-slate-500">
                                         <i class="fa-regular fa-clock w-4 h-4"></i>
                                     </div>
-                                    <input type="text" class="form-control waktu-mulai pl-12" placeholder="Waktu Mulai"
-                                        aria-label="waktu" name="waktu_mulai">
+                                    <input type="text" class="form-control waktu-mulai pl-12"
+                                        placeholder="Waktu Mulai" aria-label="waktu" name="waktu_mulai">
                                 </div>
                                 {{-- Waktu Selesai --}}
                                 <div class="relative w-auto sm:w-56">
@@ -200,7 +221,12 @@
 @endsection
 
 @include('pages.data-manual.components.scripts')
+@include('pages.components.modal-datepicker')
 
 @push('scripts')
-    @vite(['resources/js/pages/data-manual/pengairan-pemupukan.js'])
+    <script>
+        let urlDashboard = '{{ route('dashboard.data') }}'
+    </script>
+
+    @vite(['resources/js/pages/dashboard/litepickr.js', 'resources/js/pages/data-manual/pengairan-pemupukan.js', 'resources/js/pages/data-manual/pengairan.js'])
 @endpush

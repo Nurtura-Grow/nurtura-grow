@@ -87,5 +87,5 @@
         var urlDashboard = "{{ route('dashboard.data') }}";
     </script>
 
-    @vite(['resources/js/pages/riwayat/data-sensor.js', 'resources/js/pages/riwayat/litepickr.js'])
+    @vite(['resources/js/pages/riwayat/data-sensor.js', 'resources/js/pages/riwayat/litepicker.js'])
 @endpush

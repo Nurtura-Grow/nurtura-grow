@@ -88,6 +88,13 @@ function getDataAndUpdateChart(chartId) {
         success: function (response) {
             $('#tanggalTerpilih').text(response.data.tanggalDari + ' - ' + response.data.tanggalHingga);
             if (isEmpty(response.data.timestamp_pengukuran)) {
+                chartInstances = {
+                    'suhu': null,
+                    'kelembapan_udara': null,
+                    'kelembapan_tanah': null,
+                    'ph_tanah': null
+                };
+
                 $('.grafik-data').remove(); // this is my <canvas> element
                 $('#container_suhu').append('<canvas class="grafik-data w-full h-full" id="suhu"></canvas>')
                 $('#container_kelembapan_udara').append('<canvas class="grafik-data w-full h-full" id="kelembapan_udara"></canvas>')

@@ -81,7 +81,7 @@ class SideMenuController extends Controller
             'tanaman' => [
                 'icon' => 'fa-brands fa-pagelines',
                 'route_name' => 'tanaman',
-                'title' => 'Tanaman',
+                'title' => 'Penanaman',
                 'sub_menu' => [
                     'daftar-tanaman' => [
                         'icon' => 'fa-solid fa-list',

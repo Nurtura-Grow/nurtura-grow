@@ -13,6 +13,20 @@ var dateChosen = 'today';
 var tanggalDari = today;
 var tanggalHingga = today;
 
+const suhuMinimal = 25;
+const suhuMaksimal = 33;
+const kelembapanUdaraMinimal = 60;
+const kelembapanUdaraMaksimal = 69;
+const kelembapanTanahMinimal = 50;
+const kelembapanTanahMaksimal = 69;
+const phTanahMinimal = 5.5;
+const phTanahMaksimal = 6.5;
+
+$('#pilihGrafik').on('change', function () {
+    label = $(this).val();
+    getDataAndUpdateChart(label);
+});
+
 // Button Logic
 $('.chooseDate').on('click', function () {
     // Add bg-primary class
@@ -47,13 +61,6 @@ function datelainnya() {
     }
 }
 
-/** Chart JS */
-// Pilih Jenis Grafik
-$('#pilihGrafik').on('change', function () {
-    label = $(this).val();
-    getDataAndUpdateChart(label);
-});
-
 // Tanggal yang dipilih
 $('#pilihTanggal').on('click', function () {
     tanggalDari = $('#tanggal_dari').val();
@@ -62,18 +69,41 @@ $('#pilihTanggal').on('click', function () {
     getDataAndUpdateChart(label, tanggalDari = tanggalDari, tanggalHingga = tanggalHingga)
 });
 
+
 // Declare chart instance outside the functions
 let chartInstance;
 
 // Function to update data to the chart
 function addData(label, newData) {
-    chartInstance.data.datasets[0].label = (dateChosen == "last_week" || dateChosen == "last_month" ? "Rata-rata " : "") + label;
+    chartInstance.options.scales.y.max = 100;
+    chartInstance.options.scales.y.min = 0;
+
+    chartInstance.data.datasets[1].label = label + " Minimum";
+    chartInstance.data.datasets[2].label = label + " Maksimum";
+
+    chartInstance.data.datasets[0].label = label;
     chartInstance.data.datasets[0].data = newData;
 
-    if (label == "pH Tanah") {
-        chartInstance.options.scales.y.max = 14;
-    } else {
-        chartInstance.options.scales.y.max = 100;
+    // Update standard data based on label
+    switch (label) {
+        case 'Suhu Udara':
+            chartInstance.data.datasets[1].data = newData.map(data => ({ x: data.x, y: suhuMinimal }));
+            chartInstance.data.datasets[2].data = newData.map(data => ({ x: data.x, y: suhuMaksimal }));
+            chartInstance.options.scales.y.max = 50;
+            chartInstance.options.scales.y.min = 0;
+            break;
+        case 'Kelembapan Udara':
+            chartInstance.data.datasets[1].data = newData.map(data => ({ x: data.x, y: kelembapanUdaraMinimal }));
+            chartInstance.data.datasets[2].data = newData.map(data => ({ x: data.x, y: kelembapanUdaraMaksimal }));
+            break;
+        case 'Kelembapan Tanah':
+            chartInstance.data.datasets[1].data = newData.map(data => ({ x: data.x, y: kelembapanTanahMinimal }));
+            chartInstance.data.datasets[2].data = newData.map(data => ({ x: data.x, y: kelembapanTanahMaksimal }));
+            break;
+        case 'pH Tanah':
+            chartInstance.data.datasets[1].data = newData.map(data => ({ x: data.x, y: phTanahMinimal }));
+            chartInstance.data.datasets[2].data = newData.map(data => ({ x: data.x, y: phTanahMaksimal }));
+            break;
     }
 
     chartInstance.update();
@@ -98,10 +128,11 @@ function getDataAndUpdateChart(labelParam = label, tanggalDariParam = tanggalDar
                     chartInstance = null;
                 }
 
-                $('#grafik-keseluruhan').remove(); // this is my <canvas> element
-                $('#container-grafik').append('<canvas class="w-fit h-fit" id="grafik-keseluruhan"><canvas>');
+                $('#grafik-pengairan').remove();
+                $('#container-grafik').append('<canvas class="w-fit h-fit" id="grafik-pengairan"></canvas>');
 
-                const canvas = document.querySelector('#grafik-keseluruhan');
+                const canvas = document.querySelector('#grafik-pengairan');
+
                 const ctx = canvas.getContext('2d');
 
                 ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear previous content
@@ -142,23 +173,38 @@ function getDataAndUpdateChart(labelParam = label, tanggalDariParam = tanggalDar
 }
 
 // Function to update the chart with new data
-function updateGraphs(dataGraphic, label = 'Suhu Udara') {
+function updateGraphs(dataGraphic, labelParam = label) {
     // Check if the chart already exists
     if (chartInstance) {
         // Add the new data to the chart
-        addData(label, dataGraphic);
+        addData(labelParam, dataGraphic);
     } else {
         // If the chart doesn't exist, create a new chart
-        const grafikKeseluruhan = document.getElementById('grafik-keseluruhan');
+        const grafikPengairan = document.getElementById('grafik-pengairan');
         const data = {
-            datasets: [{
-                label: label,
-                data: dataGraphic,
-                fill: false,
-                backgroundColor: 'rgb(75, 192, 192)',
-                borderColor: 'rgb(75, 192, 192)',
-                tension: 0.1
-            }]
+            datasets: [
+                {
+                    label: labelParam,
+                    data: dataGraphic,
+                    borderColor: 'blue',
+                    fill: false,
+                },
+                // Minimum
+                {
+                    label: labelParam + " Minimal",
+                    data: Array(dataGraphic.length).fill(suhuMinimal),
+                    borderColor: '#57B492',
+                    fill: false,
+                },
+                // Maksimum
+                {
+                    label: labelParam + " Maksimal",
+                    data: Array(dataGraphic.length).fill(suhuMaksimal),
+                    borderColor: '#57B492',
+                    backgroundColor: 'rgba(87, 180, 146, 0.2)',
+                    fill: '-1',
+                },
+            ]
         };
 
         const options = {
@@ -172,10 +218,14 @@ function updateGraphs(dataGraphic, label = 'Suhu Udara') {
                 },
                 y: {
                     min: 0,
-                    max: 100,
+                    max: 50,
                 }
             },
             plugins: {
+                tooltip: {
+                    mode: 'index',
+                    intersect: false
+                },
                 legend: {
                     display: false
                 },
@@ -209,9 +259,8 @@ function updateGraphs(dataGraphic, label = 'Suhu Udara') {
         };
 
         // Create a new Chart.js instance and store it in the chartInstance variable
-        chartInstance = new Chart(grafikKeseluruhan, config);
+        chartInstance = new Chart(grafikPengairan, config);
     }
 }
 
-// Initial call to get data from the server and create/update the chart
 getDataAndUpdateChart();
