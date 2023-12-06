@@ -67,8 +67,9 @@ $('#pilihTanggal').on('click', function () {
 });
 
 // Function to update data to the chart
-function addData(chart, newData) {
-    chart.data.datasets[0].data = newData;
+function addData(chart, actualData, predictedData) {
+    chart.data.datasets[0].data = actualData;
+    chart.data.datasets[1].data = predictedData;
     chart.update();
 }
 
@@ -114,17 +115,24 @@ function getDataAndUpdateChart(chartId) {
                 });
             } else {
                 const x = response.data.timestamp_pengukuran;
-                const y = response.data[chartId]; // Assuming the data keys match the chart IDs
-                const convertedData = x.map((timestamp, index) => ({
+                const y = response.data[chartId];
+                const actualData = x.map((timestamp, index) => ({
                     x: timestamp,
                     y: y[index],
                 }));
 
+                const xPrediksi = response.prediksi.timestamp_prediksi_sensor;
+                const yPrediksi = response.prediksi[chartId];
+                const predictedData = xPrediksi.map((timestamp, index) => ({
+                    x: timestamp,
+                    y: yPrediksi[index],
+                }));
+
                 // Call the function to update the chart with new data
                 if (chartInstances[chartId]) {
-                    addData(chartInstances[chartId], convertedData);
+                    addData(chartInstances[chartId], actualData, predictedData);
                 } else {
-                    createChart(chartId, convertedData);
+                    createChart(chartId, actualData, predictedData);
                 }
             }
         },
@@ -135,17 +143,27 @@ function getDataAndUpdateChart(chartId) {
 }
 
 // Function to create the chart
-function createChart(chartId, dataGraphic) {
+function createChart(chartId, actualData, predictedData) {
     const canvas = document.getElementById(chartId);
     const data = {
-        datasets: [{
-            label: labelMapping[chartId],
-            data: dataGraphic,
-            fill: false,
-            backgroundColor: 'rgb(75, 192, 192)',
-            borderColor: 'rgb(75, 192, 192)',
-            tension: 0.1
-        }]
+        datasets: [
+            {
+                label: labelMapping[chartId],
+                data: actualData,
+                fill: false,
+                backgroundColor: 'rgb(75, 192, 192)',
+                borderColor: 'rgb(75, 192, 192)',
+                tension: 0.1
+            },
+            {
+                label: 'Prediksi ' + labelMapping[chartId],
+                data: predictedData,
+                fill: false,
+                backgroundColor: '#F6AE2D',
+                borderColor: '#F6AE2D',
+                tension: 0.1
+            }
+        ]
     };
 
     const options = {
@@ -164,6 +182,10 @@ function createChart(chartId, dataGraphic) {
             }
         },
         plugins: {
+            tooltip: {
+                mode: 'index',
+                intersect: false
+            },
             legend: {
                 display: false
             },

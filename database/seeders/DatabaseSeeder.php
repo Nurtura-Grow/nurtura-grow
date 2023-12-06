@@ -20,9 +20,9 @@ class DatabaseSeeder extends Seeder
             TipeInstruksiSeeder::class,
             SumberDataSeeder::class,
             SopPemupukanSeeder::class,
+            DataSensorSeeder::class,
+            PrediksiSensorSeeder::class,
         ]);
-
-        DataSensor::factory()->count(500)->create();
 
         // \App\Models\User::factory(10)->create();
 

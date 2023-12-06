@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\DataSensor;
 use App\Models\InformasiLahan;
 use App\Models\Penanaman;
+use App\Models\PrediksiSensor;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -107,6 +108,7 @@ class DashboardController extends Controller
             }
 
             $data = DataSensor::whereBetween('timestamp_pengukuran', [$tanggalDari, $tanggalHingga])->orderBy('timestamp_pengukuran')->get();
+            $prediksi = PrediksiSensor::whereBetween('timestamp_prediksi_sensor', [$tanggalDari, $tanggalHingga])->orderBy('timestamp_prediksi_sensor')->get();
             $bedaTanggal = Carbon::parse($tanggalDari)->diffInDays($tanggalHingga);
 
             if ($dateChosen == 'last_week' || $dateChosen == 'last_month' || ($dateChosen == 'lainnya' && $bedaTanggal > 1)) {
@@ -115,11 +117,20 @@ class DashboardController extends Controller
                     return Carbon::parse($item->timestamp_pengukuran)->format('Y-m-d');
                 });
 
+                $groupedPrediksi = $prediksi->groupBy(function ($item) {
+                    return Carbon::parse($item->timestamp_prediksi_sensor)->format('Y-m-d');
+                });
+
                 $suhuArray = [];
                 $kelembapanUdaraArray = [];
                 $kelembapanTanahArray = [];
                 $phTanahArray = [];
                 $timestampPengukuranArray = [];
+
+                $prediksiSuhuArray = [];
+                $prediksiKelembapanUdaraArray = [];
+                $prediksiKelembapanTanahArray = [];
+                $timestampPrediksiArray = [];
 
                 // Rata-rata
                 foreach ($groupedData as $date => $group) {
@@ -130,19 +141,46 @@ class DashboardController extends Controller
                     $timestampPengukuranArray[] = $date;
                 }
 
+                // Rata-rata Prediksi
+                foreach ($groupedPrediksi as $date => $group) {
+                    $prediksiSuhuArray[] = $group->avg('suhu');
+                    $prediksiKelembapanUdaraArray[] = $group->avg('kelembapan_udara');
+                    $prediksiKelembapanTanahArray[] = $group->avg('kelembapan_tanah');
+                    $timestampPrediksiArray[] = $date;
+                }
+
+                // Change Time Format
                 $formattedTimestamps = array_map(function ($timestamp) {
                     return Carbon::parse($timestamp)->format('d M Y');
                 }, $timestampPengukuranArray);
+
+                // Change Time Format Prediksi
+                $formattedTimestampsPrediksi = array_map(function ($timestamp) {
+                    return Carbon::parse($timestamp)->format('d M Y');
+                }, $timestampPrediksiArray);
             } else {
+                // Data Normal
                 $suhuArray = $data->pluck('suhu')->toArray();
                 $kelembapanUdaraArray = $data->pluck('kelembapan_udara')->toArray();
                 $kelembapanTanahArray = $data->pluck('kelembapan_tanah')->toArray();
                 $phTanahArray = $data->pluck('ph_tanah')->toArray();
                 $timestampPengukuranArray = $data->pluck('timestamp_pengukuran')->toArray();
 
+                // Prediksi
+                $prediksiSuhuArray = $prediksi->pluck('suhu')->toArray();
+                $prediksiKelembapanUdaraArray = $prediksi->pluck('kelembapan_udara')->toArray();
+                $prediksiKelembapanTanahArray = $prediksi->pluck('kelembapan_tanah')->toArray();
+                $timestampPrediksiArray = $prediksi->pluck('timestamp_prediksi_sensor')->toArray();
+
+                // Change Time Format
                 $formattedTimestamps = array_map(function ($timestamp) {
                     return Carbon::parse($timestamp)->format('d M Y H:i:s');
                 }, $timestampPengukuranArray);
+
+                // change Time Format Prediksi
+                $formattedTimestampsPrediksi = array_map(function ($timestamp) {
+                    return Carbon::parse($timestamp)->format('d M Y H:i:s');
+                }, $timestampPrediksiArray);
             }
 
             return response()->json([
@@ -154,6 +192,13 @@ class DashboardController extends Controller
                     "timestamp_pengukuran" => $formattedTimestamps,
                     "tanggalDari" => Carbon::parse($tanggalDari)->format('d M Y H:i:s'),
                     "tanggalHingga" => Carbon::parse($tanggalHingga)->format('d M Y H:i:s'),
+                ],
+                'prediksi' => [
+                    "suhu" => $prediksiSuhuArray,
+                    "kelembapan_udara" => $prediksiKelembapanUdaraArray,
+                    "kelembapan_tanah" => $prediksiKelembapanTanahArray,
+                    "ph_tanah" => 0,
+                    "timestamp_prediksi_sensor" => $formattedTimestampsPrediksi,
                 ],
             ], 200);
         }
