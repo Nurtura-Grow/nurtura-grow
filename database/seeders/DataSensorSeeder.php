@@ -15,9 +15,9 @@ class DataSensorSeeder extends Seeder
     public function run(): void
     {
         // Set the initial date and time
-        $startDate = Carbon::parse('01-11-2023')->setHour(7)->setMinute(0)->setSecond(0);
+        $startDate = now()->setHour(7)->setMinute(0)->setSecond(0);
 
-        for ($i = 0; $i < 500; $i++){
+        for ($i = 0; $i < 100; $i++){
             DataSensor::create([
                 'id_penanaman' => Penanaman::where('alat_terpasang', true)->first()->id_penanaman,
                 'suhu' => random_int(20, 40),
