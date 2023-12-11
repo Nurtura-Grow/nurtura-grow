@@ -18,9 +18,12 @@ export default defineConfig({
                 "resources/css/app.css",
                 "resources/js/main.js",
                 "resources/js/app.js",
+                'resources/js/jquery.js',
 
                 // Pages
                 "resources/js/pages/datatable.js",
+                'resources/js/datatable/jquery.dataTables.js',
+                'resources/js/datatable/responsive.js',
 
                 // Auth
                 "resources/js/auth/verifikasi-otp.js",
@@ -34,6 +37,7 @@ export default defineConfig({
                 "resources/js/pages/data-manual/getPenanamanTanggalTanam.js",
                 "resources/js/pages/data-manual/pengairan-pemupukan.js",
                 "resources/js/pages/data-manual/pengairan.js",
+                "resources/js/pages/data-manual/pemupukan.js",
 
                 // Lahan
                 "resources/js/pages/lahan/googleMaps.js",
