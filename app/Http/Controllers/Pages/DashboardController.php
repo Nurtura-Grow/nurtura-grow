@@ -107,82 +107,78 @@ class DashboardController extends Controller
                     break;
             }
 
-            $data = DataSensor::whereBetween('timestamp_pengukuran', [$tanggalDari, $tanggalHingga])->orderBy('timestamp_pengukuran')->get();
-            $prediksi = PrediksiSensor::whereBetween('timestamp_prediksi_sensor', [$tanggalDari, $tanggalHingga])->orderBy('timestamp_prediksi_sensor')->get();
+            // Retrieve sensor data within the specified date range and order by measurement timestamp
+            $data = DataSensor::whereBetween('timestamp_pengukuran', [$tanggalDari, $tanggalHingga])
+                ->orderBy('timestamp_pengukuran')
+                ->get();
+
+            // Retrieve sensor prediction data within the specified date range and order by prediction timestamp
+            $prediksi = PrediksiSensor::whereBetween('timestamp_prediksi_sensor', [$tanggalDari, $tanggalHingga])
+                ->orderBy('timestamp_prediksi_sensor')
+                ->get();
+
+            // Calculate the difference in days between the start and end dates
             $bedaTanggal = Carbon::parse($tanggalDari)->diffInDays($tanggalHingga);
 
-            if ($dateChosen == 'last_week' || $dateChosen == 'last_month' || ($dateChosen == 'lainnya' && $bedaTanggal > 1)) {
-                // Group the data by date
-                $groupedData = $data->groupBy(function ($item) {
-                    return Carbon::parse($item->timestamp_pengukuran)->format('Y-m-d');
-                });
+            // Function to format a timestamp item based on a given format
+            $groupByFormat = function ($item, $format) {
+                return Carbon::parse($item)->format($format);
+            };
 
-                $groupedPrediksi = $prediksi->groupBy(function ($item) {
-                    return Carbon::parse($item->timestamp_prediksi_sensor)->format('Y-m-d');
-                });
+            // Determine the date format based on the date range selected:
+            // Use 'Y-m-d' for last week or last month or if the date difference is more than 1 day;
+            // otherwise, use 'Y-m-d H:00:00' to group by hour.
+            $format = ($dateChosen == 'last_week' || $dateChosen == 'last_month' || ($dateChosen == 'lainnya' && $bedaTanggal > 1))
+                ? 'Y-m-d'
+                : 'Y-m-d H:00:00';
 
-                $suhuArray = [];
-                $kelembapanUdaraArray = [];
-                $kelembapanTanahArray = [];
-                $phTanahArray = [];
-                $timestampPengukuranArray = [];
+            // Group the sensor data by the specified format
+            $groupedData = $data->groupBy(fn ($item) => $groupByFormat($item->timestamp_pengukuran, $format));
 
-                $prediksiSuhuArray = [];
-                $prediksiKelembapanUdaraArray = [];
-                $prediksiKelembapanTanahArray = [];
-                $timestampPrediksiArray = [];
+            // Group the sensor prediction data by the specified format
+            $groupedPrediksi = $prediksi->groupBy(fn ($item) => $groupByFormat($item->timestamp_prediksi_sensor, $format));
 
-                // Rata-rata
-                foreach ($groupedData as $date => $group) {
-                    $suhuArray[] = $group->avg('suhu');
-                    $kelembapanUdaraArray[] = $group->avg('kelembapan_udara');
-                    $kelembapanTanahArray[] = $group->avg('kelembapan_tanah');
-                    $phTanahArray[] = $group->avg('ph_tanah');
-                    $timestampPengukuranArray[] = $date;
-                }
+            // Initialize arrays to store the average values and the formatted timestamps
+            $suhuArray = [];
+            $kelembapanUdaraArray = [];
+            $kelembapanTanahArray = [];
+            $phTanahArray = [];
+            $timestampPengukuranArray = [];
 
-                // Rata-rata Prediksi
-                foreach ($groupedPrediksi as $date => $group) {
-                    $prediksiSuhuArray[] = $group->avg('suhu');
-                    $prediksiKelembapanUdaraArray[] = $group->avg('kelembapan_udara');
-                    $prediksiKelembapanTanahArray[] = $group->avg('kelembapan_tanah');
-                    $timestampPrediksiArray[] = $date;
-                }
+            // Initialize arrays to store the average prediction values and the formatted timestamps
+            $prediksiSuhuArray = [];
+            $prediksiKelembapanUdaraArray = [];
+            $prediksiKelembapanTanahArray = [];
+            $timestampPrediksiArray = [];
 
-                // Change Time Format
-                $formattedTimestamps = array_map(function ($timestamp) {
-                    return Carbon::parse($timestamp)->format('d M Y');
-                }, $timestampPengukuranArray);
-
-                // Change Time Format Prediksi
-                $formattedTimestampsPrediksi = array_map(function ($timestamp) {
-                    return Carbon::parse($timestamp)->format('d M Y');
-                }, $timestampPrediksiArray);
-            } else {
-                // Data Normal
-                $suhuArray = $data->pluck('suhu')->toArray();
-                $kelembapanUdaraArray = $data->pluck('kelembapan_udara')->toArray();
-                $kelembapanTanahArray = $data->pluck('kelembapan_tanah')->toArray();
-                $phTanahArray = $data->pluck('ph_tanah')->toArray();
-                $timestampPengukuranArray = $data->pluck('timestamp_pengukuran')->toArray();
-
-                // Prediksi
-                $prediksiSuhuArray = $prediksi->pluck('suhu')->toArray();
-                $prediksiKelembapanUdaraArray = $prediksi->pluck('kelembapan_udara')->toArray();
-                $prediksiKelembapanTanahArray = $prediksi->pluck('kelembapan_tanah')->toArray();
-                $timestampPrediksiArray = $prediksi->pluck('timestamp_prediksi_sensor')->toArray();
-
-                // Change Time Format
-                $formattedTimestamps = array_map(function ($timestamp) {
-                    return Carbon::parse($timestamp)->format('d M Y H:i:s');
-                }, $timestampPengukuranArray);
-
-                // change Time Format Prediksi
-                $formattedTimestampsPrediksi = array_map(function ($timestamp) {
-                    return Carbon::parse($timestamp)->format('d M Y H:i:s');
-                }, $timestampPrediksiArray);
+            // Rata-rata Pengukuran
+            foreach ($groupedData as $date => $group) {
+                $suhuArray[] = $group->avg('suhu');
+                $kelembapanUdaraArray[] = $group->avg('kelembapan_udara');
+                $kelembapanTanahArray[] = $group->avg('kelembapan_tanah');
+                $phTanahArray[] = $group->avg('ph_tanah');
+                $timestampPengukuranArray[] = $date;
             }
 
+            // Rata-rata Prediksi
+            foreach ($groupedPrediksi as $date => $group) {
+                $prediksiSuhuArray[] = $group->avg('suhu');
+                $prediksiKelembapanUdaraArray[] = $group->avg('kelembapan_udara');
+                $prediksiKelembapanTanahArray[] = $group->avg('kelembapan_tanah');
+                $timestampPrediksiArray[] = $date;
+            }
+
+            // Change Time Format
+            $formattedTimestamps = array_map(function ($timestamp) use ($format) {
+                return Carbon::parse($timestamp)->format($format);
+            }, $timestampPengukuranArray);
+
+            // Change Time Format Prediksi
+            $formattedTimestampsPrediksi = array_map(function ($timestamp) use ($format) {
+                return Carbon::parse($timestamp)->format($format);
+            }, $timestampPrediksiArray);
+
+            // Return the data in JSON format
             return response()->json([
                 'data' => [
                     "suhu" => $suhuArray,
