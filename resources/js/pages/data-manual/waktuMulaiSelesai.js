@@ -78,13 +78,21 @@ function calculateDuration() {
 
         // Display or return the duration
         $('#durasi').val(minutes + " menit");
+
+        // Update volume
+        const volumeLiter = minutes * debit;
+        if (nilaiSatuan == "mL") {
+            volume.value = volumeLiter * 1000;
+        } else {
+            volume.value = volumeLiter;
+        }
     } else {
         $('#durasi').val("Pilih waktu mulai dan selesai untuk mendapatkan durasi");
         $('#submit').prop('disabled', true);
     }
 }
 
-if(satuan && volume){
+if (satuan && volume) {
     satuan.addEventListener('change', function () {
         nilaiSatuan = satuan.value
         if (nilaiSatuan == "mL") {
@@ -97,7 +105,7 @@ if(satuan && volume){
         getTimeMinute();
     })
 
-    volume.addEventListener('change', function(){
+    volume.addEventListener('change', function () {
         nilaiVolumeLiter = volume.value;
         if (nilaiSatuan == "mL") {
             nilaiVolumeLiter = volume.value / 1000;
@@ -111,7 +119,7 @@ if(satuan && volume){
         const timeMinute = nilaiVolumeLiter / debit;
 
         // Update waktu-mulai and waktu-selesai value
-        if(! startTime){
+        if (!startTime) {
             console.log("Tidak ada start time")
             startTime = currentHour;
         } else {

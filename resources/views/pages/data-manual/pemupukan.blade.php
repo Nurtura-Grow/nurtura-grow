@@ -94,7 +94,8 @@
                     <div class="intro-y" id="jalankan-aksi-sekarang">
                         <p class="mb-2 font-bold">Apakah Anda ingin memberi pupuk sekarang?</p>
                         <div class="flex flex-col xl:flex-row gap-2">
-                            <a href="#input-manual" class="basis-1/2 w-full btn btn-primary px-5">Ya, abaikan SOP pemupukan</a>
+                            <a href="#input-manual" class="basis-1/2 w-full btn btn-primary px-5">Ya, abaikan SOP
+                                pemupukan</a>
                             <a href="#judul-section-sop" class="basis-1/2 w-full btn px-5" id="jalankan-rekomendasi">Tidak,
                                 ikuti SOP pemupukan</a>
                         </div>
@@ -157,8 +158,8 @@
                                 <input name="volume_pemupukan" type="text" class="form-control col-span-6"
                                     placeholder="10" id="volume">
                                 <select class="form-select col-span-6" name="satuan" id="satuan">
-                                    <option>L</option>
-                                    <option selected>mL</option>
+                                    <option selected>L</option>
+                                    <option>mL</option>
                                 </select>
                             </div>
                         </div>
@@ -190,29 +191,42 @@
                                         placeholder="Waktu Selesai" aria-label="waktu" name="waktu_selesai">
                                 </div>
                             </div>
-
-                            <div class="ml-4 mt-2" id="durasi"></div>
-                            <div class="ml-4 mt-2 text-warning">Keterangan: waktu penyiraman maksimal 3 jam</div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            {{-- Button Submit --}}
-            <div class="sm:ml-32 sm:pl-5">
-                <button type="submit" class="btn btn-primary mt-5 px-10 w-auto sm:w-56" id="submit" disabled>Jalankan</button>
+            {{-- Durasi --}}
+            <div class="form-inline mt-5">
+                <label for="durasi" class="form-label sm:w-32">Durasi</label>
+                <input type="text" class="form-control" name="durasi"
+                    placeholder="Pilih waktu mulai dan selesai untuk mendapatkan durasi" id="durasi" readonly>
             </div>
 
-            {{-- Warning --}}
-            <div class="sm:ml-32 sm:pl-5 mt-3">
-                <span class="text-warning">
-                    <span class="font-bold">
-                        <i class="fa-solid fa-triangle-exclamation mr-3"></i>PERINGATAN<i
-                            class="fa-solid fa-triangle-exclamation ml-3"></i>
-                        <br>
-                    </span>
-                    Aksi Anda akan menggantikan rekomendasi sistem.
-                </span>
+
+            {{-- Keterangan --}}
+            <div class="form-inline mt-5">
+                <label class="form-label sm:w-32 font-bold" for="keterangan">Keterangan</label>
+                <ul>
+                    <li>
+                        Waktu pemupukan <span class="font-bold">maksimal 180 menit</span>
+                    </li>
+                    <li>
+                        Debit sprinkler: <span class="font-bold">7 L/menit</span>
+                    </li>
+
+                    <li class="font-bold text-warning">
+                        <i class="fa-solid fa-triangle-exclamation mr-2"></i>
+                        Aksi Anda akan menggantikan rekomendasi sistem.
+                        <i class="fa-solid fa-triangle-exclamation ml-2"></i>
+                    </li>
+                </ul>
+            </div>
+
+            {{-- Button Jalankan --}}
+            <div class="sm:ml-32 sm:pl-5">
+                <button type="submit" class="btn btn-primary mt-5 px-10 w-auto sm:w-56" id="submit"
+                    disabled>Jalankan</button>
             </div>
         </form>
     </div>
