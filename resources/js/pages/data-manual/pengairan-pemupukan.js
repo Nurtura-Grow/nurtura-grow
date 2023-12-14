@@ -1,19 +1,5 @@
 import $ from 'jquery';
 
-// Menyesuaikan satuan volume
-const satuan = document.getElementById('satuan');
-if (satuan) {
-    satuan.addEventListener('change', function () {
-        const volume = document.getElementById('volume');
-        if (satuan.value == "mL") {
-            volume.value = volume.value * 1000;
-        } else if (satuan.value == "L") {
-            volume.value = volume.value / 1000;
-        }
-    })
-}
-
-
 // Tidak, ikuti rekomendasi sistem
 $('#jalankan-rekomendasi').on('click', function () {
     $('#jalankan-aksi-sekarang').addClass('hidden');

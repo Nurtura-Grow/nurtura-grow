@@ -17,14 +17,14 @@ class RekomendasiPengairan extends Model
         'id_rekomendasi_air'
     ];
 
+    public function data_sensor(): BelongsTo
+    {
+        return $this->belongsTo(DataSensor::class, 'id_sensor', 'id_sensor');
+    }
+
     public function log_aksi(): BelongsTo
     {
         return $this->belongsTo(LogAksi::class, 'id_log_aksi', 'id_log_aksi');
-    }
-
-    public function penanaman(): BelongsTo
-    {
-        return $this->belongsTo(Penanaman::class, 'id_penanaman', 'id_penanaman');
     }
 
     public function kondisi_message(): BelongsTo

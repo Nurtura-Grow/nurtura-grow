@@ -122,6 +122,7 @@ function getDataAndUpdateChart(labelParam = label, tanggalDariParam = tanggalDar
             tanggalHingga: tanggalHinggaParam
         },
         success: function (response) {
+            $('#tanggalTerpilih').text(response.data.tanggalDari + ' - ' + response.data.tanggalHingga);
             if (isEmpty(response.data.timestamp_pengukuran)) {
                 if (chartInstance) {
                     chartInstance.destroy();

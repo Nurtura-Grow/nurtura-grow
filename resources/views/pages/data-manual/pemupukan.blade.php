@@ -148,7 +148,7 @@
                 <label for="tanggal_pemupukan" class="form-label sm:w-32">Volume/durasi pemupukan alat</label>
                 <div class="w-full">
                     {{-- Pemupukan --}}
-                    <div class="clickable-box flex flex-row mt-2 py-3 px-4 border-2 rounded-lg shadow-md">
+                    <div class="clickable-box flex flex-row mt-2 py-3 px-4 ml-4 border-2 rounded-lg shadow-md">
                         <input class="form-check-input input-pemupukan" type="radio" name="pemupukan" checked>
                         <div>
                             <label class="form-check-label ml-4" for="volume_pemupukan">Volume Pemupukan</label>
@@ -165,7 +165,7 @@
                     </div>
 
                     {{-- Waktu pemupukan --}}
-                    <div class="clickable-box flex flex-row mt-5 py-3 px-4 border-2 rounded-lg shadow-md">
+                    <div class="clickable-box flex flex-row mt-5 py-3 px-4 ml-4 border-2 rounded-lg shadow-md">
                         <input class="form-check-input input-pemupukan" type="radio" name="pemupukan">
 
                         <div>
@@ -190,15 +190,17 @@
                                         placeholder="Waktu Selesai" aria-label="waktu" name="waktu_selesai">
                                 </div>
                             </div>
+
+                            <div class="ml-4 mt-2" id="durasi"></div>
+                            <div class="ml-4 mt-2 text-warning">Keterangan: waktu penyiraman maksimal 3 jam</div>
                         </div>
                     </div>
                 </div>
-
             </div>
 
             {{-- Button Submit --}}
             <div class="sm:ml-32 sm:pl-5">
-                <button type="submit" class="btn btn-primary mt-5 px-10">Masukkan</button>
+                <button type="submit" class="btn btn-primary mt-5 px-10 w-auto sm:w-56" id="submit" disabled>Jalankan</button>
             </div>
 
             {{-- Warning --}}
@@ -219,5 +221,5 @@
 @include('pages.data-manual.components.scripts')
 
 @push('scripts')
-    @vite(['resources/js/pages/data-manual/pengairan-pemupukan.js'])
+    @vite(['resources/js/pages/data-manual/pengairan-pemupukan.js', 'resources/js/pages/data-manual/pemupukan.js'])
 @endpush

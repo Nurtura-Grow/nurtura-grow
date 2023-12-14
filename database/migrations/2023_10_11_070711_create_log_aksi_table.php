@@ -16,10 +16,11 @@ return new class extends Migration
             $table->foreignId('id_tipe_instruksi');
             $table->foreignId('id_penanaman');
             // kalau ikutin rekomendasi machine learning
-            $table->foreignId('id_rekomendasi_pemupukan')->nullable();
-            $table->foreignId('id_rekomendasi_air')->nullable();
+            $table->foreignId('id_fertilizer_controller')->nullable();
+            $table->foreignId('id_irrigation_controller')->nullable();
             $table->float('durasi');
             // Diisi kalau diisi manual
+            $table->boolean('sedang_berjalan');
             $table->foreignId('created_by')->nullable();
             $table->foreignId('updated_by')->nullable();
             $table->foreignId('deleted_by')->nullable();

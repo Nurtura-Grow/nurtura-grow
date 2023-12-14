@@ -3,10 +3,11 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class DataSensor extends Model
 {
@@ -33,6 +34,11 @@ class DataSensor extends Model
                 $data_sensor->timestamp_pengukuran = Carbon::parse($data_sensor->timestamp_pengukuran)->format('d M Y H:i:s');
                 return $data_sensor;
             });
+    }
+
+    public function rekomendasi_pengairan(): HasOne
+    {
+        return $this->hasOne(RekomendasiPengairan::class, 'id_sensor', 'id_sensor');
     }
 
     public function informasi_lahan(): BelongsTo

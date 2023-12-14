@@ -26,10 +26,10 @@ let chartInstances = {
 };
 
 const labelMapping = {
-    'suhu': 'Suhu Udara',
-    'kelembapan_udara': 'Kelembapan Udara',
-    'kelembapan_tanah': 'Kelembapan Tanah',
-    'ph_tanah': 'pH Tanah'
+    'suhu': 'Rata-rata Suhu Udara',
+    'kelembapan_udara': 'Rata-rata Kelembapan Udara',
+    'kelembapan_tanah': 'Rata-rata Kelembapan Tanah',
+    'ph_tanah': 'Rata-rata pH Tanah'
 };
 
 

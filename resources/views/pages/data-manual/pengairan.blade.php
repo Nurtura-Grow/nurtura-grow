@@ -42,6 +42,11 @@
                         </a>
                     </div>
 
+                    <div class="mt-2">
+                        <p class="text-center font-semibold">Tanggal: <span id="tanggalTerpilih" class="font-normal">31
+                                Desember 2023</span></p>
+                    </div>
+
                     <div class="grow w-full h-full flex justify-center items-center" id="container-grafik">
                         <canvas class="w-fit h-fit" id="grafik-pengairan"></canvas>
                     </div>
@@ -152,8 +157,8 @@
             <div class="form-inline mt-5">
                 <label for="tanggal_pengairan" class="form-label sm:w-32">Volume air/durasi penyiraman alat</label>
                 <div class="w-full">
-                    {{-- Pengairan --}}
-                    <div class="clickable-box flex flex-row mt-2 py-3 px-4 border-2 rounded-lg shadow-md">
+                    {{-- Volume Pengairan --}}
+                    <div class="clickable-box flex flex-row mt-2 ml-4 py-3 px-4 border-2 rounded-lg shadow-md">
                         <input class="form-check-input input-pengairan" type="radio" name="pengairan" checked>
                         <div>
                             <label class="form-check-label ml-4" for="volume_pengairan">Volume Pengairan</label>
@@ -162,17 +167,16 @@
                                 <input name="volume_pengairan" type="text" class="form-control col-span-6"
                                     placeholder="10" id="volume">
                                 <select class="form-select col-span-6" name="satuan" id="satuan">
-                                    <option>L</option>
-                                    <option selected>mL</option>
+                                    <option selected>L</option>
+                                    <option>mL</option>
                                 </select>
                             </div>
                         </div>
                     </div>
 
                     {{-- Waktu Pengairan --}}
-                    <div class="clickable-box flex flex-row mt-5 py-3 px-4 border-2 rounded-lg shadow-md">
+                    <div class="clickable-box flex flex-row mt-5 ml-4 py-3 px-4 border-2 rounded-lg shadow-md">
                         <input class="form-check-input input-pengairan" type="radio" name="pengairan">
-
                         <div>
                             <label class="form-check-label ml-4" for="waktu_pengairan">Waktu Pengairan</label>
                             <div class="flex flex-col lg:flex-row gap-2 ml-4 mt-2">
@@ -182,7 +186,7 @@
                                         class="absolute top-0 left-0 rounded-l w-10 h-full flex items-center justify-center bg-slate-100 border text-slate-500">
                                         <i class="fa-regular fa-clock w-4 h-4"></i>
                                     </div>
-                                    <input type="text" class="form-control waktu-mulai pl-12"
+                                    <input type="text" class="form-control waktu-mulai pl-12" id="waktu_mulai"
                                         placeholder="Waktu Mulai" aria-label="waktu" name="waktu_mulai">
                                 </div>
                                 {{-- Waktu Selesai --}}
@@ -191,7 +195,7 @@
                                         class="absolute top-0 left-0 rounded-l w-10 h-full flex items-center justify-center bg-slate-100 border text-slate-500">
                                         <i class="fa-regular fa-clock w-4 h-4"></i>
                                     </div>
-                                    <input type="text" class="form-control waktu-selesai pl-12"
+                                    <input type="text" class="form-control waktu-selesai pl-12" id="waktu_selesai"
                                         placeholder="Waktu Selesai" aria-label="waktu" name="waktu_selesai">
                                 </div>
                             </div>
@@ -200,21 +204,36 @@
                 </div>
             </div>
 
-            {{-- Button Jalankan --}}
-            <div class="sm:ml-32 sm:pl-5">
-                <button type="submit" class="btn btn-primary mt-5 px-10 w-auto sm:w-56">Jalankan</button>
+            {{-- Durasi --}}
+            <div class="form-inline mt-5">
+                <label for="durasi" class="form-label sm:w-32">Durasi</label>
+                <input type="text" class="form-control" name="durasi"
+                    placeholder="Pilih waktu mulai dan selesai untuk mendapatkan durasi" id="durasi" readonly>
             </div>
 
-            {{-- Warning --}}
-            <div class="sm:ml-32 sm:pl-5 mt-3">
-                <span class="text-warning">
-                    <span class="font-bold">
-                        <i class="fa-solid fa-triangle-exclamation mr-3"></i>PERINGATAN<i
-                            class="fa-solid fa-triangle-exclamation ml-3"></i>
-                        <br>
-                    </span>
-                    Aksi Anda akan menggantikan rekomendasi sistem.
-                </span>
+            {{-- Keterangan --}}
+            <div class="form-inline mt-5">
+                <label class="form-label sm:w-32 font-bold" for="keterangan">Keterangan</label>
+                <ul>
+                    <li>
+                        Waktu pengairan <span class="font-bold">maksimal 180 menit</span>
+                    </li>
+                    <li>
+                        Debit sprinkler: <span class="font-bold">7 L/menit</span>
+                    </li>
+
+                    <li class="font-bold text-warning">
+                        <i class="fa-solid fa-triangle-exclamation mr-2"></i>
+                        Aksi Anda akan menggantikan rekomendasi sistem.
+                        <i class="fa-solid fa-triangle-exclamation ml-2"></i>
+                    </li>
+                </ul>
+            </div>
+
+            {{-- Button Jalankan --}}
+            <div class="sm:ml-32 sm:pl-5">
+                <button type="submit" class="btn btn-primary mt-5 px-10 w-auto sm:w-56" id="submit"
+                    disabled>Jalankan</button>
             </div>
         </form>
     </div>

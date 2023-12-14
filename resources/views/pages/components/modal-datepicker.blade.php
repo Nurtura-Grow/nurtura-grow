@@ -54,8 +54,6 @@
             <!-- END: Modal Body -->
             <!-- BEGIN: Modal Footer -->
             <div class="modal-footer text-right">
-                <button type="button" data-tw-dismiss="modal"
-                    class="btn btn-outline-secondary w-36 mr-1">Batal</button>
                 <button type="button" id="pilihTanggal" data-tw-dismiss="modal" class="btn btn-primary w-36">Pilih Tanggal</button>
             </div>
             <!-- END: Modal Footer -->
