@@ -67,7 +67,7 @@ let chartInstance;
 
 // Function to update data to the chart
 function addData(label, newData) {
-    chartInstance.data.datasets[0].label = (dateChosen == "last_week" || dateChosen == "last_month" ? "Rata-rata " : "") + label;
+    chartInstance.data.datasets[0].label = "Rata-rata " + label;
     chartInstance.data.datasets[0].data = newData;
 
     if (label == "pH Tanah") {
@@ -152,7 +152,7 @@ function updateGraphs(dataGraphic, label = 'Suhu Udara') {
         const grafikKeseluruhan = document.getElementById('grafik-keseluruhan');
         const data = {
             datasets: [{
-                label: label,
+                label: "Rata-rata " + label,
                 data: dataGraphic,
                 fill: false,
                 backgroundColor: 'rgb(75, 192, 192)',

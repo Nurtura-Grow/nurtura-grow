@@ -5,10 +5,22 @@
         <h2 class="text-lg font-medium  mr-auto" id="judulHalaman">
             Riwayat Tinggi Tanaman
         </h2>
-        <div class="w-full sm:w-auto flex mt-2 sm:mt-0">
-            <a href="{{ route('manual.tinggi.create') }}" class="btn bg-rgb-secondary text-white shadow-md" id="buttonTambah">
+        <div class="w-full sm:w-auto flex mt-2 sm:mt-0"  id="buttonTambah">
+            <a href="{{ route('manual.tinggi.create') }}" class="btn bg-rgb-secondary text-white shadow-md">
                 <i class="fa-solid fa-circle-plus mr-2"></i>Tambah Tinggi Tanaman
             </a>
+        </div>
+
+        <div class="dropdown w-full sm:w-auto flex mt-2 sm:mt-0 hidden" id="dropdownTambah">
+            <button class="dropdown-toggle btn bg-rgb-secondary text-white shadow-md" aria-expanded="false" data-tw-toggle="dropdown">
+                <i class="fa-solid fa-circle-plus mr-2"></i>Tambahkan aksi
+            </button>
+            <div class="dropdown-menu w-40">
+                <ul class="dropdown-content">
+                    <li> <a href="{{ route('manual.pengairan.create')}}" class="dropdown-item">Pengairan</a> </li>
+                    <li> <a href="{{ route('manual.pemupukan.create')}}" class="dropdown-item">Pemupukan</a> </li>
+                </ul>
+            </div>
         </div>
     </div>
 
@@ -26,14 +38,9 @@
                         role="tab" aria-controls="data-sensor" aria-selected="false"> Data Sensor </button>
                 </li>
 
-                <li id="riwayat-pemupukan" class="nav-item flex-1" role="presentation">
-                    <button class="nav-link w-full py-2" data-tw-toggle="pill" data-tw-target="#pemupukan" type="button"
-                        role="tab" aria-controls="pemupukan" aria-selected="false"> Pemupukan </button>
-                </li>
-
-                <li id="riwayat-pengairan" class="nav-item flex-1" role="presentation">
-                    <button class="nav-link w-full py-2" data-tw-toggle="pill" data-tw-target="#pengairan" type="button"
-                        role="tab" aria-controls="pengairan" aria-selected="false"> Pengairan </button>
+                <li id="aksi-alat" class="nav-item flex-1" role="presentation">
+                    <button class="nav-link w-full py-2" data-tw-toggle="pill" data-tw-target="#aksi-alat" type="button"
+                        role="tab" aria-controls="aksi-alat" aria-selected="false"> Aksi Alat </button>
                 </li>
             </ul>
 
@@ -47,13 +54,9 @@
                     @include('pages.riwayat.data-sensor')
                 </div>
 
-                <div id="pemupukan" class="tab-pane leading-relaxed w-full sm:p-2" role="tabpanel"
-                    aria-labelledby="riwayat-pemupukan">
-                    @include('pages.riwayat.pemupukan')
-                </div>
-                <div id="pengairan" class="tab-pane leading-relaxed w-full sm:p-2" role="tabpanel"
-                    aria-labelledby="riwayat-pengairan">
-                    @include('pages.riwayat.pengairan')
+                <div id="aksi-alat" class="tab-pane leading-relaxed w-full sm:p-2" role="tabpanel"
+                    aria-labelledby="aksi-alat">
+                    @include('pages.riwayat.aksi-alat')
                 </div>
             </div>
         </div>
@@ -64,8 +67,6 @@
 @push('scripts')
     <script>
         const routeTinggi = "{{ route('manual.tinggi.create') }}"
-        const routePemupukan = "{{ route('manual.pemupukan.create') }}";
-        const routePengairan = "{{ route('manual.pengairan.create') }}";
     </script>
 
     @vite(['resources/js/pages/riwayat/index.js', 'resources/js/pages/riwayat/data-sensor.js', 'resources/js/pages/riwayat/litepicker.js'])

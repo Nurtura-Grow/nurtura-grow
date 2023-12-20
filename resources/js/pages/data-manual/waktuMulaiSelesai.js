@@ -61,6 +61,9 @@ var waktuMulaiPicker = flatpickr(".waktu-mulai", {
 
 function calculateDuration() {
     if (startTime && endTime) {
+        console.log("calculateDuration startTime", startTime)
+        console.log("calculateDuration endTime", endTime)
+
         // Calculate the difference in milliseconds
         var durationMillis = endTime - startTime;
 
@@ -70,7 +73,7 @@ function calculateDuration() {
         minutes = Math.floor(durationMillis / (1000 * 60));
 
         // Check if the duration is negative or more than 3 hours
-        if (durationMillis <= 0 || (minutes >= 180)) {
+        if (durationMillis <= 0 || (minutes > 180)) {
             $('#submit').prop('disabled', true);
         } else {
             $('#submit').prop('disabled', false);
@@ -79,12 +82,15 @@ function calculateDuration() {
         // Display or return the duration
         $('#durasi').val(minutes + " menit");
 
+        // Update Waktu selesai
+        $('.waktu-selesai').val(moment(endTime, 'HH:mm').format('HH:mm'))
+
         // Update volume
-        const volumeLiter = minutes * debit;
+        nilaiVolumeLiter = minutes * debit;
         if (nilaiSatuan == "mL") {
-            volume.value = volumeLiter * 1000;
+            volume.value = nilaiVolumeLiter * 1000;
         } else {
-            volume.value = volumeLiter;
+            volume.value = nilaiVolumeLiter;
         }
     } else {
         $('#durasi').val("Pilih waktu mulai dan selesai untuk mendapatkan durasi");
@@ -111,6 +117,8 @@ if (satuan && volume) {
             nilaiVolumeLiter = volume.value / 1000;
         }
 
+        console.log('volumeChange', nilaiVolumeLiter)
+
         nilaiSatuan = satuan.value;
         getTimeMinute();
     })
@@ -120,13 +128,13 @@ if (satuan && volume) {
 
         // Update waktu-mulai and waktu-selesai value
         if (!startTime) {
-            console.log("Tidak ada start time")
-            startTime = currentHour;
+            startTime = moment(currentHour, 'HH:mm');
         } else {
             startTime = moment(startTime, 'HH:mm')
         }
 
         endTime = moment(startTime, 'HH:mm').add(timeMinute, 'minutes')
+        console.log('getTimeMinute endTime', endTime)
 
         $('.waktu-mulai').val(moment(startTime, 'HH:mm').format('HH:mm'))
         $('.waktu-selesai').val(moment(endTime, 'HH:mm').format('HH:mm'))
