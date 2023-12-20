@@ -17,8 +17,7 @@ class DataSensor extends Model
     protected $guarded = [
         'id_sensor'
     ];
-
-
+    public $timestamps = false;
     public static function dataSensorWithDetails()
     {
         return self::with(['penanaman.informasi_lahan'])
