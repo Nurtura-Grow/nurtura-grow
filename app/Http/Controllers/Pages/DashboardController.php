@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Pages;
 use App\Http\Controllers\Controller;
 use App\Models\DataSensor;
 use App\Models\InformasiLahan;
+use App\Models\LogAksi;
 use App\Models\Penanaman;
 use App\Models\PrediksiSensor;
 use Carbon\Carbon;
@@ -32,6 +33,7 @@ class DashboardController extends Controller
 
         $dataSensor = DataSensor::orderBy('timestamp_pengukuran', 'desc')->first();
 
+        $logAksi = LogAksi::logAksiWithDetails();
         $penanaman = collect($penanaman)->sortByDesc('hst')->take($jumlahLahan)->values();
 
         return view('pages.dashboard', [
@@ -39,38 +41,41 @@ class DashboardController extends Controller
             'seluruhLahan' => $seluruhLahan,
             'penanaman' => $penanaman,
             'jumlahLahan' => $jumlahLahan,
+            'logAksi' => $logAksi,
             'grafik' => [
                 'Suhu Udara' => [
                     "name" => 'Suhu Udara',
-                    "data" => $dataSensor->suhu,
+                    "data" => isset($dataSensor->suhu) ? $dataSensor->suhu : 0,
                     "slug" => "suhu-udara",
-                    "persentase" => $dataSensor->suhu,
+                    "persentase" => isset($dataSensor->suhu) ? $dataSensor->suhu : 0,
                     "color" => "rgb(0, 38, 35)"
 
                 ],
                 'Kelembapan Udara' => [
                     "name" => "Kelembapan Udara",
-                    "data" => $dataSensor->kelembapan_udara,
+                    "data" => isset($dataSensor->kelembapan_udara) ? $dataSensor->kelembapan_udara : 0,
                     "slug" => "kelembapan-udara",
-                    "persentase" => $dataSensor->kelembapan_udara,
+                    "persentase" => isset($dataSensor->kelembapan_udara) ? $dataSensor->kelembapan_udara : 0,
                     "color" => "rgb(87, 180, 146)",
                 ],
                 'Kelembapan Tanah' => [
                     "name" => 'Kelembapan Tanah',
-                    "data" => $dataSensor->kelembapan_tanah,
+                    "data" => isset($dataSensor->kelembapan_tanah) ? $dataSensor->kelembapan_tanah : 0,
                     "slug" => "kelembapan-tanah",
-                    "persentase" => $dataSensor->kelembapan_tanah,
+                    "persentase" => isset($dataSensor->kelembapan_tanah) ? $dataSensor->kelembapan_tanah : 0,
                     "color" => "rgb(239, 123, 69)",
                 ],
                 'pH Tanah' => [
                     "name" => 'pH Tanah',
-                    "data" => $dataSensor->ph_tanah,
+                    "data" => isset($dataSensor->ph_tanah) ? $dataSensor->ph_tanah : 0,
                     "slug" => "ph-tanah",
-                    "persentase" => $dataSensor->ph_tanah / 14 * 100,
+                    "persentase" => isset($dataSensor->ph_tanah) ? ($dataSensor->ph_tanah / 14 * 100) : 0,
                     "color" => "rgb(246, 174, 45)",
                 ],
             ],
-            'timestamp' => Carbon::parse($dataSensor->timestamp_pengukuran)->format('d M Y || H:i:s'),
+            'timestamp' => isset($dataSensor->timestamp_pengukuran)
+                ? Carbon::parse($dataSensor->timestamp_pengukuran)->format('d M Y || H:i:s')
+                : "Tidak ada data",
         ]);
     }
 

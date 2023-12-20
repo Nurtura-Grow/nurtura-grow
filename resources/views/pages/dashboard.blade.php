@@ -192,7 +192,7 @@
                 <div class="intro-y box p-5 mt-12 sm:mt-5 grow">
                     <div class="rounded-md">
                         <div class="overflow-x-auto scrollbar-hidden">
-                            @include('pages.riwayat.pengairan')
+                            @include('pages.riwayat.aksi-alat')
                         </div>
                     </div>
                 </div>
