@@ -18,7 +18,7 @@ return new class extends Migration
             $table->float('kelembapan_udara');
             $table->float('kelembapan_tanah');
             $table->timestamp('timestamp_prediksi_sensor');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 

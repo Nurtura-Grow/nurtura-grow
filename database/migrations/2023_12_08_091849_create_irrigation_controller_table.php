@@ -14,11 +14,13 @@ return new class extends Migration
         Schema::create('irrigation_controller', function (Blueprint $table) {
             $table->id('id_irrigation_controller');
             $table->string('mode', 10);
+            $table->foreignId('id_penanaman')->nullable();
             $table->foreignId('id_rekomendasi_air')->nullable();
+            $table->integer('volume_liter');
             $table->integer('durasi_detik');
             $table->boolean('willSend');
             $table->boolean('isSent');
-            $table->timestamp('waktu_mulai');
+            $table->timestamp('waktu_mulai')->nullable();
             $table->timestamp('waktu_selesai')->nullable();
             $table->timestamps();
         });

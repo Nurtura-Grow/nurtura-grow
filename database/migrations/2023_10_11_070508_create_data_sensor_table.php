@@ -19,7 +19,6 @@ return new class extends Migration
             $table->float('kelembapan_tanah');
             $table->float('ph_tanah');
             $table->timestamp('timestamp_pengukuran')->useCurrent();
-            $table->timestamps();
         });
     }
 

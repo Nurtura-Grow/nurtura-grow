@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Pages\PengendalianManual;
 
-use App\Http\Controllers\Controller;
-use App\Models\InformasiLahan;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Models\InformasiLahan;
+use App\Http\Controllers\Controller;
+use App\Models\FertilizerController;
 
 class PemupukanController extends Controller
 {
@@ -35,7 +37,52 @@ class PemupukanController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        // Get the minutes from request
+        $minutes = intval($request->durasi);
+
+        // Convert minutes to seconds
+        $seconds = $minutes * 60;
+        $fertilizerController = FertilizerController::where('mode', 'auto')
+            ->where('waktu_mulai', '>=', now())
+            ->where('willSend', 1)
+            ->where('isSent', 0)
+            ->orderBy('waktu_mulai', 'asc') // the nearest next time
+            ->first();
+
+        if ($fertilizerController) {
+            $fertilizerController->update([
+                'willSend' => 0,
+                'updated_by' => auth()->user()->id_user,
+                'updated_at' => now(),
+            ]);
+        }
+
+        $volume = $request->satuan == "L" ? $request->volume_pemupukan : $request->volume_pemupukan * 1000;
+
+        $waktuMulaiInput = Carbon::parse($request->waktu_mulai);
+        $waktuSelesaiInput = Carbon::parse($request->waktu_selesai);
+        $currentTime = now()->addMinute()->format('Y-m-d H:i:00');
+
+        $waktuMulai = $waktuMulaiInput < $currentTime ? $currentTime : $waktuMulaiInput;
+        $waktuSelesai = $waktuMulaiInput < $currentTime ? $waktuMulaiInput->addSeconds($seconds) : $waktuSelesaiInput;
+
+
+
+        FertilizerController::create([
+            'mode' => 'manual',
+            'id_penanaman' => $request->id_penanaman,
+            'id_rekomendasi_pupuk' => null,
+            'volume_liter' => $volume,
+            'durasi_detik' => $seconds,
+            'willSend' => 1,
+            'isSent' => 0,
+            'waktu_mulai' => $waktuMulai,
+            'waktu_selesai' => $waktuSelesai,
+            'created_at' => now(),
+            'created_by' => auth()->user()->id_user,
+        ]);
+
+        return redirect()->route('riwayat.index');
     }
 
     /**

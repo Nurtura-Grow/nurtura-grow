@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('fertilizer_controller', function (Blueprint $table) {
             $table->id('id_fertilizer_controller');
             $table->string('mode', 10);
+            $table->foreignId('id_penanaman')->nullable();
             $table->foreignId('id_rekomendasi_pupuk')->nullable();
+            $table->integer('volume_liter');
             $table->integer('durasi_detik');
             $table->boolean('willSend');
             $table->boolean('isSent');
