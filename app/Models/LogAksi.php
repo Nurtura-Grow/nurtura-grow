@@ -33,6 +33,7 @@ class LogAksi extends Model
         if ($dataCombined->isNotEmpty()) {
             // willSend, isSent, sedangBerjalan
             $statusMapping = [
+                '000' => 'Dihapus',
                 '00' => "Tidak dijalankan",
                 '10' => "Belum berjalan",
                 '111' => "Sedang berjalan",
@@ -48,10 +49,15 @@ class LogAksi extends Model
 
                 $sedangBerjalan = optional($item->log_aksi->first())->sedang_berjalan;
                 $statusKey = implode('', [$item->willSend, $item->isSent, $sedangBerjalan]);
+
+                if ($item->deleted_at != null && $item->deleted_by != null) {
+                    $statusKey = '000';
+                }
+
                 $item->status = $statusMapping[$statusKey] ?? 'Status tidak diketahui';
                 $item->aksi = false;
 
-                switch($statusKey){
+                switch ($statusKey) {
                     case '10':
                         $item->aksi = true;
 
@@ -59,6 +65,9 @@ class LogAksi extends Model
                         $item->aksi = true;
                 }
 
+                // BaseController formatDateUI
+                $item->waktu_mulai = app('App\Http\Controllers\Controller')->formatDateTimeUI($item->waktu_mulai);
+                $item->waktu_selesai = app('App\Http\Controllers\Controller')->formatDateTimeUI($item->waktu_selesai);
             });
         }
 

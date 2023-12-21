@@ -216,10 +216,18 @@
                 <label class="form-label sm:w-32 font-bold" for="keterangan">Keterangan</label>
                 <ul>
                     <li>
+                        Volume akan menyesuaikan debit pengairan (kelipatan 7 sebelumnya)
+                    </li>
+                    <li>
                         Waktu pengairan <span class="font-bold">maksimal 180 menit</span>
                     </li>
                     <li>
                         Debit sprinkler: <span class="font-bold">7 L/menit</span>
+                    </li>
+
+                    <li>
+                        Jika penyiraman dilaksanakan sekarang (dengan waktu yang sama),
+                        maka waktu mulai dan selesai akan ditambahkan sebanyak 1 menit agar data dapat masuk ke database
                     </li>
 
                     <li class="font-bold text-warning">

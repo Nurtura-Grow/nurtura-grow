@@ -5,20 +5,21 @@
         <h2 class="text-lg font-medium  mr-auto" id="judulHalaman">
             Riwayat Tinggi Tanaman
         </h2>
-        <div class="w-full sm:w-auto flex mt-2 sm:mt-0"  id="buttonTambah">
+        <div class="w-full sm:w-auto flex mt-2 sm:mt-0" id="buttonTambah">
             <a href="{{ route('manual.tinggi.create') }}" class="btn bg-rgb-secondary text-white shadow-md">
                 <i class="fa-solid fa-circle-plus mr-2"></i>Tambah Tinggi Tanaman
             </a>
         </div>
 
         <div class="dropdown w-full sm:w-auto flex mt-2 sm:mt-0 hidden" id="dropdownTambah">
-            <button class="dropdown-toggle btn bg-rgb-secondary text-white shadow-md" aria-expanded="false" data-tw-toggle="dropdown">
+            <button class="dropdown-toggle btn bg-rgb-secondary text-white shadow-md" aria-expanded="false"
+                data-tw-toggle="dropdown">
                 <i class="fa-solid fa-circle-plus mr-2"></i>Tambahkan aksi
             </button>
             <div class="dropdown-menu w-40">
                 <ul class="dropdown-content">
-                    <li> <a href="{{ route('manual.pengairan.create')}}" class="dropdown-item">Pengairan</a> </li>
-                    <li> <a href="{{ route('manual.pemupukan.create')}}" class="dropdown-item">Pemupukan</a> </li>
+                    <li> <a href="{{ route('manual.pengairan.create') }}" class="dropdown-item">Pengairan</a> </li>
+                    <li> <a href="{{ route('manual.pemupukan.create') }}" class="dropdown-item">Pemupukan</a> </li>
                 </ul>
             </div>
         </div>
@@ -63,11 +64,8 @@
     </div>
 @endsection
 
+{{-- Delete Modal --}}
 @include('pages.components.datatable-styles')
 @push('scripts')
-    <script>
-        const routeTinggi = "{{ route('manual.tinggi.create') }}"
-    </script>
-
     @vite(['resources/js/pages/riwayat/index.js', 'resources/js/pages/riwayat/data-sensor.js', 'resources/js/pages/riwayat/litepicker.js'])
 @endpush

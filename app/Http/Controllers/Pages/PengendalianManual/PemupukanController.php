@@ -66,8 +66,6 @@ class PemupukanController extends Controller
         $waktuMulai = $waktuMulaiInput < $currentTime ? $currentTime : $waktuMulaiInput;
         $waktuSelesai = $waktuMulaiInput < $currentTime ? $waktuMulaiInput->addSeconds($seconds) : $waktuSelesaiInput;
 
-
-
         FertilizerController::create([
             'mode' => 'manual',
             'id_penanaman' => $request->id_penanaman,
@@ -88,9 +86,27 @@ class PemupukanController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Request $request, string $id)
     {
-        //
+        $sideMenu = $this->getSideMenuList($request);
+
+        $fertilizer_controller = FertilizerController::find($id);
+
+        if ($fertilizer_controller->isSent == 1 || !$fertilizer_controller || $fertilizer_controller->mode != 'manual') {
+            abort(400);
+        }
+
+        $fertilizer_controller->nama_penanaman = $fertilizer_controller->penanaman->nama_penanaman;
+        $fertilizer_controller->tanggal_pemupukan  = $this->formatDateUI($fertilizer_controller->waktu_mulai);
+
+        $fertilizer_controller->waktu_mulai = $this->formatTimeUI($fertilizer_controller->waktu_mulai);
+        $fertilizer_controller->waktu_selesai = $this->formatTimeUI($fertilizer_controller->waktu_selesai);
+
+
+        return view('pages.data-manual.edit.pemupukan', [
+            'sideMenu' => $sideMenu,
+            'fertilizer_controller' => $fertilizer_controller,
+        ]);
     }
 
     /**
@@ -98,7 +114,36 @@ class PemupukanController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $fertilizer_controller = FertilizerController::find($id);
+        if ($fertilizer_controller->isSent == 1 || !$fertilizer_controller || $fertilizer_controller->mode != 'manual') {
+            abort(400);
+        }
+
+        // Get the minutes from request
+        $minutes = intval($request->durasi);
+
+        // Convert minutes to seconds
+        $seconds = $minutes * 60;
+
+        $volume = $request->satuan == "L" ? $request->volume_pemupukan : $request->volume_pemupukan * 1000;
+
+        $waktuMulaiInput = Carbon::parse($request->waktu_mulai);
+        $waktuSelesaiInput = Carbon::parse($request->waktu_selesai);
+        $currentTime = now()->addMinute()->format('Y-m-d H:i:00');
+
+        $waktuMulai = $waktuMulaiInput < $currentTime ? $currentTime : $waktuMulaiInput;
+        $waktuSelesai = $waktuMulaiInput < $currentTime ? $waktuMulaiInput->addSeconds($seconds) : $waktuSelesaiInput;
+
+        $fertilizer_controller->update([
+            'volume_liter' => $volume,
+            'durasi_detik' => $seconds,
+            'waktu_mulai' => $waktuMulai,
+            'waktu_selesai' => $waktuSelesai,
+            'updated_at' => now(),
+            'updated_by' => auth()->user()->id_user,
+        ]);
+
+        return redirect()->route('riwayat.index');
     }
 
     /**
@@ -106,6 +151,17 @@ class PemupukanController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $fertilizer_controller = FertilizerController::find($id);
+        if ($fertilizer_controller->isSent == 1 || !$fertilizer_controller || $fertilizer_controller->mode != 'manual') {
+            abort(400);
+        }
+
+        $fertilizer_controller->update([
+            'willSend' => 0,
+            'deleted_at' => now(),
+            'deleted_by' => auth()->user()->id_user,
+        ]);
+
+        return redirect()->route('riwayat.index');
     }
 }
