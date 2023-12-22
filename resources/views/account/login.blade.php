@@ -21,9 +21,9 @@
                         <span class="text-white text-lg ml-3">NurturaGrow</span>
                     </a>
                     <div class="my-auto">
-                        <img alt="" class="-intro-x w-1/2 -mt-16"
-                            src="{{ asset('images/illustration/auth/login.png') }}">
-                        <div class="-intro-x text-white font-medium text-4xl leading-tight mt-10">
+                        <img alt="" class="-intro-x w-2/3 -mt-16"
+                            src="{{ asset('images/illustration/auth/login.svg') }}">
+                        <div class="-intro-x text-white font-medium text-4xl leading-tight">
                             NurturaGrow<br>
                         </div>
                         <div class="-intro-x mt-5 text-lg text-white text-opacity-70">

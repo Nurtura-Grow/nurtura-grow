@@ -1,7 +1,6 @@
 @extends('layout.base')
 
 @section('body')
-
     <body class="flex h-screen p-0 m-0 bg-no-repeat bg-rgb-light-green overflow-hidden">
         <div class="container sm:px-8 lg:px-12 xl:px-24 h-screen">
             <div class="block lg:grid grid-cols-2 gap-4">
@@ -41,7 +40,7 @@
                             <div class="intro-x mt-5 lg:mt-8 text-center lg:text-left">
                                 <button type="submit" class="w-full btn text-white shadow-md"
                                     style="background-color: rgb(0, 38, 35);" id="buttonTambah">
-                                    Kirim Kode
+                                    Perbarui Password
                                 </button>
                             </div>
                         </form>

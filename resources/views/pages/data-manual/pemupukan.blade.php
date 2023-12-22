@@ -292,7 +292,7 @@
 
 @push('scripts')
     <script defer>
-        const routePemupukanDestroy = "{{ route('manual.pemupukan.destroy', ['pengairan' => ':id_pemupukan']) }}"
+        const routePemupukanDestroy = "{{ route('manual.pemupukan.destroy', ['pemupukan' => ':id_pemupukan']) }}"
 
         function deleteAksi(element) {
             // Get data-tanaman attribute
