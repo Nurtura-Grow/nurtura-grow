@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\InformasiLahan;
 use App\Http\Controllers\Controller;
 use App\Models\IrrigationController;
+use App\Models\LogAksi;
 
 class PengairanController extends Controller
 {
@@ -25,6 +26,25 @@ class PengairanController extends Controller
             }]);
         }
 
+        // Get the latest irrigation log
+        $latestIrrigationLog = LogAksi::whereHas('tipe_instruksi', function ($query) {
+            $query->where('nama_tipe', 'pengairan');
+        })->latest('created_at')->first();
+
+        // Retrieve irrigation controller information
+        $irrigationController = $latestIrrigationLog->irrigation_controller;
+
+        // Get the next recommended irrigation and the next manual irrigation
+        $rekomendasiPenyiraman = $this->getNextIrrigation('auto');
+        $penyiramanSelanjutnya = $this->getNextIrrigation('manual');
+
+        // Prepare the response data
+        $pengairanData = [
+            'terakhir' => $this->formatIrrigationData($irrigationController),
+            'rekomendasi' => $rekomendasiPenyiraman ? $this->formatIrrigationData($rekomendasiPenyiraman) : null,
+            'selanjutnya' => ($rekomendasiPenyiraman || $penyiramanSelanjutnya) ? $this->formatIrrigationData($penyiramanSelanjutnya) : null,
+        ];
+
         $tanggalSekarang = $this->formatDateUI(now());
         $dataSensor = DataSensor::orderBy('timestamp_pengukuran', 'desc')->first();
 
@@ -32,6 +52,7 @@ class PengairanController extends Controller
             'sideMenu' => $sideMenu,
             'seluruhLahan' => $lahan,
             'tanggalSekarang' => $tanggalSekarang,
+            'pengairan' => $pengairanData,
             'grafik' => [
                 'Suhu Udara' => [
                     "name" => 'Suhu Udara',
@@ -56,6 +77,29 @@ class PengairanController extends Controller
                 ],
             ],
         ]);
+    }
+
+    // Helper function to format irrigation data
+    private function formatIrrigationData($irrigationController)
+    {
+        return [
+            'tanggal' => $this->formatDateUI($irrigationController->waktu_mulai),
+            'waktu_mulai' => $this->formatTimeUI($irrigationController->waktu_mulai),
+            'waktu_selesai' => $this->formatTimeUI($irrigationController->waktu_selesai),
+            'volume' => $irrigationController->volume_liter,
+            'id_irrigation_controller' => $irrigationController->id_irrigation_controller,
+        ];
+    }
+
+    // Helper function to get the next irrigation based on mode
+    private function getNextIrrigation($mode)
+    {
+        return IrrigationController::where('mode', $mode)
+            ->where('waktu_mulai', '>=', now())
+            ->where('willSend', 1)
+            ->where('isSent', 0)
+            ->orderBy('waktu_mulai')
+            ->first();
     }
 
     /**

@@ -73,43 +73,93 @@
                     {{-- Penyiraman Terakhir --}}
                     <div class="intro-y">
                         <p class="font-bold">Penyiraman Terakhir</p>
-                        <span class="">31 Desember 2023</span>
+                        <span class="">{{ $pengairan['terakhir']['tanggal'] }}</span>
 
                         <div class="flex mt-2">
                             <span class="basis-1/6">Pukul:</span>
-                            <span>12:00:00 - 12:15:00</span>
+                            <span>{{ $pengairan['terakhir']['waktu_mulai'] }} -
+                                {{ $pengairan['terakhir']['waktu_selesai'] }}</span>
                         </div>
                         <div class="flex">
                             <span class="basis-1/6">Volume:</span>
-                            <span>100 mL</span>
+                            <span>{{ $pengairan['terakhir']['volume'] }} L</span>
                         </div>
                     </div>
 
                     {{-- Rekomendasi Penyiraman Selanjutnya --}}
-                    <div class="intro-y">
-                        <p class="font-bold">Rekomendasi Penyiraman Selanjutnya</p>
-                        <span class="">31 Desember 2023</span>
+                    @if ($pengairan['rekomendasi'] == null && $pengairan['selanjutnya'] == null)
+                        <div class="intro-y">
+                            <p class="font-bold">Tidak ada rekomendasi/aksi penyiraman selanjutnya</p>
+                        </div>
 
-                        <div class="flex mt-2">
-                            <span class="basis-1/6">Pukul:</span>
-                            <span>12:00:00 - 12:15:00</span>
+                        <div class="intro-y">
+                            <p>Siram Sekarang?</p>
+                            <a href="#input-manual" class="w-full btn btn-primary px-5">
+                                Ya, siram sekarang
+                            </a>
                         </div>
-                        <div class="flex">
-                            <span class="basis-1/6">Volume:</span>
-                            <span>100 mL</span>
-                        </div>
-                    </div>
+                    @elseif($pengairan['rekomendasi'] == null && $pengairan['selanjutnya'] != null)
+                        {{-- Aksi Penyiraman Selanjutnya (Manual) --}}
+                        <div class="intro-y">
+                            <p class="font-bold">Aksi Penyiraman Selanjutnya</p>
+                            <span class="">{{ $pengairan['selanjutnya']['tanggal'] }}</span>
 
-                    {{-- Aksi Penyiraman --}}
-                    <div class="intro-y" id="jalankan-aksi-sekarang">
-                        <p class="mb-2 font-bold">Apakah Anda ingin menyiram sekarang?</p>
-                        <div class="flex flex-col xl:flex-row gap-2">
-                            <a href="#input-manual" class="basis-1/2 w-full btn btn-primary px-5">Ya, abaikan rekomendasi
-                                sistem</a>
-                            <a href="#judul-section-sop" class="basis-1/2 w-full btn px-5" id="jalankan-rekomendasi">Tidak,
-                                ikuti rekomendasi sistem</a>
+                            <div class="flex mt-2">
+                                <span class="basis-1/6">Pukul:</span>
+                                <span>{{ $pengairan['selanjutnya']['waktu_mulai'] }} -
+                                    {{ $pengairan['selanjutnya']['waktu_selesai'] }}</span>
+                            </div>
+                            <div class="flex">
+                                <span class="basis-1/6">Volume:</span>
+                                <span>{{ $pengairan['selanjutnya']['volume'] }} L</span>
+                            </div>
                         </div>
-                    </div>
+
+                        {{-- Aksi Penyiraman (anda mau menyiram sekarang?) --}}
+                        <div class="intro-y">
+                            <p class="mb-2 font-bold">Apakah Anda ingin mengubah/menghapus data penyiraman selanjutnya?</p>
+                            <div class="flex flex-col xl:flex-row gap-2">
+                                <a href="{{ route('manual.pengairan.edit', ['pengairan', $pengairan['selanjutnya']['id_irrigation_controller']]) }}"
+                                    class="basis-1/2 w-full btn  px-5">
+                                    Ubah
+                                </a>
+                                <a href="{{ route('manual.pengairan.destroy', ['pengairan', $pengairan['selanjutnya']['id_irrigation_controller']]) }}"
+                                    class="basis-1/2 w-full btn btn-danger px-5">Hapus
+                                </a>
+                            </div>
+                        </div>
+                    @elseif($pengairan['rekomendasi'] != null)
+                        {{-- Aksi Penyiraman Selanjutnya (Auto) --}}
+                        <div class="intro-y">
+                            <p class="font-bold">Aksi Penyiraman Selanjutnya
+                                <span class="font-semibold">(REKOMENDASI SISTEM)</span>
+                            </p>
+                            <span class="">{{ $pengairan['rekomendasi']['tanggal'] }}</span>
+
+                            <div class="flex mt-2">
+                                <span class="basis-1/6">Pukul:</span>
+                                <span>{{ $pengairan['rekomendasi']['waktu_mulai'] }} -
+                                    {{ $pengairan['rekomendasi']['waktu_selesai'] }}</span>
+                            </div>
+                            <div class="flex">
+                                <span class="basis-1/6">Volume:</span>
+                                <span>{{ $pengairan['rekomendasi']['volume'] }} L</span>
+                            </div>
+                        </div>
+
+                        {{-- Aksi Penyiraman (anda mau menyiram sekarang?) --}}
+                        <div class="intro-y" id="jalankan-aksi-sekarang">
+                            <p class="mb-2 font-bold">Apakah Anda ingin menyiram sekarang?</p>
+                            <div class="flex flex-col xl:flex-row gap-2">
+                                <a href="#input-manual" class="basis-1/2 w-full btn btn-primary px-5">
+                                    Ya, abaikan rekomendasi sistem
+                                </a>
+                                <a href="#judul-section-sop" class="basis-1/2 w-full btn px-5"
+                                    id="jalankan-rekomendasi">Tidak, ikuti rekomendasi sistem
+                                </a>
+                            </div>
+                        </div>
+                    @endif
 
                     <div class="intro-y hidden" id="rekomendasi-sistem">
                         <p class="font-semibold">Penyiraman akan dilaksanakan <span class="text-slate-400">sesuai
@@ -148,8 +198,8 @@
                         class="absolute top-0 left-0 rounded-l w-10 h-full flex items-center justify-center bg-slate-100 border text-slate-500">
                         <i class="fa-solid fa-calendar w-4 h-4"></i>
                     </div>
-                    <input name="tanggal_pengairan" type="text" class="form-control pl-12" value="{{ $tanggalSekarang }}"
-                        readonly>
+                    <input name="tanggal_pengairan" type="text" class="form-control pl-12"
+                        value="{{ $tanggalSekarang }}" readonly>
                 </div>
             </div>
 

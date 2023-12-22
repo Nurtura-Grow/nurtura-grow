@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Pages\PengendalianManual;
 
 use Carbon\Carbon;
+use App\Models\LogAksi;
 use Illuminate\Http\Request;
 use App\Models\InformasiLahan;
 use App\Http\Controllers\Controller;
@@ -25,11 +26,55 @@ class PemupukanController extends Controller
                 $query->whereNull('deleted_at')->whereNull('deleted_by');
             }]);
         }
+
+        // Get the latest fertilizer log
+        $latestFertilizerController = LogAksi::whereHas('tipe_instruksi', function ($query) {
+            $query->where('nama_tipe', 'pemupukan');
+        })->latest('created_at')->first();
+
+        // Retrieve fertilizer controller information
+        $fertilizerController = $latestFertilizerController->fertilizer_controller;
+
+        // Get the next recommended fertilizer and the next manual fertilizer
+        $rekomendasiPemupukan = $this->getNextfertilizer('auto');
+        $pemupukanSelanjutnya = $this->getNextfertilizer('manual');
+
+        // Prepare the response data
+        $pemupukanData = [
+            'terakhir' => $this->formatfertilizerData($fertilizerController),
+            'rekomendasi' => $rekomendasiPemupukan ? $this->formatfertilizerData($rekomendasiPemupukan) : null,
+            'selanjutnya' => ($rekomendasiPemupukan || $pemupukanSelanjutnya) ? $this->formatfertilizerData($pemupukanSelanjutnya) : null,
+        ];
+
         return view('pages.data-manual.pemupukan', [
             'sideMenu' => $sideMenu,
             'seluruhLahan' => $lahan,
             'tanggalSekarang' => $tanggalSekarang,
+            'pemupukan' => $pemupukanData,
         ]);
+    }
+
+    // Helper function to format fertilizer data
+    private function formatfertilizerData($fertilizerController)
+    {
+        return [
+            'tanggal' => $this->formatDateUI($fertilizerController->waktu_mulai),
+            'waktu_mulai' => $this->formatTimeUI($fertilizerController->waktu_mulai),
+            'waktu_selesai' => $this->formatTimeUI($fertilizerController->waktu_selesai),
+            'volume' => $fertilizerController->volume_liter,
+            'id_fertilizer_controller' => $fertilizerController->id_fertilizer_controller,
+        ];
+    }
+
+    // Helper function to get the next fertilizer based on mode
+    private function getNextfertilizer($mode)
+    {
+        return FertilizerController::where('mode', $mode)
+            ->where('waktu_mulai', '>=', now())
+            ->where('willSend', 1)
+            ->where('isSent', 0)
+            ->orderBy('waktu_mulai')
+            ->first();
     }
 
     /**

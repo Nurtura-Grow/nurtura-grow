@@ -46,68 +46,94 @@
                     {{-- Pemupukan Terakhir --}}
                     <div class="intro-y">
                         <p class="font-bold">Pemupukan Terakhir</p>
-                        <span class="">31 Desember 2023</span>
+                        <span class="">{{ $pemupukan['terakhir']['tanggal'] }}</span>
 
                         <div class="flex mt-2">
                             <span class="basis-1/6">Pukul:</span>
-                            <span>12:00:00 - 12:15:00</span>
+                            <span>{{ $pemupukan['terakhir']['waktu_mulai'] }} -
+                                {{ $pemupukan['terakhir']['waktu_selesai'] }}</span>
                         </div>
                         <div class="flex">
                             <span class="basis-1/6">Volume:</span>
-                            <span>100 mL</span>
+                            <span>{{ $pemupukan['terakhir']['volume'] }} L</span>
                         </div>
                     </div>
 
-                    {{-- Rekomendasi Pemupukan Terakhir --}}
-                    <div class="intro-y">
-                        <p class="font-bold">Rekomendasi Pemupukan Terakhir</p>
-                        <span class="">31 Desember 2023</span>
-
-                        <div class="flex mt-2">
-                            <span class="basis-1/6">Pukul:</span>
-                            <span>12:00:00</span>
+                    {{-- Rekomendasi Pemupukan Selanjutnya --}}
+                    @if ($pemupukan['rekomendasi'] == null && $pemupukan['selanjutnya'] == null)
+                        <div class="intro-y">
+                            <p class="font-bold">Tidak ada rekomendasi/aksi Pemupukan selanjutnya</p>
                         </div>
-                        <div class="flex">
-                            <span class="basis-1/6">Rekomendasi:</span>
-                            <span>Blablabalblablabal</span>
+
+                        <div class="intro-y">
+                            <p>Siram Sekarang?</p>
+                            <a href="#input-manual" class="w-full btn btn-primary px-5">
+                                Ya, siram sekarang
+                            </a>
                         </div>
-                        {{-- Tambah tinggi tanaman --}}
+                    @elseif($pemupukan['rekomendasi'] == null && $pemupukan['selanjutnya'] != null)
+                        {{-- Aksi Pemupukan Selanjutnya (Manual) --}}
+                        <div class="intro-y">
+                            <p class="font-bold">Aksi Pemupukan Selanjutnya</p>
+                            <span class="">{{ $pemupukan['selanjutnya']['tanggal'] }}</span>
 
-                    </div>
-
-                    {{-- Pemupukan sesuai SOP --}}
-                    <div class="intro-y">
-                        <p class="font-bold">Pemupukan Selanjutnya berdasarkan SOP</p>
-                        <span class="">31 Desember 2023</span>
-
-                        <div class="flex mt-2">
-                            <span class="basis-1/6">Pukul:</span>
-                            <span>12:00:00</span>
+                            <div class="flex mt-2">
+                                <span class="basis-1/6">Pukul:</span>
+                                <span>{{ $pemupukan['selanjutnya']['waktu_mulai'] }} -
+                                    {{ $pemupukan['selanjutnya']['waktu_selesai'] }}</span>
+                            </div>
+                            <div class="flex">
+                                <span class="basis-1/6">Volume:</span>
+                                <span>{{ $pemupukan['selanjutnya']['volume'] }} L</span>
+                            </div>
                         </div>
-                        <div class="flex">
-                            <span class="basis-1/6">Jumlah:</span>
-                            <span>520 mL</span>
-                        </div>
-                    </div>
 
-                    {{-- Aksi Pemupukan --}}
-                    <div class="intro-y" id="jalankan-aksi-sekarang">
-                        <p class="mb-2 font-bold">Apakah Anda ingin memberi pupuk sekarang?</p>
-                        <div class="flex flex-col xl:flex-row gap-2">
-                            <a href="#input-manual" class="basis-1/2 w-full btn btn-primary px-5">Ya, abaikan SOP
-                                pemupukan</a>
-                            <a href="#judul-section-sop" class="basis-1/2 w-full btn px-5" id="jalankan-rekomendasi">Tidak,
-                                ikuti SOP pemupukan</a>
+                        {{-- Aksi Pemupukan (anda mau menyiram sekarang?) --}}
+                        <div class="intro-y">
+                            <p class="mb-2 font-bold">Apakah Anda ingin mengubah/menghapus data Pemupukan selanjutnya?</p>
+                            <div class="flex flex-col xl:flex-row gap-2">
+                                <a href="{{ route('manual.pemupukan.edit', ['pemupukan', $pemupukan['selanjutnya']['id_fertilizer_controller']]) }}"
+                                    class="basis-1/2 w-full btn  px-5">
+                                    Ubah
+                                </a>
+                                <a href="{{ route('manual.pemupukan.destroy', ['pemupukan', $pemupukan['selanjutnya']['id_fertilizer_controller']]) }}"
+                                    class="basis-1/2 w-full btn btn-danger px-5">Hapus
+                                </a>
+                            </div>
                         </div>
-                    </div>
+                    @elseif($pemupukan['rekomendasi'] != null)
+                        {{-- Aksi Pemupukan Selanjutnya (Auto) --}}
+                        <div class="intro-y">
+                            <p class="font-bold">Aksi Pemupukan Selanjutnya
+                                <span class="font-semibold">(REKOMENDASI SISTEM)</span>
+                            </p>
+                            <span class="">{{ $pemupukan['rekomendasi']['tanggal'] }}</span>
 
-                    <div class="intro-y hidden" id="rekomendasi-sistem">
-                        <p class="font-semibold">Pemupukan akan dilaksanakan <span class="text-slate-400">sesuai
-                                rekomendasi sistem</span>
-                            <i class="fa-solid fa-face-smile-wink text-warning"></i>
-                        </p>
-                        <button class="btn border-2 shadow-md p-3 w-full mt-2" id="batalkan">Batalkan</button>
-                    </div>
+                            <div class="flex mt-2">
+                                <span class="basis-1/6">Pukul:</span>
+                                <span>{{ $pemupukan['rekomendasi']['waktu_mulai'] }} -
+                                    {{ $pemupukan['rekomendasi']['waktu_selesai'] }}</span>
+                            </div>
+                            <div class="flex">
+                                <span class="basis-1/6">Volume:</span>
+                                <span>{{ $pemupukan['rekomendasi']['volume'] }} L</span>
+                            </div>
+                        </div>
+
+                        {{-- Aksi Pemupukan (anda mau menyiram sekarang?) --}}
+                        <div class="intro-y" id="jalankan-aksi-sekarang">
+                            <p class="mb-2 font-bold">Apakah Anda ingin menyiram sekarang?</p>
+                            <div class="flex flex-col xl:flex-row gap-2">
+                                <a href="#input-manual" class="basis-1/2 w-full btn btn-primary px-5">
+                                    Ya, abaikan rekomendasi sistem
+                                </a>
+                                <a href="#judul-section-sop" class="basis-1/2 w-full btn px-5"
+                                    id="jalankan-rekomendasi">Tidak, ikuti rekomendasi sistem
+                                </a>
+                            </div>
+                        </div>
+                    @endif
+
                 </div>
             </div>
         </div>
@@ -138,8 +164,8 @@
                         class="absolute top-0 left-0 rounded-l w-10 h-full flex items-center justify-center bg-slate-100 border text-slate-500">
                         <i class="fa-solid fa-calendar w-4 h-4"></i>
                     </div>
-                    <input name="tanggal_pemupukan" type="text" class="form-control pl-12" value="{{ $tanggalSekarang }}"
-                        readonly>
+                    <input name="tanggal_pemupukan" type="text" class="form-control pl-12"
+                        value="{{ $tanggalSekarang }}" readonly>
                 </div>
             </div>
 
