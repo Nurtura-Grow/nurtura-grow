@@ -86,8 +86,9 @@
                         </div>
                     </div>
 
-                    {{-- Rekomendasi Penyiraman Selanjutnya --}}
+                    {{-- Todo:: benerin edit sama hapus (belum dicek) --}}
                     @if ($pengairan['rekomendasi'] == null && $pengairan['selanjutnya'] == null)
+                        {{-- Rekomendasi Penyiraman Selanjutnya (Otomatis) --}}
                         <div class="intro-y">
                             <p class="font-bold">Tidak ada rekomendasi/aksi penyiraman selanjutnya</p>
                         </div>
@@ -115,17 +116,19 @@
                             </div>
                         </div>
 
-                        {{-- Aksi Penyiraman (anda mau menyiram sekarang?) --}}
+                        {{-- Aksi Penyiraman (anda mau mengubah/menghapus?) --}}
                         <div class="intro-y">
                             <p class="mb-2 font-bold">Apakah Anda ingin mengubah/menghapus data penyiraman selanjutnya?</p>
                             <div class="flex flex-col xl:flex-row gap-2">
-                                <a href="{{ route('manual.pengairan.edit', ['pengairan', $pengairan['selanjutnya']['id_irrigation_controller']]) }}"
+                                <a href="{{ route('manual.pengairan.edit', ['pengairan' => $pengairan['selanjutnya']['id_irrigation_controller']]) }}"
                                     class="basis-1/2 w-full btn  px-5">
-                                    Ubah
+                                    <i class="w-4 h-4 mr-1 fa-solid fa-pencil"></i>Ubah
                                 </a>
-                                <a href="{{ route('manual.pengairan.destroy', ['pengairan', $pengairan['selanjutnya']['id_irrigation_controller']]) }}"
-                                    class="basis-1/2 w-full btn btn-danger px-5">Hapus
-                                </a>
+                                <span class="basis-1/2 w-full px-5 hover:cursor-pointer whitespace-nowrap btn btn-danger"
+                                    onclick="deleteAksi(this)" data-tw-toggle="modal" data-tw-target="#deleteAksi"
+                                    data-aksi='{{ json_encode(['id' => $pengairan['selanjutnya']['id_irrigation_controller']]) }}'>
+                                    <i class="w-4 h-4 mr-1 fa-solid fa-trash"></i>Hapus
+                                </span>
                             </div>
                         </div>
                     @elseif($pengairan['rekomendasi'] != null)
@@ -295,15 +298,59 @@
             </div>
         </form>
     </div>
+
+    {{-- Modal Delete --}}
+    <div id="deleteAksi" class="modal" tabindex="-1" aria-hidden="true" data-tw-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body p-0">
+                    <div class="p-5 text-center"> <i data-lucide="x-circle"
+                            class="w-16 h-16 text-danger mx-auto mt-3"></i>
+                        <div class="text-3xl mt-5">Apakah Anda yakin?</div>
+                        <div class="text-slate-500 mt-2">
+                            Apakah Anda sungguh ingin menghapus data ini? <br>Data ini tidak dapat dikembalikan.
+                        </div>
+                    </div>
+                    <div class="px-5 pb-8 flex justify-center">
+                        <button type="button" data-tw-dismiss="modal" class="btn btn-outline-secondary w-24 mr-1">
+                            Batalkan
+                        </button>
+
+                        <form method="POST" id="formDeleteAksi">
+                            @method('DELETE')
+                            @csrf
+                            <button type="submit" class="btn btn-danger w-24">Hapus</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
+
 
 @include('pages.data-manual.components.scripts')
 @include('pages.components.modal-datepicker')
 
-@push('scripts')
-    <script>
-        let urlDashboard = '{{ route('dashboard.data') }}'
-    </script>
 
+@push('scripts')
+    <script defer>
+        let urlDashboard = '{{ route('dashboard.data') }}'
+        const routePengairanDestroy = "{{ route('manual.pengairan.destroy', ['pengairan' => ':id_pengairan']) }}"
+
+        function deleteAksi(element) {
+            // Get data-aksi attribute
+            const dataAksi = JSON.parse(element.getAttribute('data-aksi'));
+            const id = dataAksi.id;
+
+
+            let route = routePengairanDestroy.replace(':id_pengairan', id);
+            console.log(id, route)
+
+            // Change Form
+            const form = document.getElementById('formDeleteAksi');
+            form.setAttribute('action', route);
+        }
+    </script>
     @vite(['resources/js/pages/dashboard/litepickr.js', 'resources/js/pages/data-manual/pengairan-pemupukan.js', 'resources/js/pages/data-manual/pengairan.js'])
 @endpush

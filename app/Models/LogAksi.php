@@ -33,7 +33,7 @@ class LogAksi extends Model
         if ($dataCombined->isNotEmpty()) {
             // willSend, isSent, sedangBerjalan
             $statusMapping = [
-                '000' => 'Dihapus',
+                '222' => 'Dihapus',
                 '00' => "Tidak dijalankan",
                 '10' => "Belum berjalan",
                 '111' => "Sedang berjalan",
@@ -51,7 +51,7 @@ class LogAksi extends Model
                 $statusKey = implode('', [$item->willSend, $item->isSent, $sedangBerjalan]);
 
                 if ($item->deleted_at != null && $item->deleted_by != null) {
-                    $statusKey = '000';
+                    $statusKey = '222';
                 }
 
                 $item->status = $statusMapping[$statusKey] ?? 'Status tidak diketahui';
