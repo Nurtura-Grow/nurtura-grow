@@ -31,8 +31,9 @@ class PengairanController extends Controller
             $query->where('nama_tipe', 'pengairan');
         })->latest('created_at')->first();
 
+
         // Retrieve irrigation controller information
-        $irrigationController = $latestIrrigationLog->irrigation_controller;
+        $irrigationController = $latestIrrigationLog->irrigation_controller ?? null;
 
         // Get the next recommended irrigation and the next manual irrigation
         $rekomendasiPenyiraman = $this->getNextIrrigation('auto');
@@ -40,7 +41,7 @@ class PengairanController extends Controller
 
         // Prepare the response data
         $pengairanData = [
-            'terakhir' => $this->formatIrrigationData($irrigationController),
+            'terakhir' => $latestIrrigationLog ? $this->formatIrrigationData($irrigationController) : null,
             'rekomendasi' => $rekomendasiPenyiraman ? $this->formatIrrigationData($rekomendasiPenyiraman) : null,
             'selanjutnya' => ($rekomendasiPenyiraman || $penyiramanSelanjutnya) ? $this->formatIrrigationData($penyiramanSelanjutnya) : null,
         ];
@@ -196,7 +197,7 @@ class PengairanController extends Controller
         // Convert minutes to seconds
         $seconds = $minutes * 60;
 
-        $volume = $request->satuan == "L" ? $request->volume_pemupukan : $request->volume_pemupukan * 1000;
+        $volume = $request->satuan == "L" ? $request->volume_pengairan : $request->volume_pengairan * 1000;
 
         $waktuMulaiInput = Carbon::parse($request->waktu_mulai);
         $waktuSelesaiInput = Carbon::parse($request->waktu_selesai);

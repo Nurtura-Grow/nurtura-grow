@@ -73,17 +73,20 @@
                     {{-- Penyiraman Terakhir --}}
                     <div class="intro-y">
                         <p class="font-bold">Penyiraman Terakhir</p>
-                        <span class="">{{ $pengairan['terakhir']['tanggal'] }}</span>
+                        <span
+                            class="">{{ $pengairan['terakhir']['tanggal'] ?? 'Tidak ada penyiraman terakhir' }}</span>
 
-                        <div class="flex mt-2">
-                            <span class="basis-1/6">Pukul:</span>
-                            <span>{{ $pengairan['terakhir']['waktu_mulai'] }} -
-                                {{ $pengairan['terakhir']['waktu_selesai'] }}</span>
-                        </div>
-                        <div class="flex">
-                            <span class="basis-1/6">Volume:</span>
-                            <span>{{ $pengairan['terakhir']['volume'] }} L</span>
-                        </div>
+                        @if (isset($pengairan['terakhir']['tanggal']))
+                            <div class="flex mt-2">
+                                <span class="basis-1/6">Pukul:</span>
+                                <span>{{ $pengairan['terakhir']['waktu_mulai'] }} -
+                                    {{ $pengairan['terakhir']['waktu_selesai'] }}</span>
+                            </div>
+                            <div class="flex">
+                                <span class="basis-1/6">Volume:</span>
+                                <span>{{ $pengairan['terakhir']['volume'] }} L</span>
+                            </div>
+                        @endif
                     </div>
 
                     {{-- Todo:: benerin edit sama hapus (belum dicek) --}}

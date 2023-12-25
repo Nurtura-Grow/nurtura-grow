@@ -22,6 +22,7 @@
     <div class="intro-y box p-5 mt-5 md:min-h-[40vh] lg:min-h-[70vh]">
         <form method="POST"
             action="{{ route('manual.pengairan.update', ['pengairan' => $irrigation_controller->id_irrigation_controller]) }}">
+            @method('PUT')
             @csrf
 
             <div class="form-inline">

@@ -33,7 +33,7 @@ class PemupukanController extends Controller
         })->latest('created_at')->first();
 
         // Retrieve fertilizer controller information
-        $fertilizerController = $latestFertilizerController->fertilizer_controller;
+        $fertilizerController = $latestFertilizerController->fertilizer_controller ?? null;
 
         // Get the next recommended fertilizer and the next manual fertilizer
         $rekomendasiPemupukan = $this->getNextfertilizer('auto');
@@ -41,7 +41,7 @@ class PemupukanController extends Controller
 
         // Prepare the response data
         $pemupukanData = [
-            'terakhir' => $this->formatfertilizerData($fertilizerController),
+            'terakhir' => $fertilizerController ? $this->formatfertilizerData($fertilizerController) : null,
             'rekomendasi' => $rekomendasiPemupukan ? $this->formatfertilizerData($rekomendasiPemupukan) : null,
             'selanjutnya' => ($rekomendasiPemupukan || $pemupukanSelanjutnya) ? $this->formatfertilizerData($pemupukanSelanjutnya) : null,
         ];

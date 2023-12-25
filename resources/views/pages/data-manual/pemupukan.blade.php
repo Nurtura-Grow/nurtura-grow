@@ -46,17 +46,21 @@
                     {{-- Pemupukan Terakhir --}}
                     <div class="intro-y">
                         <p class="font-bold">Pemupukan Terakhir</p>
-                        <span class="">{{ $pemupukan['terakhir']['tanggal'] }}</span>
+                        <span
+                            class="">{{ $pemupukan['terakhir']['tanggal'] ?? 'Tidak ada pemupukan terakhir' }}</span>
 
-                        <div class="flex mt-2">
-                            <span class="basis-1/6">Pukul:</span>
-                            <span>{{ $pemupukan['terakhir']['waktu_mulai'] }} -
-                                {{ $pemupukan['terakhir']['waktu_selesai'] }}</span>
-                        </div>
-                        <div class="flex">
-                            <span class="basis-1/6">Volume:</span>
-                            <span>{{ $pemupukan['terakhir']['volume'] }} L</span>
-                        </div>
+
+                        @if (isset($pemupukan['terakhir']['tanggal']))
+                            <div class="flex mt-2">
+                                <span class="basis-1/6">Pukul:</span>
+                                <span>{{ $pemupukan['terakhir']['waktu_mulai'] }} -
+                                    {{ $pemupukan['terakhir']['waktu_selesai'] }}</span>
+                            </div>
+                            <div class="flex">
+                                <span class="basis-1/6">Volume:</span>
+                                <span>{{ $pemupukan['terakhir']['volume'] }} L</span>
+                            </div>
+                        @endif
                     </div>
 
                     {{-- Rekomendasi Pemupukan Selanjutnya --}}
@@ -66,9 +70,9 @@
                         </div>
 
                         <div class="intro-y">
-                            <p>Siram Sekarang?</p>
+                            <p>Beri Pupuk Sekarang?</p>
                             <a href="#input-manual" class="w-full btn btn-primary px-5">
-                                Ya, siram sekarang
+                                Ya, beri pupuk sekarang
                             </a>
                         </div>
                     @elseif($pemupukan['rekomendasi'] == null && $pemupukan['selanjutnya'] != null)

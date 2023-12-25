@@ -41,7 +41,7 @@
                                 data-aksi='{{ json_encode(['tipe' => $log->tipe, 'id' => $log->id_irrigation_controller]) }}'>
                                 <i class="w-4 h-4 mr-1 fa-solid fa-trash"></i>Hapus</span>
                         @else
-                            <a href="{{ route('manual.pengairan.edit', ['pengairan' => $log->id_fertilizer_controller]) }}"
+                            <a href="{{ route('manual.pemupukan.edit', ['pemupukan' => $log->id_fertilizer_controller]) }}"
                                 class="btn mr-4 whitespace-nowrap">
                                 <i class="w-4 h-4 mr-1 fa-solid fa-pencil"></i>Ubah
                             </a>

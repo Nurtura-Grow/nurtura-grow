@@ -22,6 +22,7 @@
     <div class="intro-y box p-5 mt-5 md:min-h-[40vh] lg:min-h-[70vh]">
         <form method="POST"
             action="{{ route('manual.pemupukan.update', ['pemupukan' => $fertilizer_controller->id_fertilizer_controller]) }}">
+            @method('PUT')
             @csrf
             <div class="form-inline">
                 <label for="nama_penanaman" class="form-label sm:w-32">Nama Penanaman</label>
