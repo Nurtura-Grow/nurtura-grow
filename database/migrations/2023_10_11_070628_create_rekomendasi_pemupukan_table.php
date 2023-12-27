@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('rekomendasi_pemupukan', function (Blueprint $table) {
             $table->id('id_rekomendasi_pemupukan');
-            // $table->foreignId('id_penanaman');
+            $table->foreignId('id_tinggi_tanaman');
             $table->boolean('nyalakan_alat');
             $table->boolean('is_tinggi_optimal');
             $table->float('jumlah_rekomendasi_ml')->nullable();

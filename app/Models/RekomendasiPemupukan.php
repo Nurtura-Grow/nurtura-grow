@@ -15,6 +15,7 @@ class RekomendasiPemupukan extends Model
     protected $guarded = [
         'id_rekomendasi_pemupukan'
     ];
+    public $timestamps = false;
 
     public function log_aksi(): HasMany
     {

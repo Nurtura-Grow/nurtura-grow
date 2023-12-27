@@ -13,8 +13,6 @@ use App\Http\Controllers\Pages\TanamanController;
 use App\Http\Controllers\Pages\PengendalianManual\PemupukanController as PemupukanManualController;
 use App\Http\Controllers\Pages\PengendalianManual\PengairanController as PengairanManualController;
 use App\Http\Controllers\Pages\PengendalianManual\TinggiTanamanController as TinggiTanamanManualController;
-use App\Http\Controllers\Pages\Rekomendasi\PemupukanController;
-use App\Http\Controllers\Pages\Rekomendasi\PengairanController;
 use App\Http\Controllers\Pages\RiwayatController;
 
 use App\Http\Controllers\Pages\PanduanController;

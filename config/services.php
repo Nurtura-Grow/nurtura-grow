@@ -31,5 +31,5 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
     'password' => env('ADMIN_PASSWORD', 'admin'),
-
+    'link_integrasi' => env('LINK_INTEGRASI', 'http://localhost:8000'),
 ];

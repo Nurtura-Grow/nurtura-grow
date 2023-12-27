@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers\Pages\PengendalianManual;
 
+use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use App\Models\Message;
 use App\Models\Penanaman;
 use App\Models\TinggiTanaman;
 use App\Models\InformasiLahan;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Auth;
+use App\Models\FertilizerController;
+use App\Models\RekomendasiPemupukan;
 
 class TinggiTanamanController extends Controller
 {
@@ -84,13 +89,16 @@ class TinggiTanamanController extends Controller
             return redirect()->back()->withInput()->withErrors('tanggal_catat', 'Tanggal pencatatan tidak valid');
         }
 
-        TinggiTanaman::create([
+        $idTinggiTanaman = TinggiTanaman::create([
             "id_penanaman" => $id_penanaman,
             "tinggi_tanaman_mm" => $tinggi_tanaman,
             "hari_setelah_tanam" => $hst,
             "tanggal_pengukuran" => $tanggal_pencatatan,
             "created_by" => Auth::user()->id_user,
-        ]);
+        ])->id_tinggi_tanaman;
+
+        // Request ke ML untuk rekomendasi pemupukan
+        $this->requestRekomendasiPemupukan($idTinggiTanaman, $tinggi_tanaman, $hst);
 
         return redirect()->route('riwayat.index');
     }
@@ -177,7 +185,63 @@ class TinggiTanamanController extends Controller
             "updated_at" => now(),
         ]);
 
+        // Request ke ML untuk rekomendasi pemupukan
+        $this->requestRekomendasiPemupukan($id, $tinggi_tanaman, $hst);
+
         return redirect()->route('riwayat.index');
+    }
+
+    private function requestRekomendasiPemupukan($idTinggiTanaman, $tinggiTanaman, $hst)
+    {
+        $debit = 7; // Liter per menit
+        $link = config('services.link_integrasi') . '/ml/fertilizer';
+        $response = Http::post($link, [
+            'tinggi_tanaman' => $tinggiTanaman,
+            'hst' => $hst,
+        ]);
+
+        if ($response->successful()) {
+            $response = $response->json();
+            $response = $response['data'];
+
+            $durasi = $response['waktu'];
+            $volume_liter = $durasi / 60 * $debit;
+
+            $isiPesan = $response['message'] == "" ? "Tidak ada pesan" : $response['message'];
+            $pesan = Message::firstOrCreate([
+                'message' => $isiPesan,
+            ])->id;
+
+            $idRekomendasiPupuk = RekomendasiPemupukan::updateOrCreate([
+                'id_tinggi_tanaman' => $idTinggiTanaman,
+                'nyalakan_alat' => $response['nyala'] == 1 ? true : false,
+                'is_tinggi_optimal' => $response['tinggi_optimal'] == 1 ? true : false,
+                'durasi_detik' => $durasi,
+                'jumlah_rekomendasi_ml' => $volume_liter * 1000, // dijadikan mL
+                'pesan' => $pesan,
+                'tanggal_rekomendasi' => now(),
+            ])->id_rekomendasi_pupuk;
+
+            Alert::info('Rekomendasi Pemupukan', 'Rekomendasi pemupukan berhasil dibuat, rekomendasi machine learning: ' . $isiPesan);
+
+            if ($response['nyala'] == 1) {
+                $id_penanaman = TinggiTanaman::find($idTinggiTanaman)->penanaman->first()->id_penanaman;
+
+                // Buat Fertilizer Controller
+                FertilizerController::create([
+                    'mode' => 'auto',
+                    'id_penanaman' => $id_penanaman,
+                    'id_rekomendasi_pupuk' => $idRekomendasiPupuk,
+                    'volume_liter' => $volume_liter,
+                    'durasi_detik' => $durasi,
+                    'willSend' => 1,
+                    'isSent' => 0,
+                    'waktu_mulai' => now()->addMinute()->format('Y-m-d H:i:00'),
+                    'waktu_selesai' => now()->addSeconds($durasi)->format('Y-m-d H:i:00'),
+                    'created_at' => now(),
+                ]);
+            }
+        }
     }
 
     /**

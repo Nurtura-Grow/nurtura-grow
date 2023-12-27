@@ -7,6 +7,7 @@
 @section('body')
 
     <body class="p-0 m-0 relative bg-rgb-light-green">
+        @include('sweetalert::alert')
         @include('guest.navbar')
         {{-- Section 1 --}}
         <section
