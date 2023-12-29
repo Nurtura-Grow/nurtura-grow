@@ -4,6 +4,56 @@ import crosshair from 'chartjs-plugin-crosshair';
 import moment from "moment";
 import { isEmpty } from 'lodash';
 
+// Button ubah-data pressed, remove all readonly attribute from .form-pengairan
+$('#ubah-data').on('click', function () {
+    // Remove readonly attribute from .form-pengairan
+    $('.form-pengairan').removeAttr('readonly');
+
+    // Hide ubah-data
+    $(this).addClass('hidden');
+    $('#button-submit-form').removeClass('hidden');
+});
+
+$('batal-submit').on('click', function () {
+    // Add readonly attribute from .form-pengairan
+    $('.form-pengairan').attr('readonly', true);
+
+    // Show ubah-data
+    $('#ubah-data').removeClass('hidden');
+    $('#button-submit-form').addClass('hidden');
+});
+
+// Give red border if input is more than 100 or 0, or not a number
+$('.form-pengairan').on('keyup', function () {
+    // Check each form-pengairan input
+    let isValid = true;
+
+    $('.form-pengairan').each(function () {
+
+        const container = $(this).closest('.grid');
+        const minInput = container.find('.form-pengairan:first');
+        const maxInput = container.find('.form-pengairan:last');
+
+        const minValue = parseInt(minInput.val());
+        const maxValue = parseInt(maxInput.val());
+
+        // Validate against the rules
+        if (isNaN(minValue) || isNaN(maxValue) || minValue < 0 || maxValue > 100 || minValue > maxValue) {
+            isValid = false;
+            $(this).addClass('border-danger');
+            $('#keterangan-sop').removeClass('hidden');
+            $('#keterangan-sop').text("Keterangan: Nilai minimal tidak boleh lebih besar dari nilai maksimal, dan nilai minimal dan maksimal harus berada di antara 0 dan 100.")
+        } else {
+            $('#keterangan-sop').addClass('hidden');
+            $(this).removeClass('border-danger');
+        }
+    });
+
+    $('#ubah-submit').prop('disabled', !isValid);
+});
+
+
+// Chart
 Chart.register(crosshair);
 
 // Default Variable

@@ -3,7 +3,7 @@
 @section('subcontent')
     <div class="intro-y flex flex-col sm:flex-row items-center mt-8 hidden" id="judul-section-sop">
         <h2 class="text-lg font-medium mr-auto">
-            SOP Pengairan
+            Kondisi Ideal untuk Pengairan
         </h2>
 
         <div class="w-full sm:w-auto flex mt-4 sm:mt-0" id="sembunyikan-section-rekomendasi">
@@ -16,7 +16,67 @@
     {{-- Rekomendasi Pengairan --}}
     <div class="flex flex-col min-h-[68vh] mt-5 gap-4 hidden" id="section-rekomendasi">
         <div class="intro-y grow basis-1/2 box p-5">
-            {{-- Todo: Add Gambar SOP Pengairan --}}
+            <p class="mb-5">Kondisi ini akan digunakan sebagai pengaturan optimal untuk irigasi, nilai di sebelah kiri
+                menunjukkan nilai minimal dan di sebelah kanan menunjukkan nilai maksimal.</p>
+
+            <form action="{{ route('manual.pengairan.sop') }}" method="POST">
+                @method('PUT')
+                @csrf
+
+                {{-- Suhu Udara --}}
+                <div class="form-inline">
+                    <label for="suhu-udara" class="form-label sm:w-32">Suhu Udara</label>
+                    <div class="grid grid-cols-12">
+                        <input type="text" class="form-control col-span-4 form-pengairan" placeholder="Nilai Minimal"
+                            aria-label="suhu-udara" name='temperature[]' value="{{ $sopPengairan['temperature_min'] }}" readonly>
+                        <p class="col-span-1 flex items-center justify-center font-bold"> - </p>
+                        <input type="text" class="form-control col-span-4 form-pengairan" placeholder="Nilai Maksimal"
+                            aria-label="suhu-udara" name='temperature[]' value="{{ $sopPengairan['temperature_max'] }}" readonly>
+                        <p class="flex items-center justify-center font-bold">C</p>
+                    </div>
+                </div>
+
+                {{-- Kelembapan Udara --}}
+                <div class="form-inline mt-5">
+                    <label for="kelembapan-udara" class="form-label sm:w-32">Kelembapan Udara</label>
+                    <div class="grid grid-cols-12">
+                        <input type="text" class="form-control col-span-4 form-pengairan" placeholder="Nilai Minimal"
+                            aria-label="kelembapan-udara" name="humidity[]" value="{{ $sopPengairan['humidity_min'] }}" readonly>
+                        <p class="col-span-1 flex items-center justify-center font-bold"> - </p>
+                        <input type="text" class="form-control col-span-4 form-pengairan" placeholder="Nilai Maksimal"
+                            aria-label="kelembapan-udara" name="humidity[]" value="{{ $sopPengairan['humidity_max'] }}" readonly>
+                        <p class="flex items-center justify-center font-bold">%</p>
+                    </div>
+                </div>
+
+                {{-- Kelembapan Tanah --}}
+                <div class="form-inline mt-5">
+                    <label for="kelembapan-tanah" class="form-label sm:w-32">Kelembapan Tanah</label>
+                    <div class="grid grid-cols-12">
+                        <input type="text" class="form-control col-span-4 form-pengairan" placeholder="Nilai Minimal"
+                            aria-label="kelembapan-tanah" name="soil_moisture[]" value="{{ $sopPengairan['soil moisture_min'] }}" readonly>
+                        <p class="col-span-1 flex items-center justify-center font-bold"> - </p>
+                        <input type="text" class="form-control col-span-4 form-pengairan" placeholder="Nilai Maksimal"
+                            aria-label="kelembapan-tanah" name="soil_moisture[]" value="{{ $sopPengairan['soil moisture_max'] }}" readonly>
+                        <p class="flex items-center justify-center font-bold">%</p>
+                    </div>
+                </div>
+
+                <div class="intro-y sm:ml-32 sm:pl-5 mt-5">
+                    <button type="button" class="btn btn-primary w-48" id="ubah-data">Ubah Data</button>
+                </div>
+
+
+                <p class="text-danger hidden mt-5 mb-5" id="keterangan-sop">Keterangan: </p>
+                <div class="intro-y flex md:flex-row hidden" id="button-submit-form">
+                    <div class="sm:ml-32 sm:pl-5">
+                        <button type="submit" class="btn btn-primary w-48" id="ubah-submit">Ubah Data Pengairan</button>
+                    </div>
+                    <div class="ml-4">
+                        <button type="button" class="btn w-48" id="batal-submit">Batal</button>
+                    </div>
+                </div>
+            </form>
         </div>
 
         {{-- Bawah --}}
@@ -89,7 +149,6 @@
                         @endif
                     </div>
 
-                    {{-- Todo:: benerin edit sama hapus (belum dicek) --}}
                     @if ($pengairan['rekomendasi'] == null && $pengairan['selanjutnya'] == null)
                         {{-- Rekomendasi Penyiraman Selanjutnya (Otomatis) --}}
                         <div class="intro-y">
@@ -282,8 +341,7 @@
                     </li>
 
                     <li>
-                        Jika penyiraman dilaksanakan sekarang (dengan waktu yang sama),
-                        maka waktu mulai dan selesai akan ditambahkan sebanyak 1 menit agar data dapat masuk ke database
+                        Terdapat kemungkinan untuk menambahkan waktu sebanyak 1 - 2 menit.
                     </li>
 
                     <li class="font-bold text-warning">
