@@ -90,6 +90,8 @@ Route::group([
         Route::get('/tinggi/penanaman/{id}', [TinggiTanamanManualController::class, 'search_tanggal'])->name('tinggi.search_tanggal');
         Route::resource('/pengairan', PengairanManualController::class)->except(['index', 'show']);
         Route::resource('/pemupukan', PemupukanManualController::class)->except(['index', 'show']);
+
+        Route::put('/sop/pengairan', [PengairanManualController::class, 'updateSOP'])->name('pengairan.sop');
     });
 
     // Route Riwayat

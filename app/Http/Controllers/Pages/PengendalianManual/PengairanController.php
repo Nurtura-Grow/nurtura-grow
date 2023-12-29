@@ -9,6 +9,8 @@ use App\Models\InformasiLahan;
 use App\Http\Controllers\Controller;
 use App\Models\IrrigationController;
 use App\Models\LogAksi;
+use App\Models\SOPPengairan;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PengairanController extends Controller
 {
@@ -48,6 +50,13 @@ class PengairanController extends Controller
 
         $tanggalSekarang = $this->formatDateUI(now());
         $dataSensor = DataSensor::orderBy('timestamp_pengukuran', 'desc')->first();
+        $sopPengairan = SOPPengairan::get();
+        $result = [];
+
+        foreach ($sopPengairan as $sop) {
+            $result[$sop->nama . '_min'] = $sop->min;
+            $result[$sop->nama . '_max'] = $sop->max;
+        }
 
         return view('pages.data-manual.pengairan', [
             'sideMenu' => $sideMenu,
@@ -77,6 +86,7 @@ class PengairanController extends Controller
                     "color" => "rgb(239, 123, 69)",
                 ],
             ],
+            'sopPengairan' => $result,
         ]);
     }
 
@@ -235,5 +245,23 @@ class PengairanController extends Controller
         ]);
 
         return redirect()->route('riwayat.index');
+    }
+
+    /**
+     * Update SOP Pengairan
+     */
+    public function updateSOP(Request $request)
+    {
+        $formData = $request->except(['_method', '_token']);
+
+        foreach ($formData as $nama => $values) {
+            SOPPengairan::where('nama', $nama)->update([
+                'min' => $values[0],
+                'max' => $values[1],
+            ]);
+        }
+
+        Alert::success('Sukses', 'Data SOP Pengairan telah diubah!');
+        return redirect()->route('manual.pengairan.create');
     }
 }
