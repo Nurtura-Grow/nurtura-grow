@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             LahanSeeder::class,
             TipeInstruksiSeeder::class,
             SopPemupukanSeeder::class,
+            SopPengairanSeeder::class,
             // DataSensorSeeder::class,
             // PrediksiSensorSeeder::class,
         ]);
