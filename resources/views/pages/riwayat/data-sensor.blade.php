@@ -46,7 +46,8 @@
 
 {{-- Tabel --}}
 <div class="">
-    <h1 class="mb-3 text-lg font-bold border-b-4 sticky top-16 md:top-0 bg-white z-[9999]">Tabel Riwayat Data Sensor</h1>
+    <h1 class="mb-3 text-lg font-bold border-b-4 sticky top-16 md:top-0 bg-white z-[9999]">Tabel Riwayat Data Sensor
+    </h1>
     <table id="table" class="hover intro-y overflow-x-hidden" style="width:100%">
         <thead>
             <tr>
@@ -70,7 +71,8 @@
                     <td class="border-b">{{ $data->kelembapan_udara }}</td>
                     <td class="border-b">{{ $data->kelembapan_tanah }}</td>
                     <td class="border-b">{{ $data->ph_tanah }}</td>
-                    <td class="border-b" data-sort="{{ $data->attribute_timestamp }}">{{ $data->timestamp_pengukuran }}
+                    <td class="border-b" data-sort="{{ $data->attribute_timestamp }}">
+                        {{ $data->timestamp_pengukuran }}
                     </td>
                 </tr>
             @endforeach

@@ -7,6 +7,7 @@
             <th class="border-b-2 whitespace-nowrap">HST</th>
             <th class="border-b-2 whitespace-nowrap">Tinggi Tanaman</th>
             <th class="border-b-2 whitespace-nowrap">Tanggal Tanam</th>
+            <th class="border-b-2 whitespace-nowrap">Rekomendasi Pemupukan</th>
             <th class="border-b-2 whitespace-nowrap">Tanggal Pengukuran</th>
             <th class="border-b-2 whitespace-nowrap">Diukur Oleh</th>
             <th class="border-b-2 whitespace-nowrap">Aksi</th>
@@ -21,6 +22,7 @@
                 <td class="border-b">{{ $tanaman->hari_setelah_tanam }}</td>
                 <td class="border-b">{{ $tanaman->tinggi_tanaman_mm }} mm</td>
                 <td class="border-b">{{ $tanaman->tanggal_tanam }}</td>
+                <td class="border-b">{{ $tanaman->rekomendasi_pemupukan}}</td>
                 <td class="border-b">{{ $tanaman->ditambahkan_pada }}</td>
                 <td class="border-b">{{ $tanaman->created_by }}</td>
                 <td class="border-b">
