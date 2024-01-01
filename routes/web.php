@@ -33,7 +33,6 @@ Route::group([
     'middleware' => 'guest',
 ], function () {
     Route::get('/', [LandingPageController::class, 'index'])->name('index');
-    Route::get('/panduan', [PanduanController::class, 'index'])->name('panduan');
 
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::get('/register', [RegisterController::class, 'index'])->name('register');
@@ -101,7 +100,4 @@ Route::group([
     ], function () {
         Route::get('/', [RiwayatController::class, 'index'])->name('index');
     });
-
-    // Route Panduan
-    Route::get('/panduan', [PanduanController::class, 'index'])->name('panduan');
 });

@@ -19,7 +19,8 @@
                     <a href="#tentang-kami" class="block py-2 pl-3 pr-4 rounded  ">Tentang Kami</a>
                 </li>
                 <li>
-                    <a href="#aksi" class="block py-2 pl-3 pr-4 rounded  ">Panduan</a>
+                    <a href="https://nurturagrow.gitbook.io/nurturagrow/" target="_blank"
+                        class="block py-2 pl-3 pr-4 rounded">Panduan</a>
                 </li>
 
                 <li>

@@ -3,8 +3,7 @@
         <a href="{{ route('dashboard') }}" class="flex items-center mr-auto">
             <img alt="Nurtura Grow" class="w-10 h-10" src="{{ asset('images/logo.svg') }}">
             {{-- <img alt="Nurtura Grow" class="w-8" src="{{ asset('images/logo.svg') }}"> --}}
-            <span class="text-white text-lg ml-3 font-medium">Nurtura<span
-                    class="text-rgb-secondary">Grow</span></span>
+            <span class="text-white text-lg ml-3 font-medium">Nurtura<span class="text-rgb-secondary">Grow</span></span>
         </a>
         <a href="javascript:;" class="mobile-menu-toggler"> <i data-lucide="bar-chart-2"
                 class="w-8 h-8 text-white transform -rotate-90"></i> </a>
@@ -15,15 +14,24 @@
         <ul class="scrollable__content py-2">
             @foreach ($sideMenu['side_menu'] as $menu)
                 <li>
-                    <a href="{{ isset($menu['sub_menu']) ? 'javascript:;.html' : route($menu['route_name']) }}"
-                        class="menu {{ $sideMenu['active_first_menu'] == $menu['route_name'] ? 'menu--active' : '' }}">
-                        <div class="menu__icon"> <i class="{{ $menu['icon'] }}"></i> </div>
-                        <div class="menu__title"> {{ $menu['title'] }}
-                            @if (isset($menu['sub_menu']))
-                                <div class="menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
-                            @endif
-                        </div>
-                    </a>
+                    @if ($menu['route_name'] == 'panduan')
+                        <a href="https://nurturagrow.gitbook.io/nurturagrow/" target="_blank"
+                            class="side-menu {{ $sideMenu['active_first_menu'] == $menu['route_name'] ? 'side-menu--active' : '' }}">
+                            <div class="side-menu__icon"> <i class="{{ $menu['icon'] }}"></i> </div>
+                            <div class="side-menu__title"> {{ $menu['title'] }} </div>
+                        </a>
+                    @else
+                        {{-- If have sub_menu -> javascript:;, if not, go to the route_name --}}
+                        <a href="{{ isset($menu['sub_menu']) ? 'javascript:;.html' : route($menu['route_name']) }}"
+                            class="menu {{ $sideMenu['active_first_menu'] == $menu['route_name'] ? 'menu--active' : '' }}">
+                            <div class="menu__icon"> <i class="{{ $menu['icon'] }}"></i> </div>
+                            <div class="menu__title"> {{ $menu['title'] }}
+                                @if (isset($menu['sub_menu']))
+                                    <div class="menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
+                                @endif
+                            </div>
+                        </a>
+                    @endif
                     {{-- Sub Menu --}}
                     @if (isset($menu['sub_menu']))
                         <ul class="{{ $sideMenu['active_first_menu'] == $menu['route_name'] ? 'menu__sub-open' : '' }}">
