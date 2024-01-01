@@ -33,7 +33,7 @@ export default defineConfig({
                 "resources/js/pages/dashboard/chart.js",
 
                 // Data Manual
-                "resources/js/pages/data-manual/waktuMulaiSelesai",
+                "resources/js/pages/data-manual/waktuMulaiSelesai.js",
                 "resources/js/pages/data-manual/getPenanamanTanggalTanam.js",
                 "resources/js/pages/data-manual/pengairan-pemupukan.js",
                 "resources/js/pages/data-manual/pengairan.js",
