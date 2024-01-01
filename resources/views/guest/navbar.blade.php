@@ -73,7 +73,7 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('panduan') }}" class="menu">
+                <a href="https://nurturagrow.gitbook.io/nurturagrow/" target="_blank" class="menu">
                     <div class="menu__icon"><i class="fa-solid fa-book"></i></div>
                     <div class="menu__title">Panduan</div>
                 </a>
