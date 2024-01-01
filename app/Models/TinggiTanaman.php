@@ -3,10 +3,11 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class TinggiTanaman extends Model
@@ -70,9 +71,9 @@ class TinggiTanaman extends Model
         return $this->belongsTo(Penanaman::class, 'id_penanaman', 'id_penanaman');
     }
 
-    public function rekomendasi_pemupukan(): HasMany
+    public function rekomendasi_pemupukan(): HasOne
     {
-        return $this->hasMany(RekomendasiPemupukan::class, 'id_rekomendasi_pemupukan', 'id_rekomendasi_pemupukan');
+        return $this->hasOne(RekomendasiPemupukan::class, 'id_tinggi_tanaman', 'id_tinggi_tanaman');
     }
 
     // Created By, Updated By, Deleted By
