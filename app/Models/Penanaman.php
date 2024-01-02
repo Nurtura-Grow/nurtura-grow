@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class Penanaman extends Model
 {
@@ -73,9 +74,9 @@ class Penanaman extends Model
         return $this->hasMany(LogAksi::class, 'id_penanaman', 'id_penanaman');
     }
 
-    public function rekomendasi_pengairan(): HasMany
+    public function rekomendasi_pengairan(): HasManyThrough
     {
-        return $this->hasMany(RekomendasiPengairan::class, 'id_penanaman', 'id_penanaman');
+        return $this->hasManyThrough(RekomendasiPengairan::class, DataSensor::class, 'id_penanaman', 'id_sensor', 'id_penanaman', 'id_sensor');
     }
 
     public function tinggi_tanaman(): HasMany

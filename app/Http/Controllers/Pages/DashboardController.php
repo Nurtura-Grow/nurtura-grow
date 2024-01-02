@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Pages;
 use App\Http\Controllers\Controller;
 use App\Models\DataSensor;
 use App\Models\InformasiLahan;
+use App\Models\LogAksi;
 use App\Models\Penanaman;
+use App\Models\PrediksiSensor;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -31,6 +33,7 @@ class DashboardController extends Controller
 
         $dataSensor = DataSensor::orderBy('timestamp_pengukuran', 'desc')->first();
 
+        $logAksi = LogAksi::logAksiWithDetails();
         $penanaman = collect($penanaman)->sortByDesc('hst')->take($jumlahLahan)->values();
 
         return view('pages.dashboard', [
@@ -38,38 +41,41 @@ class DashboardController extends Controller
             'seluruhLahan' => $seluruhLahan,
             'penanaman' => $penanaman,
             'jumlahLahan' => $jumlahLahan,
+            'logAksi' => $logAksi,
             'grafik' => [
                 'Suhu Udara' => [
                     "name" => 'Suhu Udara',
-                    "data" => $dataSensor->suhu,
+                    "data" => isset($dataSensor->suhu) ? $dataSensor->suhu : 0,
                     "slug" => "suhu-udara",
-                    "persentase" => $dataSensor->suhu,
+                    "persentase" => isset($dataSensor->suhu) ? $dataSensor->suhu : 0,
                     "color" => "rgb(0, 38, 35)"
 
                 ],
                 'Kelembapan Udara' => [
                     "name" => "Kelembapan Udara",
-                    "data" => $dataSensor->kelembapan_udara,
+                    "data" => isset($dataSensor->kelembapan_udara) ? $dataSensor->kelembapan_udara : 0,
                     "slug" => "kelembapan-udara",
-                    "persentase" => $dataSensor->kelembapan_udara,
+                    "persentase" => isset($dataSensor->kelembapan_udara) ? $dataSensor->kelembapan_udara : 0,
                     "color" => "rgb(87, 180, 146)",
                 ],
                 'Kelembapan Tanah' => [
                     "name" => 'Kelembapan Tanah',
-                    "data" => $dataSensor->kelembapan_tanah,
+                    "data" => isset($dataSensor->kelembapan_tanah) ? $dataSensor->kelembapan_tanah : 0,
                     "slug" => "kelembapan-tanah",
-                    "persentase" => $dataSensor->kelembapan_tanah,
+                    "persentase" => isset($dataSensor->kelembapan_tanah) ? $dataSensor->kelembapan_tanah : 0,
                     "color" => "rgb(239, 123, 69)",
                 ],
                 'pH Tanah' => [
                     "name" => 'pH Tanah',
-                    "data" => $dataSensor->ph_tanah,
+                    "data" => isset($dataSensor->ph_tanah) ? $dataSensor->ph_tanah : 0,
                     "slug" => "ph-tanah",
-                    "persentase" => $dataSensor->ph_tanah / 14 * 100,
+                    "persentase" => isset($dataSensor->ph_tanah) ? ($dataSensor->ph_tanah / 14 * 100) : 0,
                     "color" => "rgb(246, 174, 45)",
                 ],
             ],
-            'timestamp' => Carbon::parse($dataSensor->timestamp_pengukuran)->format('d M Y || H:i:s'),
+            'timestamp' => isset($dataSensor->timestamp_pengukuran)
+                ? Carbon::parse($dataSensor->timestamp_pengukuran)->format('d M Y || H:i:s')
+                : "Tidak ada data",
         ]);
     }
 
@@ -106,45 +112,78 @@ class DashboardController extends Controller
                     break;
             }
 
-            $data = DataSensor::whereBetween('timestamp_pengukuran', [$tanggalDari, $tanggalHingga])->orderBy('timestamp_pengukuran')->get();
+            // Retrieve sensor data within the specified date range and order by measurement timestamp
+            $data = DataSensor::whereBetween('timestamp_pengukuran', [$tanggalDari, $tanggalHingga])
+                ->orderBy('timestamp_pengukuran')
+                ->get();
+
+            // Retrieve sensor prediction data within the specified date range and order by prediction timestamp
+            $prediksi = PrediksiSensor::whereBetween('timestamp_prediksi_sensor', [$tanggalDari, $tanggalHingga])
+                ->orderBy('timestamp_prediksi_sensor')
+                ->get();
+
+            // Calculate the difference in days between the start and end dates
             $bedaTanggal = Carbon::parse($tanggalDari)->diffInDays($tanggalHingga);
 
-            if ($dateChosen == 'last_week' || $dateChosen == 'last_month' || ($dateChosen == 'lainnya' && $bedaTanggal > 1)) {
-                // Group the data by date
-                $groupedData = $data->groupBy(function ($item) {
-                    return Carbon::parse($item->timestamp_pengukuran)->format('Y-m-d');
-                });
+            // Function to format a timestamp item based on a given format
+            $groupByFormat = function ($item, $format) {
+                return Carbon::parse($item)->format($format);
+            };
 
-                $suhuArray = [];
-                $kelembapanUdaraArray = [];
-                $kelembapanTanahArray = [];
-                $phTanahArray = [];
-                $timestampPengukuranArray = [];
+            // Determine the date format based on the date range selected:
+            // Use 'Y-m-d' for last week or last month or if the date difference is more than 1 day;
+            // otherwise, use 'Y-m-d H:00:00' to group by hour.
+            $format = ($dateChosen == 'last_week' || $dateChosen == 'last_month' || ($dateChosen == 'lainnya' && $bedaTanggal > 1))
+                ? 'Y-m-d'
+                : 'Y-m-d H:00:00';
 
-                // Rata-rata
-                foreach ($groupedData as $date => $group) {
-                    $suhuArray[] = $group->avg('suhu');
-                    $kelembapanUdaraArray[] = $group->avg('kelembapan_udara');
-                    $kelembapanTanahArray[] = $group->avg('kelembapan_tanah');
-                    $phTanahArray[] = $group->avg('ph_tanah');
-                    $timestampPengukuranArray[] = $date;
-                }
+            // Group the sensor data by the specified format
+            $groupedData = $data->groupBy(fn ($item) => $groupByFormat($item->timestamp_pengukuran, $format));
 
-                $formattedTimestamps = array_map(function ($timestamp) {
-                    return Carbon::parse($timestamp)->format('d M Y');
-                }, $timestampPengukuranArray);
-            } else {
-                $suhuArray = $data->pluck('suhu')->toArray();
-                $kelembapanUdaraArray = $data->pluck('kelembapan_udara')->toArray();
-                $kelembapanTanahArray = $data->pluck('kelembapan_tanah')->toArray();
-                $phTanahArray = $data->pluck('ph_tanah')->toArray();
-                $timestampPengukuranArray = $data->pluck('timestamp_pengukuran')->toArray();
+            // Group the sensor prediction data by the specified format
+            $groupedPrediksi = $prediksi->groupBy(fn ($item) => $groupByFormat($item->timestamp_prediksi_sensor, $format));
 
-                $formattedTimestamps = array_map(function ($timestamp) {
-                    return Carbon::parse($timestamp)->format('d M Y H:i:s');
-                }, $timestampPengukuranArray);
+            // Initialize arrays to store the average values and the formatted timestamps
+            $suhuArray = [];
+            $kelembapanUdaraArray = [];
+            $kelembapanTanahArray = [];
+            $phTanahArray = [];
+            $timestampPengukuranArray = [];
+
+            // Initialize arrays to store the average prediction values and the formatted timestamps
+            $prediksiSuhuArray = [];
+            $prediksiKelembapanUdaraArray = [];
+            $prediksiKelembapanTanahArray = [];
+            $timestampPrediksiArray = [];
+
+            // Rata-rata Pengukuran
+            foreach ($groupedData as $date => $group) {
+                $suhuArray[] = $group->avg('suhu');
+                $kelembapanUdaraArray[] = $group->avg('kelembapan_udara');
+                $kelembapanTanahArray[] = $group->avg('kelembapan_tanah');
+                $phTanahArray[] = $group->avg('ph_tanah');
+                $timestampPengukuranArray[] = $date;
             }
 
+            // Rata-rata Prediksi
+            foreach ($groupedPrediksi as $date => $group) {
+                $prediksiSuhuArray[] = $group->avg('suhu');
+                $prediksiKelembapanUdaraArray[] = $group->avg('kelembapan_udara');
+                $prediksiKelembapanTanahArray[] = $group->avg('kelembapan_tanah');
+                $timestampPrediksiArray[] = $date;
+            }
+
+            // Change Time Format
+            $formattedTimestamps = array_map(function ($timestamp) use ($format) {
+                return Carbon::parse($timestamp)->format($format);
+            }, $timestampPengukuranArray);
+
+            // Change Time Format Prediksi
+            $formattedTimestampsPrediksi = array_map(function ($timestamp) use ($format) {
+                return Carbon::parse($timestamp)->format($format);
+            }, $timestampPrediksiArray);
+
+            // Return the data in JSON format
             return response()->json([
                 'data' => [
                     "suhu" => $suhuArray,
@@ -154,6 +193,13 @@ class DashboardController extends Controller
                     "timestamp_pengukuran" => $formattedTimestamps,
                     "tanggalDari" => Carbon::parse($tanggalDari)->format('d M Y H:i:s'),
                     "tanggalHingga" => Carbon::parse($tanggalHingga)->format('d M Y H:i:s'),
+                ],
+                'prediksi' => [
+                    "suhu" => $prediksiSuhuArray,
+                    "kelembapan_udara" => $prediksiKelembapanUdaraArray,
+                    "kelembapan_tanah" => $prediksiKelembapanTanahArray,
+                    "ph_tanah" => 0,
+                    "timestamp_prediksi_sensor" => $formattedTimestampsPrediksi,
                 ],
             ], 200);
         }

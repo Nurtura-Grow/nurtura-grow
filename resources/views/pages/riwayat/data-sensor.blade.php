@@ -9,7 +9,7 @@
         </button>
     </div>
 
-    <div class="grid grid-cols-12 gap-x-6 gap-y-2">
+    <div class="grid grid-cols-12 gap-x-6 gap-y-1">
         {{-- Tanggal yang dipilih --}}
         <div class="col-span-12 flex flex-col sm:flex-row justify-center items-center ml-3 pt-5">
             <span class="font-bold">Data pada tanggal:</span>
@@ -17,36 +17,37 @@
         </div>
 
         {{-- Data Grafik --}}
-        <div class="col-span-12 xl:col-span-6 p-5">
+        <div class="col-span-12 lg:col-span-6 p-5" id="container_suhu">
             <h1 class="font-bold text-md">
                 Data Sensor Suhu Udara
             </h1>
-            <canvas id="suhu"></canvas>
+            <canvas class="grafik-data" id="suhu"></canvas>
         </div>
-        <div class="col-span-12 xl:col-span-6 p-5">
+        <div class="col-span-12 lg:col-span-6 p-5" id="container_kelembapan_udara">
             <h1 class="font-bold text-md">
                 Data Sensor Kelembapan Udara
             </h1>
-            <canvas id="kelembapan_udara"></canvas>
+            <canvas class="grafik-data" id="kelembapan_udara"></canvas>
         </div>
-        <div class="col-span-12 xl:col-span-6 p-5">
+        <div class="col-span-12 lg:col-span-6 p-5" id="container_kelembapan_tanah">
             <h1 class="font-bold text-md">
                 Data Sensor Kelembapan Tanah
             </h1>
-            <canvas id="kelembapan_tanah"></canvas>
+            <canvas class="grafik-data" id="kelembapan_tanah"></canvas>
         </div>
-        <div class="col-span-12 xl:col-span-6 p-5">
+        <div class="col-span-12 lg:col-span-6 p-5" id="container_ph_tanah">
             <h1 class="font-bold text-md">
                 Data Sensor pH Tanah
             </h1>
-            <canvas id="ph_tanah"></canvas>
+            <canvas class="grafik-data" id="ph_tanah"></canvas>
         </div>
     </div>
 </div>
 
 {{-- Tabel --}}
 <div class="">
-    <h1 class="mb-3 text-lg font-bold border-b-4 sticky top-16 md:top-0 bg-white z-[9999]">Tabel Riwayat Data Sensor</h1>
+    <h1 class="mb-3 text-lg font-bold border-b-4 sticky top-16 md:top-0 bg-white z-[9999]">Tabel Riwayat Data Sensor
+    </h1>
     <table id="table" class="hover intro-y overflow-x-hidden" style="width:100%">
         <thead>
             <tr>
@@ -70,7 +71,8 @@
                     <td class="border-b">{{ $data->kelembapan_udara }}</td>
                     <td class="border-b">{{ $data->kelembapan_tanah }}</td>
                     <td class="border-b">{{ $data->ph_tanah }}</td>
-                    <td class="border-b" data-sort="{{ $data->attribute_timestamp }}">{{ $data->timestamp_pengukuran }}
+                    <td class="border-b" data-sort="{{ $data->attribute_timestamp }}">
+                        {{ $data->timestamp_pengukuran }}
                     </td>
                 </tr>
             @endforeach
@@ -87,5 +89,5 @@
         var urlDashboard = "{{ route('dashboard.data') }}";
     </script>
 
-    @vite(['resources/js/pages/riwayat/data-sensor.js', 'resources/js/pages/riwayat/litepickr.js'])
+    @vite(['resources/js/pages/riwayat/data-sensor.js', 'resources/js/pages/riwayat/litepicker.js'])
 @endpush

@@ -19,7 +19,8 @@
                     <a href="#tentang-kami" class="block py-2 pl-3 pr-4 rounded  ">Tentang Kami</a>
                 </li>
                 <li>
-                    <a href="#aksi" class="block py-2 pl-3 pr-4 rounded  ">Panduan</a>
+                    <a href="https://nurturagrow.gitbook.io/nurturagrow/" target="_blank"
+                        class="block py-2 pl-3 pr-4 rounded">Panduan</a>
                 </li>
 
                 <li>
@@ -41,7 +42,7 @@
 <div class=" mobile-menu lg:hidden">
     <div class="mobile-menu-bar">
         <a href="{{ route('dashboard') }}" class="-intro-x flex mr-auto">
-            <img alt="Nurtura Grow" class="w-8" src="{{ asset('images/logo-bg.svg') }}">
+            <img alt="Nurtura Grow" class="w-8" src="{{ asset('images/logo.svg') }}">
             <span class="text-rgb-secondary text-lg ml-3 font-medium">NurturaGrow</span>
         </a>
         <a href="{{ route('login') }}"
@@ -72,7 +73,7 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('panduan') }}" class="menu">
+                <a href="https://nurturagrow.gitbook.io/nurturagrow/" target="_blank" class="menu">
                     <div class="menu__icon"><i class="fa-solid fa-book"></i></div>
                     <div class="menu__title">Panduan</div>
                 </a>

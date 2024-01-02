@@ -2,8 +2,7 @@ import $ from 'jquery';
 import { Chart } from "chart.js/auto";
 import crosshair from 'chartjs-plugin-crosshair';
 import moment from "moment";
-import Litepicker from 'litepicker';
-import 'litepicker/dist/plugins/mobilefriendly';
+import { isEmpty } from 'lodash';
 
 // Register plugin crosshair
 Chart.register(crosshair);
@@ -27,10 +26,10 @@ let chartInstances = {
 };
 
 const labelMapping = {
-    'suhu': 'Suhu Udara',
-    'kelembapan_udara': 'Kelembapan Udara',
-    'kelembapan_tanah': 'Kelembapan Tanah',
-    'ph_tanah': 'pH Tanah'
+    'suhu': 'Rata-rata Suhu Udara',
+    'kelembapan_udara': 'Rata-rata Kelembapan Udara',
+    'kelembapan_tanah': 'Rata-rata Kelembapan Tanah',
+    'ph_tanah': 'Rata-rata pH Tanah'
 };
 
 
@@ -68,8 +67,9 @@ $('#pilihTanggal').on('click', function () {
 });
 
 // Function to update data to the chart
-function addData(chart, newData) {
-    chart.data.datasets[0].data = newData;
+function addData(chart, actualData, predictedData) {
+    chart.data.datasets[0].data = actualData;
+    chart.data.datasets[1].data = predictedData;
     chart.update();
 }
 
@@ -88,19 +88,52 @@ function getDataAndUpdateChart(chartId) {
 
         success: function (response) {
             $('#tanggalTerpilih').text(response.data.tanggalDari + ' - ' + response.data.tanggalHingga);
+            if (isEmpty(response.data.timestamp_pengukuran)) {
+                chartInstances = {
+                    'suhu': null,
+                    'kelembapan_udara': null,
+                    'kelembapan_tanah': null,
+                    'ph_tanah': null
+                };
 
-            const x = response.data.timestamp_pengukuran;
-            const y = response.data[chartId]; // Assuming the data keys match the chart IDs
-            const convertedData = x.map((timestamp, index) => ({
-                x: timestamp,
-                y: y[index],
-            }));
+                $('.grafik-data').remove(); // this is my <canvas> element
+                $('#container_suhu').append('<canvas class="grafik-data w-full h-full" id="suhu"></canvas>')
+                $('#container_kelembapan_udara').append('<canvas class="grafik-data w-full h-full" id="kelembapan_udara"></canvas>')
+                $('#container_kelembapan_tanah').append('<canvas class="grafik-data w-full h-full" id="kelembapan_tanah"></canvas>')
+                $('#container_ph_tanah').append('<canvas class="grafik-data w-full h-full" id="ph_tanah"></canvas>')
 
-            // Call the function to update the chart with new data
-            if (chartInstances[chartId]) {
-                addData(chartInstances[chartId], convertedData);
+                const canvases = document.querySelectorAll('.grafik-data');
+
+                canvases.forEach((canvas) => {
+                    const ctx = canvas.getContext('2d');
+
+                    ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear previous content
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.font = '16px Roboto';
+                    ctx.fillText("Tidak ada data", canvas.width / 2, canvas.height / 2);
+                });
             } else {
-                createChart(chartId, convertedData);
+                const x = response.data.timestamp_pengukuran;
+                const y = response.data[chartId];
+                const actualData = x.map((timestamp, index) => ({
+                    x: timestamp,
+                    y: y[index],
+                }));
+
+                const xPrediksi = response.prediksi.timestamp_prediksi_sensor;
+                const yPrediksi = response.prediksi[chartId];
+                const predictedData = xPrediksi.map((timestamp, index) => ({
+                    x: timestamp,
+                    y: yPrediksi[index],
+                }));
+
+                // Call the function to update the chart with new data
+                if (chartInstances[chartId]) {
+                    addData(chartInstances[chartId], actualData, predictedData);
+                } else {
+                    createChart(chartId, actualData, predictedData);
+                }
             }
         },
         error: function (err) {
@@ -110,17 +143,27 @@ function getDataAndUpdateChart(chartId) {
 }
 
 // Function to create the chart
-function createChart(chartId, dataGraphic) {
+function createChart(chartId, actualData, predictedData) {
     const canvas = document.getElementById(chartId);
     const data = {
-        datasets: [{
-            label: labelMapping[chartId],
-            data: dataGraphic,
-            fill: false,
-            backgroundColor: 'rgb(75, 192, 192)',
-            borderColor: 'rgb(75, 192, 192)',
-            tension: 0.1
-        }]
+        datasets: [
+            {
+                label: labelMapping[chartId],
+                data: actualData,
+                fill: false,
+                backgroundColor: 'rgb(75, 192, 192)',
+                borderColor: 'rgb(75, 192, 192)',
+                tension: 0.1
+            },
+            {
+                label: 'Prediksi ' + labelMapping[chartId],
+                data: predictedData,
+                fill: false,
+                backgroundColor: '#F6AE2D',
+                borderColor: '#F6AE2D',
+                tension: 0.1
+            }
+        ]
     };
 
     const options = {
@@ -139,6 +182,10 @@ function createChart(chartId, dataGraphic) {
             }
         },
         plugins: {
+            tooltip: {
+                mode: 'index',
+                intersect: false
+            },
             legend: {
                 display: false
             },

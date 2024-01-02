@@ -14,6 +14,7 @@ class User extends Authenticatable
     protected $guarded = [
         'id_user'
     ];
+    public $timestamps = false;
 
     public function penanaman_user(): HasMany
     {

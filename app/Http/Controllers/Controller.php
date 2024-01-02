@@ -29,4 +29,14 @@ class Controller extends BaseController
     {
         return Carbon::parse($date)->format('d M Y');
     }
+
+    public function formatDateTimeUI($date)
+    {
+        return Carbon::parse($date)->format('d M Y H:i');
+    }
+
+    public function formatTimeUI($date)
+    {
+        return Carbon::parse($date)->format('H:i');
+    }
 }

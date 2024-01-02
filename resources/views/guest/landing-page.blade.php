@@ -7,6 +7,7 @@
 @section('body')
 
     <body class="p-0 m-0 relative bg-rgb-light-green">
+        @include('sweetalert::alert')
         @include('guest.navbar')
         {{-- Section 1 --}}
         <section
@@ -56,47 +57,86 @@
         {{-- Section 2: Fitur --}}
         <section class="min-h-screen p-0 m-0 bg-white flex flex-col justify-center items-center" id="fitur">
             {{-- Content --}}
-            <div class="intro-x grow text-center flex flex-col justify-center items-center p-4">
+            <div class="intro-x grow text-center flex flex-col gap-5 justify-center items-center p-4">
                 <h1
                     class="mt-8 lg:mt-4 text-lg md:text-3xl lg:text-6xl text-rgb-secondary font-bold rounded underline decoration-4 decoration-rgb-mid-green underline-offset-8">
                     Fitur NurturaGrow
                 </h1>
-                {{-- Fitur 1 --}}
-                <div
-                    class="flex flex-col lg:flex-row mt-2 lg:mt-10 lg:gap-16 items-center lg:items-start lg:p-8 max-w-screen-lg">
-                    <img class="w-auto h-auto" src="{{ asset('images/illustration/landing-page/tentang-kami.png') }}" alt="">
+
+                {{-- Fitur 1 -- Pendataan Lahan dan Penanaman --}}
+                <div class="flex flex-col lg:flex-row lg:gap-16 justify-center items-center  lg:p-4 max-w-screen-lg">
+                    <img class="w-auto sm:w-1/2 lg:w-1/3" src="{{ asset('images/illustration/landing-page/planting.svg') }}"
+                        alt="">
                     <div class="text-justify max-lg:p-4">
                         <h1 class="font-bold text-xl lg:text-2xl max-lg:text-center text-rgb-secondary">
-                            Lorem Ipsum
+                            Pendataan Lahan dan Penanaman
                         </h1>
                         <p class="text-lg">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia ipsam nihil adipisci dolorum.
-                            Quaerat illo laborum rerum assumenda quos similique cupiditate quas. Nisi excepturi repudiandae
-                            voluptate iste ad optio rerum maiores voluptas! Obcaecati vitae dolor modi ex corporis aperiam,
-                            perspiciatis repellat minima corrupti ut quod explicabo sit hic ipsam, natus quis in earum
-                            architecto nostrum rem molestiae cupiditate dolorum illo nisi. Est tempore quam vel fugit ullam
-                            deserunt ipsa reprehenderit earum impedit quasi, sequi neque natus molestias. Corporis numquam
+                            NurturaGrow memberikan kemudahan kepada para petani dengan fitur pemetaan lokasi lahan yang
+                            terintegrasi. Dengan pendataan yang akurat, petani dapat dengan cepat mengidentifikasi area
+                            tanaman dan mengelola penanaman secara efisien. Sistem pencatatan penanaman dan informasi
+                            hari-hari setelah tanam memberikan wawasan yang berharga, membantu petani mengoptimalkan
+                            strategi pertanian mereka untuk hasil panen yang lebih baik.
                         </p>
                     </div>
                 </div>
-                {{-- Fitur 2 --}}
-                <div
-                    class="flex flex-col lg:flex-row mt-2 lg:mt-10 lg:gap-16 items-center lg:items-start  lg:p-8 max-w-screen-lg">
-                    <img class="w-auto h-auto" src="{{ asset('images/illustration/landing-page/tentang-kami.png') }}" alt="">
+
+                {{-- Fitur 2 -- Monitoring/Pemantauan Alat --}}
+                <div class="flex flex-col lg:flex-row lg:gap-16 justify-center items-center lg:p-4 max-w-screen-lg">
+                    <img class="w-auto sm:w-1/2 lg:w-1/3" src="{{ asset('images/illustration/landing-page/monitoring-iot.svg') }}"
+                        alt="">
                     <div class="text-justify max-lg:p-4">
                         <h1 class="font-bold text-xl lg:text-2xl max-lg:text-center text-rgb-secondary">
-                            Lorem Ipsum
+                            Pemantauan Alat
                         </h1>
                         <p class="text-lg">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia ipsam nihil adipisci dolorum.
-                            Quaerat illo laborum rerum assumenda quos similique cupiditate quas. Nisi excepturi repudiandae
-                            voluptate iste ad optio rerum maiores voluptas! Obcaecati vitae dolor modi ex corporis aperiam,
-                            perspiciatis repellat minima corrupti ut quod explicabo sit hic ipsam, natus quis in earum
-                            architecto nostrum rem molestiae cupiditate dolorum illo nisi. Est tempore quam vel fugit ullam
-                            deserunt ipsa reprehenderit earum impedit quasi, sequi neque natus molestias. Corporis numquam
+                            Fitur pemantauan alat NurturaGrow membuka pintu untuk pemahaman yang mendalam tentang kondisi
+                            lahan. Petani dapat dengan mudah memantau data sensor seperti kelembaban tanah, suhu, dan
+                            tingkat nutrisi. Informasi real-time ini memungkinkan pengambilan keputusan yang cepat dan
+                            tepat, memastikan tanaman mendapatkan perawatan yang optimal sesuai dengan kebutuhan mereka.
                         </p>
                     </div>
                 </div>
+
+                {{-- Fitur 3 -- Otomatisasi --}}
+                <div class="flex flex-col lg:flex-row lg:gap-16 justify-center items-center  lg:p-4 max-w-screen-lg">
+                    <img class="w-auto sm:w-1/2 lg:w-1/3" src="{{ asset('images/illustration/landing-page/automation.svg') }}"
+                        alt="">
+                    <div class="text-justify max-lg:p-4">
+                        <h1 class="font-bold text-xl lg:text-2xl max-lg:text-center text-rgb-secondary">
+                            Otomatisasi Pengairan dan Rekomendasi Pemupukan
+                        </h1>
+                        <p class="text-lg">
+                            NurturaGrow menyajikan inovasi terkini dengan fitur otomatisasi pengairan yang disesuaikan
+                            dengan data sensor dan keputusan cerdas dari machine learning. Sistem ini secara otomatis
+                            menyesuaikan tingkat pengairan berdasarkan analisis sensor tanah seperti kelembaban, suhu, dan
+                            kebutuhan air tanaman. Selain itu, melalui penggunaan machine learning, NurturaGrow memberikan
+                            rekomendasi pemupukan yang tepat waktu dan optimal, mempertimbangkan kondisi tanaman. Dengan
+                            pendekatan ini, petani dapat memanfaatkan teknologi untuk meningkatkan efisiensi
+                            penggunaan air dan memberikan pupuk tanaman secara presisi, menghasilkan hasil pertanian yang
+                            lebih berkualitas dan berkelanjutan.
+                        </p>
+                    </div>
+                </div>
+
+                {{-- Fitur 4 -- Pengaturan Alat Manual --}}
+                <div class="flex flex-col lg:flex-row lg:gap-16 justify-center items-center  lg:p-4 max-w-screen-lg">
+                    <img class="w-auto sm:w-1/2 lg:w-1/3" src="{{ asset('images/illustration/landing-page/control-iot.svg') }}"
+                        alt="">
+                    <div class="text-justify max-lg:p-4">
+                        <h1 class="font-bold text-xl lg:text-2xl max-lg:text-center text-rgb-secondary">
+                            Pengaturan Alat Manual
+                        </h1>
+                        <p class="text-lg">
+                            NurturaGrow memberdayakan petani dengan kemampuan pengendalian alat secara manual yang mudah dan
+                            efisien. Melalui platform kami, petani dapat mengatur alat-alat IoT dengan cepat sesuai
+                            keinginan mereka, termasuk pengaturan pengairan dan pemupukan. Pengendalian manual ini
+                            memberikan fleksibilitas penuh kepada petani untuk merespons perubahan kondisi lahan secara
+                            instan, menjadikan proses pertanian lebih adaptif dan responsif.
+                        </p>
+                    </div>
+                </div>
+
             </div>
         </section>
         {{-- Section 3: Tentang Kami --}}
@@ -109,19 +149,22 @@
             <div
                 class="mt-2 lg:mt-10 flex flex-col items-center justify-center lg:flex-row gap-6 lg:gap-12 h-auto w-full max-w-screen-xl p-8">
                 <div class="h-auto w-auto">
-                    <img class="h-auto w-auto" src="{{ asset('images/illustration/landing-page/Reason 1.png') }}" alt="">
+                    <img class="h-auto w-auto" src="{{ asset('images/illustration/landing-page/Reason 1.png') }}"
+                        alt="">
                 </div>
                 <div>
-                    <img class="h-auto w-auto" src="{{ asset('images/illustration/landing-page/Reason 1.png') }}" alt="">
+                    <img class="h-auto w-auto" src="{{ asset('images/illustration/landing-page/Reason 1.png') }}"
+                        alt="">
                 </div>
                 <div>
-                    <img class="h-auto w-auto" src="{{ asset('images/illustration/landing-page/Reason 1.png') }}" alt="">
+                    <img class="h-auto w-auto" src="{{ asset('images/illustration/landing-page/Reason 1.png') }}"
+                        alt="">
                 </div>
             </div>
         </section>
 
         {{-- Section 4: CTA --}}
-        <section class="min-h-[50vh] lg:min-h-[80vh] p-0 m-0 bg-rgb-light-green flex flex-col justify-center"
+        <section class="min-h-[30vh] lg:min-h-[80vh] p-0 m-0 bg-rgb-light-green flex flex-col justify-center"
             id="aksi">
             {{-- Background ornament --}}
             <img class="top-0 left-0 w-full" src="{{ asset('images/background/section4.svg') }}" alt="">
@@ -149,8 +192,12 @@
         </section>
 
         {{-- Section 5: Footer --}}
-        <section class="min-h-[5vh] lg:min-h-[10vh] p-0 m-0 bg-rgb-secondary  flex items-center justify-center">
+        <section class="min-h-[10vh] lg:min-h-[15vh] p-0 m-0 bg-rgb-secondary  flex flex-col items-center justify-center">
             <p class="intro-x text-md lg:text-lg lg:font-semibold text-white">Dibuat oleh NurturaGrow 2023</p>
+
+            <div class="intro-x text-md lg:text-lg text-white mt-3">
+                Kredit: Seluruh ilustrasi dibuat oleh <a href="https://www.freepik.com">Freepik.com</a>
+            </div>
         </section>
 
         @include('layout.partials.scripts')

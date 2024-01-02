@@ -18,17 +18,10 @@ class DatabaseSeeder extends Seeder
             UsersSeeder::class,
             LahanSeeder::class,
             TipeInstruksiSeeder::class,
-            SumberDataSeeder::class,
             SopPemupukanSeeder::class,
+            SopPengairanSeeder::class,
+            // DataSensorSeeder::class,
+            // PrediksiSensorSeeder::class,
         ]);
-
-        DataSensor::factory()->count(300)->create();
-
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
     }
 }

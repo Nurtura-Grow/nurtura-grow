@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -12,8 +13,6 @@ use App\Http\Controllers\Pages\TanamanController;
 use App\Http\Controllers\Pages\PengendalianManual\PemupukanController as PemupukanManualController;
 use App\Http\Controllers\Pages\PengendalianManual\PengairanController as PengairanManualController;
 use App\Http\Controllers\Pages\PengendalianManual\TinggiTanamanController as TinggiTanamanManualController;
-use App\Http\Controllers\Pages\Rekomendasi\PemupukanController;
-use App\Http\Controllers\Pages\Rekomendasi\PengairanController;
 use App\Http\Controllers\Pages\RiwayatController;
 
 use App\Http\Controllers\Pages\PanduanController;
@@ -34,10 +33,12 @@ Route::group([
     'middleware' => 'guest',
 ], function () {
     Route::get('/', [LandingPageController::class, 'index'])->name('index');
-    Route::get('/panduan', [PanduanController::class, 'index'])->name('panduan');
 
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::get('/register', [RegisterController::class, 'index'])->name('register');
+    Route::get('/forgot/password', [ForgotPasswordController::class, 'index'])->name('password');
+    Route::get('/verifikasi/{email}', [ForgotPasswordController::class, 'index_verifikasi'])->name('verifikasi');
+    Route::get('/reset/password/{email}', [ForgotPasswordController::class, 'index_reset_password'])->name('reset_password');
 
     Route::group([
         'prefix' => 'auth',
@@ -45,6 +46,9 @@ Route::group([
     ], function () {
         Route::post('/login', [LoginController::class, 'login'])->name('login');
         Route::post('/register', [RegisterController::class, 'register'])->name('register');
+        Route::post('/forgot/password', [ForgotPasswordController::class, 'forgot_password'])->name('forgot_password');
+        Route::post('/verifikasi/pin/{email}', [ForgotPasswordController::class, 'verifikasi'])->name('verifikasi');
+        Route::post('/reset/password/{email}', [ForgotPasswordController::class, 'reset_password'])->name('reset_password');
     });
 });
 
@@ -85,15 +89,8 @@ Route::group([
         Route::get('/tinggi/penanaman/{id}', [TinggiTanamanManualController::class, 'search_tanggal'])->name('tinggi.search_tanggal');
         Route::resource('/pengairan', PengairanManualController::class)->except(['index', 'show']);
         Route::resource('/pemupukan', PemupukanManualController::class)->except(['index', 'show']);
-    });
 
-    // Route Rekomendasi
-    Route::group([
-        'prefix' => 'rekomendasi',
-        'as' => 'rekomendasi.'
-    ], function () {
-        Route::get('/pengairan', [PengairanController::class, 'index'])->name('pengairan');
-        Route::get('/pemupukan', [PemupukanController::class, 'index'])->name('pemupukan');
+        Route::put('/sop/pengairan', [PengairanManualController::class, 'updateSOP'])->name('pengairan.sop');
     });
 
     // Route Riwayat
@@ -103,7 +100,4 @@ Route::group([
     ], function () {
         Route::get('/', [RiwayatController::class, 'index'])->name('index');
     });
-
-    // Route Panduan
-    Route::get('/panduan', [PanduanController::class, 'index'])->name('panduan');
 });

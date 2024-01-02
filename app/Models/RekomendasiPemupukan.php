@@ -15,6 +15,7 @@ class RekomendasiPemupukan extends Model
     protected $guarded = [
         'id_rekomendasi_pemupukan'
     ];
+    public $timestamps = false;
 
     public function log_aksi(): HasMany
     {
@@ -24,5 +25,10 @@ class RekomendasiPemupukan extends Model
     public function tinggi_tanaman(): BelongsTo
     {
         return $this->belongsTo(TinggiTanaman::class, 'id_tinggi_tanaman', 'id_tinggi_tanaman');
+    }
+
+    public function message(): BelongsTo
+    {
+        return $this->belongsTo(Message::class, 'pesan', 'id');
     }
 }

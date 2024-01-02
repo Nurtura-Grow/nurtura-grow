@@ -1,5 +1,5 @@
 <!-- BEGIN: Modal Content -->
-<div id="datepicker-modal-preview" class="modal" tabindex="-1" aria-hidden="true">
+<div id="datepicker-modal-preview" class="modal" tabindex="-1" aria-hidden="true" data-tw-backdrop="static">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <!-- BEGIN: Modal Header -->
@@ -54,8 +54,6 @@
             <!-- END: Modal Body -->
             <!-- BEGIN: Modal Footer -->
             <div class="modal-footer text-right">
-                <button type="button" data-tw-dismiss="modal"
-                    class="btn btn-outline-secondary w-36 mr-1">Batal</button>
                 <button type="button" id="pilihTanggal" data-tw-dismiss="modal" class="btn btn-primary w-36">Pilih Tanggal</button>
             </div>
             <!-- END: Modal Footer -->

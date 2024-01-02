@@ -81,7 +81,7 @@ class SideMenuController extends Controller
             'tanaman' => [
                 'icon' => 'fa-brands fa-pagelines',
                 'route_name' => 'tanaman',
-                'title' => 'Tanaman',
+                'title' => 'Penanaman',
                 'sub_menu' => [
                     'daftar-tanaman' => [
                         'icon' => 'fa-solid fa-list',
@@ -95,23 +95,23 @@ class SideMenuController extends Controller
                     ],
                 ]
             ],
-            'rekomendasi' => [
-                'icon' => 'fa-solid fa-hands-holding-circle',
-                'route_name' => 'rekomendasi',
-                'title' => 'Rekomendasi',
-                'sub_menu' => [
-                    'pengairan' => [
-                        'icon' => 'fa-solid fa-droplet',
-                        'route_name' => 'rekomendasi.pengairan',
-                        'title' => 'Pengairan'
-                    ],
-                    'pemupukan' => [
-                        'icon' => 'fa-solid fa-seedling',
-                        'route_name' => 'rekomendasi.pemupukan',
-                        'title' => 'Pemupukan'
-                    ]
-                ]
-            ],
+            // 'rekomendasi' => [
+            //     'icon' => 'fa-solid fa-hands-holding-circle',
+            //     'route_name' => 'rekomendasi',
+            //     'title' => 'Rekomendasi',
+            //     'sub_menu' => [
+            //         'pengairan' => [
+            //             'icon' => 'fa-solid fa-droplet',
+            //             'route_name' => 'rekomendasi.pengairan',
+            //             'title' => 'Pengairan'
+            //         ],
+            //         'pemupukan' => [
+            //             'icon' => 'fa-solid fa-seedling',
+            //             'route_name' => 'rekomendasi.pemupukan',
+            //             'title' => 'Pemupukan'
+            //         ]
+            //     ]
+            // ],
             'manual' => [
                 'icon' => 'fa-solid fa-gears',
                 'route_name' => 'manual',

@@ -17,37 +17,6 @@ if (satuan) {
     })
 }
 
-/** AJAX */
-function makeAjaxRequest(id_penanaman) {
-    // Replace :id with the value of id_penanaman
-    const formattedUrl = url.replace(':id', id_penanaman);
-
-    // Make the AJAX request using jQuery
-    $.ajax({
-        url: formattedUrl,
-        method: 'GET',
-        success: function (data) {
-            // Handle the response data
-            const tanggal_tanam = data.tanggal_tanam;
-            changeDatePickerTinggiValue(tanggal_tanam);
-        },
-        error: function (xhr, status, error) {
-            // Handle errors
-            console.error('AJAX error:', error);
-        }
-    });
-}
-
-// Initial AJAX request with default value
-makeAjaxRequest($('#id_penanaman').val());
-
-// Change event handler
-$('#id_penanaman').on('change', function () {
-    const id_penanaman = $(this).val();
-    // Make the AJAX request using the function
-    makeAjaxRequest(id_penanaman);
-});
-
 /** Litepicker */
 // Create Litepicker Element
 var customOptions = {
@@ -67,16 +36,51 @@ var customOptions = {
 };
 
 const dateTinggi = document.querySelector(".dateTinggi");
-const datePickerTinggi = new Litepicker({
-    element: dateTinggi,
-    ...customOptions,
-})
+if (dateTinggi) {
 
-// Change Value of Datepicker
-function changeDatePickerTinggiValue(tanggal_tanam) {
-    datePickerTinggi.setOptions({
-        minDate: tanggal_tanam,
-        setDate: tanggal_tanam,
-        maxDate: moment().format("DD MMM YYYY"),
+    const datePickerTinggi = new Litepicker({
+        element: dateTinggi,
+        ...customOptions,
+    })
+
+    // Change Value of Datepicker
+    function changeDatePickerTinggiValue(tanggal_tanam) {
+        datePickerTinggi.setOptions({
+            minDate: tanggal_tanam,
+            setDate: tanggal_tanam,
+            maxDate: moment().format("DD MMM YYYY"),
+        });
+    }
+
+    /** AJAX */
+    function makeAjaxRequest(id_penanaman) {
+        // Replace :id with the value of id_penanaman
+        const formattedUrl = url.replace(':id', id_penanaman);
+
+        // Make the AJAX request using jQuery
+        $.ajax({
+            url: formattedUrl,
+            method: 'GET',
+            success: function (data) {
+                // Handle the response data
+                const tanggal_tanam = data.tanggal_tanam;
+                changeDatePickerTinggiValue(tanggal_tanam);
+            },
+            error: function (xhr, status, error) {
+                // Handle errors
+                console.error('AJAX error:', error);
+            }
+        });
+    }
+
+    // Initial AJAX request with default value
+    makeAjaxRequest($('#id_penanaman').val());
+
+    // Change event handler
+    $('#id_penanaman').on('change', function () {
+        const id_penanaman = $(this).val();
+        // Make the AJAX request using the function
+        makeAjaxRequest(id_penanaman);
     });
+
 }

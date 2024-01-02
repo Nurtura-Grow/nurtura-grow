@@ -16,9 +16,8 @@ class UsersSeeder extends Seeder
         User::firstOrCreate([
             'nama' => 'Admin',
             'email' => 'admin@gmail.com',
-            'password' => bcrypt('admin'),
+            'password' => bcrypt(config('services.password')),
             'username' => 'admin',
-            'created_by' => 1,
         ]);
     }
 }

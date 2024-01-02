@@ -7,7 +7,7 @@
         <div class="col-span-12 2xl:col-span-9">
             <div class="flex flex-col max-xl:min-h-[120vh] xl:min-h-screen 2xl:min-h-0 h-full">
                 {{-- Grafik Sensor Terkini --}}
-                <div class="basis-[60%] xl:basis-[40%] 2xl:basis-2/5 mt-2 flex flex-col">
+                <div class="mt-2 flex flex-col">
                     {{-- Container Item --}}
                     <div class="intro-y block sm:flex items-center h-10 mt-5">
                         {{-- Judul --}}
@@ -23,8 +23,8 @@
                     <div class="intro-y grow flex flex-wrap -mx-4 mt-4">
                         @foreach ($grafik as $graf)
                             <div class="w-full sm:w-1/2 xl:w-1/4 px-4 mb-6">
-                                <div class="report-box h-full zoom-in">
-                                    <div class="box p-5 h-full text-center">
+                                <div class="report-box zoom-in">
+                                    <div class="box p-5 text-center flex flex-col items-center justify-center">
                                         {{-- Judul Grafik --}}
                                         <p class="mb-2 font-semibold">{{ $graf['name'] }}</p>
                                         {{-- Isi Grafik --}}
@@ -43,7 +43,7 @@
                 </div>
 
                 {{-- Grafik Data Semua Sensor --}}
-                <div class="basis-[40%] xl:basis-[60%] 2xl:basis-3/5 mt-2 flex flex-col">
+                <div class="grow mt-2 flex flex-col">
                     {{-- Judul --}}
                     <div class="intro-y block sm:flex items-center h-10 mt-3">
                         <h2 class="text-lg font-medium truncate mr-auto">
@@ -69,7 +69,7 @@
                     <div class="intro-y grow -mx-4 mt-12 sm:mt-5">
                         <div class="px-4 mb-4 h-full">
                             <div class="report-box h-full zoom-in">
-                                <div class="box p-5 h-full flex items-center justify-center">
+                                <div class="box p-5 h-full flex items-center justify-center" id="container-grafik">
                                     {{-- Isi Grafik Keseluruhan --}}
                                     <canvas class="w-fit h-fit" id="grafik-keseluruhan"></canvas>
                                 </div>
@@ -192,7 +192,7 @@
                 <div class="intro-y box p-5 mt-12 sm:mt-5 grow">
                     <div class="rounded-md">
                         <div class="overflow-x-auto scrollbar-hidden">
-                            @include('pages.riwayat.pengairan')
+                            @include('pages.riwayat.aksi-alat')
                         </div>
                     </div>
                 </div>
@@ -209,5 +209,7 @@
 
     @vite(['resources/js/pages/dashboard/chart.js', 'resources/js/pages/dashboard/litepickr.js'])
 @endpush
+
+@include('pages.lahan.modal')
 @include('pages.components.datatable-styles')
 @include('pages.lahan.scripts')

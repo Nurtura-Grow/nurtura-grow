@@ -21,13 +21,12 @@ class CreateUsersTable extends Migration
             $table->string('password', 255);
             $table->string('remember_token', 100)->nullable();
 
-
-            $table->foreignId('created_by');
-            $table->foreignId('updated_by')->nullable();
-            $table->foreignId('deleted_by')->nullable();
+            // $table->foreignId('created_by');
+            // $table->foreignId('updated_by')->nullable();
+            // $table->foreignId('deleted_by')->nullable();
             $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->nullable();
-            $table->timestamp('deleted_at')->nullable();
+            $table->timestamp('updated_at')->useCurrent();
+            // $table->timestamp('deleted_at')->nullable();
         });
     }
 

@@ -30,7 +30,7 @@ class LahanSeeder extends Seeder
             'id_lahan' => InformasiLahan::first()->id_lahan,
             'nama_penanaman' => 'Penanaman Bawang Merah 1',
             'keterangan' => 'Ini tanaman Bawang Merah',
-            'tanggal_tanam' => now(),
+            'tanggal_tanam' => '2023-12-02',
             'tanggal_panen' => null,
             'status_hidup' => true,
             'created_by' => $id_user,

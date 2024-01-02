@@ -3,34 +3,27 @@ import $ from 'jquery';
 const judulHalaman = document.getElementById('judulHalaman');
 const buttonTambah = document.getElementById('buttonTambah')
 const navigationBar = document.getElementById('navigationBar');
+const dropdownTambah = document.getElementById('dropdownTambah');
 
 const navButtons = navigationBar.querySelectorAll('.nav-link');
 
 navButtons.forEach(button => {
     button.addEventListener('click', () => {
-        if (button.textContent == " Data Sensor ") {
+        var textContent = button.textContent.trim();
+
+        if (textContent == "Aksi Alat") {
+            dropdownTambah.classList.remove('hidden');
             buttonTambah.classList.add('hidden');
-        } else {
+            console.log(dropdownTambah.classList)
+        } else if (textContent == "Tinggi Tanaman") {
+            dropdownTambah.classList.add('hidden');
             buttonTambah.classList.remove('hidden');
-        }
-
-        buttonTambah.innerHTML = '<i class="fa-solid fa-circle-plus mr-2"></i>' + 'Tambah' + button
-            .textContent + 'Manual';
-
-        var routeName;
-        if (button.textContent == " Tinggi Tanaman ") {
-            routeName = routeTinggi;
-        } else if (button.textContent == " Pemupukan ") {
-            routeName = routePemupukan;
-        } else if (button.textContent == " Pengairan ") {
-            routeName = routePengairan;
         } else {
-            // Default case if none of the above conditions are met
-            routeName = ''; // or provide a default value
+            dropdownTambah.classList.add('hidden');
+            buttonTambah.classList.add('hidden');
         }
 
-        buttonTambah.setAttribute('href', routeName);
-        judulHalaman.textContent = 'Riwayat ' + button.textContent;
+        judulHalaman.textContent = 'Riwayat ' + textContent;
     });
 });
 

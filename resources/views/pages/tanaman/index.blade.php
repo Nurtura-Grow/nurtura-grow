@@ -63,10 +63,10 @@
                         @endif
                         <td class="border-b">
                             <a href="{{ route('tanaman.edit', ['tanaman' => $penanaman->id_penanaman]) }}"
-                                class="mr-4 whitespace-nowrap">
+                                class="btn mr-4 whitespace-nowrap">
                                 <i class="w-4 h-4 mr-1 fa-solid fa-pencil"></i>Ubah
                             </a>
-                            <span class="text-danger deletePenanaman hover:cursor-pointer whitespace-nowrap"
+                            <span class="text-white deletePenanaman hover:cursor-pointer whitespace-nowrap btn btn-danger"
                                 onclick="deleteTanaman(this)" data-tw-toggle="modal" data-tw-target="#deleteTanaman"
                                 data-tanaman='{{ json_encode(['id_penanaman' => $penanaman->id_penanaman]) }}'>
                                 <i class="w-4 h-4 mr-1 fa-solid fa-trash"></i>Hapus</span>
@@ -77,7 +77,7 @@
     </div>
 
     {{-- Modal untuk Delete --}}
-    <div id="deleteTanaman" class="modal" tabindex="-1" aria-hidden="true">
+    <div id="deleteTanaman" class="modal" tabindex="-1" aria-hidden="true" data-tw-backdrop="static">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body p-0">

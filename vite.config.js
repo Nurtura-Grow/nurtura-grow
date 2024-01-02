@@ -18,17 +18,26 @@ export default defineConfig({
                 "resources/css/app.css",
                 "resources/js/main.js",
                 "resources/js/app.js",
+                'resources/js/jquery.js',
 
                 // Pages
                 "resources/js/pages/datatable.js",
+                'resources/js/datatable/jquery.dataTables.js',
+                'resources/js/datatable/responsive.js',
+
+                // Auth
+                "resources/js/auth/verifikasi-otp.js",
 
                 // Dashboard
                 "resources/js/pages/dashboard/litepickr.js",
                 "resources/js/pages/dashboard/chart.js",
 
                 // Data Manual
-                "resources/js/pages/data-manual/waktuMulaiSelesai",
+                "resources/js/pages/data-manual/waktuMulaiSelesai.js",
                 "resources/js/pages/data-manual/getPenanamanTanggalTanam.js",
+                "resources/js/pages/data-manual/pengairan-pemupukan.js",
+                "resources/js/pages/data-manual/pengairan.js",
+                "resources/js/pages/data-manual/pemupukan.js",
 
                 // Lahan
                 "resources/js/pages/lahan/googleMaps.js",
