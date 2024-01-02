@@ -16,9 +16,9 @@
                 <li>
                     @if ($menu['route_name'] == 'panduan')
                         <a href="https://nurturagrow.gitbook.io/nurturagrow/" target="_blank"
-                            class="side-menu {{ $sideMenu['active_first_menu'] == $menu['route_name'] ? 'side-menu--active' : '' }}">
-                            <div class="side-menu__icon"> <i class="{{ $menu['icon'] }}"></i> </div>
-                            <div class="side-menu__title"> {{ $menu['title'] }} </div>
+                            class="menu {{ $sideMenu['active_first_menu'] == $menu['route_name'] ? 'menu--active' : '' }}">
+                            <div class="menu__icon"> <i class="{{ $menu['icon'] }}"></i> </div>
+                            <div class="menu__title"> {{ $menu['title'] }} </div>
                         </a>
                     @else
                         {{-- If have sub_menu -> javascript:;, if not, go to the route_name --}}

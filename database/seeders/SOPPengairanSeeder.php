@@ -29,7 +29,7 @@ class SopPengairanSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'nama' => 'soil moisture',
+                'nama' => 'soil_moisture',
                 'min' => '50',
                 'max' => '69',
                 'created_at' => now(),

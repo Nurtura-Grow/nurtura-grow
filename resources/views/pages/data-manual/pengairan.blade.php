@@ -54,10 +54,10 @@
                     <label for="kelembapan-tanah" class="form-label sm:w-32">Kelembapan Tanah</label>
                     <div class="grid grid-cols-12">
                         <input type="text" class="form-control col-span-4 form-pengairan" placeholder="Nilai Minimal"
-                            aria-label="kelembapan-tanah" name="soil_moisture[]" value="{{ $sopPengairan['soil moisture_min'] }}" readonly>
+                            aria-label="kelembapan-tanah" name="soil_moisture[]" value="{{ $sopPengairan['soil_moisture_min'] }}" readonly>
                         <p class="col-span-1 flex items-center justify-center font-bold"> - </p>
                         <input type="text" class="form-control col-span-4 form-pengairan" placeholder="Nilai Maksimal"
-                            aria-label="kelembapan-tanah" name="soil_moisture[]" value="{{ $sopPengairan['soil moisture_max'] }}" readonly>
+                            aria-label="kelembapan-tanah" name="soil_moisture[]" value="{{ $sopPengairan['soil_moisture_max'] }}" readonly>
                         <p class="flex items-center justify-center font-bold">%</p>
                     </div>
                 </div>
