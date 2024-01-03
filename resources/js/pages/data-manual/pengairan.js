@@ -63,15 +63,6 @@ var dateChosen = 'today';
 var tanggalDari = today;
 var tanggalHingga = today;
 
-const suhuMinimal = 25;
-const suhuMaksimal = 33;
-const kelembapanUdaraMinimal = 60;
-const kelembapanUdaraMaksimal = 69;
-const kelembapanTanahMinimal = 50;
-const kelembapanTanahMaksimal = 69;
-const phTanahMinimal = 5.5;
-const phTanahMaksimal = 6.5;
-
 $('#pilihGrafik').on('change', function () {
     label = $(this).val();
     getDataAndUpdateChart(label);

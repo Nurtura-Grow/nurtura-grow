@@ -28,10 +28,12 @@
                     <label for="suhu-udara" class="form-label sm:w-32">Suhu Udara</label>
                     <div class="grid grid-cols-12">
                         <input type="text" class="form-control col-span-4 form-pengairan" placeholder="Nilai Minimal"
-                            aria-label="suhu-udara" name='temperature[]' value="{{ $sopPengairan['temperature_min'] }}" readonly>
+                            aria-label="suhu-udara" name='temperature[]' value="{{ $sopPengairan['temperature_min'] }}"
+                            readonly>
                         <p class="col-span-1 flex items-center justify-center font-bold"> - </p>
                         <input type="text" class="form-control col-span-4 form-pengairan" placeholder="Nilai Maksimal"
-                            aria-label="suhu-udara" name='temperature[]' value="{{ $sopPengairan['temperature_max'] }}" readonly>
+                            aria-label="suhu-udara" name='temperature[]' value="{{ $sopPengairan['temperature_max'] }}"
+                            readonly>
                         <p class="flex items-center justify-center font-bold">C</p>
                     </div>
                 </div>
@@ -41,10 +43,12 @@
                     <label for="kelembapan-udara" class="form-label sm:w-32">Kelembapan Udara</label>
                     <div class="grid grid-cols-12">
                         <input type="text" class="form-control col-span-4 form-pengairan" placeholder="Nilai Minimal"
-                            aria-label="kelembapan-udara" name="humidity[]" value="{{ $sopPengairan['humidity_min'] }}" readonly>
+                            aria-label="kelembapan-udara" name="humidity[]" value="{{ $sopPengairan['humidity_min'] }}"
+                            readonly>
                         <p class="col-span-1 flex items-center justify-center font-bold"> - </p>
                         <input type="text" class="form-control col-span-4 form-pengairan" placeholder="Nilai Maksimal"
-                            aria-label="kelembapan-udara" name="humidity[]" value="{{ $sopPengairan['humidity_max'] }}" readonly>
+                            aria-label="kelembapan-udara" name="humidity[]" value="{{ $sopPengairan['humidity_max'] }}"
+                            readonly>
                         <p class="flex items-center justify-center font-bold">%</p>
                     </div>
                 </div>
@@ -54,10 +58,12 @@
                     <label for="kelembapan-tanah" class="form-label sm:w-32">Kelembapan Tanah</label>
                     <div class="grid grid-cols-12">
                         <input type="text" class="form-control col-span-4 form-pengairan" placeholder="Nilai Minimal"
-                            aria-label="kelembapan-tanah" name="soil_moisture[]" value="{{ $sopPengairan['soil_moisture_min'] }}" readonly>
+                            aria-label="kelembapan-tanah" name="soil_moisture[]"
+                            value="{{ $sopPengairan['soil_moisture_min'] }}" readonly>
                         <p class="col-span-1 flex items-center justify-center font-bold"> - </p>
                         <input type="text" class="form-control col-span-4 form-pengairan" placeholder="Nilai Maksimal"
-                            aria-label="kelembapan-tanah" name="soil_moisture[]" value="{{ $sopPengairan['soil_moisture_max'] }}" readonly>
+                            aria-label="kelembapan-tanah" name="soil_moisture[]"
+                            value="{{ $sopPengairan['soil_moisture_max'] }}" readonly>
                         <p class="flex items-center justify-center font-bold">%</p>
                     </div>
                 </div>
@@ -398,6 +404,15 @@
     <script defer>
         let urlDashboard = '{{ route('dashboard.data') }}'
         const routePengairanDestroy = "{{ route('manual.pengairan.destroy', ['pengairan' => ':id_pengairan']) }}"
+
+        const suhuMinimal = {{ $sopPengairan['temperature_min'] }};
+        const suhuMaksimal = {{ $sopPengairan['temperature_max'] }};
+        const kelembapanUdaraMinimal = {{ $sopPengairan['humidity_min'] }};
+        const kelembapanUdaraMaksimal = {{ $sopPengairan['humidity_max'] }};
+        const kelembapanTanahMinimal = {{ $sopPengairan['soil_moisture_min'] }};
+        const kelembapanTanahMaksimal = {{ $sopPengairan['soil_moisture_max'] }};
+        const phTanahMinimal = 5.5;
+        const phTanahMaksimal = 6.5;
 
         function deleteAksi(element) {
             // Get data-aksi attribute
