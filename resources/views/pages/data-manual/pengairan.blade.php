@@ -79,7 +79,7 @@
                         <button type="submit" class="btn btn-primary w-48" id="ubah-submit">Ubah Data Pengairan</button>
                     </div>
                     <div class="ml-4">
-                        <button type="button" class="btn w-48" id="batal-submit">Batal</button>
+                        <button type="button" class="btn w-48" id="batal-submit" onclick="window.location.reload()">Batal</button>
                     </div>
                 </div>
             </form>
