@@ -144,8 +144,8 @@ class ForgotPasswordController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
         }
-
-        $user = User::where('email', $email);
+        $email_decrypted = Crypt::decryptString($email);
+        $user = User::where('email', $email_decrypted);
         $user->update([
             'password' => Hash::make($request->password)
         ]);
