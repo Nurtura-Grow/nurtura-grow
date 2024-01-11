@@ -28,8 +28,7 @@ class LogAksi extends Model
             return $control;
         });
 
-        $dataCombined = $irrigationControllers->merge($fertilizerControllers);
-
+        $dataCombined = $irrigationControllers->concat($fertilizerControllers);
         if ($dataCombined->isNotEmpty()) {
             // willSend, isSent, sedangBerjalan
             $statusMapping = [
@@ -59,9 +58,6 @@ class LogAksi extends Model
 
                 switch ($statusKey) {
                     case '10':
-                        $item->aksi = true;
-
-                    case '00':
                         $item->aksi = true;
                 }
 

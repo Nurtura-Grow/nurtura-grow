@@ -45,7 +45,7 @@ class PengairanController extends Controller
         $pengairanData = [
             'terakhir' => $latestIrrigationLog ? $this->formatIrrigationData($irrigationController) : null,
             'rekomendasi' => $rekomendasiPenyiraman ? $this->formatIrrigationData($rekomendasiPenyiraman) : null,
-            'selanjutnya' => ($rekomendasiPenyiraman || $penyiramanSelanjutnya) ? $this->formatIrrigationData($penyiramanSelanjutnya) : null,
+            'selanjutnya' => $this->formatIrrigationData($penyiramanSelanjutnya ?? $rekomendasiPenyiraman),
         ];
 
         $tanggalSekarang = $this->formatDateUI(now());
@@ -93,6 +93,7 @@ class PengairanController extends Controller
     // Helper function to format irrigation data
     private function formatIrrigationData($irrigationController)
     {
+
         return [
             'tanggal' => $this->formatDateUI($irrigationController->waktu_mulai),
             'waktu_mulai' => $this->formatTimeUI($irrigationController->waktu_mulai),

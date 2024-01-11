@@ -26,6 +26,8 @@ class RiwayatController extends Controller
             $data->timestamp_pengukuran = Carbon::parse($data->timestamp_pengukuran)->format('d M Y H:i:s');
         }
 
+        $logAksi = collect($logAksi)->sortBy('waktu_mulai')->values()->all();
+
         foreach($tinggi_tanaman as $tinggi){
             $tinggi->nama_lahan = $tinggi->penanaman->informasi_lahan->nama_lahan;
             $tinggi->nama_penanaman = $tinggi->penanaman->nama_penanaman;
